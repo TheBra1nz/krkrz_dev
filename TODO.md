@@ -26,11 +26,11 @@ krkrz_dev 全体の未対応課題をここに集約する。**詳細な SSOT �
 対応したら項目に ✅ と対応コミットを書き、**消さずに残す** (再発防止の記録)。
 完了したものは末尾の「完了 (記録として残す)」へ移す。
 
-## 現況 (2026-10-09 時点)
+## 現況 (2026-10-12 時点)
 
 | 区分 | 件数 | 中身 |
 |---|---|---|
-| 予定・未着手 | 21 | Elements/UI 5 / エンジン基盤 12 / ビルド・運用 4 (内訳: 中 11 / 低 9 / 検討中 1)。2026-10-09: 「共通の xp3 作成 CLI」を標準ツール `krkrxp3` で ✅ |
+| 予定・未着手 | 23 | Elements/UI 6 / エンジン基盤 13 / ビルド・運用 4 (内訳: 中 13 / 低 9 / 検討中 1)。2026-10-09: 「共通の xp3 作成 CLI」を標準ツール `krkrxp3` で ✅。2026-10-11〜12: 「SDL 版 VideoOverlay の再生矩形」「パネルのパッド操作」を追加 |
 | 将来課題 | 8 | 着手時期未定 (中 4 / 低 4)。2026-10-09 に「GPU モードの確立と描画系プラグインの SDL_GPU 版」を追加 |
 | 未修正の既知バグ | 2 | いずれもレイヤ合成系。回避規約で運用中 (原因確定済みだった 2 件は 2026-09-06 に修正) |
 | 低優先・保留 | 12 | 単発の小さいもの。着手順は問わない |
@@ -97,6 +97,7 @@ registerHotKey の WINVER 配線)。
 | ✅ | Elements: `input_box` にプログラム的フォーカスが効かない | **2026-09-02 に解決** (elements `de989d18`: `descend_focus_first` — composite 包みの内側へフォーカス連鎖を用意)。`initial_focus` / `focus_by_id` / `ElementsDialog.focus(id)` で編集フォーカス (キャレット + text 受理) になる。詳細 = [TODO-elements.md](TODO-elements.md) §3 |
 | ✅ | Elements: `input_box` の最大長と値の差し替え口が無い | **2026-09-02 に解決** (elements `de989d18`): `"max_chars"` (別名 `"maxlength"`、codepoint 単位、0/省略=無制限) を追加。既定値 (`"text"`/`"value"`) 入りは build 時全選択なので initial_focus からそのまま打つと置き換わる (差し替え口の代替)。詳細 = [TODO-elements.md](TODO-elements.md) §5-8 |
 | ✅ | Elements の IME: 変換候補窓のキャレット追従 | **対応済み**。elements に `overlay_session::focus_text_caret()` を新設し、engine が毎フレーム surface 座標→クライアント px へ直して WINVER は `ImmSetCompositionWindow`/`ImmSetCandidateWindow`、SDL3 は `SDL_SetTextInputArea` へ渡す。**SDL3 は上流の Windows バックエンドが同等の Imm 呼び出しを実装済みで fork は不要**だった (SDL2 の頃と違う)。残るは未確定文字列のインライン表示のみ (下記)。SSOT = [ElementsDialog.md](src/core/doc/ElementsDialog.md) 「変換ウィンドウの位置」 |
+| 中 | パネルをパッドだけで操作できるようにする (マウスの無い機種) | **2026-10-12 記録** (Xbox devkit で、コアデモ「デバッグ支援」のパネルのボタンをパッドで押せなかった)。2 種類あって前提が違う: (1) **demolib の `DemoPanel` = `ElementsDialog` の `showJson(json, true, false)`** (非モーダル + フォーカスあり)。キー / パッドはパネルへ届く設計 (`demo_common.tjs` のコメントもパッド十字 / A で操作する前提) だが、開いた直後はどの要素にもフォーカスが無く (`Agent.dialogs()[0].focused` が空)、WIN 版 (SDL) で ↓ キーを 3 回送ってもフォーカスが付かなかった。A は accept = Enter の合成なのでフォーカスが無いと空振りする (未処理例外ダイアログで同じ原因だったものは OK に `initial_focus` を付けて 2026-10-12 に修正済み)。十字でフォーカスが付かない理由 (フォーカス無しからのナビの起点 / ナビキーがシェルや registerHotKey に取られていないか) は未調査。対処の候補: パネルにも初期フォーカスを置く (demolib 側の JSON か、`showJson` の非モーダル + フォーカスありで先頭の有効な要素へ自動で置く既定)、フォーカス無しでナビキーが来たら先頭へ置く (elements 側)。(2) **`ElementsPanel` (レイヤに載るパネル)** はキー / パッドを «スクリプトが明示的に流したときだけ» 受ける仕様で、フォーカス調停の枠も無い ([ElementsDialog.md](src/core/doc/ElementsDialog.md) 「持っていないもの」)。パッドで使うにはスクリプトが `keyDown` 等で流すか、調停の仕組みを足す必要がある。デモ以外でも、マウスの無い機種 (コンソール) で操作パネルを出す画面は同じ問題に当たるので、仕様として決めておく |
 | 低 | Elements の IME: 未確定文字列のインライン表示 | 変換中の文字列はアプリ側で描かず IME の窓に任せている。入力欄の中に直接出したい場合は `WM_IME_COMPOSITION` (GCS_COMPSTR) / SDL の `SDL_EVENT_TEXT_EDITING` を拾って elements のテキスト要素へ「未確定領域」として流す仕組みが要る。位置は追従済みなので実用上は困らない |
 | ✅ | SDL3 ビルドの IME が開かない — **現状問題なしと判断 (2026-09-12)** | 起票時は「SDL3 は `SDL_StartTextInput` でテキストイベントを有効にするだけで IME の開閉までは面倒を見ないので、Windows/SDL3 では Elements のテキスト欄に focus しても英数のまま」としていたが、**実運用で問題として顕在化していない**ため一旦クローズ。変換窓の位置追従は 2026-09-10 に対応済み (`focus_text_caret` → `SDL_SetTextInputArea`)。再発したら「focus 中だけ HWND から imm32 を直に叩く」か「SDL 側に口を足す」で再開する |
 | ✅ | Elements: cursor-warp の echo 判定が 2 層に重複 | **2026-09-12 対応**。判定を engine 側 1 箇所に寄せ、結果を `on_mouse_move(..., bool synthetic)` で session へ渡す形にした (elements_modal の `warp_issued` / `warp_target` / ±2px 照合を削除)。レイヤ座標と view 論理座標という倍率の違う 2 つの座標系へ同じ ±2 を当てていた構造が消えた。なお「踏むと直る」ことを実測できた類ではなく、食い違いの窓 (`present_scale=1/2` なら実誤差 1〜2px の範囲) を構造ごと消す修正。詳細 = [ElementsAudit.md](src/core/doc/ElementsAudit.md) §1 |
