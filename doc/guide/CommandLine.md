@@ -124,7 +124,9 @@ tool.exe -replfile=D:/ch -datapath=D:/ch/sd -- -batch a.mmo
 吉里吉里の特定の機能のみを呼び出して使うために以下のオプションがあります。
 
 - **-**userconf** (エンドユーザ向け設定ツールの起動)**  
-  本体に内蔵されているエンドユーザ向け設定ツールを起動します。
+  本体に内蔵されているエンドユーザ向け設定ツール ( [吉里吉里設定](Configure.md) ) を起動します。ゲームは起動せず、設定画面をブラウザで開きます ( Windows / Linux / macOS。Windows ネイティブ ( WINVER ) 版と SDL 版で共通 )。
+- **-**userconfbrowser** (設定画面の開き方)**  
+  -userconf の設定画面をどう開くかを指定します。設定可能な値は **'app' ( 既定。Edge / Chrome のアプリ表示。使えなければ既定のブラウザ )**, **'default' ( 既定のブラウザ )**, **'none' ( 開かない )** のいずれかです。'none' の場合は、設定画面の URL がログに出るので、それをブラウザで開きます。
 - **-**about** (著作権情報ダイアログボックスの表示)**  
   「バージョン・著作権・環境情報」のダイアログボックスを表示します。同梱コンポーネントのライセンス一覧も併せて表示されます ( 全文は -license=<名前> で取り出せます )。
 - **-**sel** (「フォルダ/アーカイブの選択」ダイアログボックスの表示)**  
@@ -186,9 +188,9 @@ tool.exe -replfile=D:/ch -datapath=D:/ch/sd -- -batch a.mmo
   - **$(savedgamespath)**  
     System.savedGamesPath(ゲームのセーブデータ用フォルダ)に置き換えられます。(1.1.0以降)
   
-  上の説明は Windows 版のものです。**Windows 以外の SDL3 版**では `$(appdatapath)` / `$(personalpath)` / `$(vistapath)` / `$(savedgamespath)` はいずれも**アプリごとのユーザ領域** ( `user://`。Linux 版は下記のローカルパス ) に置き換わり、[System.appDataPath](../reference/System.md#appdatapath) / [System.personalPath](../reference/System.md#personalpath) が返す OS 標準フォルダ ( macOS の `~/Library/Application Support/` など ) とは一致しません。
+  上の説明は Windows 版のものです。**Windows 以外の SDL3 版**では `$(appdatapath)` / `$(personalpath)` / `$(vistapath)` / `$(savedgamespath)` はいずれも**アプリごとのユーザ領域** ( `user://`。Linux 版・macOS 版は下記のローカルパス ) に置き換わり、[System.appDataPath](../reference/System.md#appdatapath) / [System.personalPath](../reference/System.md#personalpath) が返す OS 標準フォルダ ( macOS の `~/Library/Application Support/` など ) とは一致しません。
   
-  デフォルトでは「$(exepath)\savedata」となっています (**Linux 版を除く**。下記)。この設定は、インストーラなどを特に用いずにプログラムを zip 等で圧縮・アーカイブして配布し、ユーザにそれを展開して頂いてすぐにプログラム実行、という配布形態に適した設定です。
+  デフォルトでは「$(exepath)\savedata」となっています (**Linux 版・macOS 版を除く**。下記)。この設定は、インストーラなどを特に用いずにプログラムを zip 等で圧縮・アーカイブして配布し、ユーザにそれを展開して頂いてすぐにプログラム実行、という配布形態に適した設定です。
   
   しかし、このデフォルトの設定では、Program Files 以下にプログラムを配置した場合、Program Files 以下に書き込む権限がない、Windows XP 等の「制限ユーザ」等でプログラムを起動した場合に、ファイルを書き込むことができずにエラーになる可能性があります。
   
@@ -204,6 +206,10 @@ tool.exe -replfile=D:/ch -datapath=D:/ch/sd -- -batch a.mmo
       - Linux 版では `$(appdatapath)` / `$(personalpath)` / `$(vistapath)` / `$(savedgamespath)` も、このユーザごとのフォルダ (ローカルパス) に置き換わります。`\` 区切りで書いた値は `/` に直され、末尾の区切りも補われます。
       - 実際の保存場所は起動ログの `datapath (Linux default, ...)` / データ保存場所の行で確認できます。実行ファイルの隣に旧既定のセーブ (`savedata*`) が残っていると、移行を促す警告を出します。
       - 以前の Linux 版は既定の保存場所の末尾に `/` が付いておらず、`System.dataPath + "ファイル名"` が実行ファイルの隣に `savedataファイル名` として書かれていました。残っている場合は新しい場所へ移してください。
+
+  macOS 版 (SDL3) の既定も **ユーザごとのフォルダ `~/Library/Application Support/<組織名>/<アプリケーション名>/`** です (以前と同じ場所)。2026-10-12 からはこれをローカルのパスとして扱い、-datapath も効くようになりました ( 以前は -datapath が無視されていました )。
+
+  相対パスで指定した場合は、起動したときのカレントフォルダを基準にします ( Windows 版も同じ )。
 
   このオプションで指定されたデータ保存場所は、吉里吉里起動時に、もし存在していなければ作成が試みられます。作成が失敗してもそこで終了とはならずに処理が続行しますので、エラー処理はユーザのスクリプト内で(データが保存できないなどの例外を捕捉することにより)行ってください。
   
@@ -554,8 +560,9 @@ tool.exe -replfile=D:/ch -datapath=D:/ch/sd -- -batch a.mmo
     - **'sdl'**: SDL_Renderer 経由の [SDLDrawDevice](../reference/SDLDrawDevice.md) ( backend 自動選択 )
     - **'sdlogl'**: OpenGL ES 直接版 ( PBO 経由・Canvas 非対応の純粋版 ) ( `TVP_USE_OPENGL=ON` 時のみ )
     - **'ogl'**: OpenGL ES + Canvas / Texture / Shader / Offscreen を含むフル機能版 [OGLDrawDevice](../reference/OGLDrawDevice.md) ( `TVP_USE_OPENGL=ON` 時のみ )
+    - **'gpu'**: SDL_GPU + Canvas / Texture / Shader / Offscreen の [GPUDrawDevice](../reference/GPUDrawDevice.md) ( Canvas を SDL_GPU で動かす `KRKRZ_CANVAS_GPU=ON` ビルドのみ。このビルドでは `Window.OGLDrawDevice` の名前でも使えます )
   
-  指定しなかった場合、`TVP_USE_OPENGL=ON` ビルドでは `sdlogl`、それ以外では `sdl` が選択されます。
+  指定しなかった場合、`TVP_USE_OPENGL=ON` ビルドでは `sdlogl`、`KRKRZ_CANVAS_GPU=ON` ビルドでは `gpu`、それ以外では `sdl` が選択されます。
   
   Windows ネイティブ ( WINVER ) ビルド:
   
@@ -585,6 +592,18 @@ tool.exe -replfile=D:/ch -datapath=D:/ch/sd -- -batch a.mmo
   コンテキストの要求バージョンは ES 3.2 で、作れない場合は 3.1 → 3.0 → 2.0 と自動的に下げて再試行します ( ANGLE の D3D11 バックエンドは ES 3.0/3.1 までのため、EGL 経由ではこの再試行で成立します )。実際に得られたバージョンは起動ログの `Loaded GLES x.y` で確認できます。
   
   WINVER ビルドの OpenGL は常に EGL ( ANGLE ) 経由のため、このオプションは SDL3 ビルドでのみ意味を持ちます。
+- **-**gpudriver** (SDL_GPU ドライバの明示指定 / `KRKRZ_CANVAS_GPU` ビルド限定)**  
+  GPUDrawDevice が使う SDL_GPU のドライバ名を明示します ( 例: `vulkan` )。指定しなかった場合は SDL3 の自動選択に任されます。
+  
+  Windows では既定で `vulkan` ( シェーダーは SPIR-V ) が選ばれます。`direct3d12` を指定すると D3D12 ( シェーダーは DXIL ) で動きます。この場合、スクリプトのシェーダーも DXIL で用意したパックが必要です ( 変換ツールの `--target dxil` で作ります )。
+- **-**gpushaderpack** (Canvas ( GPU 版 ) のシェーダーパック / `KRKRZ_CANVAS_GPU` ビルド限定)**  
+  スクリプトが使うシェーダーを事前に変換したパック ( `.kzgs` ) をストレージ名で指定します。`;` で区切って複数指定できます。
+  
+  指定しなかった場合は、データの `canvas_shaders.kzgs` を読み、無ければ実行ファイルと同じフォルダの `canvas_shaders.kzgs` を読みます。
+- **-**gpushadercollect** (変換が必要なシェーダーの書き出し / `KRKRZ_CANVAS_GPU` ビルド限定・開発用)**  
+  パックに無いシェーダーが使われたとき、そのソースを指定したフォルダへ書き出します。書き出したものを変換ツール ( `gpushaderc.py pack` ) でパックにします。
+  
+  Canvas ( GPU 版 ) は実行時にシェーダーをコンパイルしないため、パックに無いシェーダーを使うと例外になります。手順は本体ソースの `doc/CanvasGPU.md` を参照してください。
 - **-**mediaengine** (動画のハードウェアデコード / Windows 限定)**  
   [VideoOverlay](../reference/VideoOverlay.md) のオーバーレイ再生 ( `vomOverlay` ) で、
   mp4/H.264/HEVC/wmv/asf などの MF-native 形式を Media Foundation ( IMFMediaEngine ) で

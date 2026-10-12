@@ -48,6 +48,7 @@
     "events": [],
     "file": "src/core/win32/visual/BasicDrawDevice.cpp",
     "methods": [
+      "captureWithOverlay",
       "recreate"
     ],
     "properties": [
@@ -341,6 +342,28 @@
       "underline",
       "variations",
       "weight"
+    ]
+  },
+  "GPUDrawDevice": {
+    "events": [
+      "onDone",
+      "onDraw",
+      "onInit"
+    ],
+    "file": "src/core/sdl3/visual/SDLGpuDrawDevice.cpp",
+    "methods": [
+      "createCanvas",
+      "recreate",
+      "resumeOnDraw"
+    ],
+    "properties": [
+      "canvas",
+      "dialogRendererHost",
+      "interface",
+      "sdlVideoPresenterHost",
+      "texture",
+      "viewportBackgroundHost",
+      "window"
     ]
   },
   "ImageFunction": {

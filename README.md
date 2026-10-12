@@ -4,15 +4,16 @@
 ドキュメント等開発関係のもの全てが入ったリポジトリ。
 各種ファイルはサブモジュールで参照されています。
 
-## 他プラットフォーム向けの外枠リポジトリ (ブラウザ / Android / iOS)
+## 他プラットフォーム向けの外枠リポジトリ (ブラウザ / Android / iOS / Linux / GDK)
 
 Win32 や各種デスクトップ向けのビルドは本リポジトリ (umbrella) で完結するが、
-**ブラウザ (wasm) / Android / iOS / Linux 配布パッケージ** はそれぞれ別の「外枠」リポジトリでビルドする。
+**ブラウザ (wasm) / Android / iOS / Linux 配布パッケージ / Microsoft GDK (PC・Xbox)** はそれぞれ別の「外枠」リポジトリでビルドする。
 いずれも本リポジトリをエンジンソースとして参照し (環境変数 `KRKRZ_BASE` に
 本リポジトリの親フォルダを指定)、エンジン本体・プラグインには手を入れず、
 各プラットフォーム固有のビルド定義・パッケージングだけを持つ。本リポジトリと
 同じ場所に clone しておく (`KRKRZ_BASE/krkrz_dev` と `KRKRZ_BASE/krkrz_web` /
-`KRKRZ_BASE/krkrz_android` / `KRKRZ_BASE/krkrz_ios` / `KRKRZ_BASE/krkrz_linux` が並ぶ構成)。
+`KRKRZ_BASE/krkrz_android` / `KRKRZ_BASE/krkrz_ios` / `KRKRZ_BASE/krkrz_linux` /
+`KRKRZ_BASE/krkrz_gdk` が並ぶ構成)。
 
 - **krkrz_web** — ブラウザ (Emscripten / wasm32, SDL3 ベース) 版。
   https://github.com/wamsoft/krkrz_web
@@ -43,6 +44,14 @@ Win32 や各種デスクトップ向けのビルドは本リポジトリ (umbrel
   同じ書式)。出力は「そのまま動くフォルダ」と tar.gz で、Steam のデポや itch.io / GOG に
   そのまま使える。`orgName` / `appName` を `<exe名>.cf` に書き込み、セーブデータの場所
   (`~/.local/share/<orgname>/<appname>/`) を案件ごとに決める。
+
+- **krkrz_gdk** — Microsoft GDK 版 (PC = `Gaming.Desktop.x64` / Xbox Series X|S / Xbox One, SDL3 ベース)。
+  https://github.com/wamsoft/krkrz_gdk
+  案件構成は `gdk-config.json` で定義する (`cmake` / `assetPack` は krkrz_android と同じ書式)。
+  プラグインは全て static。`MicrosoftGame.config` の生成・MakePkg による msixvc 化・devkit への
+  配置と起動まで `tools/krkrz_gdk.py` で行う。Xbox は描画が SDL_GPU (D3D12) で、Canvas の
+  シェーダーは GXDK の dxc で事前コンパイルして同梱する。GDK / GXDK は各自で導入する
+  (Xbox 向けは開発者契約が要る)。
 
 各リポジトリ固有の詳細はそれぞれの README を参照。
 
@@ -114,7 +123,7 @@ win32版（SJIS対応）で作成する
 
 ```
 export PRESET=x86-windows
-export CMAKEOPT="-DUSESJIS=ON"
+export CMAKEOPT="-DKRKRZ_USE_SJIS=ON"
 make prebuild
 make
 make install
@@ -128,6 +137,17 @@ make prebuild
 make
 make install
 ```
+
+### 標準ツール (krkrz_tools)
+
+`src/tools/krkrz_tools` ([krkrz_tools](https://github.com/wamsoft/krkrz_tools)、submodule) の
+ツール (破損チェック・署名・xp3・音声 / 画像コンバータ・ループチューナ) も一緒にビルドし、
+`make install` で `<インストール先>/tools/` に置きます。
+
+- ツールは exe 1 本で配れるよう静的リンク (`x64-windows-static` など) で作るため、本体とは別の
+  ビルドとして作ります (`build/<preset>/krkrz_tools`、常に Release。`cmake/KrkrzTools.cmake`)
+- 初回は、ツール用の vcpkg ライブラリ (静的版) のビルドに時間がかかります
+- 既定はデスクトップ (Windows / Linux / macOS) で有効。`CMAKEOPT='-DKRKRZ_BUILD_TOOLS=OFF'` でビルドしません
 
 ### OpenGL 用 ANGLE DLL の配置
 
@@ -176,7 +196,7 @@ TVP_PLUGINS_STATIC が定義されている場合は、それに含まれる
 CMake のリストとして定義するので ;　区切りで必要なものを列挙します
 
 ```
-CMAKEOPT='-DUSESJIS=ON -DTVP_PLUGINS_STATIC="json;csvParser"' make prebuild
+CMAKEOPT='-DKRKRZ_USE_SJIS=ON -DTVP_PLUGINS_STATIC="json;csvParser"' make prebuild
 make
 make install
 ```

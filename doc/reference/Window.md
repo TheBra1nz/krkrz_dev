@@ -670,7 +670,7 @@ Windows ネイティブ ( WINVER ) ビルドと SDL3 / 汎用ビルドの双方�
 デフォルトで指定されているインスタンスはビルドによって異なります。Windows ネイティブ ( WINVER ) ビルドでは
 [Window.BasicDrawDevice](Window.BasicDrawDevice.md) ( Direct3D 11 )、SDL3 ビルドでは
 [SDLOGLDrawDevice](SDLOGLDrawDevice.md) ( OpenGL 有効ビルド時。無効ビルドでは
-[SDLDrawDevice](SDLDrawDevice.md) ) です。起動オプション `-drawdevice` で起動時の既定を
+[SDLDrawDevice](SDLDrawDevice.md)、Canvas を SDL_GPU で動かすビルドでは [GPUDrawDevice](GPUDrawDevice.md) ) です。起動オプション `-drawdevice` で起動時の既定を
 選択できます ( [コマンドラインオプション](../guide/CommandLine.md) )。なお SDL3 ビルドを
 `-drawdevice=sdl` で起動した場合、実行中に OpenGL 系のデバイスへ切り替えることはできません。
 
@@ -3034,8 +3034,6 @@ WINVER ビルドのみです。
 
 ## プラグイン拡張: layerExSave
 
-擬似コードによるマニュアル
-
 ウインドウ拡張
 
 ### メンバー一覧
@@ -3203,7 +3201,6 @@ TLG5/PNG 形式での画像の保存の開始
 
 true にするとメッセージを受信するようになります。
 メッセージ受信が有効なら true
---------------------------------------------------- ウインドウメッセージ処理拡張 ---------------------------------------------------
 
 ---
 
@@ -3260,7 +3257,6 @@ static bool __stdcall receiver(iTJSDispatch2 *winobj, void *userdata, tTVPWindow
 であるとみなされます。設定時は整数にキャストしてください。
 winobj は該当するウインドウのオブジェクトです
 userdata は整数にキャストした値でひきわたされます。
----------------------------------------------------
 
 ---
 
@@ -3363,7 +3359,6 @@ HWNDを指定して低レベルメッセージをポストします。
 
 起動している吉里吉里すべてに WM_COPYDATA メッセージを送信します。
 識別キーとメッセージの意味はそれぞれのアプリで適当に定めてください。
----------------------------------------------------
 
 ---
 
@@ -3668,8 +3663,6 @@ exe や dll の場合は署名はファイルに内臓されます。xp3 など�
 ---
 
 ## プラグイン拡張: windowEx
-
-擬似コードによるマニュアル
 
 Window拡張
 
@@ -4872,8 +4865,6 @@ HTBORDER
 ---
 
 ## プラグイン拡張: windowExProgress
-
-擬似コードによるマニュアル
 
 ウインドウ拡張
 

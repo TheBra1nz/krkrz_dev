@@ -51,6 +51,8 @@ Windows で 32bit版/64bit版のプラグインを読み分けるためにも pl
 1. 吉里吉里本体と同じフォルダ
 2. 吉里吉里本体以下と同じフォルダにある plugin フォルダ内
 
+SDL 版の -userconf は、プラグインに隣接する `<プラグイン名>.options.json` を「吉里吉里本体と同じフォルダ」と「プラグインフォルダ」から読みます。
+
 吉里吉里の設定ツールは自動検索パスまでは検索しないため、設定項目を含むプラグインは「吉里吉里本体と同じフォルダ」か「吉里吉里本体以下と同じフォルダにある plugin フォルダ内」に置かなければなりません。
 
 ## プラグインの自動読み込み
@@ -115,7 +117,7 @@ Takechin 氏作の画像ビューア「Susie32」用のプラグインを利用�
 | **layerExVector** | thorvg による SVG などのベクター描画を [Layer](../reference/Layer.md) に追加します ( [GdiPlus](../reference/GdiPlus.md) 互換 API )。 |
 | **lineParser** | 行単位のテキスト解析を行う [LineParser](../reference/LineParser.md) クラスを追加します。 |
 | **minizip** | ZIP アーカイブの読み込み ( zip:// 自動検索パス ) と作成を行う [Zip](../reference/Zip.md) / [Unzip](../reference/Unzip.md) クラスを追加します。 |
-| **psdfile** | Photoshop PSD ファイルの読み込み・編集・保存を行う [PSD](../reference/PSD.md) クラスを追加します。`psd://` でレイヤ画像を直接ロードすることもできます。 |
+| **psdfile** | Photoshop PSD ファイルの読み込み・編集・保存を行う [PSD](../reference/PSD.md) クラスを追加します。`psd://` でレイヤ画像を直接ロードすることもできます。レイヤの状態からの合成 (調整レイヤ・レイヤー効果込み) やレイヤ単体の描画、シェイプ / パスのラスタライズも行えます。 |
 | **saveStruct** | Array / Dictionary の saveStruct を拡張し、UTF-8 など出力エンコーディングを指定可能にします ( [Scripts](../reference/Scripts.md) 参照 )。 |
 | **scriptsEx** | スクリプト実行系のユーティリティを [Scripts](../reference/Scripts.md) に追加します。 |
 | **shrinkCopy** | 高速な縮小コピーを [Layer](../reference/Layer.md) に追加します。 |
