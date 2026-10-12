@@ -8,7 +8,7 @@
  * このデバイスがアクティブな間、[Canvas](Canvas.md) / [Texture](Texture.md) / [ShaderProgram](ShaderProgram.md) / [Offscreen](Offscreen.md) / [Matrix32](Matrix32.md) / [VertexBuffer](VertexBuffer.md) / [VertexBinder](VertexBinder.md) が SDL_GPU の上で機能します。OpenGL ES 版との主な違いは次のとおりです。
  *
  * - シェーダーは実行時にコンパイルせず、事前に変換したパック ( `canvas_shaders.kzgs` ) から引きます。パックに無いシェーダーを使うと例外になります ( `-gpushadercollect` で書き出して変換します。`-gpushaderpack` でパックを指定できます )
- * - drawText・GLCompositor・TextureLayerTreeOwner・動画テクスチャは未対応です ( マスク・ステンシルによるクリッピング ( beginMaskClip / beginStencilClip ) とポストエフェクト ( beginEffect / endEffect ) は使えます )
+ * - drawText・GLCompositor・動画テクスチャは未対応です ( マスク・ステンシルによるクリッピング ( beginMaskClip / beginStencilClip )・ポストエフェクト ( beginEffect / endEffect )・TextureLayerTreeOwner は使えます )
  * - [Texture.nativeHandle](Texture.md#nativehandle) は GL のテクスチャ番号ではなく、SDL_GPU のテクスチャになります
  * - [matrix](OGLDrawDevice.md#matrix) / [glVideoPresenterHost](OGLDrawDevice.md#glvideopresenterhost) プロパティはありません
  *
