@@ -26,14 +26,14 @@ krkrz_dev 全体の未対応課題をここに集約する。**詳細な SSOT �
 対応したら項目に ✅ と対応コミットを書き、**消さずに残す** (再発防止の記録)。
 完了したものは末尾の「完了 (記録として残す)」へ移す。
 
-## 現況 (2026-10-12 時点)
+## 現況 (2026-10-15 時点)
 
 | 区分 | 件数 | 中身 |
 |---|---|---|
 | 予定・未着手 | 22 | Elements/UI 6 / エンジン基盤 12 / ビルド・運用 4 (内訳: 中 12 / 低 9 / 検討中 1)。2026-10-15: 「GPU 版 Canvas の endEffect に opacity 引数が無い」を追加し、同日 ✅。2026-10-12: 「VideoOverlay の再生矩形」を ✅。2026-10-09: 「共通の xp3 作成 CLI」を標準ツール `krkrxp3` で ✅。2026-10-11〜12: 「SDL 版 VideoOverlay の再生矩形」「パネルのパッド操作」を追加 |
 | 将来課題 | 7 | 着手時期未定 (中 4 / 低 3)。2026-10-09 に「GPU モードの確立と描画系プラグインの SDL_GPU 版」を追加 |
 | 未修正の既知バグ | 2 | いずれもレイヤ合成系。回避規約で運用中 (原因確定済みだった 2 件は 2026-09-06 に修正) |
-| 低優先・保留 | 12 | 単発の小さいもの。着手順は問わない |
+| 低優先・保留 | 11 | 単発の小さいもの。着手順は問わない。2026-10-15: `-timerprec` の残骸を削除して ✅ |
 | デモ整備 | 10 + 1 | 未着手デモは多くが資材待ち |
 
 ### 次のリリースで移行メモに書くこと
@@ -142,7 +142,7 @@ registerHotKey の WINVER 配線)。
 | 中 | OS フォントの文字単位フォールバック + macOS / Android の OS フォント列挙 | 2026-09-30 に「OS のフォントを名前で引ける」まで対応 (SDL 版ほか: Windows = DirectWrite / Linux = fontconfig、`generic/environ/SystemFontList.cpp`)。残り: **(B-1) 連鎖のどのフォントにも無い文字を OS に問い合わせて補う** (DirectWrite `IDWriteFontFallback::MapCharacters` / fontconfig `FcFontSort` + charset。現状は U+FFFD で描く) / **(B-2) macOS の CoreText (`CTFontManagerCopyAvailableFontURLs`) と Android の `ASystemFontIterator` (API 29+) で同じ名前登録**。B-1 は結果が実行環境で変わるので、既定で入れるか (`-systemfont` で切るか) を決めてから。SSOT = [FontEngine.md](src/core/doc/FontEngine.md) 「OS のフォント」 |
 | 低 | フォントエンジンの未対応 (計画) 4 件 | ①収録範囲を使った**言語別フォールバックの自動選択** (Elements は宣言式の `font_languages` で対応済みだが `Layer.drawText` / `Font.face` 側は未対応) ②圧縮 cmap/bitset による包含判定の最適化 ③`TVPGetAllFontList` へメタデータ名を合流 (設定 UI のフォント一覧反映) ④システムフォント全列挙 (`allowSystem`) の検索統合。SSOT = [FontEngine.md](src/core/doc/FontEngine.md) 「未対応 (計画)」 |
 | 低 | 実行中にウィンドウのアイコンを差し替える口 (`Window.setIcon` 相当) | windowEx の廃止で `setWindowIcon` / `resetWindowIcon` が無くなった。WINVER には `DpiIcon` クラス (DPI に合わせた大きさで設定) があるが WINVER 専用なので、**SDL3 版と CS 機には実行中にアイコンを替える手段が無い**。入れるなら本体の Window にメソッドを足す (WINVER は `WM_SETICON`、SDL3 は `SDL_SetWindowIcon`)。引数は画像ストレージかレイヤ。常にフルスクリーンの機種では何もしない。windowEx から外した残りの機能 (Win32 固有の見た目 / IME / 小物) は移さない方針。経緯 = [WindowState.md](src/core/doc/WindowState.md) 8 章 |
-| 中 | SDL 版で GLES3 経路が有効になった影響を各機種で確認する | 2026-10-06 まで SDL3 経路は `TVPOpenGLESVersion` が常に 200 で、`GLTexture` の GLES3 経路 (`GL_UNPACK_ROW_LENGTH` の部分転送 / 3.2 以上の `glCopyImageSubData` / ミップマップ生成) が一度も通っていなかった。`InitGLES` で実際の版を入れるよう直した (src/core `33a92114`) ので、**Windows SDL 版 (ネイティブ ES / ANGLE)・Android・wasm (WebGL2 = 3.0)・Steam Deck で初めてこの経路を通る**。確認済みは Linux (Mesa, GLES 3.2) のみ: `-demotest -demotestcap` の全 24 シーンと GL Canvas 全 5 ページで表示崩れ・GL エラーなし。WINVER は EGLContext が先に 200/300 を入れた後で実際の版に上書きされる (ANGLE D3D11 なら 3.0/3.1 なので `glCopyImageSubData` には入らない) |
+| 中 | SDL 版で GLES3 経路が有効になった影響を各機種で確認する | 2026-10-06 まで SDL3 経路は `TVPOpenGLESVersion` が常に 200 で、`GLTexture` の GLES3 経路 (`GL_UNPACK_ROW_LENGTH` の部分転送 / 3.2 以上の `glCopyImageSubData` / ミップマップ生成) が一度も通っていなかった。`InitGLES` で実際の版を入れるよう直した (src/core `33a92114`) ので、**Windows SDL 版 (ネイティブ ES / ANGLE)・Android・wasm (WebGL2 = 3.0)・Steam Deck で初めてこの経路を通る**。確認済みは Linux (Mesa, GLES 3.2) と **Windows SDL 版 (2026-10-15)**: Linux は `-demotest -demotestcap` の全 24 シーンと GL Canvas 全 5 ページ (当時) で表示崩れ・GL エラーなし。Windows はネイティブ ES (GLES 3.2、`openGLESVersion`=320) と ANGLE (`-forceegl=yes`、3.2 / 3.1 が EGL_BAD_MATCH で 3.0 に落ちる) の両方で、全 24 シーン完走 (`@demotest:ok`) と GL Canvas 全 7 ページ (マスク / ステンシルクリップ・ポストエフェクト・GLCompositor を含む) の表示が一致し、GL エラーなし。**残りは Android・wasm (WebGL2)・Steam Deck**。WINVER は EGLContext が先に 200/300 を入れた後で実際の版に上書きされる (ANGLE D3D11 なら 3.0/3.1 なので `glCopyImageSubData` には入らない) |
 | ✅ | `TJS_64BIT_OS` が gcc / clang では定義されない | **2026-10-06 対応** (src/core `051c7691` / tp_stub `8e39fd2`)。`__LP64__` / `_WIN64` で定義。SDL3 のプラグインフォルダは CMake のインストール先と同じ規則 (`plugin64/` は Windows 64bit だけ) に固定したので Linux は `plugin/` のまま。起動ログに `pluginPath:`、Linux 等で `plugin64/` があれば警告。**有効になった TLG6 の SSE2 デコードに、幅が 8 の倍数でない画像で崩れる + 行末からはみ出して書くバグがあった** (端数ブロック用の Generic まで SSE2 版に差し替えていた。MSVC x64 では以前からこの状態) → Generic は C 版に戻して修正 (src/core `f327fe65`)。ノイズ・グラデーション・実画像を TLG6 / TLG6(24bit) で保存→読み戻しし、SIMD 有効/無効とも全画素一致を確認 |
 | ✅ | Windows x64 で TLG6 の修正を確認する | **2026-10-08 に WINVER x64 (MSVC) で確認**。幅が 8 の倍数でない 19 サイズ (1x1〜1023x5) と対照の 8 の倍数 3 サイズ × ノイズ (α付き) / グラデーションを TLG6・TLG6(24bit) で保存→読み戻しし、88 項目すべて全画素一致。SIMD 有効 / `-cpusimd=no` / 再実行で結果も同一。修正 (`f327fe65`) を一時的に外したビルドでは、8 の倍数でない幅が全件崩れ (72 件)、終了時に異常終了 (はみ出し書き込みによるヒープ破壊) も再現したので、確認方法が不具合を捉えることも確かめた。既存タイトルでの報告の有無は未確認 |
 | 低 | MSVC arm64 で `TJS_64BIT_OS` が定義されない | MSVC 分岐は `_M_X64` だけを見ているため、`arm64-windows(-win)` の 64bit 版でも未定義。win32/ の 64bit 分岐 (`Application.cpp` / `SysInitImpl.cpp` / `DetectCPU.cpp` 等) とプラグインフォルダ名に影響しうる。x86 専用の分岐 (`DetectCPU.cpp` 等) が混ざっているので、`_M_ARM64` を足すなら各使用箇所を見てから。Windows arm64 実機での確認が前提 |
@@ -153,7 +153,7 @@ registerHotKey の WINVER 配線)。
 |---|---|---|
 | 中 | krkrlive2d のドライバソースを版固定取得へ | ドライバ側 CMake がローカルパス (`LIVE2DLIB_FOLDER` / `CUBISM_SDK` 等) を直接参照する作りで、そのフォルダの版がずれると **umbrella の configure ごと失敗する** (実例: ドライバが `find_package(minizip)` を要求する版になり、本体 vcpkg マニフェストに minizip が無くて configure 不能)。 版を固定して fetch する形へ直すまで、`CMakeLists.txt` の `CUBISM_SDK` ブロックをコメントアウトしてビルド対象から外してある (2edc380)。 直したら除外を戻す |
 | 中 | リリースのバージョン運用を確定する | **実験中 API の扱いは 2026-09-06 に決定** (安定保証の対象外を `@experimental` で明示し、そこの非互換変更はマイナー。[Versioning.md](src/core/doc/Versioning.md) 「実験中 API」節)。番号の供給元は一本化済み ([Versioning.md](src/core/doc/Versioning.md))。`v2.0.0` は core (krkrz.git) / umbrella (master) 双方に打鍵済み。残りは **再パッケージ時のタグ規則の確定**: core 無変更でプラグインだけ更新する場合に `v2.0.0-2` 等のサフィックスを使うか。既存タグは `1.4.0` (v 無し) と `v1.0.0` (v 有り) が混在しているので、以後は `v` 付きで統一する |
-| 中 | 全生成器の Perl 撤去 → Python 統一 | 残 = syntax 後処理 5 本 と `gengl.pl` (7519 行 = 最大の山)。バイト一致の差分ゲート方式。他作業と独立に実施可。ほかに `src/core/generic/base/copy_if_differ.pl` が残っているが、どこからも呼ばれていない (2026-10-08 確認。消してよい) |
+| 中 | 全生成器の Perl 撤去 → Python 統一 | 残 = syntax 後処理 5 本 と `gengl.pl` (7519 行 = 最大の山)。バイト一致の差分ゲート方式。他作業と独立に実施可。✅ どこからも呼ばれていなかった `src/core/generic/base/copy_if_differ.pl` は 2026-10-15 に削除 (src/core `8a5c88f9`) |
 | ✅ | 2026-10-06 の Linux 修正を基準環境で確認する | 相対パス起動の abort / サーバ停止時のハング / GLES 版 / exeBits の修正 (src/core `5016acf1`〜`a86ec6de`) は、ホストの Ubuntu 26.04 (glibc 新・gcc 15・CMake 4.2) で直ビルドして確認しただけ。2026-10-06 に基準環境 (steamdev `deckbuild/` sniper SDK、src/core `051c7691`) で configure〜install が通り、[LinuxBuild.md](src/core/doc/LinuxBuild.md) の合格基準 (GLIBC ≤ 2.31 / GLIBCXX 依存なし) を満たすこと、ホスト (Wayland) で `-demotest -demotestcap` 全 24 シーン ok を確認済み。同日 Steam Deck 実機 (SteamOS 3.8.16、ネイティブ実行) でも `-demotest -demotestcap` 全 24 シーン ok。なお Steam から起動すると同梱 SDL3 (3.4.0) ではなく Steam ランタイム側の SDL3 (3.2.18) が読まれていた (動作は問題なし) (`dc5a3ed`) |
 | ✅ | Steam 起動時に同梱 SDL3 が使われない | Deck で Steam から起動すると `LD_LIBRARY_PATH=.` を付けても Steam ランタイム側の SDL3 (3.2.18) が先に読まれ、ビルドした SDL3 (3.4.0) が使われない。今のところ動作に問題はないが、SDL3 側の修正に依存する不具合が出たら効いてくる。→ exe に `$ORIGIN` を DT_RPATH で埋め込み、soname リンクも install するよう修正。Deck の Steam 起動で同梱 3.4.0 が読まれ `-demotest` 全 24 シーン ok を確認 (src/core `0f54ee4b`) |
 | 中 | 配布パッケージ外枠の整備 (Linux 以外も) | Linux は [krkrz_linux](https://github.com/wamsoft/krkrz_linux) でフォルダ + tar.gz まで (2026-10-06)。残り: AppImage 出力 (`.desktop` / アイコンは生成済み)、Flatpak (AppStream メタデータ) は需要次第。macOS (.app) / Windows (フォルダ・MSIX) / Xbox (GDK) も `*-config.json` の `cmake` / `assetPack` 書式を共通にした外枠で揃える方向で調査 |
@@ -196,7 +196,7 @@ registerHotKey の WINVER 配線)。
 - リップシンクの母音判定精度向上とデモ
 - Elements 遷移エフェクト Phase C (GPU present 拡張・optional)
 - `-replweb` 稼働中に本体がモーダル (`System.inform` 等) を出すと HTTP API が全部止まる。 動的ハンドラはメインスレッド実行なので、 モーダルを閉じるまで`/cmd` も `/pad/exec` も返らず、 静的配信だけ生きているので「一部だけ応答する」紛らわしい状態になる (REPL も drain されないので中から復帰できない)。 **利用側は「実行できない条件をハンドラで先に弾いて 4xx を返す」で回避できる**ので優先度は低い。 本体側の案は (a) `/state` に「モーダル待ち」を出して UI が「死んだのか待っているだけか」を切り分けられるようにする (安い) (b) `-replweb` 稼働中はモーダルを出さずログと SSE へ流すオプション。 → 上の «web REPL の modal 転送» と同じ系統
-- 起動オプションの残骸。 `-timerprec` は `generic/base/SysInitImpl.cpp` で値を読んで `prectick` に入れるだけで、 以降どこからも参照されない (WINVER 側にも実装なし)。 ガイドには載せていないので、 **実装を戻すか、 オプションごと消すか**を決めるだけの作業 (2026-09-20 のコマンドラインオプション棚卸しで判明)。 ✅ 同時に見つかった `-ogg_pcm_format` (ブロックコメントの中で死んでいた) は実装して有効化済み (src/core `4fda1460`)。
+- ✅ 起動オプションの残骸 `-timerprec` — **2026-10-15 に削除** (src/core `8a5c88f9`)。 `-timerprec` は `generic/base/SysInitImpl.cpp` で値を読んで `prectick` に入れるだけで、 以降どこからも参照されない (WINVER 側にも実装なし)。 ガイドには載せていない (2026-09-20 のコマンドラインオプション棚卸しで判明)。 WINVER は `timeBeginPeriod` の廃止 (ModernizationRoadmap 4-2) でオプションごと撤去済みだったので、 SDL / LIB 側も消して揃えた。 ✅ 同時に見つかった `-ogg_pcm_format` (ブロックコメントの中で死んでいた) は実装して有効化済み (src/core `4fda1460`)。
 - `-demotestcap` (ギャラリー全シーンの自動キャプチャ) は各シーンの最初のページしか撮らない。複数ページあるシーン (GL Canvas 5 ページ等) の残りは REPL から送って撮っている (手順 = `src/core/data/demolib/readme.txt`)。シーン側に「ページ数とページ送り」の口 (`onDemoTest` と同様のフック) を足せば巡回時に全ページ撮れる
 
 ## デモ整備
