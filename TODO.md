@@ -241,6 +241,13 @@ doc のデモ一覧ページ ([doc/demos.md](doc/demos.md)) と wasm 再ビル�
 
 ## 最近クローズしたもの
 
+- ✅ 既定書体 (`Font.face = ""`) が Elements のアイコンフォントで描かれる (2026-10-15、src/core `cf10b113`)
+  fonts.json の無いデータ (デモの単独起動等) で `Layer.drawText` の文字が全部矢印などの記号になっていた
+  (`data/elements_audit` で発覚)。classic FreeType 経路が既定書体名 (OS のフォント) を遅延ロードせずに
+  引こうとして失敗し、最後の手段の「最初に読み込んだ内蔵フォント」= ファイル名順で先頭の `elements_basic`
+  (アイコン専用) に落ちていた。既定名も遅延ロードし、最後の手段でアイコンフォントを選ばないよう修正。
+  あわせて Elements の TAB がフォーカス無しから最後の要素に入る件と、入力欄フォーカス中の
+  `Agent.dialogs()[i].focused` が空の件も修正 (elements `8df09caf`、詳細 = [TODO-elements.md](TODO-elements.md) §11)
 - ✅ Elements: スムーズスクロール一覧 `virtual_scroller` とスライダの目盛制約 `snap`、
   WINVER のホイール位置の修正 (2026-10-08、elements `54436cfe`〜`510e5089` / src/core `bb2ff20d`〜`16cff597`、
   ドキュメントは elements `6a9f61f6` / src/core `130e95c0`)

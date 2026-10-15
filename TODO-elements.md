@@ -970,10 +970,15 @@ park する」回避をしていた (動いてはいるので急がないが、 
 > (離しは押下に揃える) / C = 十字で入力欄に入っただけでは画面のキーボードを出さず決定で出す
 > (`last_input_is_key_nav` + `ConfirmScreenKeyboard`) / D = ElementsDialog.md「パッドだけで操作する
 > 画面」・ガイド・skill elements / E = `tTVPDialogInputForwardedScope` で 2 重配送を解消。
-> SDL / WINVER で確認。 F (機種で既定を変える) は入れていない。 残り: TAB でフォーカス無しから
-> 最後の要素に入る件、 入力欄フォーカス中の `Agent.dialogs()[i].focused` が空の件 (11-5)、
-> フォーカスが無くても A はパネル既定の決定割り当てが受け取る (ゲームへは届かない) こと、
-> コンソール実機での確認。
+> SDL / WINVER で確認。 F (機種で既定を変える) は入れていない。 残り: フォーカスが無くても A は
+> パネル既定の決定割り当てが受け取る (ゲームへは届かない) こと、 コンソール実機での確認。
+>
+> 11-5 の小物も 2026-10-15 に対応 (elements `8df09caf` / src/core `cf10b113`):
+> - TAB がフォーカス無しから最後の要素に入る → layer (子を逆順に扱う `reverse_index`) を挟む
+>   画面で、 子を辿る順と子へ入る端を同じフラグで決めていたため。 入る端は Tab の向きだけで決める
+> - 入力欄フォーカス中の `focused` が空 → `input_box` がフォーカス追跡に登録されていなかった
+> - ついでに、 `data/elements_audit` を単独起動すると `Layer.drawText` の文字が全部記号になる件
+>   (既定書体 `Font.face = ""` が Elements のアイコンフォントで描かれていた) も修正
 
 報告: 2026-10-12、Xbox devkit でコアデモ「デバッグ支援」のパネルのボタンをパッドで
 押せなかった。2026-10-15 に Windows SDL 版で調査 (`-navlog` + REPL の `Agent` 注入。
