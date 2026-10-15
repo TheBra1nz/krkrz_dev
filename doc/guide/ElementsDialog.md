@@ -263,6 +263,8 @@ foreach_dict_of(cfg, function(k, v) { ElementsDialog.setSharedVar(k, v); });
 
 単発表示系 ( [showJson](../reference/ElementsDialog.md#showjson) / showFile / showDict ) は第 3 引数 `modal` で「非モーダル + フォーカスあり」( `showJson(json, true, false)` ) を指定できます。slider や picker を含む操作パネルはこの形で出すと、パッドの十字 / A ボタンやキーボードでウィジェットを操作しつつ、パネルが使わないキーはゲームへ流れます。その上で ESC ( シーン復帰 ) や PageUp/Down ( 画面切替 ) のような「必ずホストが受けたいキー」を registerHotKey で確保するのが定石です ( 実例: `data/demolib/demo_common.tjs` の DemoShell )。
 
+パッドの十字でフォーカスを動かすには、画面 JSON に `"input": { "arrow_focus_nav": true }` が必要です ( 方向キー / 十字でのフォーカス移動は既定で無効です )。十字は「フォーカスを動かせる」か「フォーカス中の要素に届く」ときだけパネルが使い、それ以外はゲームへ流れます。パネルを出したまま十字をゲームで使う画面では、そのパネルの `arrow_focus_nav` を外します。物理キーボードの無い機種では、十字で入力欄を通過しても画面のキーボードは開かず、決定 ( A / Enter ) で開きます ( マウス / タッチで押したときはすぐ開きます )。
+
 - ホットキーはテキスト入力ウィジェットにキャレットがある間は既定で抑止されます ( `duringTextInput = true` で入力中も有効化 )
 - モーダル表示中はホットキーも無効です ( 確認ダイアログの ESC = cancel を奪いません )
 - マウスボタン ( VK_RBUTTON 等 ) も登録でき、全画面透過 HUD が右クリックを拾って閉じてしまう問題の回避にも使えます
