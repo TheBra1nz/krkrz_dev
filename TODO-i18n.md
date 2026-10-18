@@ -49,8 +49,11 @@ Elements 以外の描画 (drawText / setInfo / メニュー / samples.tjs の ti
 - [x] A のエンジン変更 (2026-10-19)
 - [x] `demo_i18n.tjs` 実装 + demolib 組込 (2026-10-19。F2 で切替・シーン入り直し、パネルボタンからの切替は次フレームへ遅延)
 - [x] sysinfo シーンを英語対応 (最初の適用例。2026-10-19、ja / en とも表示確認・umbrella ギャラリー -demotest -language=en 全 21 シーン ok)
-- [ ] 既存デモの順次移行 (新規デモは必須)
-- [ ] 埋め込みデモ (doc の iframe) にページ言語を `-language=` として渡す (krkrz_web 側の引数経路を要確認)
+- [x] 既存デモの移行 (2026-10-19。coretest_legacy 以外の全デモ。umbrella ギャラリー全 22 シーン ja / en で巡回 ok)
+  - 保留: elements_gallery の定義ソース (pages.tjs。表示と eval を兼ねる)
+  - 新規デモは表を使って書く
+- [x] 埋め込みデモへ言語を渡す (krkrz_web `?language=` → `-language=`、doc/demos.en.md の iframe に付与)
+  - [ ] krkrz_web を再ビルドして `doc/_assets/demo` を差し替える (英語化したデモと ?language= を反映)
 
 ## C. 公開ドキュメントの英語版
 
@@ -82,6 +85,6 @@ Elements 以外の描画 (drawText / setInfo / メニュー / samples.tjs の ti
   `refi18n.py` (dump / merge) + `check_translations.py`、見出し語 `doc/i18n/en/reference_labels.json`、
   用語集 `doc/i18n/glossary.md`。`doc/i18n/` はサイトに出さない。CI は翻訳レポートを出すだけ。
   手順は `tools/docgen/README.md`「翻訳」。試訳として Rect を全訳
-- [ ] Phase 1: トップ / about / 起動 / デモ一覧
-- [ ] Phase 2: reference の主要クラス
-- [ ] Phase 3: guide / tjs2 / specification / topics
+- [x] Phase 1: トップ / about / 起動 / デモ一覧 (+ CommandLine / Configure / 各索引)
+- [x] Phase 2: reference のコアクラス 41 + plugin 描画系 23 (2026-10-19)
+- [x] Phase 3: guide / tjs2 / specification / topics — 手書き全 104 ページ (2026-10-19)
