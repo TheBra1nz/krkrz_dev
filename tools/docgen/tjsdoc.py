@@ -212,6 +212,9 @@ HEADING_SUFFIX_RE = re.compile(
 )
 
 
+RULE_LINE_RE = re.compile(r"^\s*[=\-*#~]{4,}\s*$")
+
+
 def is_section_heading(text):
     """Heuristic: short categorical comments like '// 定数' or '// FontStyle 定義'
     are section headings, not member documentation. Skip them silently."""
@@ -326,6 +329,13 @@ def parse_doc_block(comment_block):
     # Drop section-heading line comments ('// 定数', '// FontStyle 定義' etc.)
     segments = [s for s in segments
                 if not (s[0] == "line" and is_section_heading(s[1]))]
+    # '// =====' / '// -----' の罫線で囲んだ節見出しブロックは、最後の罫線までを
+    # 捨てる (罫線より後ろの行コメントだけをメンバーの解説として残す)。
+    last_rule = max((i for i, sg in enumerate(segments)
+                     if sg[0] == "line" and RULE_LINE_RE.match(sg[1])), default=-1)
+    if last_rule >= 0:
+        segments = [sg for i, sg in enumerate(segments)
+                    if i > last_rule or sg[0] != "line"]
 
     doc = Doc()
     summary_lines = []
@@ -548,8 +558,13 @@ def parse_class_body(body, nested_out=None, parent_name=""):
             name = m.group(1)
             value = (m.group(2) or "").strip()
             doc = parse_doc_block(comment_block)
+            # 同じ行の後置コメント (const A = 0;  // 説明) はこの定数の解説。
+            # 拾わないと次の定数の前置コメント扱いになり、説明が 1 つずつずれる。
+            trailing, p = collect_trailing_line_comment(body, m.end())
+            if trailing and not doc.summary:
+                doc.summary = trailing.lstrip("<").strip()
             members.append(Member(kind="const", name=name, value=value, doc=doc))
-            pos = m.end()
+            pos = p
             # const grouped with comma share one declaration; advance again
             continue
 

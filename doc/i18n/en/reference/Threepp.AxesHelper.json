@@ -6,6 +6,10 @@
       "ja": {
         "summary": "軸ヘルパー",
         "description": "X(赤), Y(緑), Z(青)の軸を表示します。"
+      },
+      "tr": {
+        "summary": "Axes helper",
+        "description": "Displays the X (red), Y (green) and Z (blue) axes."
       }
     },
     "krkrthreepp:Threepp.AxesHelper.AxesHelper": {
@@ -15,12 +19,21 @@
         "params": {
           "size": "軸の長さ"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "size": "Length of the axes."
+        }
       }
     },
     "krkrthreepp:Threepp.AxesHelper.type": {
       "hash": "37fbd7ac9728",
       "ja": {
         "summary": "\"AxesHelper\"（読み取り専用）"
+      },
+      "tr": {
+        "summary": "\"AxesHelper\" (read-only)"
       }
     }
   }

@@ -6,6 +6,10 @@
       "ja": {
         "summary": "エッジジオメトリ",
         "description": "元のジオメトリからエッジ（輪郭線）を抽出します。"
+      },
+      "tr": {
+        "summary": "Edges geometry",
+        "description": "Extracts the edges (outlines) from a source geometry."
       }
     },
     "krkrthreepp:Threepp.EdgesGeometry.EdgesGeometry": {
@@ -16,12 +20,22 @@
           "geometry": "元のジオメトリ",
           "thresholdAngle": "エッジとみなす角度閾値 (度)"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "geometry": "Source geometry.",
+          "thresholdAngle": "Angle threshold for treating a boundary as an edge (degrees)."
+        }
       }
     },
     "krkrthreepp:Threepp.EdgesGeometry.type": {
       "hash": "426dab41c3ed",
       "ja": {
         "summary": "型名（読み取り専用）"
+      },
+      "tr": {
+        "summary": "Type name (read-only)"
       }
     }
   }

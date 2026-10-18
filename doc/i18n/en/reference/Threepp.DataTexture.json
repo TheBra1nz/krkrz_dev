@@ -6,6 +6,10 @@
       "ja": {
         "summary": "データテクスチャ",
         "description": "ピクセルデータから生成するテクスチャです。"
+      },
+      "tr": {
+        "summary": "Data texture",
+        "description": "A texture created from pixel data."
       }
     },
     "krkrthreepp:Threepp.DataTexture.DataTexture": {
@@ -16,6 +20,14 @@
           "channels": "チャンネル数",
           "width": "幅",
           "height": "高さ"
+        }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "channels": "Number of channels.",
+          "width": "Width.",
+          "height": "Height."
         }
       }
     }

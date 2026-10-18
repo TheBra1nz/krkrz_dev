@@ -6,6 +6,10 @@
       "ja": {
         "summary": "VRM ローダ",
         "description": ".vrm を読み込み VRM を返す。VRM 0.x / 1.0 両対応。"
+      },
+      "tr": {
+        "summary": "VRM loader",
+        "description": "Loads a .vrm file and returns a VRM. Supports both VRM 0.x and 1.0."
       }
     },
     "krkrthreepp:Threepp.VRMLoader.load": {
@@ -16,6 +20,13 @@
         "params": {
           "osPath": "ファイルシステム上の絶対/相対パス"
         }
+      },
+      "tr": {
+        "summary": "Loads from an OS path (for debugging / standalone use).",
+        "returns": "VRM (void on failure)",
+        "params": {
+          "osPath": "Absolute or relative path on the file system."
+        }
       }
     },
     "krkrthreepp:Threepp.VRMLoader.loadStorage": {
@@ -25,6 +36,13 @@
         "returns": "VRM  (失敗時 void)",
         "params": {
           "storageName": "ストレージ名 (例 Storages.getPlacedPath(\"model.vrm\"))"
+        }
+      },
+      "tr": {
+        "summary": "Loads from a Kirikiri storage name (for production; archives supported).",
+        "returns": "VRM (void on failure)",
+        "params": {
+          "storageName": "Storage name (e.g. Storages.getPlacedPath(\"model.vrm\"))."
         }
       }
     }

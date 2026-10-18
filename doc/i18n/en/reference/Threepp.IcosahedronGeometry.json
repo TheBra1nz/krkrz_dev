@@ -5,6 +5,9 @@
       "hash": "a4fc25feb8ec",
       "ja": {
         "summary": "正二十面体ジオメトリ"
+      },
+      "tr": {
+        "summary": "Icosahedron geometry"
       }
     },
     "krkrthreepp:Threepp.IcosahedronGeometry.IcosahedronGeometry": {
@@ -15,12 +18,22 @@
           "radius": "半径",
           "detail": "分割レベル"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "radius": "Radius.",
+          "detail": "Subdivision level."
+        }
       }
     },
     "krkrthreepp:Threepp.IcosahedronGeometry.type": {
       "hash": "dd5603267824",
       "ja": {
         "summary": "\"IcosahedronGeometry\"（読み取り専用）"
+      },
+      "tr": {
+        "summary": "\"IcosahedronGeometry\" (read-only)"
       }
     }
   }

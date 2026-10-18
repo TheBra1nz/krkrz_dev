@@ -5,6 +5,9 @@
       "hash": "d14470744e8f",
       "ja": {
         "description": "WIN32Dialog を吉里吉里向けにもう少し使いやすくしたクラス\nScripts.execStorage(\"win32dialog.tjs\")として使います。\n詳細は当該ソースやサンプルなどを参照してください。"
+      },
+      "tr": {
+        "description": "A wrapper that makes WIN32Dialog a little easier to use from Kirikiri.\nLoad it with Scripts.execStorage(\"win32dialog.tjs\").\nSee that source file and the samples for details."
       }
     },
     "win32dialog:WIN32DialogEX.store": {
@@ -14,6 +17,13 @@
         "description": "コントロールは，コントロール生成用の関数を呼びます。",
         "params": {
           "elm": "テンプレート用辞書配列\nelm = %[ helpID, exStyle, style, x, y, cx, cy, menu, windowClass, title, pointSize, weight, italic, charset, typeFace,\nitems: [ コントロール1, コントロール2, ... ] ];"
+        }
+      },
+      "tr": {
+        "summary": "Loads a template",
+        "description": "For controls, call the control creation functions.",
+        "params": {
+          "elm": "Template dictionary.\nelm = %[ helpID, exStyle, style, x, y, cx, cy, menu, windowClass, title, pointSize, weight, italic, charset, typeFace,\nitems: [ control1, control2, ... ] ];"
         }
       }
     },
@@ -25,6 +35,13 @@
         "params": {
           "elm": "パラメータ辞書"
         }
+      },
+      "tr": {
+        "summary": "Sets the initialization parameters of the items",
+        "description": "Always call this after store(). See win32dialog.tjs and testscript.tjs for the parameters.",
+        "params": {
+          "elm": "Parameter dictionary."
+        }
       }
     },
     "win32dialog:WIN32DialogEX.open": {
@@ -33,6 +50,11 @@
         "summary": "ダイアログを表示する",
         "description": "WIN32Dialog.open と返り値が異なるので注意のこと",
         "returns": "%[ result:EndDialogのnResult値, items:アイテムの状態辞書 ];"
+      },
+      "tr": {
+        "summary": "Shows the dialog",
+        "description": "Note that the return value differs from WIN32Dialog.open.",
+        "returns": "%[ result: the nResult value passed to EndDialog, items: dictionary of item states ];"
       }
     },
     "win32dialog:WIN32DialogEX.setCenterPosition": {
@@ -41,6 +63,12 @@
         "summary": "指定ウィンドウの中央位置にダイアログを移動",
         "params": {
           "win": "ウィンドウ（省略時はopen時の引数ウィンドウに対して）\nnullを渡すと画面に対して中央になる"
+        }
+      },
+      "tr": {
+        "summary": "Centers the dialog on the given window",
+        "params": {
+          "win": "Window (if omitted, the window passed to open is used).\nPassing null centers the dialog on the screen."
         }
       }
     },
@@ -51,6 +79,13 @@
         "params": {
           "dllfile": "dllファイル（自動的にStorages.getPlacedPath/getLocalName処理される）",
           "resource": "ダイアログリソース名"
+        }
+      },
+      "tr": {
+        "summary": "Loads a dialog resource (override)",
+        "params": {
+          "dllfile": "DLL file (Storages.getPlacedPath/getLocalName are applied automatically).",
+          "resource": "Dialog resource name."
         }
       }
     },
@@ -67,6 +102,19 @@
           "h": "高さ （ダイアログ座標単位）",
           "style": "スタイル",
           "ex": "拡張スタイル"
+        }
+      },
+      "tr": {
+        "summary": "Functions for creating the various controls",
+        "params": {
+          "text": "Text.",
+          "id": "Control ID.",
+          "x": "X coordinate (in dialog units).",
+          "y": "Y coordinate (in dialog units).",
+          "w": "Width (in dialog units).",
+          "h": "Height (in dialog units).",
+          "style": "Style.",
+          "ex": "Extended style."
         }
       }
     }

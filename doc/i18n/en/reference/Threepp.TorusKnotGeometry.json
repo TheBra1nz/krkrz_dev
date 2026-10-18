@@ -5,6 +5,9 @@
       "hash": "52fa124737c5",
       "ja": {
         "summary": "トーラスノットジオメトリ"
+      },
+      "tr": {
+        "summary": "Torus knot geometry"
       }
     },
     "krkrthreepp:Threepp.TorusKnotGeometry.TorusKnotGeometry": {
@@ -19,12 +22,26 @@
           "p": "ノットのパラメータp",
           "q": "ノットのパラメータq"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "radius": "Radius.",
+          "tube": "Radius of the tube.",
+          "tubularSegments": "Number of tubular segments.",
+          "radialSegments": "Number of radial segments.",
+          "p": "Knot parameter p.",
+          "q": "Knot parameter q."
+        }
       }
     },
     "krkrthreepp:Threepp.TorusKnotGeometry.type": {
       "hash": "add260ffd93e",
       "ja": {
         "summary": "\"TorusKnotGeometry\"（読み取り専用）"
+      },
+      "tr": {
+        "summary": "\"TorusKnotGeometry\" (read-only)"
       }
     }
   }

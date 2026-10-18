@@ -6,6 +6,10 @@
       "ja": {
         "summary": "カメラヘルパー",
         "description": "カメラの視錐台を可視化します。"
+      },
+      "tr": {
+        "summary": "Camera helper",
+        "description": "Visualizes the frustum of a camera."
       }
     },
     "krkrthreepp:Threepp.CameraHelper.CameraHelper": {
@@ -15,18 +19,30 @@
         "params": {
           "camera": "可視化するカメラ"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "camera": "Camera to visualize."
+        }
       }
     },
     "krkrthreepp:Threepp.CameraHelper.type": {
       "hash": "426dab41c3ed",
       "ja": {
         "summary": "型名（読み取り専用）"
+      },
+      "tr": {
+        "summary": "Type name (read-only)"
       }
     },
     "krkrthreepp:Threepp.CameraHelper.update": {
       "hash": "0c9639963fd8",
       "ja": {
         "summary": "ヘルパーを更新"
+      },
+      "tr": {
+        "summary": "Updates the helper"
       }
     }
   }

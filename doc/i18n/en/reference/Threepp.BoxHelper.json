@@ -6,6 +6,10 @@
       "ja": {
         "summary": "ボックスヘルパー",
         "description": "オブジェクトの境界ボックスを表示します。"
+      },
+      "tr": {
+        "summary": "Box helper",
+        "description": "Displays the bounding box of an object."
       }
     },
     "krkrthreepp:Threepp.BoxHelper.BoxHelper": {
@@ -16,18 +20,31 @@
           "object": "対象のObject3D",
           "color": "色 (0xRRGGBB)"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "object": "Target Object3D.",
+          "color": "Color (0xRRGGBB)."
+        }
       }
     },
     "krkrthreepp:Threepp.BoxHelper.type": {
       "hash": "9b9b3c0717f5",
       "ja": {
         "summary": "\"BoxHelper\"（読み取り専用）"
+      },
+      "tr": {
+        "summary": "\"BoxHelper\" (read-only)"
       }
     },
     "krkrthreepp:Threepp.BoxHelper.update": {
       "hash": "c662a08be3f1",
       "ja": {
         "summary": "更新"
+      },
+      "tr": {
+        "summary": "Updates the helper"
       }
     }
   }

@@ -6,6 +6,10 @@
       "ja": {
         "summary": "ShapeGeometry（2D形状ジオメトリ）",
         "description": "Shapeから平面的なジオメトリを生成"
+      },
+      "tr": {
+        "summary": "ShapeGeometry (2D shape geometry)",
+        "description": "Generates flat geometry from a Shape."
       }
     },
     "krkrthreepp:Threepp.ShapeGeometry.ShapeGeometry": {
@@ -15,6 +19,13 @@
         "params": {
           "shape": "Shapeオブジェクトまたは配列",
           "curveSegments": "カーブの分割数（デフォルト: 12）"
+        }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "shape": "A Shape object or an array of them.",
+          "curveSegments": "Number of segments on curves (default: 12)."
         }
       }
     }

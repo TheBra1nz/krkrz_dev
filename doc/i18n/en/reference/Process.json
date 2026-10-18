@@ -6,6 +6,10 @@
       "ja": {
         "summary": "擬似コードによるマニュアル",
         "description": "外部アプリを機動してその終了を待つ機構を提供します。"
+      },
+      "tr": {
+        "summary": "Manual written as pseudo-code",
+        "description": "Provides a mechanism for launching an external application and waiting for it to exit."
       }
     },
     "process:Process.status": {
@@ -13,6 +17,10 @@
       "ja": {
         "summary": "現在の状態",
         "description": "0:未実行\n1:実行中"
+      },
+      "tr": {
+        "summary": "Current state",
+        "description": "0: not running\n1: running"
       }
     },
     "process:Process.execute": {
@@ -25,6 +33,16 @@
           "target": "プログラム",
           "param": "引数",
           "folder": "実行時フォルダ(未指定時はカレントフォルダ)"
+        }
+      },
+      "tr": {
+        "summary": "Runs an external program in the background",
+        "description": "The onExecuted event is raised when it finishes.",
+        "returns": "true if the program was launched.",
+        "params": {
+          "target": "Program.",
+          "param": "Arguments.",
+          "folder": "Working folder (the current folder if omitted)."
         }
       }
     },
@@ -39,6 +57,16 @@
           "param": "引数",
           "folder": "実行時フォルダ(未指定時はカレントフォルダ)"
         }
+      },
+      "tr": {
+        "summary": "Runs a command-line program and captures its console output",
+        "description": "The onOutput event is raised for each line of console output.\nThe onExecuted event is raised when it finishes.",
+        "returns": "true if the program was launched.",
+        "params": {
+          "target": "Program.",
+          "param": "Arguments.",
+          "folder": "Working folder (the current folder if omitted)."
+        }
       }
     },
     "process:Process.terminate": {
@@ -47,6 +75,12 @@
         "summary": "実行中の外部プログラムの強制終了",
         "params": {
           "endCode": "終了コード"
+        }
+      },
+      "tr": {
+        "summary": "Forcibly terminates the running external program",
+        "params": {
+          "endCode": "Exit code."
         }
       }
     },
@@ -58,6 +92,13 @@
         "params": {
           "isBreak": "Ctrl+CではなくCtrl+Breakを送る"
         }
+      },
+      "tr": {
+        "summary": "Sends a Ctrl+C event (experimental: may not work in every environment)",
+        "returns": "true on success.",
+        "params": {
+          "isBreak": "Sends Ctrl+Break instead of Ctrl+C."
+        }
       }
     },
     "process:Process.onExecuted": {
@@ -66,6 +107,12 @@
         "summary": "イベント:シェル実行終了",
         "params": {
           "endCode": "終了コード"
+        }
+      },
+      "tr": {
+        "summary": "Event: the program has finished",
+        "params": {
+          "endCode": "Exit code."
         }
       }
     },
@@ -76,6 +123,13 @@
         "params": {
           "line": "行番号",
           "text": "出力テキスト（１行単位）"
+        }
+      },
+      "tr": {
+        "summary": "Event: console output",
+        "params": {
+          "line": "Line number.",
+          "text": "Output text (one line at a time)."
         }
       }
     }

@@ -133,6 +133,10 @@ Constant
 
 Value: `0`
 
+**Description**
+
+Left-aligned
+
 ---
 
 ### HALIGN_CENTER
@@ -143,7 +147,7 @@ Value: `1`
 
 **Description**
 
-Left-aligned
+Centered
 
 ---
 
@@ -155,7 +159,7 @@ Value: `2`
 
 **Description**
 
-Centered
+Right-aligned
 
 ---
 
@@ -167,7 +171,7 @@ Value: `3`
 
 **Description**
 
-Right-aligned
+Justified
 
 ---
 
@@ -176,6 +180,10 @@ Right-aligned
 Constant
 
 Value: `0`
+
+**Description**
+
+Top-aligned
 
 ---
 
@@ -187,7 +195,7 @@ Value: `1`
 
 **Description**
 
-Top-aligned
+Vertically centered
 
 ---
 
@@ -199,7 +207,7 @@ Value: `2`
 
 **Description**
 
-Centered
+Bottom-aligned
 
 ---
 
@@ -208,6 +216,10 @@ Centered
 Constant
 
 Value: `0`
+
+**Description**
+
+Fast (decides immediately at each break opportunity)
 
 ---
 
@@ -219,7 +231,7 @@ Value: `1`
 
 **Description**
 
-Fast (decides immediately at each break opportunity)
+High quality (Knuth-Plass algorithm)
 
 ---
 
@@ -231,7 +243,7 @@ Value: `2`
 
 **Description**
 
-High quality (Knuth-Plass algorithm)
+Balanced (evens out line lengths)
 
 ---
 
@@ -240,6 +252,10 @@ High quality (Knuth-Plass algorithm)
 Constant
 
 Value: `0`
+
+**Description**
+
+Left to right
 
 ---
 
@@ -251,7 +267,7 @@ Value: `1`
 
 **Description**
 
-Left to right
+Right to left
 
 ---
 
@@ -263,7 +279,7 @@ Value: `2`
 
 **Description**
 
-Right to left
+Default left to right
 
 ---
 
@@ -275,6 +291,6 @@ Value: `3`
 
 **Description**
 
-Default left to right
+Default right to left
 
 ---

@@ -12,7 +12,7 @@
         "description": "richtext - rich text rendering plugin for Kirikiri\n\nProvides high-quality text rendering by combining typesetting with minikin (the Android text layout engine)\nand glyph drawing with the Kirikiri Z engine's unified font engine (glyphware).\nBecause font data and glyph rasterization are shared with the engine,\nthe output matches Layer.drawText and Elements dialogs in appearance.\n\nFeatures:\n- Fallback across multiple fonts\n- Multilingual support (including RTL)\n- Emoji support\n- Styling with HTML-like tags\n- Decorations such as outlines and shadows\n- Paragraph layout (automatic line wrapping)\n- Progressive display (using ParagraphLayout / StyledLayout)"
       }
     },
-    "krkr_richtext:RichText.HALIGN_CENTER": {
+    "krkr_richtext:RichText.HALIGN_LEFT": {
       "hash": "5b3c4fe14312",
       "ja": {
         "summary": "左揃え"
@@ -21,7 +21,7 @@
         "summary": "Left-aligned"
       }
     },
-    "krkr_richtext:RichText.HALIGN_RIGHT": {
+    "krkr_richtext:RichText.HALIGN_CENTER": {
       "hash": "9ff2cf7f5cfd",
       "ja": {
         "summary": "中央揃え"
@@ -30,7 +30,7 @@
         "summary": "Centered"
       }
     },
-    "krkr_richtext:RichText.HALIGN_JUSTIFY": {
+    "krkr_richtext:RichText.HALIGN_RIGHT": {
       "hash": "bacbd03e094c",
       "ja": {
         "summary": "右揃え"
@@ -39,7 +39,16 @@
         "summary": "Right-aligned"
       }
     },
-    "krkr_richtext:RichText.VALIGN_MIDDLE": {
+    "krkr_richtext:RichText.HALIGN_JUSTIFY": {
+      "hash": "44bd5a660d52",
+      "ja": {
+        "summary": "両端揃え"
+      },
+      "tr": {
+        "summary": "Justified"
+      }
+    },
+    "krkr_richtext:RichText.VALIGN_TOP": {
       "hash": "dbba96f87dfd",
       "ja": {
         "summary": "上揃え"
@@ -48,16 +57,25 @@
         "summary": "Top-aligned"
       }
     },
-    "krkr_richtext:RichText.VALIGN_BOTTOM": {
+    "krkr_richtext:RichText.VALIGN_MIDDLE": {
       "hash": "9ff2cf7f5cfd",
       "ja": {
         "summary": "中央揃え"
       },
       "tr": {
-        "summary": "Centered"
+        "summary": "Vertically centered"
       }
     },
-    "krkr_richtext:RichText.BREAK_HIGH_QUALITY": {
+    "krkr_richtext:RichText.VALIGN_BOTTOM": {
+      "hash": "9409820073e4",
+      "ja": {
+        "summary": "下揃え"
+      },
+      "tr": {
+        "summary": "Bottom-aligned"
+      }
+    },
+    "krkr_richtext:RichText.BREAK_GREEDY": {
       "hash": "b500ba3f4831",
       "ja": {
         "summary": "高速（各改行候補で即座に判断）"
@@ -66,7 +84,7 @@
         "summary": "Fast (decides immediately at each break opportunity)"
       }
     },
-    "krkr_richtext:RichText.BREAK_BALANCED": {
+    "krkr_richtext:RichText.BREAK_HIGH_QUALITY": {
       "hash": "eba560368526",
       "ja": {
         "summary": "高品質（Knuth-Plassアルゴリズム）"
@@ -75,7 +93,16 @@
         "summary": "High quality (Knuth-Plass algorithm)"
       }
     },
-    "krkr_richtext:RichText.BIDI_RTL": {
+    "krkr_richtext:RichText.BREAK_BALANCED": {
+      "hash": "429fa3addb77",
+      "ja": {
+        "summary": "バランス（各行の長さを均等に）"
+      },
+      "tr": {
+        "summary": "Balanced (evens out line lengths)"
+      }
+    },
+    "krkr_richtext:RichText.BIDI_LTR": {
       "hash": "a33a73508283",
       "ja": {
         "summary": "左から右"
@@ -84,7 +111,7 @@
         "summary": "Left to right"
       }
     },
-    "krkr_richtext:RichText.BIDI_DEFAULT_LTR": {
+    "krkr_richtext:RichText.BIDI_RTL": {
       "hash": "c6887182864f",
       "ja": {
         "summary": "右から左"
@@ -93,13 +120,22 @@
         "summary": "Right to left"
       }
     },
-    "krkr_richtext:RichText.BIDI_DEFAULT_RTL": {
+    "krkr_richtext:RichText.BIDI_DEFAULT_LTR": {
       "hash": "97ec2a2ae97a",
       "ja": {
         "summary": "デフォルト左から右"
       },
       "tr": {
         "summary": "Default left to right"
+      }
+    },
+    "krkr_richtext:RichText.BIDI_DEFAULT_RTL": {
+      "hash": "279a29af83fd",
+      "ja": {
+        "summary": "デフォルト右から左"
+      },
+      "tr": {
+        "summary": "Default right to left"
       }
     }
   }

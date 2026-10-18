@@ -5,6 +5,9 @@
       "hash": "9be786913660",
       "ja": {
         "description": "ActiveX を操作できるオブジェクトを生成します。\nActiveX が IDispatch で持つメソッドを直接呼び出すことができます。"
+      },
+      "tr": {
+        "description": "Creates an object for controlling an ActiveX control.\nMethods that the ActiveX control exposes through IDispatch can be called directly."
       }
     },
     "win32ole:ActiveX.ActiveX": {
@@ -20,6 +23,18 @@
           "width": "表示サイズ   ウインドウ指定かつ省略の場合は親ウインドウのクライアント領域のサイズ",
           "height": "表示サイズ  ウインドウ指定かつ省略の場合は親ウインドウのクライアント領域のサイズ"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "progIdOrCLSID": "ProgID or CLSID, as a string.",
+          "name": "ProgID or CLSID, as a string. Note that the CLSID format differs from WIN32OLE: it uses the CAxWindow::CreateControl format.",
+          "win": "If given, the control is created on that window. If omitted, it becomes a standalone window.",
+          "left": "Display position. If a window is given and this is omitted, the top-left of the window's client area.",
+          "top": "Display position. If a window is given and this is omitted, the top-left of the window's client area.",
+          "width": "Display size. If a window is given and this is omitted, the size of the parent window's client area.",
+          "height": "Display size. If a window is given and this is omitted, the size of the parent window's client area."
+        }
       }
     },
     "win32ole:ActiveX.setPos": {
@@ -29,6 +44,13 @@
         "params": {
           "left": "左端座標",
           "top": "上端座標"
+        }
+      },
+      "tr": {
+        "summary": "Sets the position",
+        "params": {
+          "left": "Left edge coordinate.",
+          "top": "Top edge coordinate."
         }
       }
     },
@@ -40,6 +62,13 @@
           "width": "横幅",
           "height": "縦幅"
         }
+      },
+      "tr": {
+        "summary": "Sets the size",
+        "params": {
+          "width": "Width.",
+          "height": "Height."
+        }
       }
     },
     "win32ole:ActiveX.setExternalUI": {
@@ -47,42 +76,64 @@
       "ja": {
         "summary": "拡張UI指定",
         "description": "IEコンポーネントでのみ意味を持ちます。現在の版では、これ呼び出すことで\nコンテキストメニューが抑制されます。"
+      },
+      "tr": {
+        "summary": "Enables the external UI",
+        "description": "Only meaningful for the IE component. In the current version, calling this\nsuppresses the context menu."
       }
     },
     "win32ole:ActiveX.isValidWindow": {
       "hash": "b1c6a8450d58",
       "ja": {
         "summary": "ウインドウが有効かどうか(読み込み専用)"
+      },
+      "tr": {
+        "summary": "Whether the window is valid (read-only)"
       }
     },
     "win32ole:ActiveX.left": {
       "hash": "3c05c9e59a47",
       "ja": {
         "summary": "左端座標"
+      },
+      "tr": {
+        "summary": "Left edge coordinate"
       }
     },
     "win32ole:ActiveX.top": {
       "hash": "8d0fd86797ea",
       "ja": {
         "summary": "上端座標"
+      },
+      "tr": {
+        "summary": "Top edge coordinate"
       }
     },
     "win32ole:ActiveX.width": {
       "hash": "4b9595d1f95f",
       "ja": {
         "summary": "横幅"
+      },
+      "tr": {
+        "summary": "Width"
       }
     },
     "win32ole:ActiveX.height": {
       "hash": "828fded269d4",
       "ja": {
         "summary": "縦幅"
+      },
+      "tr": {
+        "summary": "Height"
       }
     },
     "win32ole:ActiveX.visible": {
       "hash": "7475a58edb07",
       "ja": {
         "summary": "表示状態"
+      },
+      "tr": {
+        "summary": "Visibility"
       }
     },
     "win32ole:ActiveX.onCreate": {
@@ -90,6 +141,10 @@
       "ja": {
         "summary": "ウインドウ生成完了後に呼び出されるイベント",
         "description": "初期生成時やフルスクリーン処理などでウインドウが生成された後に呼ばれます\n再構築後は、登録されていたイベントはすべて破棄される他、その他もろもろが\n初期化されるので、このイベント内で必要なものを再設定する必要があります。"
+      },
+      "tr": {
+        "summary": "Event called after the window has been created",
+        "description": "Called after the window is created, for example on initial creation or when switching to full screen.\nAfter re-creation, all registered events are discarded and various other state is\nreset, so re-apply whatever you need inside this event."
       }
     },
     "win32ole:ActiveX.onDestroy": {
@@ -97,6 +152,10 @@
       "ja": {
         "summary": "ウインドウ破棄前に呼び出されるイベント",
         "description": "フルスクリーン処理やオブジェクトの破棄などでウインドウが破棄される前に呼ばれます。"
+      },
+      "tr": {
+        "summary": "Event called before the window is destroyed",
+        "description": "Called before the window is destroyed, for example when switching to full screen or when the object is destroyed."
       }
     }
   }

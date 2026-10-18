@@ -5,6 +5,9 @@
       "hash": "1d15ac4c665c",
       "ja": {
         "summary": "球ジオメトリ"
+      },
+      "tr": {
+        "summary": "Sphere geometry"
       }
     },
     "krkrthreepp:Threepp.SphereGeometry.SphereGeometry": {
@@ -20,18 +23,36 @@
           "thetaStart": "垂直方向の開始角度",
           "thetaLength": "垂直方向の角度範囲"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "radius": "Radius.",
+          "widthSegments": "Number of horizontal segments.",
+          "heightSegments": "Number of vertical segments.",
+          "phiStart": "Horizontal start angle.",
+          "phiLength": "Horizontal sweep angle.",
+          "thetaStart": "Vertical start angle.",
+          "thetaLength": "Vertical sweep angle."
+        }
       }
     },
     "krkrthreepp:Threepp.SphereGeometry.type": {
       "hash": "def1661a37de",
       "ja": {
         "summary": "\"SphereGeometry\"（読み取り専用）"
+      },
+      "tr": {
+        "summary": "\"SphereGeometry\" (read-only)"
       }
     },
     "krkrthreepp:Threepp.SphereGeometry.radius": {
       "hash": "08acea71798b",
       "ja": {
         "summary": "半径（読み取り専用）"
+      },
+      "tr": {
+        "summary": "Radius (read-only)"
       }
     }
   }

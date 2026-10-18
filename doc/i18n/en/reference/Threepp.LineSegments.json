@@ -6,6 +6,10 @@
       "ja": {
         "summary": "線分オブジェクト",
         "description": "独立した線分を描画します。"
+      },
+      "tr": {
+        "summary": "Line segments object",
+        "description": "Draws separate line segments."
       }
     },
     "krkrthreepp:Threepp.LineSegments.LineSegments": {
@@ -16,12 +20,22 @@
           "geometry": "ジオメトリ (BufferGeometry)",
           "material": "マテリアル (LineBasicMaterial)"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "geometry": "Geometry (BufferGeometry).",
+          "material": "Material (LineBasicMaterial)."
+        }
       }
     },
     "krkrthreepp:Threepp.LineSegments.type": {
       "hash": "027882ef9691",
       "ja": {
         "summary": "\"LineSegments\"（読み取り専用）"
+      },
+      "tr": {
+        "summary": "\"LineSegments\" (read-only)"
       }
     }
   }

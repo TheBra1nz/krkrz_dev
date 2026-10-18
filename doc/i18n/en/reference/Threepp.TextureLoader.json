@@ -6,6 +6,10 @@
       "ja": {
         "summary": "テクスチャローダー",
         "description": "ファイルからテクスチャを読み込みます。"
+      },
+      "tr": {
+        "summary": "Texture loader",
+        "description": "Loads textures from files."
       }
     },
     "krkrthreepp:Threepp.TextureLoader.TextureLoader": {
@@ -14,6 +18,12 @@
         "summary": "コンストラクタ",
         "params": {
           "useCache": "キャッシュを使用するか"
+        }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "useCache": "Whether to use the cache."
         }
       }
     },
@@ -26,12 +36,23 @@
           "path": "ファイルパス",
           "flipY": "Y軸を反転するか"
         }
+      },
+      "tr": {
+        "summary": "Loads a texture",
+        "returns": "Texture",
+        "params": {
+          "path": "File path.",
+          "flipY": "Whether to flip along the Y axis."
+        }
       }
     },
     "krkrthreepp:Threepp.TextureLoader.clearCache": {
       "hash": "92814e855d14",
       "ja": {
         "summary": "キャッシュをクリア"
+      },
+      "tr": {
+        "summary": "Clears the cache"
       }
     }
   }

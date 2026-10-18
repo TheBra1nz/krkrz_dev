@@ -6,6 +6,10 @@
       "ja": {
         "summary": "フォグ（線形）",
         "description": "線形フォグを設定します。"
+      },
+      "tr": {
+        "summary": "Fog (linear)",
+        "description": "Sets up linear fog."
       }
     },
     "krkrthreepp:Threepp.Fog.Fog": {
@@ -17,24 +21,41 @@
           "near": "フォグ開始距離",
           "far": "フォグ終了距離"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "color": "Fog color.",
+          "near": "Distance at which the fog starts.",
+          "far": "Distance at which the fog ends."
+        }
       }
     },
     "krkrthreepp:Threepp.Fog.color": {
       "hash": "74bda96d4788",
       "ja": {
         "summary": "フォグの色"
+      },
+      "tr": {
+        "summary": "Fog color"
       }
     },
     "krkrthreepp:Threepp.Fog.nearPlane": {
       "hash": "28b7b48b3fe9",
       "ja": {
         "summary": "開始距離"
+      },
+      "tr": {
+        "summary": "Start distance"
       }
     },
     "krkrthreepp:Threepp.Fog.farPlane": {
       "hash": "ea105ae25740",
       "ja": {
         "summary": "終了距離"
+      },
+      "tr": {
+        "summary": "End distance"
       }
     }
   }

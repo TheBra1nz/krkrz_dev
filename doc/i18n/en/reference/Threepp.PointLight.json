@@ -6,6 +6,10 @@
       "ja": {
         "summary": "点光源",
         "description": "一点から全方向に照射される光源です。"
+      },
+      "tr": {
+        "summary": "Point light",
+        "description": "A light emitted from a single point in all directions."
       }
     },
     "krkrthreepp:Threepp.PointLight.PointLight": {
@@ -18,48 +22,78 @@
           "distance": "光が届く距離（0で無限）",
           "decay": "減衰率"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "color": "Light color (0xRRGGBB).",
+          "intensity": "Light intensity.",
+          "distance": "Maximum range of the light (0 for unlimited).",
+          "decay": "Decay rate."
+        }
       }
     },
     "krkrthreepp:Threepp.PointLight.type": {
       "hash": "6b440173293f",
       "ja": {
         "summary": "\"PointLight\"（読み取り専用）"
+      },
+      "tr": {
+        "summary": "\"PointLight\" (read-only)"
       }
     },
     "krkrthreepp:Threepp.PointLight.distance": {
       "hash": "99b6c534339a",
       "ja": {
         "summary": "光が届く距離"
+      },
+      "tr": {
+        "summary": "Maximum range of the light"
       }
     },
     "krkrthreepp:Threepp.PointLight.decay": {
       "hash": "588dea002b2d",
       "ja": {
         "summary": "減衰率"
+      },
+      "tr": {
+        "summary": "Decay rate"
       }
     },
     "krkrthreepp:Threepp.PointLight.getPower": {
       "hash": "d634fd525ff7",
       "ja": {
         "summary": "光のパワーを取得"
+      },
+      "tr": {
+        "summary": "Gets the light power"
       }
     },
     "krkrthreepp:Threepp.PointLight.setPower": {
       "hash": "66ef0c5a6a42",
       "ja": {
         "summary": "光のパワーを設定"
+      },
+      "tr": {
+        "summary": "Sets the light power"
       }
     },
     "krkrthreepp:Threepp.PointLight.setShadowMapSize": {
       "hash": "d1f11a7ac60c",
       "ja": {
         "summary": "--- 影(ShadowMap) --- ※ setShadowOrthoBounds は平行光源専用(点光源では無効)"
+      },
+      "tr": {
+        "summary": "--- Shadows (ShadowMap) --- Note: setShadowOrthoBounds is for directional lights only (it has no effect on point lights)."
       }
     },
     "krkrthreepp:Threepp.PointLight.dispose": {
       "hash": "4b8ce80d5ddf",
       "ja": {
         "summary": "リソースを解放"
+      },
+      "tr": {
+        "summary": "Releases resources"
       }
     }
   }

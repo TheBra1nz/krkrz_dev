@@ -5,6 +5,9 @@
       "hash": "cb11e35cf174",
       "ja": {
         "summary": "円（ディスク）ジオメトリ"
+      },
+      "tr": {
+        "summary": "Circle (disc) geometry"
       }
     },
     "krkrthreepp:Threepp.CircleGeometry.CircleGeometry": {
@@ -17,12 +20,24 @@
           "thetaStart": "開始角度",
           "thetaLength": "角度範囲"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "radius": "Radius.",
+          "segments": "Number of segments.",
+          "thetaStart": "Start angle.",
+          "thetaLength": "Central angle of the sector."
+        }
       }
     },
     "krkrthreepp:Threepp.CircleGeometry.type": {
       "hash": "03b20ee8c97b",
       "ja": {
         "summary": "\"CircleGeometry\"（読み取り専用）"
+      },
+      "tr": {
+        "summary": "\"CircleGeometry\" (read-only)"
       }
     }
   }

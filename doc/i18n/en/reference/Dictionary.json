@@ -11,6 +11,15 @@
           "newline": "改行コード 0:CRLF 1:LF",
           "option": "整形オプション sso* の組み合わせ（後述）もしくは直接数値指定"
         }
+      },
+      "tr": {
+        "summary": "Saves data in a format compatible with saveStruct",
+        "params": {
+          "filename": "Destination file.",
+          "utf8": "Output encoding. true for UTF-8, false for the current code page.",
+          "newline": "Newline code. 0: CRLF, 1: LF.",
+          "option": "Formatting options: a combination of sso* flags (see below), or a numeric value."
+        }
       }
     },
     "saveStruct:Dictionary.toStructString": {
@@ -20,6 +29,13 @@
         "params": {
           "newline": "改行コード 0:CRLF 1:LF",
           "option": "整形オプション sso* の組み合わせ（後述）もしくは直接数値指定"
+        }
+      },
+      "tr": {
+        "returns": "A string in a format compatible with saveStruct.",
+        "params": {
+          "newline": "Newline code. 0: CRLF, 1: LF.",
+          "option": "Formatting options: a combination of sso* flags (see below), or a numeric value."
         }
       }
     }
