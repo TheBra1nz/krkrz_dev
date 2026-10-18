@@ -6,6 +6,10 @@
       "ja": {
         "summary": "Elements の画面をホストのレイヤへ描くパネル",
         "description": "[ElementsDialog](ElementsDialog.md) と同じ画面 JSON を、overlay ( 常に最前面 )\nではなく **指定した [Layer](Layer.md) のビットマップへ描画**するクラスです。\nz 順・トランジション ( `[trans]` )・スクリーンショット ( piledCopy )・入力の\n帰属がすべて吉里吉里のレイヤの仕組みに従うため、本文の上に UI が被らない\nHUD、ゲーム画面の一部としての UI、トランジションに乗せたい画面などに\n使います。\n\n```tjs\nvar lay = new Layer(win, win.primaryLayer);\nlay.setImageSize(400, 300);\nlay.setSizeToImageSize();\nlay.type = ltAlpha;      // ltAddAlpha なら変換なしでさらに軽い\nlay.hitThreshold = 0;    // すべてのマウスメッセージを受ける\nlay.visible = true;\n\nvar panel = new ElementsPanel(lay);\npanel.onAction = function(id, payload) { ... };\npanel.showFile(\"ui/hud.jsonc\");\n\n// レイヤの入力をパネルへ流す ( Layer 派生で 1 回書けばよい )\nlay.onMouseDown = function(x, y, b, f) { panel.mouseDown(x, y, b, f); };\nlay.onMouseUp   = function(x, y, b, f) { panel.mouseUp  (x, y, b, f); };\nlay.onMouseMove = function(x, y, f)    { panel.mouseMove(x, y, f); };\n```\n\nイベント ( [onAction](#onaction) / [onDrag](#ondrag) / [onVar](#onvar) /\n[onClose](#onclose) ) と変数 store の API ( [setVar](#setvar) /\n[getVar](#getvar) / [listVars](#listvars) / [watchVars](#watchvars) ) は\nElementsDialog と同じ形なので、既存の画面ドライバをほぼそのまま載せられます。\n\nElementsDialog ( overlay ) との違い:\n\n- 入力インターセプトやウィンドウクローズ抑止に影響しません\n- `Agent.dialogs()` / `closeAllDialogs()` には現れません\n- モーダル結果・navigator フロー・仮想キーボード・ホストホットキー表は\n持ちません ( 1 パネル = 1 画面。画面切替は showJson を呼び直すか、\nレイヤを 2 枚にして `[trans]` に任せます )\n- キー / パッド入力は既定では受けません。効かせたい画面だけ\n[keyDown](#keydown) / [keyUp](#keyup) / [text](#text) をスクリプトから\n流します\n\nテーマ・表示言語・[ElementsDialog.registerImage](ElementsDialog.md#registerimage)\nの実行時画像ストアはプロセス全体で共有され、パネルにも反映されます。"
+      },
+      "tr": {
+        "summary": "Panel that draws an Elements screen onto a host layer",
+        "description": "A class that draws the same screen JSON as [ElementsDialog](ElementsDialog.md) **onto the bitmap of a given [Layer](Layer.md)**\ninstead of as an overlay ( always on top ).\nZ-order, transitions ( `[trans]` ), screenshots ( piledCopy ), and input\nownership all follow Kirikiri's layer mechanisms, so use it for HUDs that must not\ncover the text, UI that is part of the game screen, screens you want to carry through a transition,\nand so on.\n\n```tjs\nvar lay = new Layer(win, win.primaryLayer);\nlay.setImageSize(400, 300);\nlay.setSizeToImageSize();\nlay.type = ltAlpha;      // ltAddAlpha なら変換なしでさらに軽い\nlay.hitThreshold = 0;    // すべてのマウスメッセージを受ける\nlay.visible = true;\n\nvar panel = new ElementsPanel(lay);\npanel.onAction = function(id, payload) { ... };\npanel.showFile(\"ui/hud.jsonc\");\n\n// レイヤの入力をパネルへ流す ( Layer 派生で 1 回書けばよい )\nlay.onMouseDown = function(x, y, b, f) { panel.mouseDown(x, y, b, f); };\nlay.onMouseUp   = function(x, y, b, f) { panel.mouseUp  (x, y, b, f); };\nlay.onMouseMove = function(x, y, f)    { panel.mouseMove(x, y, f); };\n```\n\nThe events ( [onAction](#onaction) / [onDrag](#ondrag) / [onVar](#onvar) /\n[onClose](#onclose) ) and the variable store API ( [setVar](#setvar) /\n[getVar](#getvar) / [listVars](#listvars) / [watchVars](#watchvars) ) have\nthe same shape as in ElementsDialog, so existing screen drivers can be reused almost as is.\n\nDifferences from ElementsDialog ( overlay ):\n\n- Does not affect input interception or window-close suppression\n- Does not appear in `Agent.dialogs()` / `closeAllDialogs()`\n- Has no modal result, navigator flow, virtual keyboard, or host hotkey table\n( 1 panel = 1 screen. To switch screens, call showJson again, or\nuse two layers and let `[trans]` handle it )\n- Does not receive key / pad input by default. For screens that need it,\nfeed [keyDown](#keydown) / [keyUp](#keyup) / [text](#text) from\nscript\n\nThe theme, display language, and the runtime image store of\n[ElementsDialog.registerImage](ElementsDialog.md#registerimage)\nare shared across the whole process and also apply to panels."
       }
     },
     "ElementsPanel.ElementsPanel": {
@@ -15,6 +19,13 @@
         "description": "描画先のレイヤを指定してパネルを構築します。描画はレイヤの画像サイズ\nいっぱいに行われます。",
         "params": {
           "layer": "描画先の [Layer](Layer.md)。"
+        }
+      },
+      "tr": {
+        "summary": "Constructs an ElementsPanel object",
+        "description": "Constructs a panel that draws onto the given layer. Drawing fills the layer's entire\nimage size.",
+        "params": {
+          "layer": "Destination [Layer](Layer.md)."
         }
       }
     },
@@ -27,6 +38,14 @@
         "params": {
           "path": "画面 JSON の統一ストレージパス。"
         }
+      },
+      "tr": {
+        "summary": "Opens screen JSON from a file",
+        "description": "Loads screen JSON ( jsonc allowed ) from a file and starts drawing onto the layer.\nRelative asset paths in the screen are resolved from the directory containing the JSON.",
+        "returns": "Whether it was opened.",
+        "params": {
+          "path": "Unified storage path of the screen JSON."
+        }
       }
     },
     "ElementsPanel.showJson": {
@@ -36,6 +55,13 @@
         "returns": "開けたかどうか。",
         "params": {
           "json": "画面 JSON 文字列。"
+        }
+      },
+      "tr": {
+        "summary": "Opens screen JSON from a string",
+        "returns": "Whether it was opened.",
+        "params": {
+          "json": "Screen JSON string."
         }
       }
     },
@@ -48,6 +74,14 @@
         "params": {
           "dict": "レイアウトの Dictionary。"
         }
+      },
+      "tr": {
+        "summary": "Opens a layout written as a Dictionary",
+        "description": "Opens a layout written with TJS Dictionary / Array ( same format as\n[ElementsDialog.showDict](ElementsDialog.md#showdict) ).",
+        "returns": "Whether it was opened.",
+        "params": {
+          "dict": "Layout Dictionary."
+        }
       }
     },
     "ElementsPanel.close": {
@@ -55,6 +89,10 @@
       "ja": {
         "summary": "パネルを閉じる",
         "description": "画面を破棄して描画を止めます。レイヤ自体は残る ( 最後の描画内容も\n消えない ) ので、必要ならホスト側でクリアしてください。"
+      },
+      "tr": {
+        "summary": "Closes the panel",
+        "description": "Discards the screen and stops drawing. The layer itself remains ( and the last drawn content\nis not erased ), so clear it on the host side if needed."
       }
     },
     "ElementsPanel.notifyResized": {
@@ -62,6 +100,10 @@
       "ja": {
         "summary": "レイヤのサイズ変更をパネルへ通知する",
         "description": "描画先レイヤの画像サイズを変えた後に呼びます。次フレームから新しい\nサイズで描画されます。"
+      },
+      "tr": {
+        "summary": "Notifies the panel of a layer size change",
+        "description": "Call this after changing the image size of the destination layer. Drawing uses the new\nsize from the next frame."
       }
     },
     "ElementsPanel.mouseDown": {
@@ -75,6 +117,16 @@
           "button": "= 0 マウスボタン ( 0 = 左 / 1 = 右 / 2 = 中 )。",
           "shift": "= 0 シフト状態ビットフラグ。"
         }
+      },
+      "tr": {
+        "summary": "Feeds a mouse press to the panel",
+        "description": "Coordinates are layer-local ( the Layer.onMouseDown arguments as is ).",
+        "params": {
+          "x": "Layer-local X coordinate.",
+          "y": "Layer-local Y coordinate.",
+          "button": "= 0 Mouse button ( 0 = left / 1 = right / 2 = middle ).",
+          "shift": "= 0 Shift state bit flags."
+        }
       }
     },
     "ElementsPanel.mouseUp": {
@@ -87,6 +139,15 @@
           "button": "= 0 マウスボタン。",
           "shift": "= 0 シフト状態ビットフラグ。"
         }
+      },
+      "tr": {
+        "summary": "Feeds a mouse release to the panel",
+        "params": {
+          "x": "Layer-local X coordinate.",
+          "y": "Layer-local Y coordinate.",
+          "button": "= 0 Mouse button.",
+          "shift": "= 0 Shift state bit flags."
+        }
       }
     },
     "ElementsPanel.mouseMove": {
@@ -97,6 +158,14 @@
           "x": "レイヤ local X 座標。",
           "y": "レイヤ local Y 座標。",
           "shift": "= 0 シフト状態ビットフラグ。"
+        }
+      },
+      "tr": {
+        "summary": "Feeds a mouse move to the panel",
+        "params": {
+          "x": "Layer-local X coordinate.",
+          "y": "Layer-local Y coordinate.",
+          "shift": "= 0 Shift state bit flags."
         }
       }
     },
@@ -110,12 +179,24 @@
           "y": "レイヤ local Y 座標。",
           "shift": "= 0 シフト状態ビットフラグ。"
         }
+      },
+      "tr": {
+        "summary": "Feeds a wheel rotation to the panel",
+        "params": {
+          "delta": "Rotation amount ( in units of 120 ).",
+          "x": "Layer-local X coordinate.",
+          "y": "Layer-local Y coordinate.",
+          "shift": "= 0 Shift state bit flags."
+        }
       }
     },
     "ElementsPanel.mouseLeave": {
       "hash": "d5795661ed54",
       "ja": {
         "summary": "マウスがレイヤから出たことをパネルへ流す"
+      },
+      "tr": {
+        "summary": "Tells the panel that the mouse left the layer"
       }
     },
     "ElementsPanel.keyDown": {
@@ -128,6 +209,15 @@
           "key": "仮想キーコード。",
           "shift": "= 0 シフト状態ビットフラグ。"
         }
+      },
+      "tr": {
+        "summary": "Feeds a key press to the panel",
+        "description": "The panel does not take keyboard focus by default, so feed keys from script\nonly for screens that need them.",
+        "returns": "Whether the panel consumed it.",
+        "params": {
+          "key": "Virtual key code.",
+          "shift": "= 0 Shift state bit flags."
+        }
       }
     },
     "ElementsPanel.keyUp": {
@@ -139,6 +229,14 @@
           "key": "仮想キーコード。",
           "shift": "= 0 シフト状態ビットフラグ。"
         }
+      },
+      "tr": {
+        "summary": "Feeds a key release to the panel",
+        "returns": "Whether the panel consumed it.",
+        "params": {
+          "key": "Virtual key code.",
+          "shift": "= 0 Shift state bit flags."
+        }
       }
     },
     "ElementsPanel.text": {
@@ -148,6 +246,13 @@
         "description": "input_box へのテキスト入力 ( IME / 貼り付け相当 ) です。",
         "params": {
           "str": "入力する文字列。"
+        }
+      },
+      "tr": {
+        "summary": "Feeds text input to the panel",
+        "description": "Text input to an input_box ( equivalent to IME / paste ).",
+        "params": {
+          "str": "String to input."
         }
       }
     },
@@ -161,6 +266,15 @@
           "name": "変数名。",
           "value": "設定する値 ( 文字列 )。"
         }
+      },
+      "tr": {
+        "summary": "Writes a variable of the displayed screen",
+        "description": "Same as [ElementsDialog.setVar](ElementsDialog.md#setvar).",
+        "returns": "Whether it was written.",
+        "params": {
+          "name": "Variable name.",
+          "value": "Value to set ( string )."
+        }
       }
     },
     "ElementsPanel.getVar": {
@@ -172,6 +286,14 @@
         "params": {
           "name": "変数名。"
         }
+      },
+      "tr": {
+        "summary": "Reads a variable of the displayed screen",
+        "description": "Same as [ElementsDialog.getVar](ElementsDialog.md#getvar).",
+        "returns": "The variable's value ( string ). void for an unknown variable or when nothing is open.",
+        "params": {
+          "name": "Variable name."
+        }
       }
     },
     "ElementsPanel.listVars": {
@@ -180,6 +302,11 @@
         "summary": "表示中画面の変数一覧を取得する",
         "description": "[ElementsDialog.listVars](ElementsDialog.md#listvars) と同じです。",
         "returns": "変数記述 Dictionary の配列。未オープンなら空配列。"
+      },
+      "tr": {
+        "summary": "Gets the list of variables of the displayed screen",
+        "description": "Same as [ElementsDialog.listVars](ElementsDialog.md#listvars).",
+        "returns": "An array of variable descriptor Dictionaries. An empty array when nothing is open."
       }
     },
     "ElementsPanel.invalidate": {
@@ -187,6 +314,10 @@
       "ja": {
         "summary": "明示的な再描画を要求する",
         "description": "次フレームで画面全体を描き直します。通常は不要です ( 画面の変化は\n自動で反映されます )。"
+      },
+      "tr": {
+        "summary": "Requests an explicit redraw",
+        "description": "Redraws the whole screen on the next frame. Normally unnecessary ( screen changes\nare reflected automatically )."
       }
     },
     "ElementsPanel.focus": {
@@ -197,6 +328,14 @@
         "returns": "依頼できたかどうか。未オープンなら false。",
         "params": {
           "id": "フォーカスを移す widget の id。"
+        }
+      },
+      "tr": {
+        "summary": "Moves focus to the widget with the given id",
+        "description": "Same as [ElementsDialog.focus](ElementsDialog.md#focus). An input_box\nreceives editing focus ( caret shown + accepts text ).",
+        "returns": "Whether the request was made. false when nothing is open.",
+        "params": {
+          "id": "id of the widget to focus."
         }
       }
     },
@@ -209,12 +348,23 @@
         "params": {
           "id": "実行する widget の id。"
         }
+      },
+      "tr": {
+        "summary": "Activates the widget with the given id",
+        "description": "Moves focus to it and activates it ( equivalent to Enter ).\nSame as [ElementsDialog.activate](ElementsDialog.md#activate).",
+        "returns": "Whether it was activated. false for an unknown id or when nothing is open.",
+        "params": {
+          "id": "id of the widget to activate."
+        }
       }
     },
     "ElementsPanel.active": {
       "hash": "8a39f26a7b17",
       "ja": {
         "summary": "画面を開いているか"
+      },
+      "tr": {
+        "summary": "Whether a screen is open"
       }
     },
     "ElementsPanel.focused": {
@@ -222,6 +372,10 @@
       "ja": {
         "summary": "現在フォーカス中の widget id",
         "description": "フォーカスが無ければ空文字列です。"
+      },
+      "tr": {
+        "summary": "id of the currently focused widget",
+        "description": "Empty string if nothing has focus."
       }
     },
     "ElementsPanel.watchVars": {
@@ -229,6 +383,10 @@
       "ja": {
         "summary": "どの変数の変化を onVar で受けるか",
         "description": "[ElementsDialog.watchVars](ElementsDialog.md#watchvars) と同じです。\nvoid ( 既定 ) = onVar を実装しているときだけ全変数 / `\"*\"` = 全変数 /\n`[]` = 観測しない / `[名前, ...]` = その変数だけ。"
+      },
+      "tr": {
+        "summary": "Which variable changes are delivered to onVar",
+        "description": "Same as [ElementsDialog.watchVars](ElementsDialog.md#watchvars).\nvoid ( default ) = all variables, only when onVar is implemented / `\"*\"` = all variables /\n`[]` = observe none / `[name, ...]` = only those variables."
       }
     },
     "ElementsPanel.onAction": {
@@ -240,6 +398,14 @@
           "id": "操作された widget の id。",
           "payload": "値 ( button クリックは void、state widget は実値 )。"
         }
+      },
+      "tr": {
+        "summary": "Widget operation notification",
+        "description": "Same as [ElementsDialog.onAction](ElementsDialog.md#onaction).",
+        "params": {
+          "id": "id of the operated widget.",
+          "payload": "Value ( void for a button click, the actual value for a state widget )."
+        }
       }
     },
     "ElementsPanel.onDrag": {
@@ -249,6 +415,13 @@
         "description": "[ElementsDialog.onDrag](ElementsDialog.md#ondrag) と同じです。",
         "params": {
           "payload": "ドラッグ情報の Dictionary。"
+        }
+      },
+      "tr": {
+        "summary": "Drag notification",
+        "description": "Same as [ElementsDialog.onDrag](ElementsDialog.md#ondrag).",
+        "params": {
+          "payload": "Dictionary of drag information."
         }
       }
     },
@@ -261,6 +434,14 @@
           "name": "変数名。",
           "value": "新しい値 ( 文字列 )。"
         }
+      },
+      "tr": {
+        "summary": "Variable change notification",
+        "description": "Same as [ElementsDialog.onVar](ElementsDialog.md#onvar).",
+        "params": {
+          "name": "Variable name.",
+          "value": "New value ( string )."
+        }
       }
     },
     "ElementsPanel.onClose": {
@@ -270,6 +451,13 @@
         "description": "[ElementsDialog.onClose](ElementsDialog.md#onclose) と同じです。",
         "params": {
           "action": "閉じる契機になった action。"
+        }
+      },
+      "tr": {
+        "summary": "Notification when the screen closes",
+        "description": "Same as [ElementsDialog.onClose](ElementsDialog.md#onclose).",
+        "params": {
+          "action": "The action that triggered the close."
         }
       }
     }
