@@ -11,6 +11,7 @@ krkrz_dev 全体の未対応課題をここに集約する。**詳細な SSOT �
 | Elements の入力リピート / キャッシュ / 描画の精査 | [src/core/doc/ElementsAudit.md](src/core/doc/ElementsAudit.md) |
 | 仮想カーソル位置 (提案) | [src/core/doc/VirtualCursor.md](src/core/doc/VirtualCursor.md) |
 | デモ整備 | [data/ROADMAP.md](data/ROADMAP.md) |
+| 多言語化 (デモの i18n / 公開ドキュメントの英語版) | [TODO-i18n.md](TODO-i18n.md) |
 | 標準ツールの改定 (リリーサ / 署名 / 破損チェック / ループチューナ / 画像・音声コンバータ) | [TODO-tools.md](TODO-tools.md) |
 | 読み上げ (スクリーンリーダー対応) | [doc/specification/accessibility.md](doc/specification/accessibility.md) (Elements 側は `src/core/external/elements/docs/accessibility.md`) |
 | Window のサイズ/位置/ズーム/ビューポート仕様 | [src/core/doc/WindowGeometry.md](src/core/doc/WindowGeometry.md) |
@@ -152,6 +153,8 @@ registerHotKey の WINVER 配線)。
 
 | 優先 | 課題 | 内容 |
 |---|---|---|
+| 中 | 多言語化: デモ用 i18n 基礎ライブラリ + 実効表示言語の公開 | `demolib/demo_i18n.tjs` (Elements の `strings` と同じ形の表を共用) と `System.uiLanguage` / `uiLanguageCandidates`。当面 ja / en、chs を後から足せる作り。SSOT = [TODO-i18n.md](TODO-i18n.md) A・B |
+| 中 | 多言語化: 公開ドキュメントの英語版 | 公開サイトの範囲のみ。mkdocs-static-i18n (接尾辞方式 `*.en.md`) + reference は JSON の翻訳カタログから生成 + 訳の鮮度チェック。SSOT = [TODO-i18n.md](TODO-i18n.md) C |
 | 中 | krkrlive2d のドライバソースを版固定取得へ | ドライバ側 CMake がローカルパス (`LIVE2DLIB_FOLDER` / `CUBISM_SDK` 等) を直接参照する作りで、そのフォルダの版がずれると **umbrella の configure ごと失敗する** (実例: ドライバが `find_package(minizip)` を要求する版になり、本体 vcpkg マニフェストに minizip が無くて configure 不能)。 版を固定して fetch する形へ直すまで、`CMakeLists.txt` の `CUBISM_SDK` ブロックをコメントアウトしてビルド対象から外してある (2edc380)。 直したら除外を戻す |
 | 中 | リリースのバージョン運用を確定する | **実験中 API の扱いは 2026-09-06 に決定** (安定保証の対象外を `@experimental` で明示し、そこの非互換変更はマイナー。[Versioning.md](src/core/doc/Versioning.md) 「実験中 API」節)。番号の供給元は一本化済み ([Versioning.md](src/core/doc/Versioning.md))。`v2.0.0` は core (krkrz.git) / umbrella (master) 双方に打鍵済み。残りは **再パッケージ時のタグ規則の確定**: core 無変更でプラグインだけ更新する場合に `v2.0.0-2` 等のサフィックスを使うか。既存タグは `1.4.0` (v 無し) と `v1.0.0` (v 有り) が混在しているので、以後は `v` 付きで統一する |
 | 中 | 全生成器の Perl 撤去 → Python 統一 | 残 = syntax 後処理 5 本 と `gengl.pl` (7519 行 = 最大の山)。バイト一致の差分ゲート方式。他作業と独立に実施可。✅ どこからも呼ばれていなかった `src/core/generic/base/copy_if_differ.pl` は 2026-10-15 に削除 (src/core `8a5c88f9`) |
