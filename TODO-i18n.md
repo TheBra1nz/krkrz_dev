@@ -120,3 +120,12 @@ umbrella の doc/manual 分のうち明らかな誤りは同日修正済み (コ
   - layerExSave: getCropRect の文が summary / description に分断、`threthold`
   - windowEx: onNcMouseMove / ncHitTest の `@param x, y`、findWindoeEx
   - shellExecute「機動」・sigcheck「内臓」、fstat `fliename`、Scripts.getClassNames `obect`
+  - XMLParser: currentColumnNumber の summary が「行番号」、`currentButeCount`
+  - SimpleHTTPServer: start の 2 つ目 (summary「サービス停止」) は stop の名前違いに見える
+  - Steam: manual のメソッド名の綴り (`clearAchievment` → 実装は clearAchievement、`coundFileCount`、
+    `isIsSubscribedApp`、`ssDlcInstalled`)
+  - Unzip.list「CRD」(CRC)、Math.octetVectorSum / MenuItem.popupEx の `@param a, ...` 書式、
+    Array.toStructString の引数名と説明が逆、WIN32Dialog.openProgress `activate[optional]`、
+    WIN32Dialog.left の summary が「サイズ取得」、MenuItem.bmpChecked に宣言行が混入、
+    Console `maxmimize` / `restoreMaxmimize`
+  - PSD: summary / description に文が分断された項目 6 つ、getLayerComp の戻り値説明が getGuides の写し
