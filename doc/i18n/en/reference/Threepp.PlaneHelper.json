@@ -1,0 +1,35 @@
+{
+  "class": "Threepp.PlaneHelper",
+  "entries": {
+    "krkrthreepp:Threepp.PlaneHelper": {
+      "hash": "374fe687a9a5",
+      "ja": {
+        "summary": "平面ヘルパー",
+        "description": "平面を可視化します。"
+      }
+    },
+    "krkrthreepp:Threepp.PlaneHelper.PlaneHelper": {
+      "hash": "ce24afb5a34f",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "plane": "可視化する平面",
+          "size": "ヘルパーのサイズ",
+          "color": "ヘルパーの色"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.PlaneHelper.type": {
+      "hash": "426dab41c3ed",
+      "ja": {
+        "summary": "型名（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.PlaneHelper.size": {
+      "hash": "b072fff02188",
+      "ja": {
+        "summary": "サイズ"
+      }
+    }
+  }
+}

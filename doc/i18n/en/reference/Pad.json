@@ -1,0 +1,18 @@
+{
+  "class": "Pad",
+  "entries": {
+    "windowEx:Pad": {
+      "hash": "4d3dee1c6315",
+      "ja": {
+        "description": "Pad拡張"
+      }
+    },
+    "windowEx:Pad.registerExEvent": {
+      "hash": "1076ac9cacd8",
+      "ja": {
+        "summary": "拡張イベントを有効にする（登録失敗で例外が発生）",
+        "description": "拡張イベントとして以下が発生：\nonClose  閉じるボタンが押された\n\n※borderStyleなどの変更によりウィンドウが作り直されるとイベントが発生しなくなるので注意\n⇒その場合は再度registerExEvent()を呼ぶ"
+      }
+    }
+  }
+}

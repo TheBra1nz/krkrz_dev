@@ -1,0 +1,66 @@
+{
+  "class": "XMLParser",
+  "entries": {
+    "expat:XMLParser": {
+      "hash": "26487685094e",
+      "ja": {
+        "summary": "擬似コードによるマニュアル",
+        "description": "Copyright 2005-2009 GoWatanabe\n\nexpat による処理がおこなわれて自動的にメソッド呼び返し処理が行われます\n具体的な DOM の実装例は XML.tjs 参照"
+      }
+    },
+    "expat:XMLParser.parse": {
+      "hash": "8bb86d267e3b",
+      "ja": {
+        "summary": "テキストに対するパース処理を実行する。",
+        "params": {
+          "text": "テキスト。省略時は現在設定中のテキストに対して処理を行なう"
+        }
+      }
+    },
+    "expat:XMLParser.parseStorage": {
+      "hash": "f217f32e1695",
+      "ja": {
+        "summary": "テキストに対するパース処理を実行する。",
+        "params": {
+          "filename": "テキストのファイル名"
+        }
+      }
+    },
+    "expat:XMLParser.errorCode": {
+      "hash": "358498dbb121",
+      "ja": {
+        "summary": "エラーコード数値"
+      }
+    },
+    "expat:XMLParser.errorString": {
+      "hash": "6902b70c2a6f",
+      "ja": {
+        "summary": "エラーコード文字列"
+      }
+    },
+    "expat:XMLParser.currentByteIndex": {
+      "hash": "a67582fdf10e",
+      "ja": {
+        "summary": "現在のバイトインデックス"
+      }
+    },
+    "expat:XMLParser.currentLineNumber": {
+      "hash": "f92250373d3a",
+      "ja": {
+        "summary": "現在の行番号"
+      }
+    },
+    "expat:XMLParser.currentColumnNumber": {
+      "hash": "f92250373d3a",
+      "ja": {
+        "summary": "現在の行番号"
+      }
+    },
+    "expat:XMLParser.currentButeCount": {
+      "hash": "b27651632469",
+      "ja": {
+        "summary": "現在のバイトカウント"
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "class": "GdiPlus.Matrix",
+  "entries": {
+    "layerExDraw:GdiPlus.Matrix": {
+      "hash": "4215c28d787a",
+      "ja": {
+        "summary": "マトリックス情報を取り扱うクラス"
+      }
+    },
+    "layerExDraw:GdiPlus.Matrix.Matrix": {
+      "hash": "719cc8ea7403",
+      "ja": {
+        "summary": "コンストラクタ",
+        "description": "正規マトリックスを生成する"
+      }
+    },
+    "layerExDraw:GdiPlus.Matrix.Matrix@2": {
+      "hash": "25979a8884fb",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "rectF": "矩形(RectFクラス) マトリックスの回転部",
+          "pointF": "ポイント(PointFクラス) マトリックスの移動部"
+        }
+      }
+    },
+    "layerExDraw:GdiPlus.Matrix.Matrix@3": {
+      "hash": "8c1a7ebcfb2f",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "m11": "第1行1列",
+          "m12": "第1行2列",
+          "m21": "第2行1列",
+          "m22": "第2行2列",
+          "dx": "第3行1列",
+          "dy": "第3行2列"
+        }
+      }
+    },
+    "layerExVector:GdiPlus.Matrix": {
+      "hash": "4215c28d787a",
+      "ja": {
+        "summary": "マトリックス情報を取り扱うクラス"
+      }
+    },
+    "layerExVector:GdiPlus.Matrix.Matrix": {
+      "hash": "719cc8ea7403",
+      "ja": {
+        "summary": "コンストラクタ",
+        "description": "正規マトリックスを生成する"
+      }
+    },
+    "layerExVector:GdiPlus.Matrix.Matrix@2": {
+      "hash": "8c1a7ebcfb2f",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "m11": "第1行1列",
+          "m12": "第1行2列",
+          "m21": "第2行1列",
+          "m22": "第2行2列",
+          "dx": "第3行1列",
+          "dy": "第3行2列"
+        }
+      }
+    }
+  }
+}

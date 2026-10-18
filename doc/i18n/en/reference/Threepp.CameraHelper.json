@@ -1,0 +1,33 @@
+{
+  "class": "Threepp.CameraHelper",
+  "entries": {
+    "krkrthreepp:Threepp.CameraHelper": {
+      "hash": "10b6f608df81",
+      "ja": {
+        "summary": "カメラヘルパー",
+        "description": "カメラの視錐台を可視化します。"
+      }
+    },
+    "krkrthreepp:Threepp.CameraHelper.CameraHelper": {
+      "hash": "004b3d50dcf6",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "camera": "可視化するカメラ"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.CameraHelper.type": {
+      "hash": "426dab41c3ed",
+      "ja": {
+        "summary": "型名（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.CameraHelper.update": {
+      "hash": "0c9639963fd8",
+      "ja": {
+        "summary": "ヘルパーを更新"
+      }
+    }
+  }
+}

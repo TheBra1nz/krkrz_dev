@@ -1,0 +1,268 @@
+{
+  "class": "BinaryStream",
+  "entries": {
+    "binaryStream:BinaryStream.BinaryStream": {
+      "hash": "09529dfce2a4",
+      "ja": {
+        "summary": "コンストラクタ／デストラクタ"
+      }
+    },
+    "binaryStream:BinaryStream.open": {
+      "hash": "0a73f039976a",
+      "ja": {
+        "summary": "ストレージを開く",
+        "params": {
+          "storage": "対象ストレージ",
+          "mode": "モード指定(bsRead, bsWrite, bsAppend, bsUpdate)"
+        }
+      }
+    },
+    "binaryStream:BinaryStream.close": {
+      "hash": "72b07b91bde4",
+      "ja": {
+        "summary": "オープン中のストレージを閉じる"
+      }
+    },
+    "binaryStream:BinaryStream.read": {
+      "hash": "bba7cc622561",
+      "ja": {
+        "summary": "指定バイト読み込む",
+        "returns": "読み込んだデータ（octet形式） 終端などで読めなかった場合はvoid（length=0のoctetではないので注意）",
+        "params": {
+          "size": "読み込むサイズ（バイト）"
+        }
+      }
+    },
+    "binaryStream:BinaryStream.write": {
+      "hash": "825cc2e78262",
+      "ja": {
+        "summary": "データを書き込む",
+        "description": "dataが文字列の場合は wchar で書き込まれます（コード変換はサポートされません）",
+        "returns": "書き込んだバイト数",
+        "params": {
+          "data": "書き込むデータ（octet形式または文字列）"
+        }
+      }
+    },
+    "binaryStream:BinaryStream.readI8": {
+      "hash": "5863f4bf91e7",
+      "ja": {
+        "summary": "{1,2,4,8}バイトを数値として読み込む",
+        "description": "※数値は8byte以外はunsigned読み込みになります（符号拡張されません）\n※voidを返すのは1byteも読めなかった場合のみとなります\n1byte以上指定byte未満しか読めなかった場合は足りない部分を0で埋めた値が返されるので注意",
+        "returns": "読み込んだ数値 / 終端などで読めなかった場合はvoid"
+      }
+    },
+    "binaryStream:BinaryStream.readI16LE": {
+      "hash": "62287fb8deb7",
+      "ja": {
+        "summary": "2byte 読み込み (Little Endian)"
+      }
+    },
+    "binaryStream:BinaryStream.readI32LE": {
+      "hash": "d9fc5d6d4233",
+      "ja": {
+        "summary": "4byte 読み込み (Little Endian)"
+      }
+    },
+    "binaryStream:BinaryStream.readI64LE": {
+      "hash": "20d027d45168",
+      "ja": {
+        "summary": "8byte 読み込み (Little Endian)"
+      }
+    },
+    "binaryStream:BinaryStream.readI16BE": {
+      "hash": "d4ce7e45a763",
+      "ja": {
+        "summary": "2byte 読み込み (Big Endian)"
+      }
+    },
+    "binaryStream:BinaryStream.readI32BE": {
+      "hash": "ba1f809d7246",
+      "ja": {
+        "summary": "4byte 読み込み (Big Endian)"
+      }
+    },
+    "binaryStream:BinaryStream.readI64BE": {
+      "hash": "ec0b46d7866f",
+      "ja": {
+        "summary": "8byte 読み込み (Big Endian)"
+      }
+    },
+    "binaryStream:BinaryStream.writeI8": {
+      "hash": "d6e94da3e478",
+      "ja": {
+        "summary": "{1,2,4,8}バイトで数値を書き込む",
+        "returns": "書き込んだバイト数",
+        "params": {
+          "num": "書き込む数値"
+        }
+      }
+    },
+    "binaryStream:BinaryStream.writeI16LE": {
+      "hash": "716673ce8e6e",
+      "ja": {
+        "summary": "2byte 書き込み (Little Endian)"
+      }
+    },
+    "binaryStream:BinaryStream.writeI32LE": {
+      "hash": "569929ed6721",
+      "ja": {
+        "summary": "4byte 書き込み (Little Endian)"
+      }
+    },
+    "binaryStream:BinaryStream.writeI64LE": {
+      "hash": "b9ecab7f031f",
+      "ja": {
+        "summary": "8byte 書き込み (Little Endian)"
+      }
+    },
+    "binaryStream:BinaryStream.writeI16BE": {
+      "hash": "7ce94e5a2f98",
+      "ja": {
+        "summary": "2byte 書き込み (Big Endian)"
+      }
+    },
+    "binaryStream:BinaryStream.writeI32BE": {
+      "hash": "007265a9b88d",
+      "ja": {
+        "summary": "4byte 書き込み (Big Endian)"
+      }
+    },
+    "binaryStream:BinaryStream.writeI64BE": {
+      "hash": "f18a20c13c71",
+      "ja": {
+        "summary": "8byte 書き込み (Big Endian)"
+      }
+    },
+    "binaryStream:BinaryStream.copy": {
+      "hash": "60ac556c7480",
+      "ja": {
+        "summary": "別のストレージからデータをコピー",
+        "description": "対象ストレージのoffsetからlength分の内容が，現在のストリームのポジションから書き込まれます\nフィルタの詳細は setFilter() の説明を参照してください",
+        "returns": "書き込んだバイト数",
+        "params": {
+          "storage": "コピー元のストレージ（現在開いているストレージと同じ場合は例外）",
+          "elm": "動作指定用の辞書（in/out）内容は下記：（省略時は単純コピー，[out]なし）\noffset  :[in] コピー元ストレージの読み込み開始オフセット（省略時先頭）\nlength  :[in] コピー元ストレージの最大読み込みサイズ（省略時ファイルサイズ）\n\nfilter  :[in] フィルタ処理を行う関数名（省略時はフィルタ処理なし）\nfparam  :[in] フィルタに渡すパラメータ値(int)\n\nnocopy  :[in] trueを指定すると出力を書き込まない（省略時はfalse，hashのみ取得したい場合などに指定）\nmd5     :[in] trueを指定すると出力のMD5ダイジェストを返す\n\nhash    :[out]読み込んだファイルのハッシュ値（Adler32）\nread    :[out]読み込んだバイト数\ndigest  :[out]書き込んだデータのMD5ダイジェスト（octet） ※md5がtrueの場合にのみ有効"
+        }
+      }
+    },
+    "binaryStream:BinaryStream.compress": {
+      "hash": "e2213e1f5830",
+      "ja": {
+        "summary": "別のストレージからデータを圧縮しつつコピー",
+        "description": "対象ストレージを zlib/deflate で圧縮しつつ，現在のストリームのポジションから書き込みます\nフィルタ関数は圧縮前のバイナリに対して適用されます",
+        "returns": "書き込んだバイト数",
+        "params": {
+          "storage": "コピー元のストレージ（現在開いているストレージと同じ場合は例外）",
+          "elm": "動作指定用の辞書（in/out）内容は copy() と同じものに加えて下記：\ncomp_lv :[in] zlibによる圧縮レベル（1～9）省略時，またはelmそのものの指定がない場合は 9"
+        }
+      }
+    },
+    "binaryStream:BinaryStream.decompress": {
+      "hash": "83aa4ebcae6e",
+      "ja": {
+        "summary": "別のストレージからデータを展開しつつコピー",
+        "description": "対象ストレージを zlib/inflate で展開しつつ，現在のストリームのポジションから書き込みます\n展開に失敗すると例外が発生します\nフィルタ関数は展開後のバイナリに対して適用されます\nhash[out] は展開後／フィルタ後のバイナリに対して計算されます",
+        "returns": "書き込んだバイト数",
+        "params": {
+          "storage": "コピー元のストレージ（現在開いているストレージと同じ場合は例外）",
+          "elm": "動作指定用の辞書（in/out）内容は copy() と同じ"
+        }
+      }
+    },
+    "binaryStream:BinaryStream.setProgressCallback": {
+      "hash": "9fce0e4f59bc",
+      "ja": {
+        "summary": "プログレスコールバックを設定する",
+        "description": "copy/compress/decompress の処理中からコールバックする関数を設定します。\nコールバックは（現在の実装では） 1MiB 読む毎時および最後まで読んだ時に呼び返されます。\nコールバックから true を返すと処理がキャンセルできます。\n※コールバックの間隔は変更される場合があります\n\nTJS的には処理が固まってしまうのは仕様ですが，別途 windowExProgress プラグインなどを\n使用することで，ユーザーからのキャンセルを受け付けられるようになります。",
+        "params": {
+          "callback": "コールバック関数 function(storage, read_size) { return true_if_cancel; }\nvoidの場合は解除"
+        }
+      }
+    },
+    "binaryStream:BinaryStream.setFilter": {
+      "hash": "3b92c0a21537",
+      "ja": {
+        "summary": "フィルタDLLを設定する",
+        "description": "copy/compress/decompressのデータに対して外部DLLを使用したフィルタを設定します\nelm.filter に関数名を指定た場合に，このDLL中の下記の形式でエクスポートされた関数をフィルタとして使用します\nvoid (__stdcall *FilterProc)(uint32 hash, uint64 offset, void *buffer, uint32 length);",
+        "params": {
+          "dll": "対象のDLLファイル（voidの場合は設定解除）"
+        }
+      }
+    },
+    "binaryStream:BinaryStream.seek": {
+      "hash": "323ff038583a",
+      "ja": {
+        "summary": "ストリームのポジションを変更する",
+        "returns": "移動後の位置",
+        "params": {
+          "pos": "位置",
+          "whence": "基準位置(bsSeekSet, bsSeekCur, bsSeekEnd)"
+        }
+      }
+    },
+    "binaryStream:BinaryStream.tell": {
+      "hash": "2fc0410b142c",
+      "ja": {
+        "summary": "ストリームの現在のポジションを取得する",
+        "returns": "位置"
+      }
+    },
+    "binaryStream:BinaryStream.storage": {
+      "hash": "8851df75a05b",
+      "ja": {
+        "summary": "現在開いているストレージ",
+        "description": "開いていない場合はvoid"
+      }
+    },
+    "binaryStream:BinaryStream.mode": {
+      "hash": "5b4dd83702d8",
+      "ja": {
+        "summary": "現在のモード",
+        "description": "開いていない場合は-1"
+      }
+    },
+    "binaryStream:BinaryStream.bsRead": {
+      "hash": "6d0e3f71ec36",
+      "ja": {
+        "summary": "読み込み"
+      }
+    },
+    "binaryStream:BinaryStream.bsWrite": {
+      "hash": "02d021053fb3",
+      "ja": {
+        "summary": "書き込み"
+      }
+    },
+    "binaryStream:BinaryStream.bsAppend": {
+      "hash": "f3d2c062fa3f",
+      "ja": {
+        "summary": "追記"
+      }
+    },
+    "binaryStream:BinaryStream.bsUpdate": {
+      "hash": "c662a08be3f1",
+      "ja": {
+        "summary": "更新"
+      }
+    },
+    "binaryStream:BinaryStream.bsSeekSet": {
+      "hash": "e044934d883a",
+      "ja": {
+        "summary": "先頭から"
+      }
+    },
+    "binaryStream:BinaryStream.bsSeekCur": {
+      "hash": "bbe747ce60b3",
+      "ja": {
+        "summary": "現在位置から"
+      }
+    },
+    "binaryStream:BinaryStream.bsSeekEnd": {
+      "hash": "31ced1cc7ebd",
+      "ja": {
+        "summary": "末尾から"
+      }
+    }
+  }
+}

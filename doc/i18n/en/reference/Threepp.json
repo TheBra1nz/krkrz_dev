@@ -1,0 +1,96 @@
+{
+  "class": "Threepp",
+  "entries": {
+    "krkrthreepp:Threepp": {
+      "hash": "c7272b146a43",
+      "ja": {
+        "summary": "threepp プラグイン 擬似コードによるマニュアル",
+        "description": "threepp は three.js の C++ ポートです。\n3D グラフィックスのレンダリング機能を提供します。"
+      }
+    },
+    "krkrthreepp:Threepp.Side_Front": {
+      "hash": "e87e3cc5742f",
+      "ja": {
+        "summary": "============================================================ Side 定義 (マテリアルの描画面) ============================================================"
+      }
+    },
+    "krkrthreepp:Threepp.Side_Back": {
+      "hash": "1b7c3a1f1de2",
+      "ja": {
+        "summary": "表面のみ描画"
+      }
+    },
+    "krkrthreepp:Threepp.Side_Double": {
+      "hash": "c8ecdc540355",
+      "ja": {
+        "summary": "裏面のみ描画"
+      }
+    },
+    "krkrthreepp:Threepp.Blending_None": {
+      "hash": "fcf9210f7980",
+      "ja": {
+        "summary": "============================================================ Blending 定義 (ブレンドモード) ============================================================"
+      }
+    },
+    "krkrthreepp:Threepp.CullFace_None": {
+      "hash": "dca9a03ca498",
+      "ja": {
+        "summary": "============================================================ CullFace 定義 (カリング) ============================================================"
+      }
+    },
+    "krkrthreepp:Threepp.ShadowMap_Basic": {
+      "hash": "789a3e96bbc4",
+      "ja": {
+        "summary": "============================================================ ShadowMap 定義 (シャドウマップ種別) ============================================================"
+      }
+    },
+    "krkrthreepp:Threepp.ToneMapping_None": {
+      "hash": "85b6729948c7",
+      "ja": {
+        "summary": "============================================================ ToneMapping 定義 (トーンマッピング) ============================================================"
+      }
+    },
+    "krkrthreepp:Threepp.Encoding_Linear": {
+      "hash": "c0c2b033f738",
+      "ja": {
+        "summary": "============================================================ Encoding 定義 (出力エンコーディング) ============================================================"
+      }
+    },
+    "krkrthreepp:Threepp.TextureWrapping_Repeat": {
+      "hash": "a67bb8b41f13",
+      "ja": {
+        "summary": "============================================================ TextureWrapping 定義 (テクスチャラッピング) ============================================================"
+      }
+    },
+    "krkrthreepp:Threepp.Filter_Nearest": {
+      "hash": "ff053fc6b491",
+      "ja": {
+        "summary": "============================================================ Filter 定義 (テクスチャフィルタ) ============================================================"
+      }
+    },
+    "krkrthreepp:Threepp.Loop_Once": {
+      "hash": "7222a9cd8f8c",
+      "ja": {
+        "summary": "============================================================ Loop 定義 (アニメーションループ) ============================================================"
+      }
+    },
+    "krkrthreepp:Threepp.Loop_Once@2": {
+      "hash": "abf8fcfc3bcf",
+      "ja": {
+        "summary": "Loop モード定数 (AnimationAction.setLoop に渡す)"
+      }
+    },
+    "krkrthreepp:Threepp.Loop_Repeat@2": {
+      "hash": "7435875ccd9a",
+      "ja": {
+        "summary": "1回で停止"
+      }
+    },
+    "krkrthreepp:Threepp.Loop_PingPong@2": {
+      "hash": "13152bbeb00a",
+      "ja": {
+        "summary": "ループ (ModelAnimator.play の既定)"
+      }
+    }
+  }
+}

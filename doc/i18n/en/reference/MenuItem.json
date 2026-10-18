@@ -1,0 +1,258 @@
+{
+  "class": "MenuItem",
+  "entries": {
+    "menu:MenuItem.MenuItem": {
+      "hash": "17c0dde3877f",
+      "ja": {
+        "summary": "MenuItem オブジェクトの構築",
+        "description": "MenuItem クラスのオブジェクトを構築します。\n作成したメニュー項目を親メニュー項目に追加するには、親メニュー項目の MenuItem.add メソッドを使います。",
+        "params": {
+          "window": "このメニュー項目を作成するウィンドウを指定します。",
+          "caption": "メニュー項目のキャプション (表示する文字列) を指定します。\nMenuItem.caption プロパティで設定/取得できます。"
+        }
+      }
+    },
+    "menu:MenuItem.add": {
+      "hash": "7c685a6f3bab",
+      "ja": {
+        "summary": "子メニュー項目の追加",
+        "description": "子メニュー項目を追加します。\nメニュー項目が他のメニュー項目の子になると、 親メニュー項目が無効化されるときに自動的に子メニュー項目も無効化されるようになります。\nまた、メニュー階層においても親子の関係を持つようになります。",
+        "params": {
+          "item": "追加する子メニュー項目を指定します。\n子メニュー項目は、すでに子となっているメニュー項目の最後に追加されます。"
+        }
+      }
+    },
+    "menu:MenuItem.insert": {
+      "hash": "cf741be64acc",
+      "ja": {
+        "summary": "子メニュー項目の挿入",
+        "description": "子メニュー項目を指定位置に挿入します。",
+        "params": {
+          "item": "挿入する子メニュー項目を指定します。",
+          "index": "挿入する位置を指定します。0 を指定すると先頭に挿入されます。"
+        }
+      }
+    },
+    "menu:MenuItem.popup": {
+      "hash": "65a6d0251117",
+      "ja": {
+        "summary": "メニュー項目のポップアップ表示",
+        "description": "メニュー項目をポップアップ表示します。このメソッドは、メニューが閉じられるまで帰ってきません。\nメニューが閉じられるまでの間に他の非同期イベントが発生する可能性があるので注意してください。\nWindow.menuそのものはポップアップできません。\n非表示状態のメニュー項目はポップアップできません。\nWindow.menuの子でないメニューはポップアップできません。",
+        "returns": "flagsにtpmReturnCmdが指定されていた場合は、 選択されたメニュー項目のIDを整数で返します(ただし、現バージョンではこのIDを吉里吉里側から設定することができないため、flagsにtpmReturnCmdを指定することは意味がありません)。\n何も選択されずにキャンセルされた場合は0を返します。",
+        "params": {
+          "flags": "メニューの挙動を表すフラグです。以下の値のビット論理和を指定してください。\ntpmLeftButton\ntpmRightButton\ntpmLeftAlign\ntpmCenterAlign\ntpmRightAlign\ntpmTopAlign\ntpmVCenterAlign\ntpmBottomAlign\ntpmHorizontal\ntpmVertical\ntpmNoNotify\ntpmReturnCmd\ntpmRecurse\ntpmHorPosAnimation\ntpmHorNegAnimation\ntpmVerPosAnimation\ntpmVerNegAnimation\ntpmNoAnimation\nこれらのフラグの詳細についてはMSDNの該当ページを参照してください。",
+          "x": "ウィンドウのクライアント座標上でのx位置を表します。",
+          "y": "ウィンドウのクライアント座標上でのy位置を表します。"
+        }
+      }
+    },
+    "menu:MenuItem.remove": {
+      "hash": "67beb1a8993d",
+      "ja": {
+        "summary": "子メニュー項目の削除",
+        "description": "指定された子メニュー項目をリストから削除します。",
+        "params": {
+          "item": "削除する子メニュー項目を指定します。"
+        }
+      }
+    },
+    "menu:MenuItem.HMENU": {
+      "hash": "d0db5ecf8f58",
+      "ja": {
+        "summary": "HMENUメニュー項目ハンドル",
+        "description": "Windows APIにおけるHMENU型のメニュー項目ハンドルを表します。\nこのプロパティはプラグインなどでメニュー項目に直接アクセスしたいときに用います。\nTJS2からのアクセスは意味がありません。\nここで得られるのは整数ですが、プラグインなどでこの数値を使う場合は HMENU 型に キャストして使ってください。"
+      }
+    },
+    "menu:MenuItem.caption": {
+      "hash": "848030bfa18f",
+      "ja": {
+        "summary": "キャプション",
+        "description": "キャプション ( 表示する文字列 ) を表します。値を設定することもできます。\n'-' ( ハイフン ) を指定すると区切り線を表示するようになります。"
+      }
+    },
+    "menu:MenuItem.checked": {
+      "hash": "fef32217fd82",
+      "ja": {
+        "summary": "チェックマークを表示するかどうか",
+        "description": "メニュー項目の横にチェックマークを表示するかどうかを表します。値を設定することもできます。\n真を指定するとチェックマークが表示されます。\nMenuItem.radio プロパティが真の場合は、チェックマークではなく、黒い丸が表示されます。\nMenuItem.group にて同じグループ番号を持ち、かつ同じ親を持ち、さらに MenuItem.radio プロパティが真のメニュー項目は、 このプロパティを同時に二つ以上を 真にすることはできません。他のメニュー項目のこのプロパティが真になった場合、 他に真になっているメニュー項目があれば、自動的にそのメニュー項目のこのプロパティは偽に 設定されます。"
+      }
+    },
+    "menu:MenuItem.children": {
+      "hash": "bf39d40d6886",
+      "ja": {
+        "summary": "子メニュー項目",
+        "description": "子メニュー項目がリストされた配列オブジェクトを表します。\nここで得られた配列に値を書き込んだり、項目の削除や追加などをしても実際のメニュー項目の状態には反映されません。読み取りのみが行えると考えてください。"
+      }
+    },
+    "menu:MenuItem.enabled": {
+      "hash": "ebeb0b680366",
+      "ja": {
+        "summary": "選択可能かどうか",
+        "description": "メニュー項目を選択可能かどうかを表します。値を設定することもできます。\n真の場合はメニュー項目が選択可能、偽の場合は選択不可能になります。"
+      }
+    },
+    "menu:MenuItem.group": {
+      "hash": "bccf76e60a2d",
+      "ja": {
+        "summary": "グループ番号",
+        "description": "グループ番号を表します。値を設定することもできます。\n同じグループ番号を持ち、かつ同じ親を持ち、MenuItem.radio プロパティが 真のメニュー項目は、MenuItem.checked プロパティを同時に二つ以上を 真にすることはできません。"
+      }
+    },
+    "menu:MenuItem.index": {
+      "hash": "bc43c2730a5b",
+      "ja": {
+        "summary": "順番",
+        "description": "同じ親を持つメニュー項目間における順番を表す、0または正の整数です。\n0が先頭を表します。\n現在位置を取得したり、位置を変更するときに便利です。\n値を設定すると、その位置にメニュー項目が移動します。"
+      }
+    },
+    "menu:MenuItem.parent": {
+      "hash": "f3819fd70057",
+      "ja": {
+        "summary": "親メニュー項目",
+        "description": "親メニュー項目を表します。"
+      }
+    },
+    "menu:MenuItem.radio": {
+      "hash": "517f5c55fc71",
+      "ja": {
+        "summary": "ラジオ項目かどうか",
+        "description": "ラジオ項目かどうかを指定します。値を設定することもできます。\nこの項目が真の場合の動作については MenuItem.checked プロパティを 参照してください。"
+      }
+    },
+    "menu:MenuItem.root": {
+      "hash": "9a83e15806d6",
+      "ja": {
+        "summary": "ルートメニュー項目",
+        "description": "ルート(大本)のメニュー項目(MenuItemクラスのインスタンス)を表します。"
+      }
+    },
+    "menu:MenuItem.shortcut": {
+      "hash": "1e74d618dd59",
+      "ja": {
+        "summary": "ショートカットキー",
+        "description": "ショートカットキーを表します。値を設定することもできます。\nショートカットキーは文字列で指定します。「シフト系キー+対象キー名」の組み合わせで 指定します。大文字と小文字は区別されません。以下は有効なショートカットキーの例です。\n\n\"Shift+Esc\"\n\"Ctrl+S\"\n\"Shift+Alt+E\"\n\"Alt+Enter\"\n\"Ctrl+F1\"\n\"T\" (シフト系キーの指定をしないこともできます)\n\n無効なショートカットキーの組み合わせや、\"\" (空文字列) を指定するとショートカットキーは無効になります。\n現バージョンでは、Tab や Shift+F1 など、システムや吉里吉里であらかじめ用途の決まっているキーの一部や、一部のキー (Shiftキーそのものなど)を指定しても反応しません。\nショートカットキーを指定すると、そのキーに対応する onKeyDown 等のイベントは発生しなくなり、ショートカットキーを 指定したメニュー項目にのみイベントが発生するようになります。"
+      }
+    },
+    "menu:MenuItem.visible": {
+      "hash": "2bb18417a341",
+      "ja": {
+        "summary": "可視かどうか",
+        "description": "メニュー項目が可視かどうかを表します。値を設定することもできます。\n真ならば表示され、偽ならば非表示です。"
+      }
+    },
+    "menu:MenuItem.window": {
+      "hash": "4b39b82cc451",
+      "ja": {
+        "summary": "オーナーウィンドウ",
+        "description": "このメニューアイテムを保持するオーナーウィンドウ(Windowクラスのオブジェクト)を表します。"
+      }
+    },
+    "menu:MenuItem.onClick": {
+      "hash": "2274c97782d3",
+      "ja": {
+        "summary": "メニュー項目が選択された",
+        "description": "メニュー項目が選択された ( クリックされたり Enter キーが押された ) 時に発生します。"
+      }
+    },
+    "windowEx:MenuItem": {
+      "hash": "787df61551f5",
+      "ja": {
+        "description": "MenuItem拡張"
+      }
+    },
+    "windowEx:MenuItem.rightJustify": {
+      "hash": "b95dc1908820",
+      "ja": {
+        "summary": "メニューバーの右端分け表示",
+        "description": "true ならその Item 以降は右端に寄せられる\n※ Window.menu 直下で visible でない正しく動作しない"
+      }
+    },
+    "windowEx:MenuItem.bmpChecked": {
+      "hash": "1bab44611b96",
+      "ja": {
+        "summary": "アイコンの表示",
+        "description": "設定内容は MenuItem.bi* 定数を使用するか，レイヤオブジェクトを渡す\n※ 値を設定する時点で Window.menu の子で visible でないと機能しないので注意\nまた，プルダウンメニューは，Window.registerExEvent()をして拡張イベントを登録しないと表示されないので注意\nproperty bmpItem      { getter; setter }; //< 文字列位置アイコン（チェック／未チェックアイコンの同時指定不可？） チェック時アイコン (0でデフォルト)"
+      }
+    },
+    "windowEx:MenuItem.bmpUnchecked": {
+      "hash": "908f2710addd",
+      "ja": {
+        "summary": "未チェック時アイコン (0でデフォルト)"
+      }
+    },
+    "windowEx:MenuItem.biSystem": {
+      "hash": "14122efe37f6",
+      "ja": {
+        "summary": "HBMMENU_SYSTEM"
+      }
+    },
+    "windowEx:MenuItem.biRestore": {
+      "hash": "a51846841c6f",
+      "ja": {
+        "summary": "HBMMENU_MBAR_RESTORE"
+      }
+    },
+    "windowEx:MenuItem.biMinimize": {
+      "hash": "e798d7b6bc2e",
+      "ja": {
+        "summary": "HBMMENU_MBAR_MINIMIZE"
+      }
+    },
+    "windowEx:MenuItem.biClose": {
+      "hash": "8c75e82e3ed0",
+      "ja": {
+        "summary": "HBMMENU_MBAR_CLOSE"
+      }
+    },
+    "windowEx:MenuItem.biCloseDisabled": {
+      "hash": "b45edf3c8292",
+      "ja": {
+        "summary": "HBMMENU_MBAR_CLOSE_D"
+      }
+    },
+    "windowEx:MenuItem.biMinimizeDisabled": {
+      "hash": "718bd9e90412",
+      "ja": {
+        "summary": "HBMMENU_MBAR_MINIMIZE_D"
+      }
+    },
+    "windowEx:MenuItem.biPopupClose": {
+      "hash": "81a8a165591f",
+      "ja": {
+        "summary": "HBMMENU_POPUP_CLOSE"
+      }
+    },
+    "windowEx:MenuItem.biPopupRestore": {
+      "hash": "b2d7c99f61de",
+      "ja": {
+        "summary": "HBMMENU_POPUP_RESTORE"
+      }
+    },
+    "windowEx:MenuItem.biPopupMaximize": {
+      "hash": "0fabcee9f7e1",
+      "ja": {
+        "summary": "HBMMENU_POPUP_MAXIMIZE"
+      }
+    },
+    "windowEx:MenuItem.biPopupMinimize": {
+      "hash": "71dd2e43487a",
+      "ja": {
+        "summary": "HBMMENU_POPUP_MINIMIZE"
+      }
+    },
+    "windowEx:MenuItem.popupEx": {
+      "hash": "ab3847564505",
+      "ja": {
+        "summary": "ポップアップ表示",
+        "description": "MenuItem.popupのようにウィンドウメニュー所属である必要はなく，また一覧も辞書の配列を渡すなどができる\nこの関数によるポップアップでのbmp*プロパティによるアイコン表示はされないので注意",
+        "returns": "選択されたオブジェクト",
+        "params": {
+          "x,": "y  表示位置（スクリーン座標，省略時マウスカーソル位置）",
+          "hwnd": "オーナウィンドウ（省略時インスタンス所属ウィンドウ）",
+          "rect": "オーバーラップ禁止範囲（%[ x, y, w, h ]，省略時禁止範囲無し）",
+          "menulist": "メニュー一覧配列（MenuItemのインスタンスである必要はなく，辞書を並べても良い）"
+        }
+      }
+    }
+  }
+}

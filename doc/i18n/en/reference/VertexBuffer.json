@@ -1,0 +1,199 @@
+{
+  "class": "VertexBuffer",
+  "entries": {
+    "VertexBuffer": {
+      "hash": "489a9d1f1804",
+      "ja": {
+        "description": "VertexBufferは頂点情報を保持するクラスです。\n\n位置の指定やUV座標、頂点カラーなどを細かく設定したい場合に使用します。\n単純な矩形ではなくメッシュ変形などを行いたい場合やポイントスプライトを使用したい場合などにも使用します。\n\nプラグインで頂点の配列を直接変更できるようにポインタアクセスも可能です(ただしOpenGLES3.0以降)。\nシェーダー+TJS2スクリプト+プラグインでの頂点操作で従来のようなLayer拡張性を確保できます。\n従来のプラグイン内でほぼ完結していたものに比べるとやや複雑にはなります。"
+      }
+    },
+    "VertexBuffer.VertexBuffer": {
+      "hash": "d8a192c61f80",
+      "ja": {
+        "summary": "未初期化の頂点バッファを作ります",
+        "params": {
+          "size": "バッファのバイト数",
+          "dataType": "データの型。dtByte/dtUByte/dtShort/dtUShort/dtInt/dtFloat",
+          "updateType": "データ更新頻度。utStream/utStatic/utDynamic",
+          "isIndex": "インデックスバッファかどうか。頂点バッファならfalse"
+        }
+      }
+    },
+    "VertexBuffer.VertexBuffer@2": {
+      "hash": "873d7a1d4ff6",
+      "ja": {
+        "summary": "頂点配列を指定して頂点バッファを作ります",
+        "params": {
+          "data": "頂点配列。バッファサイズはこの配列の要素数×データ型サイズ。",
+          "dataType": "データの型。dtByte/dtUByte/dtShort/dtUShort/dtInt/dtFloat",
+          "updateType": "データ更新頻度。utStream/utStatic/utDynamic",
+          "isIndex": "インデックスバッファかどうか。頂点バッファならfalse"
+        }
+      }
+    },
+    "VertexBuffer.setVertex": {
+      "hash": "9d3a9cb0fbc3",
+      "ja": {
+        "summary": "頂点データを設定/更新",
+        "description": "Staticの時は失敗します(例外)。",
+        "params": {
+          "array": "頂点配列",
+          "offset": "変更を開始する配列オフセットインデックス(非バイトサイズ)"
+        }
+      }
+    },
+    "VertexBuffer.lock": {
+      "hash": "5bc96c427eae",
+      "ja": {
+        "summary": "頂点データをロックし、データへのポインタ(read/write指定)を返します",
+        "description": "プラグイン用( OpenGL ES 3.0以降でないと使えません )",
+        "returns": "頂点データへのポインタ、ロックに失敗した時はnull"
+      }
+    },
+    "VertexBuffer.unlock": {
+      "hash": "064c050318d4",
+      "ja": {
+        "summary": "頂点データのロックを解除します",
+        "description": "プラグイン用( OpenGL ES 3.0以降でないと使えません )。\nデータの受け渡しが終わったら、バッファが使用される前に呼び出します。\nlockを維持せず、更新したら即座にunlockするのが好ましいです。"
+      }
+    },
+    "VertexBuffer.size": {
+      "hash": "fad5cec4ad7b",
+      "ja": {
+        "summary": "バッファサイズ(readonly)"
+      }
+    },
+    "VertexBuffer.dataType": {
+      "hash": "3ec294df292f",
+      "ja": {
+        "summary": "頂点データの型(readonly)"
+      }
+    },
+    "VertexBuffer.updateType": {
+      "hash": "5d5f3ddc1b28",
+      "ja": {
+        "summary": "データ更新頻度(readonly)"
+      }
+    },
+    "VertexBuffer.isIndex": {
+      "hash": "6924f6616712",
+      "ja": {
+        "summary": "インデックスバッファかどうか(readonly)"
+      }
+    },
+    "VertexBuffer.nativeHandle": {
+      "hash": "664c74e9c461",
+      "ja": {
+        "summary": "ネイティブハンドル"
+      }
+    },
+    "VertexBuffer.dtByte": {
+      "hash": "e74cf0cfdb9e",
+      "ja": {
+        "summary": "データ型定数(byte)"
+      }
+    },
+    "VertexBuffer.dtUByte": {
+      "hash": "62910535c8ee",
+      "ja": {
+        "summary": "データ型定数(unsigned byte)"
+      }
+    },
+    "VertexBuffer.dtShort": {
+      "hash": "a52d778868ae",
+      "ja": {
+        "summary": "データ型定数(short)"
+      }
+    },
+    "VertexBuffer.dtUShort": {
+      "hash": "84360586b922",
+      "ja": {
+        "summary": "データ型定数(unsigned short)"
+      }
+    },
+    "VertexBuffer.dtInt": {
+      "hash": "92c54284d725",
+      "ja": {
+        "summary": "データ型定数(int) ES3.0以降必要"
+      }
+    },
+    "VertexBuffer.dtUInt": {
+      "hash": "aaa82dafafa7",
+      "ja": {
+        "summary": "データ型定数(unsinged int) ES3.0以降必要"
+      }
+    },
+    "VertexBuffer.dtFixed": {
+      "hash": "c9a4d5d96ff3",
+      "ja": {
+        "summary": "データ型定数(fixed:固定少数点)"
+      }
+    },
+    "VertexBuffer.dtFloat": {
+      "hash": "9f5749974a9d",
+      "ja": {
+        "summary": "データ型定数(float)"
+      }
+    },
+    "VertexBuffer.utStream": {
+      "hash": "cee1677ca6ca",
+      "ja": {
+        "summary": "更新頻度定数:毎フレーム更新"
+      }
+    },
+    "VertexBuffer.utStatic": {
+      "hash": "ecaaac73b764",
+      "ja": {
+        "summary": "更新頻度定数:変更なし"
+      }
+    },
+    "VertexBuffer.utDynamic": {
+      "hash": "a84b3253d6bf",
+      "ja": {
+        "summary": "更新頻度定数:頻繁に更新される"
+      }
+    },
+    "VertexBuffer.ptPoints": {
+      "hash": "5401672960cd",
+      "ja": {
+        "summary": "プリミティブ型定数(ポイントリスト)"
+      }
+    },
+    "VertexBuffer.ptLineStrip": {
+      "hash": "4f36b6e49173",
+      "ja": {
+        "summary": "プリミティブ型定数(ラインストリップ)"
+      }
+    },
+    "VertexBuffer.ptLineLoop": {
+      "hash": "27a5bbe3f90e",
+      "ja": {
+        "summary": "プリミティブ型定数(ラインループ)"
+      }
+    },
+    "VertexBuffer.ptLines": {
+      "hash": "531e659ac707",
+      "ja": {
+        "summary": "プリミティブ型定数(ラインリスト)"
+      }
+    },
+    "VertexBuffer.ptTriangleStrip": {
+      "hash": "fabe6048196d",
+      "ja": {
+        "summary": "プリミティブ型定数(トライアングルストラップ)"
+      }
+    },
+    "VertexBuffer.ptTriangleFan": {
+      "hash": "6c40d6c36f68",
+      "ja": {
+        "summary": "プリミティブ型定数(トライアングルファン)"
+      }
+    },
+    "VertexBuffer.ptTriangles": {
+      "hash": "da3163262793",
+      "ja": {
+        "summary": "プリミティブ型定数(トライアングルリスト)"
+      }
+    }
+  }
+}

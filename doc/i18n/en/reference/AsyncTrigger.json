@@ -1,0 +1,58 @@
+{
+  "class": "AsyncTrigger",
+  "entries": {
+    "AsyncTrigger": {
+      "hash": "d0c123bf73f3",
+      "ja": {
+        "summary": "AsyncTrigger クラスは、いったん吉里吉里に制御が戻った直後のイベント配信のタイミングにイベントを発生させるためのクラスです。この機能を**非同期トリガ** ( asynchronous trigger ) と呼びます。",
+        "description": "吉里吉里のようにイベント駆動型のプログラミングモデルをとるスクリプトにおいて、イベントハンドラ内では実行できないような処理 ( たとえばイベントの発生元のオブジェクトをそのイベントハンドラ内で無効化しようとするなど ) を、そのイベントハンドラ外で行いたい時に便利です。"
+      }
+    },
+    "AsyncTrigger.AsyncTrigger": {
+      "hash": "8e3bb5131a56",
+      "ja": {
+        "summary": "AsyncTriger オブジェクトの構築",
+        "description": "AsyncTrigger クラスのオブジェクトを構築します。",
+        "params": {
+          "owner": "イベントの発生先を指定します。",
+          "actionname": "owner で指定したイベントの発生先オブジェクトで、イベントを受け取るメソッド名を\n指定します。空文字列を指定すると owner はメソッドとみなされ、イベントの発生ごとに\nowner が直接呼ばれます。"
+        }
+      }
+    },
+    "AsyncTrigger.onFire": {
+      "hash": "87fd3fcbf791",
+      "ja": {
+        "summary": "発砲するとき",
+        "description": "[AsyncTrigger.trigger](AsyncTrigger.md#trigger) メソッドでトリガを引いた後に発生します。"
+      }
+    },
+    "AsyncTrigger.trigger": {
+      "hash": "b1f873c1fa78",
+      "ja": {
+        "summary": "トリガを引く",
+        "description": "イベントを発生させます。\n\nこのメソッドを呼んだ後、吉里吉里本体に制御が戻り、吉里吉里本体がたまった非同期イベントを配信する\n段階になると [AsyncTrigger.onFire](AsyncTrigger.md#onfire) イベントが発生します。"
+      }
+    },
+    "AsyncTrigger.cancel": {
+      "hash": "8479ecb92668",
+      "ja": {
+        "summary": "トリガのキャンセル",
+        "description": "[AsyncTrigger.trigger](AsyncTrigger.md#trigger) メソッドで引いたトリガをキャンセルします。\n\n発砲前であればいつでもキャンセルできます。"
+      }
+    },
+    "AsyncTrigger.cached": {
+      "hash": "0c5421ce27f9",
+      "ja": {
+        "summary": "イベントをキャッシュするかどうか",
+        "description": "イベントをキャッシュするかどうかを表します。値を設定することもできます。\n\n真を指定すると、発砲までに何度 [AsyncTrigger.trigger](AsyncTrigger.md#trigger) メソッドを呼んでも\n発砲は１回だけとなります。\n\n偽を指定すると、発砲までに呼んだ回数分、発砲されます。"
+      }
+    },
+    "AsyncTrigger.mode": {
+      "hash": "5900dfaa4c7d",
+      "ja": {
+        "summary": "モード",
+        "description": "動作のモードを表します。値を設定することもできます。\n\n以下の値のいずれかを指定します。\n\n`**atmNormal**    : ` 通常のイベント配信の段階で発砲されます。\n\n`**atmExclusive** : ` 他の非同期イベントよりも優先されて発砲されます\n\n`**atmAtIdle**    : ` アイドル状態 ( 他に配信するイベントが無くなったとき ) に発砲されます。\n\n同時にトリガを引いたときに発砲される順序は atmExclusive, atmNormal, atmIdle の順になります。\n\n同じモードのトリガが複数引かれている場合は、トリガが引かれた順に発砲します。"
+      }
+    }
+  }
+}

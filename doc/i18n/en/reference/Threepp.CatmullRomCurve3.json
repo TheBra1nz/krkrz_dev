@@ -1,0 +1,48 @@
+{
+  "class": "Threepp.CatmullRomCurve3",
+  "entries": {
+    "krkrthreepp:Threepp.CatmullRomCurve3": {
+      "hash": "047fb55ac038",
+      "ja": {
+        "summary": "CatmullRom スプライン曲線",
+        "description": "制御点を通過する滑らかな曲線を生成します。"
+      }
+    },
+    "krkrthreepp:Threepp.CatmullRomCurve3.CatmullRomCurve3": {
+      "hash": "5113bbeb49eb",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "points": "制御点の配列 (Vector3の配列または [x,y,z] の配列)",
+          "closed": "閉曲線かどうか",
+          "curveType": "曲線タイプ (centripetal, chordal, catmullrom)",
+          "tension": "テンション値 (catmullrom タイプ用)"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.CatmullRomCurve3.closed": {
+      "hash": "ff724ce6a0d1",
+      "ja": {
+        "summary": "閉曲線フラグ"
+      }
+    },
+    "krkrthreepp:Threepp.CatmullRomCurve3.tension": {
+      "hash": "50863c943b32",
+      "ja": {
+        "summary": "テンション"
+      }
+    },
+    "krkrthreepp:Threepp.CatmullRomCurve3.getLength": {
+      "hash": "8d98a47bcea4",
+      "ja": {
+        "summary": "曲線の長さを取得"
+      }
+    },
+    "krkrthreepp:Threepp.CatmullRomCurve3.getPoint": {
+      "hash": "1be3886a14b6",
+      "ja": {
+        "summary": "パラメータ t (0-1) の点を取得"
+      }
+    }
+  }
+}

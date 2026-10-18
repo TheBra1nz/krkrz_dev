@@ -1,0 +1,204 @@
+{
+  "class": "HttpRequest",
+  "entries": {
+    "httprequest:HttpRequest": {
+      "hash": "eeb4d0f8aa7f",
+      "ja": {
+        "summary": "HttpRequestクラス",
+        "description": "HTTP/HTTPS による非同期通信機能を提供します。\nファイルの送受信処理はバックグラウンド実行されます。"
+      }
+    },
+    "httprequest:HttpRequest.HttpRequest": {
+      "hash": "1ed9c25cc451",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "window": "スレッド同期処理用親ウインドウ",
+          "cert": "HTTP通信時に証明書チェックを行うかどうか。falseにすると強制許可になります。",
+          "agentName": "HTTP通信時のエージェント名"
+        }
+      }
+    },
+    "httprequest:HttpRequest.open": {
+      "hash": "7879bc022d28",
+      "ja": {
+        "summary": "指定したメソッドで指定URLにリクエストする",
+        "description": "※常に非同期での呼び出しになります",
+        "params": {
+          "method": "アクセスメソッド",
+          "url": "リクエスト先のURL",
+          "userName": "ユーザ名。指定すると認証ヘッダをつけます",
+          "password": "パスワード"
+        }
+      }
+    },
+    "httprequest:HttpRequest.setRequestHeader": {
+      "hash": "0ff480dbe9ba",
+      "ja": {
+        "summary": "送信時に送られるヘッダーを追加する",
+        "params": {
+          "name": "ヘッダ名",
+          "value": "値"
+        }
+      }
+    },
+    "httprequest:HttpRequest.send": {
+      "hash": "38b50ccfa38b",
+      "ja": {
+        "summary": "リクエストの送信。送信処理は非同期実行されます。",
+        "description": "エラー時も例外は発生しませんので、readyState と status で判定してください。",
+        "params": {
+          "data": "送信するデータ\noctetの場合  : そのまま送信\n文字列の場合 : 規定のエンコードで処理して送信\nその他       : データは送信されません",
+          "storeStrorage": "レスポンス保存先ファイル。指定された場合はプロパティ responseは 設定されません"
+        }
+      }
+    },
+    "httprequest:HttpRequest.sendStorage": {
+      "hash": "190dd478be93",
+      "ja": {
+        "summary": "リクエストの送信。送受信は非同期実行されます。",
+        "description": "エラー時も例外は発生しませんので、readyState と status で判定してください。",
+        "params": {
+          "storage": "送信するファイルデータ",
+          "storeStrorage": "レスポンス保存先ファイル。指定された場合はプロパティ responseは 設定されません"
+        }
+      }
+    },
+    "httprequest:HttpRequest.abort": {
+      "hash": "5db4c7e3f09e",
+      "ja": {
+        "summary": "現在実行中の送受信のキャンセル"
+      }
+    },
+    "httprequest:HttpRequest.getAllResponseHeaders": {
+      "hash": "6ab85615f6bb",
+      "ja": {
+        "summary": "すべての HTTPヘッダを取得する",
+        "returns": "HTTPヘッダが格納された辞書"
+      }
+    },
+    "httprequest:HttpRequest.getResponseHeader": {
+      "hash": "2717521dcad9",
+      "ja": {
+        "summary": "指定したHTTPヘッダを取得する",
+        "returns": "ヘッダの値",
+        "params": {
+          "name": "ヘッダラベル名"
+        }
+      }
+    },
+    "httprequest:HttpRequest.getResponseText": {
+      "hash": "a6205b92012f",
+      "ja": {
+        "summary": "レスポンスをテキストの形で取得",
+        "params": {
+          "encoding": "エンコード指定。省略時は Content-type の指定に従います。"
+        }
+      }
+    },
+    "httprequest:HttpRequest.UNINITIALIZED": {
+      "hash": "cd37775399ff",
+      "ja": {
+        "summary": "readyState 初期状態"
+      }
+    },
+    "httprequest:HttpRequest.OPEN": {
+      "hash": "4e9d752840df",
+      "ja": {
+        "summary": "readyState 処理開始"
+      }
+    },
+    "httprequest:HttpRequest.SENT": {
+      "hash": "3f09b683cb7b",
+      "ja": {
+        "summary": "readyState リクエスト送信"
+      }
+    },
+    "httprequest:HttpRequest.RECEIVING": {
+      "hash": "855e444fe819",
+      "ja": {
+        "summary": "readyState 受信中"
+      }
+    },
+    "httprequest:HttpRequest.LOADED": {
+      "hash": "955a1f47b783",
+      "ja": {
+        "summary": "readyState 読み込み完了"
+      }
+    },
+    "httprequest:HttpRequest.readyState": {
+      "hash": "ed5192d25591",
+      "ja": {
+        "summary": "通信状態。読み込み専用",
+        "returns": "現在の通信状態"
+      }
+    },
+    "httprequest:HttpRequest.response": {
+      "hash": "f49b4da078ca",
+      "ja": {
+        "summary": "レスポンス。読み込み専用。",
+        "returns": "レスポンスデータ\nContentType が text の場合：エンコード指定で変換された文字列が帰ります\nその他 : octet データそのまま"
+      }
+    },
+    "httprequest:HttpRequest.responseData": {
+      "hash": "cdb4709307d1",
+      "ja": {
+        "summary": "レスポンス。読み込み専用",
+        "returns": "レスポンスデータ(octet)"
+      }
+    },
+    "httprequest:HttpRequest.status": {
+      "hash": "852deca23d81",
+      "ja": {
+        "summary": "レスポンスの HTTPステータスコード。読み込み専用",
+        "returns": "ステータスコード -1:キャンセル 0:通信エラー その他:httpステータスコード"
+      }
+    },
+    "httprequest:HttpRequest.statusText": {
+      "hash": "2b92dbee2c08",
+      "ja": {
+        "summary": "レスポンスの HTTPステータスの文字列",
+        "returns": "レスポンス文字列。通信エラー時はそのエラーメッセージになります。"
+      }
+    },
+    "httprequest:HttpRequest.contentType": {
+      "hash": "d892a420b81a",
+      "ja": {
+        "summary": "レスポンスの Content-Type (エンコーディング指定は含まない)"
+      }
+    },
+    "httprequest:HttpRequest.contentTypeEncoding": {
+      "hash": "cb0c6300566d",
+      "ja": {
+        "summary": "レスポンスの Content-Type のエンコード指定",
+        "description": "ヘッダの指定が優先されますが、未指定、かつ受信データが text/html の場合は\nファイル冒頭にある META 指定も参照します。"
+      }
+    },
+    "httprequest:HttpRequest.contentLength": {
+      "hash": "6870c6e58c8e",
+      "ja": {
+        "summary": "レスポンスの Content-Length",
+        "description": "ヘッダに無い場合はファイルダウンロード完了後にサイズ確定します。"
+      }
+    },
+    "httprequest:HttpRequest.onReadyStateChange": {
+      "hash": "7a5e71045260",
+      "ja": {
+        "summary": "readyState が変化した場合のイベント",
+        "params": {
+          "readyState": "新しいステート"
+        }
+      }
+    },
+    "httprequest:HttpRequest.onProgress": {
+      "hash": "ca605e54cb1e",
+      "ja": {
+        "summary": "データ送受信イベント",
+        "params": {
+          "upload": "送信中は true",
+          "percent": "進捗状態(0〜100%)"
+        }
+      }
+    }
+  }
+}

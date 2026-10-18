@@ -1,0 +1,66 @@
+{
+  "class": "Threepp.ShaderMaterial",
+  "entries": {
+    "krkrthreepp:Threepp.ShaderMaterial": {
+      "hash": "842deb6fed05",
+      "ja": {
+        "summary": "シェーダーマテリアル",
+        "description": "カスタムGLSLシェーダーを使用するマテリアルです。"
+      }
+    },
+    "krkrthreepp:Threepp.ShaderMaterial.ShaderMaterial": {
+      "hash": "b51e2be63271",
+      "ja": {
+        "summary": "コンストラクタ"
+      }
+    },
+    "krkrthreepp:Threepp.ShaderMaterial.type": {
+      "hash": "2a6c6903864c",
+      "ja": {
+        "summary": "\"ShaderMaterial\"（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.ShaderMaterial.vertexShader": {
+      "hash": "9f649b6b17e2",
+      "ja": {
+        "summary": "頂点シェーダーコード"
+      }
+    },
+    "krkrthreepp:Threepp.ShaderMaterial.fragmentShader": {
+      "hash": "1bd21ef81cfb",
+      "ja": {
+        "summary": "フラグメントシェーダーコード"
+      }
+    },
+    "krkrthreepp:Threepp.ShaderMaterial.uniformsNeedUpdate": {
+      "hash": "36b4a1d1f662",
+      "ja": {
+        "summary": "uniformの更新が必要か"
+      }
+    },
+    "krkrthreepp:Threepp.ShaderMaterial.wireframe": {
+      "hash": "27e1aa449133",
+      "ja": {
+        "summary": "ワイヤーフレーム表示"
+      }
+    },
+    "krkrthreepp:Threepp.ShaderMaterial.wireframeLinewidth": {
+      "hash": "c1d0eb798128",
+      "ja": {
+        "summary": "ワイヤーフレームの線幅"
+      }
+    },
+    "krkrthreepp:Threepp.ShaderMaterial.lights": {
+      "hash": "72f8aabbe1b3",
+      "ja": {
+        "summary": "ライティングを使用するか"
+      }
+    },
+    "krkrthreepp:Threepp.ShaderMaterial.clipping": {
+      "hash": "a08d12cc63bd",
+      "ja": {
+        "summary": "クリッピングを使用するか"
+      }
+    }
+  }
+}

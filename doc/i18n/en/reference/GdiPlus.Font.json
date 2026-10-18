@@ -1,0 +1,123 @@
+{
+  "class": "GdiPlus.Font",
+  "entries": {
+    "layerExDraw:GdiPlus.Font": {
+      "hash": "df7d89462366",
+      "ja": {
+        "summary": "フォント情報"
+      }
+    },
+    "layerExDraw:GdiPlus.Font.Font": {
+      "hash": "b028f827a3f3",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "familyName": "フォントファミリー",
+          "emSize": "フォントのサイズ",
+          "style": "フォントスタイル"
+        }
+      }
+    },
+    "layerExDraw:GdiPlus.Font.familyName": {
+      "hash": "a0c2679563af",
+      "ja": {
+        "summary": "フォントファミリー"
+      }
+    },
+    "layerExDraw:GdiPlus.Font.emSize": {
+      "hash": "684ac9142d81",
+      "ja": {
+        "summary": "フォントのサイズ"
+      }
+    },
+    "layerExDraw:GdiPlus.Font.style": {
+      "hash": "c95ea41074fd",
+      "ja": {
+        "summary": "フォントのスタイル"
+      }
+    },
+    "layerExDraw:GdiPlus.Font.forceSelfPathDraw": {
+      "hash": "53e85827801a",
+      "ja": {
+        "summary": "GDI+ のフォント描画機構を使わずに、自前でパスを取得してのフォント描画を行うかどうかを設定する。"
+      }
+    },
+    "layerExDraw:GdiPlus.Font.ascent": {
+      "hash": "8a358e2b499b",
+      "ja": {
+        "summary": "ascent (読み出し専用)"
+      }
+    },
+    "layerExDraw:GdiPlus.Font.descent": {
+      "hash": "16992283061b",
+      "ja": {
+        "summary": "descent (読み出し専用)"
+      }
+    },
+    "layerExDraw:GdiPlus.Font.lineSpacing": {
+      "hash": "28a2c23b0697",
+      "ja": {
+        "summary": "行間の長さ (読み出し専用)。"
+      }
+    },
+    "layerExDraw:GdiPlus.Font.ascentLeading": {
+      "hash": "451039f59ddc",
+      "ja": {
+        "summary": "ascent側のinternalLeading(読み出し専用)"
+      }
+    },
+    "layerExDraw:GdiPlus.Font.descentLeading": {
+      "hash": "ee3be5c96a6d",
+      "ja": {
+        "summary": "descent側のinternalLeading(読み出し専用)"
+      }
+    },
+    "layerExVector:GdiPlus.Font": {
+      "hash": "ce11605c1869",
+      "ja": {
+        "summary": "フォント情報",
+        "description": "loadFont() で登録したフォントを使用してテキストを描画するための設定を保持します"
+      }
+    },
+    "layerExVector:GdiPlus.Font.Font": {
+      "hash": "240fdf84758d",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "fontFamily": "フォントファミリー名（loadFont()で登録した名前）",
+          "fontSize": "フォントのサイズ"
+        }
+      }
+    },
+    "layerExVector:GdiPlus.Font.fontFamily": {
+      "hash": "8f67542c855f",
+      "ja": {
+        "summary": "フォントファミリー名（loadFont()で登録した名前）"
+      }
+    },
+    "layerExVector:GdiPlus.Font.fontSize": {
+      "hash": "684ac9142d81",
+      "ja": {
+        "summary": "フォントのサイズ"
+      }
+    },
+    "layerExVector:GdiPlus.Font.italic": {
+      "hash": "ac204601f71a",
+      "ja": {
+        "summary": "イタリック傾斜 (0=なし, 0.18=標準)"
+      }
+    },
+    "layerExVector:GdiPlus.Font.letterSpacing": {
+      "hash": "c185a05cd94c",
+      "ja": {
+        "summary": "文字間隔スケール (1.0=標準, 値が大きいほど広い)"
+      }
+    },
+    "layerExVector:GdiPlus.Font.lineSpacing": {
+      "hash": "3d255db20c4b",
+      "ja": {
+        "summary": "行間隔スケール (1.0=標準, 値が大きいほど広い)"
+      }
+    }
+  }
+}

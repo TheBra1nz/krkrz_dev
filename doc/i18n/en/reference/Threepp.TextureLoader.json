@@ -1,0 +1,38 @@
+{
+  "class": "Threepp.TextureLoader",
+  "entries": {
+    "krkrthreepp:Threepp.TextureLoader": {
+      "hash": "afb057d60d9d",
+      "ja": {
+        "summary": "テクスチャローダー",
+        "description": "ファイルからテクスチャを読み込みます。"
+      }
+    },
+    "krkrthreepp:Threepp.TextureLoader.TextureLoader": {
+      "hash": "91a2e7ccdbb7",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "useCache": "キャッシュを使用するか"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.TextureLoader.load": {
+      "hash": "8021aab017f9",
+      "ja": {
+        "summary": "テクスチャを読み込む",
+        "returns": "Texture",
+        "params": {
+          "path": "ファイルパス",
+          "flipY": "Y軸を反転するか"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.TextureLoader.clearCache": {
+      "hash": "92814e855d14",
+      "ja": {
+        "summary": "キャッシュをクリア"
+      }
+    }
+  }
+}

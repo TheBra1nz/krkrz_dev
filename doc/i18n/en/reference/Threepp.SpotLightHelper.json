@@ -1,0 +1,34 @@
+{
+  "class": "Threepp.SpotLightHelper",
+  "entries": {
+    "krkrthreepp:Threepp.SpotLightHelper": {
+      "hash": "dcfdbac06629",
+      "ja": {
+        "summary": "スポットライトヘルパー",
+        "description": "スポットライトのコーンを可視化します。"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLightHelper.SpotLightHelper": {
+      "hash": "68879fad7ad0",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "light": "可視化するライト",
+          "color": "ヘルパーの色（省略時はライトの色）"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.SpotLightHelper.type": {
+      "hash": "426dab41c3ed",
+      "ja": {
+        "summary": "型名（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLightHelper.update": {
+      "hash": "0c9639963fd8",
+      "ja": {
+        "summary": "ヘルパーを更新"
+      }
+    }
+  }
+}

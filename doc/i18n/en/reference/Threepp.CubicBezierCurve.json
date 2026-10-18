@@ -1,0 +1,60 @@
+{
+  "class": "Threepp.CubicBezierCurve",
+  "entries": {
+    "krkrthreepp:Threepp.CubicBezierCurve": {
+      "hash": "9e184ae95229",
+      "ja": {
+        "summary": "2D三次ベジェカーブ",
+        "description": "制御点2つを持つ三次ベジェ曲線です。"
+      }
+    },
+    "krkrthreepp:Threepp.CubicBezierCurve.CubicBezierCurve": {
+      "hash": "b51c19e516eb",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "v0": "始点",
+          "v1": "制御点1",
+          "v2": "制御点2",
+          "v3": "終点"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.CubicBezierCurve.v0": {
+      "hash": "c793333c3c1d",
+      "ja": {
+        "summary": "始点（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.CubicBezierCurve.v1": {
+      "hash": "d01e86a512d1",
+      "ja": {
+        "summary": "制御点1（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.CubicBezierCurve.v2": {
+      "hash": "8fe1bebdeba3",
+      "ja": {
+        "summary": "制御点2（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.CubicBezierCurve.v3": {
+      "hash": "7e184ac2b862",
+      "ja": {
+        "summary": "終点（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.CubicBezierCurve.getLength": {
+      "hash": "8d98a47bcea4",
+      "ja": {
+        "summary": "曲線の長さを取得"
+      }
+    },
+    "krkrthreepp:Threepp.CubicBezierCurve.getPoint": {
+      "hash": "1be3886a14b6",
+      "ja": {
+        "summary": "パラメータ t (0-1) の点を取得"
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "class": "Window.BasicDrawDevice",
+  "entries": {
+    "Window.BasicDrawDevice": {
+      "hash": "70e053142065",
+      "ja": {
+        "summary": "Window.BasicDrawDevice クラスは、このインスタンスを [Window.drawDevice](Window.md#drawdevice) に登録して使用するための DrawDevice で、標準的な描画機能を提供します。"
+      }
+    },
+    "Window.BasicDrawDevice.BasicDrawDevice": {
+      "hash": "8b2c7f01ad3a",
+      "ja": {
+        "summary": "BasicDrawDevice オブジェクトの構築",
+        "description": "Window.BasicDrawDevice クラスのオブジェクトを構築します。\n\n初期状態で Window.drawDevice にはこのクラスのインスタンスが登録されているので、新たに登録する必要はありません。"
+      }
+    },
+    "Window.BasicDrawDevice.recreate": {
+      "hash": "3f91f345d68a",
+      "ja": {
+        "summary": "内部デバイス再生成",
+        "description": "内部デバイスの再生成を行います。\n\n通常使用することはありません。"
+      }
+    },
+    "Window.BasicDrawDevice.captureWithOverlay": {
+      "hash": "8a5021868088",
+      "ja": {
+        "summary": "Elements の画面込みで画面を取り込む",
+        "description": "レイヤの合成結果に [ElementsDialog](ElementsDialog.md) などのオーバーレイを重ねた、今の画面を描いて読み戻し、\nゲーム画面の範囲を bitmap へ写します。写した画像の大きさはウィンドウ上の表示サイズです。\n\nレイヤだけを写す方法 ( Layer の画像のコピーや KAG の画面取り込み ) では Elements の画面が写らないため、\nセーブのサムネイルなどで Elements の画面も含めたい場合に使います。",
+        "returns": "成功したら true",
+        "params": {
+          "bitmap": "写し先の [Bitmap](Bitmap.md) オブジェクト。大きさは必要に応じて変わります。"
+        }
+      }
+    },
+    "Window.BasicDrawDevice.interface": {
+      "hash": "1cd82fca475d",
+      "ja": {
+        "summary": "インターフェースオブジェクトを取得",
+        "description": "プラグインなどで DrawDevice オブジェクトを利用するためにあります。"
+      }
+    },
+    "Window.BasicDrawDevice.videoPresenterHost": {
+      "hash": "f0a7c4168144",
+      "ja": {
+        "summary": "オーバーレイ動画 presenter 登録口 (ポインタ値)",
+        "description": "オーバーレイ動画側 (VideoOverlay) が、この DrawDevice の D3D11 バックバッファへ\npull 型で合成するために読み取る `iTVPVideoPresenterHost` へのポインタ値です。\n非 0 なら presenter を登録して pull 合成に載り、0/未定義なら子ウィンドウ present に\nフォールバックします。通常はエンジン内部/プラグインが使用します。"
+      }
+    },
+    "Window.BasicDrawDevice.dialogRendererHost": {
+      "hash": "8aecc7a1f2c6",
+      "ja": {
+        "summary": "Elements ダイアログ renderer host (ポインタ値)",
+        "description": "Elements のオーバーレイ描画アダプタを取得するための `iTVPDialogRendererHost` への\nポインタ値です。通常はエンジン内部/プラグインが使用します。"
+      }
+    },
+    "Window.BasicDrawDevice.viewportBackgroundHost": {
+      "hash": "53cff7f8bf7c",
+      "ja": {
+        "summary": "ビューポート余白塗り登録口 (ポインタ値)",
+        "description": "ゲーム画面が描画領域全体を覆わないときの余白 ( [Window.viewportBgColor](Window.md#viewportbgcolor) /\n[Window.setViewportWallpaper](Window.md#setviewportwallpaper) ) を受け取る\n`iTVPViewportBackgroundHost` へのポインタ値です。 Window はこのプロパティが非 0 の\nときだけ余白設定を反映します ( プロパティを持たない描画デバイスでは余白の塗り分けは\n効かず、そのデバイス既定の塗りつぶしのままになります )。 通常はエンジン内部/プラグインが\n使用します。"
+      }
+    },
+    "Window.BasicDrawDevice.d3d11Device": {
+      "hash": "e29d12754318",
+      "ja": {
+        "summary": "ID3D11Device ポインタ (ポインタ値)",
+        "description": "HW 動画 (IMFMediaEngine) がエンジンの D3D11 デバイスへ束ねて HW デコードするために\n公開している `ID3D11Device` へのポインタ値です (VIDEO_SUPPORT + マルチスレッド保護済み)。\nWINVER (D3D11) ビルドのみ。通常はエンジン内部/プラグインが使用します。"
+      }
+    }
+  }
+}

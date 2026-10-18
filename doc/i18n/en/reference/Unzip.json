@@ -1,0 +1,52 @@
+{
+  "class": "Unzip",
+  "entries": {
+    "minizip:Unzip": {
+      "hash": "aeb2def09c9b",
+      "ja": {
+        "summary": "ZIP 展開クラス"
+      }
+    },
+    "minizip:Unzip.Unzip": {
+      "hash": "b51e2be63271",
+      "ja": {
+        "summary": "コンストラクタ"
+      }
+    },
+    "minizip:Unzip.open": {
+      "hash": "594c9fb5657b",
+      "ja": {
+        "summary": "ZIPアーカイブを展開用にオープンします",
+        "params": {
+          "filename": "ファイル名",
+          "force_utf8": "0:ファイル名の文字コードは最初のファイルで自動判別 1:UTF8強制"
+        }
+      }
+    },
+    "minizip:Unzip.list": {
+      "hash": "b518cdaa4942",
+      "ja": {
+        "summary": "ZIPアーカイブ中に含まれるファイルの情報を取得します",
+        "returns": "ファイル一覧(ファイル情報の配列)\nファイル情報は辞書の形で、以下の情報を含みます\n<dl>\n<dt>filename <dd>アーカイブ内パス名\n<dt>uncompressed_size <dd>展開サイズ\n<dt>compressed_size <dd>圧縮サイズ\n<dt>crypted <dd>暗号化されているか\n<dt>deflated <dd>圧縮されているか\n<dt>deflateLevel <dd>圧縮レベル\n<dt>crc <dd>ファイルのCRD\n</dl>"
+      }
+    },
+    "minizip:Unzip.extract": {
+      "hash": "bf7df82168f1",
+      "ja": {
+        "summary": "ファイルの展開",
+        "returns": "展開に成功したら true",
+        "params": {
+          "srcname": "展開元ファイル(アーカイブ内パス名）",
+          "destfile": "展開先ファイル（吉里吉里ストレージ名）",
+          "password": "パスワード指定"
+        }
+      }
+    },
+    "minizip:Unzip.close": {
+      "hash": "3d2196a443f6",
+      "ja": {
+        "summary": "ZIPアーカイブをクローズします"
+      }
+    }
+  }
+}

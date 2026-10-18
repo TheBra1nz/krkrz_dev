@@ -1,0 +1,77 @@
+{
+  "class": "Threepp.InstancedMesh",
+  "entries": {
+    "krkrthreepp:Threepp.InstancedMesh": {
+      "hash": "326da35c9ec2",
+      "ja": {
+        "summary": "インスタンスメッシュ",
+        "description": "同じジオメトリとマテリアルを複数インスタンス描画します。"
+      }
+    },
+    "krkrthreepp:Threepp.InstancedMesh.InstancedMesh": {
+      "hash": "99be23be29b4",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "geometry": "ジオメトリ (BufferGeometry)",
+          "material": "マテリアル (Material)",
+          "count": "インスタンス数"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.InstancedMesh.type": {
+      "hash": "b3c1d8a7714f",
+      "ja": {
+        "summary": "\"InstancedMesh\"（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.InstancedMesh.count": {
+      "hash": "0d76e40248a7",
+      "ja": {
+        "summary": "インスタンス数"
+      }
+    },
+    "krkrthreepp:Threepp.InstancedMesh.getMatrixAt": {
+      "hash": "98e2e71aba4c",
+      "ja": {
+        "summary": "インスタンスの変換行列を取得"
+      }
+    },
+    "krkrthreepp:Threepp.InstancedMesh.setMatrixAt": {
+      "hash": "544c3f5360a7",
+      "ja": {
+        "summary": "インスタンスの変換行列を設定"
+      }
+    },
+    "krkrthreepp:Threepp.InstancedMesh.getColorAt": {
+      "hash": "3e247b8280c7",
+      "ja": {
+        "summary": "インスタンスの色を取得"
+      }
+    },
+    "krkrthreepp:Threepp.InstancedMesh.setColorAt": {
+      "hash": "351af01b84d5",
+      "ja": {
+        "summary": "インスタンスの色を設定"
+      }
+    },
+    "krkrthreepp:Threepp.InstancedMesh.computeBoundingBox": {
+      "hash": "8c62399ecdca",
+      "ja": {
+        "summary": "境界ボックスを計算"
+      }
+    },
+    "krkrthreepp:Threepp.InstancedMesh.computeBoundingSphere": {
+      "hash": "8565b95dd014",
+      "ja": {
+        "summary": "境界球を計算"
+      }
+    },
+    "krkrthreepp:Threepp.InstancedMesh.dispose": {
+      "hash": "4b8ce80d5ddf",
+      "ja": {
+        "summary": "リソースを解放"
+      }
+    }
+  }
+}

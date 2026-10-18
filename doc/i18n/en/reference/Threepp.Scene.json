@@ -1,0 +1,30 @@
+{
+  "class": "Threepp.Scene",
+  "entries": {
+    "krkrthreepp:Threepp.Scene": {
+      "hash": "3666b05755d2",
+      "ja": {
+        "summary": "シーンクラス",
+        "description": "3Dオブジェクトを配置するシーンです。"
+      }
+    },
+    "krkrthreepp:Threepp.Scene.Scene": {
+      "hash": "b51e2be63271",
+      "ja": {
+        "summary": "コンストラクタ"
+      }
+    },
+    "krkrthreepp:Threepp.Scene.type": {
+      "hash": "40b3a5c65ce3",
+      "ja": {
+        "summary": "\"Scene\"（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.Scene.autoUpdate": {
+      "hash": "3064fbd3a72c",
+      "ja": {
+        "summary": "自動更新するか"
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "class": "Threepp.Points",
+  "entries": {
+    "krkrthreepp:Threepp.Points": {
+      "hash": "5e53fb73e21f",
+      "ja": {
+        "summary": "点群オブジェクト",
+        "description": "点の集合を描画します。"
+      }
+    },
+    "krkrthreepp:Threepp.Points.Points": {
+      "hash": "72cb66028716",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "geometry": "ジオメトリ (BufferGeometry)",
+          "material": "マテリアル (PointsMaterial)"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.Points.type": {
+      "hash": "e2e71cc7632e",
+      "ja": {
+        "summary": "\"Points\"（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.Points.setGeometry": {
+      "hash": "6e28adb064c0",
+      "ja": {
+        "summary": "ジオメトリを設定"
+      }
+    }
+  }
+}

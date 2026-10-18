@@ -1,0 +1,108 @@
+{
+  "class": "RichText.Style",
+  "entries": {
+    "krkr_richtext:RichText.Style": {
+      "hash": "29a652254673",
+      "ja": {
+        "summary": "テキストスタイルクラス",
+        "description": "テキストの論理的なスタイル（フォント、サイズ、ウェイト等）を定義します。\n描画外観（色、縁取り等）は Appearance クラスで設定します。"
+      }
+    },
+    "krkr_richtext:RichText.Style.Style": {
+      "hash": "b51e2be63271",
+      "ja": {
+        "summary": "コンストラクタ"
+      }
+    },
+    "krkr_richtext:RichText.Style.setFonts": {
+      "hash": "7034c21cbbcc",
+      "ja": {
+        "summary": "フォントコレクションの設定",
+        "description": "配列の順序がフォールバック優先度になります。\n最初のフォントで描画できない文字は次のフォントで描画されます。\n\n配列の各要素は registerFont で指定した登録名のほか、\n登録名で見つからなければフォントファイル内の family 名\n（例: \"Noto Sans JP\"）や \"family Style\" 連結名\n（例: \"Noto Sans JP Bold\"）でも参照できます。\n使用例:\nstyle.setFonts([\"メインフォント\", \"絵文字フォント\", \"フォールバック\"]);",
+        "params": {
+          "names": "フォント名の配列（優先度順）"
+        }
+      }
+    },
+    "krkr_richtext:RichText.Style.setLocale": {
+      "hash": "3579c1f6c243",
+      "ja": {
+        "summary": "ロケールの設定",
+        "description": "禁則処理などの行分割ルールに影響します。\n使用例:\nstyle.setLocale(\"ja_JP\");",
+        "params": {
+          "locale": "ロケール文字列"
+        }
+      }
+    },
+    "krkr_richtext:RichText.Style.clone": {
+      "hash": "a350ee5aec6f",
+      "ja": {
+        "summary": "スタイルの複製",
+        "returns": "複製された Style オブジェクト"
+      }
+    },
+    "krkr_richtext:RichText.Style.fontSize": {
+      "hash": "ed131c8b0102",
+      "ja": {
+        "summary": "フォントサイズ（ピクセル単位）",
+        "description": "デフォルト: 16"
+      }
+    },
+    "krkr_richtext:RichText.Style.fontWeight": {
+      "hash": "6a51a4e68bfb",
+      "ja": {
+        "summary": "フォントウェイト（太さ）",
+        "description": "100〜900 の値。400 = 通常、700 = 太字\nデフォルト: 400"
+      }
+    },
+    "krkr_richtext:RichText.Style.italic": {
+      "hash": "fb9261988f08",
+      "ja": {
+        "summary": "イタリック",
+        "description": "デフォルト: false"
+      }
+    },
+    "krkr_richtext:RichText.Style.letterSpacing": {
+      "hash": "b389429f3189",
+      "ja": {
+        "summary": "字間（em単位）",
+        "description": "0.1 = フォントサイズの10%の追加スペース\nデフォルト: 0"
+      }
+    },
+    "krkr_richtext:RichText.Style.wordSpacing": {
+      "hash": "a91d471af764",
+      "ja": {
+        "summary": "語間（em単位）",
+        "description": "デフォルト: 0"
+      }
+    },
+    "krkr_richtext:RichText.Style.scaleX": {
+      "hash": "e5e187a2db2d",
+      "ja": {
+        "summary": "水平スケール",
+        "description": "1.0 = 通常、0.5 = 半分の幅\nデフォルト: 1.0"
+      }
+    },
+    "krkr_richtext:RichText.Style.skewX": {
+      "hash": "92ae082cd79f",
+      "ja": {
+        "summary": "斜体スキュー値",
+        "description": "0 = 通常、負の値で右に傾斜\nデフォルト: 0"
+      }
+    },
+    "krkr_richtext:RichText.Style.fontWidth": {
+      "hash": "98a1c7f0c914",
+      "ja": {
+        "summary": "フォント幅（バリアブルフォントの wdth 軸、パーセント）",
+        "description": "100 = 通常幅。50 = 半分の幅、200 = 2倍の幅。\nバリアブルフォントの wdth 軸に対応しているフォントでのみ有効。\nデフォルト: 100"
+      }
+    },
+    "krkr_richtext:RichText.Style.bidi": {
+      "hash": "feab6dd9b38f",
+      "ja": {
+        "summary": "双方向テキスト制御",
+        "description": "RichText.BIDI_LTR / BIDI_RTL / BIDI_DEFAULT_LTR / BIDI_DEFAULT_RTL\nデフォルト: BIDI_DEFAULT_LTR"
+      }
+    }
+  }
+}

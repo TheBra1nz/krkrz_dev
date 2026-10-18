@@ -1,0 +1,305 @@
+{
+  "class": "RichTextRenderBase",
+  "entries": {
+    "krkr_richtext:RichTextRenderBase": {
+      "hash": "82b56396165a",
+      "ja": {
+        "summary": "TextRender 互換テキストレンダリングクラス",
+        "description": "../textrender の TextRender クラスと API 互換のインターフェースを提供します。\n内部では richtext ライブラリ（StyledLayout）を使用して描画を行います。\n\nTextRender のエスケープ記法入りテキストを受け取り、レイアウト結果を\n文字情報・タイミング情報・リンク情報として返します。\n\n入力用特殊テキスト書式:\n\\n      改行\n\\t      タブ文字\n\\i      インデント開始（次行から）※非対応\n\\r      インデント解除（次行から）※非対応\n\\w      空白相当分表示位置を進める\n\\k      キー入力待ち情報を生成\n\\x      nul文字相当\n\\文字   エスケープ指定（特殊機能を無効化）\n[xxxx]         ルビ指定（次の1文字にかかる）\n[xxxx,文字数]  ルビ指定（次の指定個数の文字にかかる）\n\nフォント指定:\n%f名前;     フォントフェイス指定\n%bX         ボールド指定（0:off 1:on その他:デフォルト）\n%iX         イタリック指定（0:off 1:on その他:デフォルト）\n%sX         影指定（0:off 1:on その他:デフォルト）\n%eX         エッジ指定（0:off 1:on その他:デフォルト）\n%数値;      フォントサイズ指定（デフォルトに対するパーセント）\n%B          大サイズフォント\n%S          小サイズフォント\n#xxxxxx;    色指定（16進RGB）\n%s#xxxxxx;  影色指定\n%e#xxxxxx;  エッジ色指定\n%r          フォントリセット\n\nスタイル指定:\n%C          センタリング\n%R          右よせ\n%L          左寄せ\n%p数値;     ピッチ（字間）\n\n特殊指定:\n%d数値;     文字あたり表示時間（標準に対するパーセント、100で標準速度）\n%a数値;     文字あたり表示時間（ms）\n%w数値;     時間待ち（1文字時間に対するパーセント、100で1文字分）\n%t数値;     時間待ち（ms）\n%D数値;     時間同期指定（ms）\n%D$xxx;     時間同期指定（ラベル参照）\n\n$xxx;       埋め込み指定（変数名）※onEval で処理\n&xxx;       グラフィック文字指定（画像名）※onGetGraphSize で処理\n\nリンク指定:\n%lリンク名;  リンク指定開始\n%l;          リンク指定解除\n\n非対応:\n縦書き、rubyoffset、ワードブレーク制御（%k0/%k1）\n\n使用フロー:\nclear() → setFont/setStyle → render() [複数回可] → done()\n→ getCharacters() / calcShowCount() / getKeyWait() 等で結果取得\n\n使用例:\nvar tr = new TextRenderBase();\ntr.setDefault(%[ face: \"MSゴシック\", fontsize: 24, color: 0xFFFFFF ]);\ntr.setRenderSize(400, 300);\ntr.clear();\ntr.render(\"こんにちは%B世界%r！\\n2行目\", 0, 30, 0, false);\ntr.done();\n\nvar chars = tr.getCharacters(0, 0);  // 全文字情報取得\nvar count = tr.calcShowCount(500);    // 500ms時点の表示文字数"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.TextRenderBase": {
+      "hash": "b51e2be63271",
+      "ja": {
+        "summary": "コンストラクタ"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.setOption": {
+      "hash": "f5f9884bcc06",
+      "ja": {
+        "summary": "レンダリングオプションの設定",
+        "description": "設定可能なキー:\nignore_color  色指定を無視\nignore_size   サイズ指定を無視\nignore_type   フォント種別指定を無視（bold/italic/shadow/edge）\nignore_face   フォントフェイス指定を無視\nignore_style  スタイル指定を無視（align/pitch）\nignore_ruby   ルビ指定を無視\nignore_delay  時間指定を無視\nwidth_time_scale  文字幅による時間補正（0:しない 1:する）\nlocale        ロケール文字列（例: \"ja_JP\"）",
+        "params": {
+          "elm": "辞書"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.setDefault": {
+      "hash": "800da0e85f0c",
+      "ja": {
+        "summary": "デフォルト値の設定",
+        "description": "辞書に含まれるキーのみが反映される（含まれないキーは現在値を維持）。\nsetDefault 呼び出し後は内部で resetFont() / resetStyle() 相当の処理が走り、\n現在のフォント・スタイル状態がデフォルト値に同期される。\n\n設定可能なキー:\nface          フォントフェイス\nregisterCollection で登録したコレクション名のほか、\nregisterFont の登録名、フォントファイル内の family 名\n（例: \"Noto Sans JP\"）、\"family Style\" 連結名\n（例: \"Noto Sans JP Bold\"）でも指定可能。\nfontsize      フォントサイズ\nbigfontsize   大サイズフォントサイズ（%B 用）\nsmallfontsize 小サイズフォントサイズ（%S 用）\nbold          太字\nitalic        イタリック\ncolor         文字色（RGB）\nshadow        影指定\nshadowcolor   影色\nedge          縁指定\nedgecolor     縁色\nlinespacing   行間\npitch         文字間\nlinesize      行サイズ\nalign         水平アライン（-1:左 0:中央 1:右）\nvalign        垂直アライン（-1:上 0:中央 1:下）\nrubysize      ルビサイズ",
+        "params": {
+          "elm": "辞書"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.setRenderSize": {
+      "hash": "9539c4d9005e",
+      "ja": {
+        "summary": "レンダリング領域のサイズ指定",
+        "params": {
+          "width": "領域横幅（0で無制限）",
+          "height": "領域縦幅（0で無制限）"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.timeScale": {
+      "hash": "3e12fc3ff335",
+      "ja": {
+        "summary": "レンダリング時間補正"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.fontScale": {
+      "hash": "868270191048",
+      "ja": {
+        "summary": "フォントサイズ補正倍率"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.defaultFace": {
+      "hash": "cf7f03b88eaf",
+      "ja": {
+        "summary": "デフォルト値プロパティ"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.clear": {
+      "hash": "fecc02bc97db",
+      "ja": {
+        "summary": "レンダリング結果の消去"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.setFont": {
+      "hash": "b27aeab39f0a",
+      "ja": {
+        "summary": "フォント指定",
+        "description": "設定可能なキー:\nface, fontsize, bold, italic, color, shadow, shadowcolor, edge, edgecolor",
+        "params": {
+          "elm": "辞書"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.resetFont": {
+      "hash": "5e10b3cc430e",
+      "ja": {
+        "summary": "フォント状態をデフォルトに戻す"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.setStyle": {
+      "hash": "0796b5bae03b",
+      "ja": {
+        "summary": "スタイル指定",
+        "description": "設定可能なキー:\nlinespacing, pitch, linesize, align, valign",
+        "params": {
+          "elm": "辞書"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.resetStyle": {
+      "hash": "0d3d9ffa62d5",
+      "ja": {
+        "summary": "スタイル指定をデフォルトに戻す"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.render": {
+      "hash": "f24046111094",
+      "ja": {
+        "summary": "テキストのレンダリング",
+        "description": "clear() 後に複数回呼び出せます。done() を呼ぶまで結果は確定しません。",
+        "returns": "はみ出ることなくレンダリングに成功したら true",
+        "params": {
+          "str": "レンダリングする文字列（エスケープ記法含む）",
+          "autoIndent": "自動インデント指定（0:無効 1:有効 -1:逆字下げ）※現在非対応",
+          "diff": "一文字当たり表示時間（ms）",
+          "all": "総時間指定（0は自動、ms）",
+          "noResetDelay": "true だと以前の表示時間を維持する"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.newline": {
+      "hash": "8fb1fed71eba",
+      "ja": {
+        "summary": "新規行にする"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.done": {
+      "hash": "2a3b21c9c545",
+      "ja": {
+        "summary": "レンダリング完了",
+        "description": "render() で蓄積したテキストを一括でレイアウトし、\nタイミング・リンク等の情報を確定します。"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.onEval": {
+      "hash": "9925f381ba0c",
+      "ja": {
+        "summary": "レンダリング中の変数参照処理",
+        "description": "$xxx; 記法で参照されたときに呼ばれます。\n継承して上書き可能。",
+        "returns": "変数値（文字列）",
+        "params": {
+          "name": "変数名"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.onLabel": {
+      "hash": "90220c24d1cf",
+      "ja": {
+        "summary": "レンダリング中のラベル参照処理",
+        "description": "%D$xxx; 記法で参照されたときに呼ばれます。",
+        "returns": "tick値（ms）",
+        "params": {
+          "name": "ラベル名"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.onGetGraphSize": {
+      "hash": "238726efab95",
+      "ja": {
+        "summary": "グラフィック文字のサイズ情報取得",
+        "description": "&xxx; 記法で参照されたときに呼ばれます。",
+        "returns": "%[width: 横幅, height: 縦幅]",
+        "params": {
+          "name": "画像名"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.renderOver": {
+      "hash": "87928b7e794d",
+      "ja": {
+        "summary": "/ レンダリング結果が領域をはみ出ているかどうか"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.renderLines": {
+      "hash": "be1a0c1dd428",
+      "ja": {
+        "summary": "/ レンダリング結果の行数"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.renderCount": {
+      "hash": "244662bb78c6",
+      "ja": {
+        "summary": "/ レンダリング結果の文字数"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.renderDelay": {
+      "hash": "546faa9924d3",
+      "ja": {
+        "summary": "/ レンダリング結果の総表示時間"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.renderLeft": {
+      "hash": "0ae3caff6a49",
+      "ja": {
+        "summary": "/ レンダリング結果領域情報"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.renderText": {
+      "hash": "2d13726e9b70",
+      "ja": {
+        "summary": "/ レンダリング結果テキスト（エスケープ除去済み）"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.getKeyWait": {
+      "hash": "7f231fb6788c",
+      "ja": {
+        "summary": "キー待ち情報の配列を返す",
+        "returns": "[%[pos: 文字位置, time: 時間], ...]"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.calcShowCount": {
+      "hash": "22cea50d9246",
+      "ja": {
+        "summary": "指定時間での表示文字数を返す",
+        "returns": "表示文字数",
+        "params": {
+          "time": "時間（ms）"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.calcLineOffset": {
+      "hash": "0f19fb489c27",
+      "ja": {
+        "summary": "指定行のオフセット値を返す",
+        "returns": "オフセット値",
+        "params": {
+          "lineno": "行番号"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.getCharacters": {
+      "hash": "371666f713c9",
+      "ja": {
+        "summary": "レンダリング結果文字情報の取得",
+        "description": "各要素は辞書で以下のキーを持ちます:\ntext       表示するテキスト\ngraph      グラフィック表示時の画像名（通常文字は void）\nx          表示座標X\ny          表示座標Y\ncw         表示幅\nsize       フォントサイズ\nface       フォントフェイス\ncolor      表示色\nbold       BOLD指定\nitalic     ITALIC指定\nshadow     影指定\nedge       縁指定\nshadowColor  影の色\nedgeColor    縁の色\ndelay      表示タイミング（表示開始時からの経過時間）\nlink       リンク番号（無い場合は-1）\nlinkName   リンク名（無い場合は void）\nruby       ルビ配列 [%[text, x, y, size], ...]",
+        "returns": "描画情報の配列",
+        "params": {
+          "start": "開始文字位置",
+          "num": "取得文字数（0で末尾まで）"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.getLinkNames": {
+      "hash": "25a3b5c5aefe",
+      "ja": {
+        "summary": "含まれるリンク名の一覧を返す",
+        "returns": "リンク名の配列（重複する名前もそのまま列挙）"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.getLinkRects": {
+      "hash": "82bfe8d16568",
+      "ja": {
+        "summary": "リンクの領域情報を取得",
+        "description": "複数行にまたがる場合は複数の矩形が返ります",
+        "returns": "領域情報の配列 [%[left, top, width, height], ...]",
+        "params": {
+          "link": "リンク番号"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.getLinkCharacters": {
+      "hash": "6ae0b25a39a3",
+      "ja": {
+        "summary": "リンクに属する文字情報を取得",
+        "returns": "描画情報の配列（getCharacters と同形式）",
+        "params": {
+          "link": "リンク番号"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.isLinkContains": {
+      "hash": "060b2920b095",
+      "ja": {
+        "summary": "リンク中に含まれるかどうかの判定",
+        "returns": "リンク中に含まれているなら true",
+        "params": {
+          "link": "リンク番号",
+          "x": "X位置",
+          "y": "Y位置"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.getLinkOfPosition": {
+      "hash": "57057f781d01",
+      "ja": {
+        "summary": "指定位置のリンク番号を返す",
+        "returns": "リンク番号（-1:なし）",
+        "params": {
+          "x": "X位置",
+          "y": "Y位置"
+        }
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.drawToLayer": {
+      "hash": "475a8835bab0",
+      "ja": {
+        "summary": "レンダリング結果をレイヤーに描画",
+        "description": "done() で確定したレンダリング結果を指定レイヤーに描画します。\nmaxChars を指定することで文字送りアニメーションが実現できます。\n\n使用例:\ntr.render(\"テキスト\", 0, 50, 0);\ntr.done();\ntr.drawToLayer(layer, 10, 10);\n\n// 文字送り\nvar count = tr.calcShowCount(elapsed);\ntr.drawToLayer(layer, 10, 10, count);",
+        "returns": "描画領域の配列 [x, y, width, height]",
+        "params": {
+          "layer": "描画先レイヤーオブジェクト",
+          "x": "描画開始X座標",
+          "y": "描画開始Y座標",
+          "maxChars": "描画する文字数の上限（-1で全て、省略時: -1）"
+        }
+      }
+    }
+  }
+}

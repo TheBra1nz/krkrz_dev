@@ -1,0 +1,80 @@
+{
+  "class": "Threepp.SpotLight",
+  "entries": {
+    "krkrthreepp:Threepp.SpotLight": {
+      "hash": "91294d1c308f",
+      "ja": {
+        "summary": "スポットライト",
+        "description": "一点から円錐状に照射される光源です。"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.SpotLight": {
+      "hash": "ed965b501ade",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "color": "光の色 (0xRRGGBB)",
+          "intensity": "光の強度",
+          "distance": "光が届く距離",
+          "angle": "照射角度（ラジアン）",
+          "penumbra": "ペナンブラ（ぼかし）",
+          "decay": "減衰率"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.type": {
+      "hash": "eee7cc825749",
+      "ja": {
+        "summary": "\"SpotLight\"（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.distance": {
+      "hash": "99b6c534339a",
+      "ja": {
+        "summary": "光が届く距離"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.angle": {
+      "hash": "972d49a4bd34",
+      "ja": {
+        "summary": "照射角度"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.penumbra": {
+      "hash": "9904df30cbc9",
+      "ja": {
+        "summary": "ペナンブラ"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.decay": {
+      "hash": "588dea002b2d",
+      "ja": {
+        "summary": "減衰率"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.getPower": {
+      "hash": "d634fd525ff7",
+      "ja": {
+        "summary": "光のパワーを取得"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.setPower": {
+      "hash": "66ef0c5a6a42",
+      "ja": {
+        "summary": "光のパワーを設定"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.setShadowMapSize": {
+      "hash": "c94daf3e0502",
+      "ja": {
+        "summary": "--- 影(ShadowMap) --- スポットライトの影は透視カメラで焼く(角度は angle 依存)"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.dispose": {
+      "hash": "4b8ce80d5ddf",
+      "ja": {
+        "summary": "リソースを解放"
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "class": "Console",
+  "entries": {
+    "windowEx:Console": {
+      "hash": "87a2df7a619a",
+      "ja": {
+        "description": "Debug.console拡張"
+      }
+    },
+    "windowEx:Console.restoreMaxmimize": {
+      "hash": "bbe18b8c05c2",
+      "ja": {
+        "summary": "ウィンドウ最大化の復帰（最大化のまま終了すると次回サイズが狂う問題解決用）"
+      }
+    },
+    "windowEx:Console.maxmimize": {
+      "hash": "fb87b3257eb5",
+      "ja": {
+        "summary": "ウィンドウを最大化"
+      }
+    },
+    "windowEx:Console.getRect": {
+      "hash": "3bde2155a8da",
+      "ja": {
+        "summary": "座標・サイズの取得"
+      }
+    },
+    "windowEx:Console.setPos": {
+      "hash": "ac64a3969515",
+      "ja": {
+        "summary": "座標・サイズの設定"
+      }
+    },
+    "windowEx:Console.getPlacement": {
+      "hash": "ef05f1f365d1",
+      "ja": {
+        "summary": "WindowPlacementの取得"
+      }
+    },
+    "windowEx:Console.setPlacement": {
+      "hash": "6af0dcafb6a5",
+      "ja": {
+        "summary": "WindowPlacementの設定"
+      }
+    },
+    "windowEx:Console.bringAfter": {
+      "hash": "d8ad80dda5e5",
+      "ja": {
+        "summary": "※ 起動後１度はvisible=trueしてウィンドウを生成しないと失敗する 優先順位の変更"
+      }
+    }
+  }
+}

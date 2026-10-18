@@ -1,0 +1,23 @@
+{
+  "class": "Threepp.DataTexture",
+  "entries": {
+    "krkrthreepp:Threepp.DataTexture": {
+      "hash": "f8bea3e6b22c",
+      "ja": {
+        "summary": "データテクスチャ",
+        "description": "ピクセルデータから生成するテクスチャです。"
+      }
+    },
+    "krkrthreepp:Threepp.DataTexture.DataTexture": {
+      "hash": "bf3c9e698c53",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "channels": "チャンネル数",
+          "width": "幅",
+          "height": "高さ"
+        }
+      }
+    }
+  }
+}

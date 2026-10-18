@@ -1,0 +1,36 @@
+{
+  "class": "Threepp.MeshDepthMaterial",
+  "entries": {
+    "krkrthreepp:Threepp.MeshDepthMaterial": {
+      "hash": "38545e78a9c3",
+      "ja": {
+        "summary": "深度マテリアル",
+        "description": "深度を色として表示するマテリアルです。"
+      }
+    },
+    "krkrthreepp:Threepp.MeshDepthMaterial.MeshDepthMaterial": {
+      "hash": "b51e2be63271",
+      "ja": {
+        "summary": "コンストラクタ"
+      }
+    },
+    "krkrthreepp:Threepp.MeshDepthMaterial.type": {
+      "hash": "37689c7e486f",
+      "ja": {
+        "summary": "\"MeshDepthMaterial\"（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.MeshDepthMaterial.wireframe": {
+      "hash": "27e1aa449133",
+      "ja": {
+        "summary": "ワイヤーフレーム表示"
+      }
+    },
+    "krkrthreepp:Threepp.MeshDepthMaterial.wireframeLinewidth": {
+      "hash": "c1d0eb798128",
+      "ja": {
+        "summary": "ワイヤーフレームの線幅"
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "class": "GPUDrawDevice",
+  "entries": {
+    "GPUDrawDevice": {
+      "hash": "c580280efe65",
+      "ja": {
+        "summary": "GPUDrawDevice クラスは、このインスタンスを [Window.drawDevice](Window.md#drawdevice) に登録して使用するための DrawDevice で、SDL3 の GPU API ( SDL_GPU ) を用いて [Canvas](Canvas.md) 系クラスを動かします。**開発中の機能** で、Canvas を SDL_GPU で動かすビルド ( CMake オプション `KRKRZ_CANVAS_GPU=ON`、SDL3 ビルドのみ・OpenGL 版とは排他 ) にだけ含まれます。",
+        "description": "このビルドでは起動時の既定 DrawDevice がこのクラスになります ( `-drawdevice=gpu`。`-drawdevice=sdl` で [SDLDrawDevice](SDLDrawDevice.md) に戻せます。 [コマンドラインオプション](../guide/CommandLine.md) )。SDL_GPU のドライバは自動選択で、`-gpudriver` で明示できます ( Windows の既定は `vulkan`。`-gpudriver=direct3d12` で D3D12 でも動きます。その場合スクリプトのシェーダーは DXIL のパックが必要です )。\n\nOpenGL 版の無いビルドでは、このクラスは `Window.OGLDrawDevice` の名前でも登録されます。[OGLDrawDevice](OGLDrawDevice.md) を使う既存のスクリプト ( 派生クラスの `super.OGLDrawDevice()` を含む ) は、そのままこのクラスで動きます。\n\nこのデバイスがアクティブな間、[Canvas](Canvas.md) / [Texture](Texture.md) / [ShaderProgram](ShaderProgram.md) / [Offscreen](Offscreen.md) / [Matrix32](Matrix32.md) / [VertexBuffer](VertexBuffer.md) / [VertexBinder](VertexBinder.md) が SDL_GPU の上で機能します。OpenGL ES 版との主な違いは次のとおりです。\n\n- シェーダーは実行時にコンパイルせず、事前に変換したパック ( `canvas_shaders.kzgs` ) から引きます。パックに無いシェーダーを使うと例外になります ( `-gpushadercollect` で書き出して変換します。`-gpushaderpack` でパックを指定できます )\n- drawText は未対応です ( マスク・ステンシルによるクリッピング ( beginMaskClip / beginStencilClip )・ポストエフェクト ( beginEffect / endEffect )・TextureLayerTreeOwner・[GLCompositor](GLCompositor.md) は使えます。オーバーレイ動画は [SDLDrawDevice](SDLDrawDevice.md) と同じ経路で Canvas の上に出ます )\n- [Texture.nativeHandle](Texture.md#nativehandle) は GL のテクスチャ番号ではなく、SDL_GPU のテクスチャになります\n- [matrix](OGLDrawDevice.md#matrix) / [glVideoPresenterHost](OGLDrawDevice.md#glvideopresenterhost) プロパティはありません\n\n画面への出し方は [SDLDrawDevice](SDLDrawDevice.md) と同じで、SDL_Renderer を Canvas と同じ GPU デバイスの上で動かし、Canvas が描いた画面をプライマリレイヤーの画像と同じ矩形へ出します。Canvas の座標系はプライマリレイヤーと同じ大きさです。"
+      }
+    },
+    "GPUDrawDevice.GPUDrawDevice": {
+      "hash": "f509d8c58963",
+      "ja": {
+        "summary": "GPUDrawDevice オブジェクトの構築",
+        "description": "GPUDrawDevice クラスのオブジェクトを構築します。\n\nこのクラスが起動時の既定の場合、Window.drawDevice には最初からこのクラスのインスタンスが登録されているので、新たに登録する必要はありません。Canvas を使うには [createCanvas](#createcanvas) を呼びます。"
+      }
+    },
+    "GPUDrawDevice.recreate": {
+      "hash": "51542322b8e5",
+      "ja": {
+        "summary": "内部デバイス再生成",
+        "description": "[OGLDrawDevice](OGLDrawDevice.md) との互換のためにあります。このクラスでは何もしません。"
+      }
+    },
+    "GPUDrawDevice.createCanvas": {
+      "hash": "689022946ccb",
+      "ja": {
+        "summary": "Canvas オブジェクトを生成",
+        "description": "このデバイスに紐づく [Canvas](Canvas.md) オブジェクトの生成を要求します。\n生成された Canvas は [canvas](#canvas) プロパティから取得できます。\n\nGPU デバイスがまだ準備できていない場合は、準備ができたとき ( [onInit](#oninit) の直前 ) に生成されます。"
+      }
+    },
+    "GPUDrawDevice.resumeOnDraw": {
+      "hash": "189214a5f6af",
+      "ja": {
+        "summary": "自動停止した onDraw の発火を再開",
+        "description": "onDraw ハンドラが毎フレーム例外を投げ続けて連続例外の上限\n( コマンドラインオプション `-eventexceptionlimit`、既定 10 ) に達すると、\nonDraw の発火は自動停止します ( 画面の表示自体は継続 )。\nこのメソッドを呼ぶと発火を再開します。"
+      }
+    },
+    "GPUDrawDevice.interface": {
+      "hash": "1cd82fca475d",
+      "ja": {
+        "summary": "インターフェースオブジェクトを取得",
+        "description": "プラグインなどで DrawDevice オブジェクトを利用するためにあります。"
+      }
+    },
+    "GPUDrawDevice.window": {
+      "hash": "57fb16b31728",
+      "ja": {
+        "summary": "関連付けられた Window オブジェクトを取得",
+        "description": "この DrawDevice をセットしている Window オブジェクトを返します。"
+      }
+    },
+    "GPUDrawDevice.canvas": {
+      "hash": "d2b8253061f5",
+      "ja": {
+        "summary": "描画用 Canvas オブジェクトを取得",
+        "description": "このデバイスが管理している [Canvas](Canvas.md) オブジェクトを返します。\nonDraw 内などからアクセスして描画コマンドを発行します。"
+      }
+    },
+    "GPUDrawDevice.texture": {
+      "hash": "d281d9a26919",
+      "ja": {
+        "summary": "プライマリレイヤーのテクスチャを取得",
+        "description": "プライマリレイヤーの画像を保持している [Texture](Texture.md) オブジェクトを返します。\nonDraw 内で Canvas に描くことで、レイヤーの画面を Canvas の描画に取り込めます。"
+      }
+    },
+    "GPUDrawDevice.sdlVideoPresenterHost": {
+      "hash": "93c2f42408dd",
+      "ja": {
+        "summary": "オーバーレイ動画 presenter 登録口 (ポインタ値)",
+        "description": "オーバーレイ動画側がこのデバイスへ pull 型で合成するために読み取る presenter host\nへのポインタ値です ( [SDLDrawDevice.sdlVideoPresenterHost](SDLDrawDevice.md#sdlvideopresenterhost) と同じ規約 )。\n通常はエンジン内部/プラグインが使用します。"
+      }
+    },
+    "GPUDrawDevice.dialogRendererHost": {
+      "hash": "e39de868ef72",
+      "ja": {
+        "summary": "Elements ダイアログ renderer host (ポインタ値)",
+        "description": "Elements のオーバーレイ描画アダプタを取得するための host へのポインタ値です。\n通常はエンジン内部/プラグインが使用します。"
+      }
+    },
+    "GPUDrawDevice.viewportBackgroundHost": {
+      "hash": "ad41cb951f93",
+      "ja": {
+        "summary": "ビューポート余白塗り登録口 (ポインタ値)",
+        "description": "ゲーム画面が描画領域全体を覆わないときの余白 ( [Window.viewportBgColor](Window.md#viewportbgcolor) /\n[Window.setViewportWallpaper](Window.md#setviewportwallpaper) ) を受け取る\n`iTVPViewportBackgroundHost` へのポインタ値です。 通常はエンジン内部/プラグインが使用します。"
+      }
+    },
+    "GPUDrawDevice.onInit": {
+      "hash": "ced7ed5b1beb",
+      "ja": {
+        "summary": "GPU デバイス準備時に呼び出されるイベント",
+        "description": "このデバイスの描画先 ( SDL_Renderer ) が GPU デバイスの上に作られ、Canvas を使える状態になったあとに発火します ( 即時ではなく、次のイベント配送で呼ばれます。onInit の中で例外が起きてもエラーの表示が固まらないようにするためです )。\n\nシェーダ・テクスチャ等の初期リソース確保はここで行います。GPU デバイスが使えない環境では発火せず、Canvas も使えません ( ログに `GPU device is not available` が出ます )。"
+      }
+    },
+    "GPUDrawDevice.onDone": {
+      "hash": "8ddf2fe6b2d0",
+      "ja": {
+        "summary": "描画先の破棄前に呼び出されるイベント",
+        "description": "このデバイスの描画先が破棄される直前に発火します。\n\nonInit で確保したリソースの解放はここで行います。"
+      }
+    },
+    "GPUDrawDevice.onDraw": {
+      "hash": "2b1967b85df9",
+      "ja": {
+        "summary": "画面描画時に呼び出されるイベント",
+        "description": "Canvas がある間、描画サイクルごとに発火します。内部で Canvas の BeginDrawing 〜 EndDrawing で挟まれた状態で呼ばれるため、ハンドラ内で [canvas](#canvas) プロパティ経由で描画コマンドを発行できます。\n\nオーバーレイ動画を再生している間は発火しません。"
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "class": "Live2DModel",
+  "entries": {
+    "krkrlive2d:Live2DModel": {
+      "hash": "ec6450ef286b",
+      "ja": {
+        "summary": "情報参照・操作用モデル",
+        "description": "デバイス(OpenGLコンテキスト)なしで生成できる\nモデルの情報参照・パラメータ操作・モーション制御が可能\n描画するには Live2DPlayer を使用する"
+      }
+    },
+    "krkrlive2d:Live2DModel.Live2DModel": {
+      "hash": "6f48f9f710f3",
+      "ja": {
+        "summary": "コンストラクタ",
+        "description": "デバイス指定は不要"
+      }
+    },
+    "krkrlive2d:Live2DModel.clear": {
+      "hash": "e95412471a62",
+      "ja": {
+        "summary": "内容消去"
+      }
+    },
+    "krkrlive2d:Live2DModel.clone": {
+      "hash": "c28ab4b7229a",
+      "ja": {
+        "summary": "複製"
+      }
+    }
+  }
+}

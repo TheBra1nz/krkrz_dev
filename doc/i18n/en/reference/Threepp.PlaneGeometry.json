@@ -1,0 +1,53 @@
+{
+  "class": "Threepp.PlaneGeometry",
+  "entries": {
+    "krkrthreepp:Threepp.PlaneGeometry": {
+      "hash": "b877240d0900",
+      "ja": {
+        "summary": "平面ジオメトリ"
+      }
+    },
+    "krkrthreepp:Threepp.PlaneGeometry.PlaneGeometry": {
+      "hash": "59ce21a70ea4",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "width": "幅",
+          "height": "高さ",
+          "widthSegments": "幅の分割数",
+          "heightSegments": "高さの分割数"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.PlaneGeometry.type": {
+      "hash": "b57f8bf8a7e8",
+      "ja": {
+        "summary": "\"PlaneGeometry\"（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.PlaneGeometry.width": {
+      "hash": "16759eb41ae9",
+      "ja": {
+        "summary": "幅（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.PlaneGeometry.height": {
+      "hash": "13b2a9cb1026",
+      "ja": {
+        "summary": "高さ（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.PlaneGeometry.widthSegments": {
+      "hash": "9d6aeb5400fa",
+      "ja": {
+        "summary": "幅の分割数（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.PlaneGeometry.heightSegments": {
+      "hash": "53a1e02d1384",
+      "ja": {
+        "summary": "高さの分割数（読み取り専用）"
+      }
+    }
+  }
+}

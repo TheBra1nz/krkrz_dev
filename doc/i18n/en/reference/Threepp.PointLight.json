@@ -1,0 +1,66 @@
+{
+  "class": "Threepp.PointLight",
+  "entries": {
+    "krkrthreepp:Threepp.PointLight": {
+      "hash": "2690bc326ca9",
+      "ja": {
+        "summary": "点光源",
+        "description": "一点から全方向に照射される光源です。"
+      }
+    },
+    "krkrthreepp:Threepp.PointLight.PointLight": {
+      "hash": "3547081be466",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "color": "光の色 (0xRRGGBB)",
+          "intensity": "光の強度",
+          "distance": "光が届く距離（0で無限）",
+          "decay": "減衰率"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.PointLight.type": {
+      "hash": "6b440173293f",
+      "ja": {
+        "summary": "\"PointLight\"（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.PointLight.distance": {
+      "hash": "99b6c534339a",
+      "ja": {
+        "summary": "光が届く距離"
+      }
+    },
+    "krkrthreepp:Threepp.PointLight.decay": {
+      "hash": "588dea002b2d",
+      "ja": {
+        "summary": "減衰率"
+      }
+    },
+    "krkrthreepp:Threepp.PointLight.getPower": {
+      "hash": "d634fd525ff7",
+      "ja": {
+        "summary": "光のパワーを取得"
+      }
+    },
+    "krkrthreepp:Threepp.PointLight.setPower": {
+      "hash": "66ef0c5a6a42",
+      "ja": {
+        "summary": "光のパワーを設定"
+      }
+    },
+    "krkrthreepp:Threepp.PointLight.setShadowMapSize": {
+      "hash": "d1f11a7ac60c",
+      "ja": {
+        "summary": "--- 影(ShadowMap) --- ※ setShadowOrthoBounds は平行光源専用(点光源では無効)"
+      }
+    },
+    "krkrthreepp:Threepp.PointLight.dispose": {
+      "hash": "4b8ce80d5ddf",
+      "ja": {
+        "summary": "リソースを解放"
+      }
+    }
+  }
+}

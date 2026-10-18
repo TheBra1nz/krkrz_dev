@@ -1,0 +1,22 @@
+{
+  "class": "Threepp.ShapeGeometry",
+  "entries": {
+    "krkrthreepp:Threepp.ShapeGeometry": {
+      "hash": "ebaf91059bb0",
+      "ja": {
+        "summary": "ShapeGeometry（2D形状ジオメトリ）",
+        "description": "Shapeから平面的なジオメトリを生成"
+      }
+    },
+    "krkrthreepp:Threepp.ShapeGeometry.ShapeGeometry": {
+      "hash": "687eca1dfd98",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "shape": "Shapeオブジェクトまたは配列",
+          "curveSegments": "カーブの分割数（デフォルト: 12）"
+        }
+      }
+    }
+  }
+}

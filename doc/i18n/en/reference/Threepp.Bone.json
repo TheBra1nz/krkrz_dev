@@ -1,0 +1,24 @@
+{
+  "class": "Threepp.Bone",
+  "entries": {
+    "krkrthreepp:Threepp.Bone": {
+      "hash": "ccd284c80790",
+      "ja": {
+        "summary": "ボーン",
+        "description": "スケルトンアニメーション用のボーンです。"
+      }
+    },
+    "krkrthreepp:Threepp.Bone.Bone": {
+      "hash": "b51e2be63271",
+      "ja": {
+        "summary": "コンストラクタ"
+      }
+    },
+    "krkrthreepp:Threepp.Bone.type": {
+      "hash": "426dab41c3ed",
+      "ja": {
+        "summary": "型名（読み取り専用）"
+      }
+    }
+  }
+}

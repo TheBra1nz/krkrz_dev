@@ -1,0 +1,27 @@
+{
+  "class": "Threepp.Water",
+  "entries": {
+    "krkrthreepp:Threepp.Water": {
+      "hash": "d1583e4d6cb5",
+      "ja": {
+        "summary": "水面オブジェクト",
+        "description": "反射と屈折を持つ水面を表現します。"
+      }
+    },
+    "krkrthreepp:Threepp.Water.Water": {
+      "hash": "c047df4be5be",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "geometry": "ジオメトリ（通常は平面）"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.Water.type": {
+      "hash": "426dab41c3ed",
+      "ja": {
+        "summary": "型名（読み取り専用）"
+      }
+    }
+  }
+}

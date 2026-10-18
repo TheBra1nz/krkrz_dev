@@ -1,0 +1,31 @@
+{
+  "class": "Threepp.TorusKnotGeometry",
+  "entries": {
+    "krkrthreepp:Threepp.TorusKnotGeometry": {
+      "hash": "52fa124737c5",
+      "ja": {
+        "summary": "トーラスノットジオメトリ"
+      }
+    },
+    "krkrthreepp:Threepp.TorusKnotGeometry.TorusKnotGeometry": {
+      "hash": "56622f8df7da",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "radius": "半径",
+          "tube": "チューブの半径",
+          "tubularSegments": "チューブ方向の分割数",
+          "radialSegments": "周方向の分割数",
+          "p": "ノットのパラメータp",
+          "q": "ノットのパラメータq"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.TorusKnotGeometry.type": {
+      "hash": "add260ffd93e",
+      "ja": {
+        "summary": "\"TorusKnotGeometry\"（読み取り専用）"
+      }
+    }
+  }
+}

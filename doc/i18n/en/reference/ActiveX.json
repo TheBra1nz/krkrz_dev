@@ -1,0 +1,103 @@
+{
+  "class": "ActiveX",
+  "entries": {
+    "win32ole:ActiveX": {
+      "hash": "9be786913660",
+      "ja": {
+        "description": "ActiveX を操作できるオブジェクトを生成します。\nActiveX が IDispatch で持つメソッドを直接呼び出すことができます。"
+      }
+    },
+    "win32ole:ActiveX.ActiveX": {
+      "hash": "7cdd5320e9f8",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "progIdOrCLSID": "識別名 または CLSIDを文字列で指定",
+          "name": "識別名またはCLSID を文字列で指定。※WIN32OLE の指定とは CLSID の書式が違うので注意 CAxWindow::CreateControl の書式",
+          "win": "指定するとそのウインドウの上に生成します。省略すると独立ウインドウになります。",
+          "left": "表示座標 ウインドウ指定かつ省略の場合はウインドウのクライアント領域の左上",
+          "top": "表示座標 ウインドウ指定かつ省略の場合はウインドウのクライアント領域の左上",
+          "width": "表示サイズ   ウインドウ指定かつ省略の場合は親ウインドウのクライアント領域のサイズ",
+          "height": "表示サイズ  ウインドウ指定かつ省略の場合は親ウインドウのクライアント領域のサイズ"
+        }
+      }
+    },
+    "win32ole:ActiveX.setPos": {
+      "hash": "6d561aebb240",
+      "ja": {
+        "summary": "座標指定",
+        "params": {
+          "left": "左端座標",
+          "top": "上端座標"
+        }
+      }
+    },
+    "win32ole:ActiveX.setSize": {
+      "hash": "9936ad562431",
+      "ja": {
+        "summary": "サイズ指定",
+        "params": {
+          "width": "横幅",
+          "height": "縦幅"
+        }
+      }
+    },
+    "win32ole:ActiveX.setExternalUI": {
+      "hash": "068fe0c68283",
+      "ja": {
+        "summary": "拡張UI指定",
+        "description": "IEコンポーネントでのみ意味を持ちます。現在の版では、これ呼び出すことで\nコンテキストメニューが抑制されます。"
+      }
+    },
+    "win32ole:ActiveX.isValidWindow": {
+      "hash": "b1c6a8450d58",
+      "ja": {
+        "summary": "ウインドウが有効かどうか(読み込み専用)"
+      }
+    },
+    "win32ole:ActiveX.left": {
+      "hash": "3c05c9e59a47",
+      "ja": {
+        "summary": "左端座標"
+      }
+    },
+    "win32ole:ActiveX.top": {
+      "hash": "8d0fd86797ea",
+      "ja": {
+        "summary": "上端座標"
+      }
+    },
+    "win32ole:ActiveX.width": {
+      "hash": "4b9595d1f95f",
+      "ja": {
+        "summary": "横幅"
+      }
+    },
+    "win32ole:ActiveX.height": {
+      "hash": "828fded269d4",
+      "ja": {
+        "summary": "縦幅"
+      }
+    },
+    "win32ole:ActiveX.visible": {
+      "hash": "7475a58edb07",
+      "ja": {
+        "summary": "表示状態"
+      }
+    },
+    "win32ole:ActiveX.onCreate": {
+      "hash": "712bf5cff44d",
+      "ja": {
+        "summary": "ウインドウ生成完了後に呼び出されるイベント",
+        "description": "初期生成時やフルスクリーン処理などでウインドウが生成された後に呼ばれます\n再構築後は、登録されていたイベントはすべて破棄される他、その他もろもろが\n初期化されるので、このイベント内で必要なものを再設定する必要があります。"
+      }
+    },
+    "win32ole:ActiveX.onDestroy": {
+      "hash": "6607893be803",
+      "ja": {
+        "summary": "ウインドウ破棄前に呼び出されるイベント",
+        "description": "フルスクリーン処理やオブジェクトの破棄などでウインドウが破棄される前に呼ばれます。"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "class": "Live2DDevice",
+  "entries": {
+    "krkrlive2d:Live2DDevice.Live2DDevice": {
+      "hash": "f958522b12c7",
+      "ja": {
+        "params": {
+          "oglbase": "GetProcAddress を保持してるオブジェクト\n以下のいずれかを指定できる:\n- krkrgles プラグインが提供する OpenGL コンテキストオブジェクト\n- 新しい吉里吉里Z の OGLDrawDevice (本体組み込みの OpenGL 描画デバイス)\n現在の OGLコンテキストに対して初期化されます"
+        }
+      }
+    },
+    "krkrlive2d:Live2DDevice.onBeginScene": {
+      "hash": "640da825c1c9",
+      "ja": {
+        "summary": "全体の描画開始時に1度だけ呼び出す",
+        "description": "※生成時のコンテキストで呼び出すこと"
+      }
+    },
+    "krkrlive2d:Live2DDevice.onEndScene": {
+      "hash": "36c0b0f63af4",
+      "ja": {
+        "summary": "全体の描画完了時に1度だけ呼び出す"
+      }
+    },
+    "krkrlive2d:Live2DDevice.prepareShaders": {
+      "hash": "eeb316439dbb",
+      "ja": {
+        "summary": "シェーダの事前コンパイルを実行する",
+        "description": "未呼び出しの場合は初回描画時にまとめてコンパイルされ\n数秒程度の待ち時間が発生するため、起動時などに呼んでおくことを推奨\n※生成時のコンテキストで呼び出すこと"
+      }
+    }
+  }
+}

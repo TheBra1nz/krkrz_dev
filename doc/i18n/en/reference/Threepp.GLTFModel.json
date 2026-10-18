@@ -1,0 +1,60 @@
+{
+  "class": "Threepp.GLTFModel",
+  "entries": {
+    "krkrthreepp:Threepp.GLTFModel": {
+      "hash": "87cbc589c6b0",
+      "ja": {
+        "summary": "ロード済み glTF モデル (GLTFLoader の戻り値)",
+        "description": "モデルのシーングラフとアニメ情報を保持する。"
+      }
+    },
+    "krkrthreepp:Threepp.GLTFModel.getScene": {
+      "hash": "189dc3cf32a7",
+      "ja": {
+        "summary": "-> Threepp.Group (Scene に add して描画)"
+      }
+    },
+    "krkrthreepp:Threepp.GLTFModel.getAnimationCount": {
+      "hash": "0efe682ee134",
+      "ja": {
+        "summary": "-> int (内蔵アニメクリップ数)"
+      }
+    },
+    "krkrthreepp:Threepp.GLTFModel.getAnimationName": {
+      "hash": "c3625c69274c",
+      "ja": {
+        "summary": "(i) -> string (クリップ名)"
+      }
+    },
+    "krkrthreepp:Threepp.GLTFModel.getAnimationDuration": {
+      "hash": "e001e494932d",
+      "ja": {
+        "summary": "(i) -> float (秒)"
+      }
+    },
+    "krkrthreepp:Threepp.GLTFModel.getPartCount": {
+      "hash": "49425ff1393f",
+      "ja": {
+        "summary": "--- パーツ (メッシュ) の取り出し --- 同じモデルを何百個も並べたいとき、GLB を個数ぶん読んで Mesh を並べると draw call がそのまま個数になる。ここから取り出して InstancedMesh へ まとめると 1 個で済む。"
+      }
+    },
+    "krkrthreepp:Threepp.GLTFModel.getPartGeometry": {
+      "hash": "ee5ba4d27a00",
+      "ja": {
+        "summary": "(i) -> BufferGeometry"
+      }
+    },
+    "krkrthreepp:Threepp.GLTFModel.getPartMaterial": {
+      "hash": "94304a0306bc",
+      "ja": {
+        "summary": "(i) -> Material (元を共有。テクスチャを持つため)"
+      }
+    },
+    "krkrthreepp:Threepp.GLTFModel.getPartName": {
+      "hash": "794eb89a4d17",
+      "ja": {
+        "summary": "(i) -> string (どのパーツか見分ける用)"
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "class": "LineParser",
+  "entries": {
+    "lineParser:LineParser.LineParser": {
+      "hash": "e0102268796b",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "target": "イベントを転送するターゲット。未指定時は自分に送る"
+        }
+      }
+    },
+    "lineParser:LineParser.init": {
+      "hash": "30c4e7362791",
+      "ja": {
+        "summary": "処理対象テキストの初期化",
+        "params": {
+          "text": "テキスト"
+        }
+      }
+    },
+    "lineParser:LineParser.initStorage": {
+      "hash": "587fa891d540",
+      "ja": {
+        "summary": "処理対象テキストの初期化",
+        "params": {
+          "filename": "テキストのファイル名",
+          "utf8": "UTF-8 のファイルを使う場合は true"
+        }
+      }
+    },
+    "lineParser:LineParser.getNextLine": {
+      "hash": "bcb2ed9682a3",
+      "ja": {
+        "summary": "次の行の情報を文字列として取得する",
+        "returns": "行"
+      }
+    },
+    "lineParser:LineParser.currentLineNumber": {
+      "hash": "18b225be68b6",
+      "ja": {
+        "summary": "現在の処理済み行番号を取得する"
+      }
+    },
+    "lineParser:LineParser.parse": {
+      "hash": "8ce37d063d27",
+      "ja": {
+        "summary": "テキストに対するパース処理を実行する。",
+        "description": "行ごとに doLine() イベントを呼び出す。",
+        "params": {
+          "text": "テキスト。省略時は現在設定中のテキストに対して処理を行なう"
+        }
+      }
+    },
+    "lineParser:LineParser.parseStorage": {
+      "hash": "7f556cc2608c",
+      "ja": {
+        "summary": "テキストに対するパース処理を実行する。",
+        "params": {
+          "filename": "テキストのファイル名",
+          "utf8": "UTF-8 のファイルを使う場合は true"
+        }
+      }
+    },
+    "lineParser:LineParser.doLine": {
+      "hash": "aadb541dd9c7",
+      "ja": {
+        "summary": "parse/parseStorage で呼び出されるイベント",
+        "params": {
+          "text": "行のテキスト情報",
+          "lineNo": "行番号(1からになる)"
+        }
+      }
+    }
+  }
+}

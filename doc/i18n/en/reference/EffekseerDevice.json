@@ -1,0 +1,210 @@
+{
+  "class": "EffekseerDevice",
+  "entries": {
+    "krkreffekseer:EffekseerDevice": {
+      "hash": "a03111dba170",
+      "ja": {
+        "summary": "描画デバイス",
+        "description": "OpenGL(ES) コンテキストごとに 1 つ生成する。"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.EffekseerDevice": {
+      "hash": "f183ed8969bb",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "oglbase": "GLGetProcAddress を保持するオブジェクト (GetProcAddress提供元)\n以下のいずれかを指定できる:\n- krkrgles プラグインの GLESAdaptor\n- Window (本体組み込みの OpenGL 描画 = OGLDrawDevice を使う構成の場合)\n※ 実装は渡されたオブジェクトの GLGetProcAddress プロパティを引くだけ。\nOGLDrawDevice 自身はこのプロパティを持たないので Window を渡すこと\n(threepp の GLRenderer に渡すものと同じ)\n現在の OpenGL ES コンテキストに対して初期化される。\n※コンテキストが current な状態で生成すること"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerDevice.onBeginScene": {
+      "hash": "f91b5fc216d1",
+      "ja": {
+        "summary": "描画開始。投影行列を更新して Effekseer の描画を開始する。",
+        "params": {
+          "width": "描画対象の幅(ピクセル)",
+          "height": "描画対象の高さ(ピクセル)\n※生成時のコンテキストで呼び出すこと"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerDevice.onEndScene": {
+      "hash": "7689f31f759c",
+      "ja": {
+        "summary": "描画終了。"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.update": {
+      "hash": "892d2d53d29d",
+      "ja": {
+        "summary": "全エフェクトをまとめて進行させる。",
+        "params": {
+          "tick": "経過時間(ミリ秒)\nプレイヤー個別に progress() する場合は呼ばなくてよい。"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerDevice.beginUpdate": {
+      "hash": "894bd67fab82",
+      "ja": {
+        "summary": "プレイヤー個別進行のまとめ処理",
+        "description": "多数の EffekseerPlayer.progress() を呼ぶ場合、beginUpdate()〜endUpdate()\nで囲むと内部のバッファ入れ替えが 1 回で済む。\ndevice.beginUpdate();\nfor (...) players[i].progress(tick);\ndevice.endUpdate();"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.onLostDevice": {
+      "hash": "5e378a85debf",
+      "ja": {
+        "summary": "GLリソースの破棄/再構築 (コンテキスト喪失への対応)"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.stopAll": {
+      "hash": "6890bda6d7c0",
+      "ja": {
+        "summary": "再生中の全エフェクトを停止する"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.setCapacity": {
+      "hash": "c42122fd0dd0",
+      "ja": {
+        "summary": "内部バッファ容量を設定する。内部のマネージャ/レンダラが作り直されるため、",
+        "description": "※エフェクト読み込み前・プレイヤー生成前に呼ぶこと。\n既存の EffekseerEffect / EffekseerPlayer は無効化される。",
+        "params": {
+          "instanceMax": "同時に存在できるパーティクル数の上限 (既定 4000)",
+          "squareMaxCount": "1描画あたりのスプライト数の上限 (既定 8192)"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerDevice.instanceMax": {
+      "hash": "592334de1581",
+      "ja": {
+        "summary": "読み出し専用"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.squareMaxCount": {
+      "hash": "592334de1581",
+      "ja": {
+        "summary": "読み出し専用"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.premultipliedAlpha": {
+      "hash": "f2c8ebc3d033",
+      "ja": {
+        "summary": "乗算済みアルファで描画するか (既定 false)。",
+        "description": "変更するとマネージャ/レンダラが作り直される (setCapacity と同じ注意)。"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.projectionMode": {
+      "hash": "1a657dc159cd",
+      "ja": {
+        "summary": "投影モード",
+        "description": "EffekseerDevice.EffekseerProjectionOrthographic … 平行投影 (既定)\nEffekseerDevice.EffekseerProjectionPerspective  … 透視投影"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.setPerspective": {
+      "hash": "9d8cfbc8988d",
+      "ja": {
+        "summary": "透視投影に切り替えてパラメータを設定する",
+        "params": {
+          "fovDegree": "垂直画角(度)  既定 45",
+          "znear": "近クリップ面  既定 1",
+          "zfar": "遠クリップ面  既定 10000\nカメラは「Z=0 の平面で 1 ワールド単位 = 1 ピクセル」になる距離へ自動配置される。"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerDevice.setOrthographic": {
+      "hash": "675caf7388be",
+      "ja": {
+        "summary": "平行投影に切り替えて奥行き範囲を設定する",
+        "params": {
+          "znear": "近クリップ面",
+          "zfar": "遠クリップ面"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerDevice.setCamera": {
+      "hash": "90ce2ce0526a",
+      "ja": {
+        "summary": "カメラを手動配置する (配置と同じ画面中央原点のピクセル座標)",
+        "description": "既定では原点 (画面中央) を正面から見る位置に自動配置される。",
+        "params": {
+          "px,py,pz": "視点",
+          "tx,ty,tz": "注視点"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerDevice.resetCamera": {
+      "hash": "a34d23894ff6",
+      "ja": {
+        "summary": "カメラを自動配置へ戻す"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.frameRate": {
+      "hash": "fc059d9c6ae8",
+      "ja": {
+        "summary": "進行の基準フレームレート (既定 60)。",
+        "description": "progress(tick) / update(tick) のミリ秒をフレーム数へ換算するのに使う。"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.restorationOfStates": {
+      "hash": "8d45650a26b9",
+      "ja": {
+        "summary": "描画前後で GL ステートを保存/復元するか (既定 true)。",
+        "description": "吉里吉里や他プラグインの GL 描画と混在させる場合は true のままにする。"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.clearDepth": {
+      "hash": "bf707efa9c6d",
+      "ja": {
+        "summary": "onBeginScene で深度バッファをクリアするか (既定 true)",
+        "description": "エフェクト側のノードで深度テスト(ZTest)が有効な場合、描画先の深度値と\n比較される。吉里吉里が用意するオフスクリーンバッファは深度が未初期化の\nことがあり (krkrgles の capture はカラーとステンシルしかクリアしない)、\nそのままだとエフェクトが一切表示されない。\n既定では毎フレーム 1.0 で初期化する。呼び出し側で深度を管理している\n場合のみ false にする。"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.verbose": {
+      "hash": "5bd4fcb5b8a2",
+      "ja": {
+        "summary": "資材のオープン結果や Effekseer の詳細ログを吉里吉里のログへ出す (既定 false)",
+        "description": "テクスチャが見つからない等の切り分けに使う。"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.getGLError": {
+      "hash": "7514170ae105",
+      "ja": {
+        "summary": "直近の GL エラーコードを取得する (読み出すとクリアされる。0 ならエラーなし)"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.surfaceWidth": {
+      "hash": "45c22f3b3f8d",
+      "ja": {
+        "summary": "読み出し専用: 最後の onBeginScene の幅"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.surfaceHeight": {
+      "hash": "a208262649d3",
+      "ja": {
+        "summary": "読み出し専用: 同 高さ"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.totalInstanceCount": {
+      "hash": "506eaf7ff9ef",
+      "ja": {
+        "summary": "読み出し専用: 全パーティクル数"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.drawCallCount": {
+      "hash": "2158d700ebbc",
+      "ja": {
+        "summary": "読み出し専用: 直近のドローコール数"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.drawVertexCount": {
+      "hash": "05fdd8cdc530",
+      "ja": {
+        "summary": "読み出し専用: 直近の頂点数"
+      }
+    },
+    "krkreffekseer:EffekseerDevice.deviceInfo": {
+      "hash": "02d222b77929",
+      "ja": {
+        "summary": "読み出し専用: 設定値一式(辞書)"
+      }
+    }
+  }
+}

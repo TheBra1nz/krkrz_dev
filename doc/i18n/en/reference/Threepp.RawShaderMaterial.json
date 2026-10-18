@@ -1,0 +1,42 @@
+{
+  "class": "Threepp.RawShaderMaterial",
+  "entries": {
+    "krkrthreepp:Threepp.RawShaderMaterial": {
+      "hash": "13f587136b16",
+      "ja": {
+        "summary": "Raw シェーダーマテリアル",
+        "description": "threepp組み込みのuniformやattributeなしのカスタムシェーダーです。"
+      }
+    },
+    "krkrthreepp:Threepp.RawShaderMaterial.RawShaderMaterial": {
+      "hash": "b51e2be63271",
+      "ja": {
+        "summary": "コンストラクタ"
+      }
+    },
+    "krkrthreepp:Threepp.RawShaderMaterial.type": {
+      "hash": "f8e43a197ac3",
+      "ja": {
+        "summary": "\"RawShaderMaterial\"（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.RawShaderMaterial.vertexShader": {
+      "hash": "9f649b6b17e2",
+      "ja": {
+        "summary": "頂点シェーダーコード"
+      }
+    },
+    "krkrthreepp:Threepp.RawShaderMaterial.fragmentShader": {
+      "hash": "1bd21ef81cfb",
+      "ja": {
+        "summary": "フラグメントシェーダーコード"
+      }
+    },
+    "krkrthreepp:Threepp.RawShaderMaterial.uniformsNeedUpdate": {
+      "hash": "36b4a1d1f662",
+      "ja": {
+        "summary": "uniformの更新が必要か"
+      }
+    }
+  }
+}

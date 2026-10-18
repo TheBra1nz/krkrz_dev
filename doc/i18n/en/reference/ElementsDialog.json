@@ -1,0 +1,691 @@
+{
+  "class": "ElementsDialog",
+  "entries": {
+    "ElementsDialog": {
+      "hash": "6d9eedffa56f",
+      "ja": {
+        "summary": "ElementsDialog クラスは、Elements ベースの汎用ダイアログを TJS から駆動するための",
+        "description": "クラスです ( SDL3 / WINVER 両ビルド対応 )。\n\nJSON / JSONC ( コメントと末尾カンマを許容 ) 形式のレイアウト定義を渡して、\nボタン・チェックボックス・トグル・テキスト入力等を含むダイアログを表示\nできます。動作モードは 3 種類あります。\n\nレイアウト定義は JSON / JSONC 文字列のほか、TJS の Dictionary / Array を\nそのまま渡せる Dict 系メソッド ( [showDict](#showdict) /\n[showModalDict](#showmodaldict) ) も利用できます。\n\n- **非モーダル (オーバーレイ表示)**\n[showJson](#showjson) / [showFile](#showfile) で表示します。表示中もメイン\nループは止まらず、ボタン押下や値変更があるたびに [onAction](#onaction)\nが逐次発火します。明示的に [close](#close) を呼ぶか、ダイアログ側で\n閉じるイベントが起きるまで残ります。\n- **ブロッキングモーダル (独立ウィンドウ)**\n[showModalJson](#showmodaljson) / [showModalFile](#showmodalfile) に\nタイトル ( および幅・高さ ) を渡して呼ぶと、新しいネイティブウィンドウ\nが開き、閉じるまで TJS の実行を止めて結果を Dictionary で返します。\n- **ブロッキングモーダル (ゲーム画面へのオーバーレイ)**\n[showModalJson](#showmodaljson) / [showModalFile](#showmodalfile) を\nJSON 1 引数だけで呼ぶと、独立ウィンドウを開かずに既存のゲーム画面に\n重ねて表示し、閉じるまでブロッキングします。\n\n複数画面を遷移する「フロー」の駆動にも対応しています。ブロッキング\n実行は [showFlow](#showflow) / [showFlowScreens](#showflowscreens)、\n非モーダル ( 常駐 ) 実行は [startFlow](#startflow) /\n[startFlowScreens](#startflowscreens) を使用します。画面遷移の\nタイミングで [onScreen](#onscreen) / [onScreenLeave](#onscreenleave)\nが発火し、widget 操作は引き続き [onAction](#onaction) に通知されます。\n\n非モーダルダイアログは複数同時に表示できます ( z-order 付きで重ね\n描画され、マウスはヒットテスト、キーボードは最前面の handler 優先で\nフォーカスが移ります )。`grabFocus` 引数を偽にすると、フォーカスを\n取らない常駐 HUD として表示できます。`showJson(json, true, false)`\n( フォーカスあり非モーダル ) にするとキー / パッドでパネルを操作しつつ\n未処理キーをホストへ素通しでき、ホストが必ず受けたいキーは\n[registerHotKey](#registerhotkey) で確保できます。\n\nJSON 仕様の要素タイプ ( label / button / input_box / checkbox / toggle /\ntext_box / text_area / vtile / htile / vspacer / hspacer 等 ) や属性、\nレイアウト密度指定 ( `\"gap\"` / top-level `\"style\"` ブロック ) の詳細は\n[elements_modal の README](https://github.com/wamsoft/elements/blob/develop/external/elements_modal/README.md)、\n`\"input\"` ノードによるキーボード / ゲームパッド操作の設定詳細は\n[キーボードナビゲーション仕様](https://github.com/wamsoft/elements/blob/develop/docs/keyboard-navigation.md)\nを参照してください。\n\n矩形へ本文を流し込むなら `text_area` を使います。折り返し・行頭行末禁則・\n文字送りが [Layer.drawShapedTextArea](Layer.md#drawshapedtextarea) と同じ\nロジックなので、**同じ本文・同じ幅なら改行位置が一致します**。\n`\"count_var\"` に変数名を与えると [setVar](#setvar) で文字送りが進み、\n折り返しは全文で確定済みなので送ってもリフローしません\n( 字幕やセリフ窓向け。従来からある `text_box` は互換のためそのまま )。\n\n表示中の画面は OS のスクリーンリーダー ( ナレーター / VoiceOver / Orca ) から\n読めます。画面 JSON の `\"a11y\"` キーで名前や役割を補えます。ゲーム本体の\nLayer に描いた UI も [setGameA11y](#setgamea11y) / [a11yLayers](#a11ylayers)\nで載せられ、[announce](#announce) で任意の文を読ませられます。仕様の全体は\n[アクセシビリティ (スクリーンリーダー) 対応](../specification/accessibility.md)\nを参照してください。\n\n`KRKRZ_USE_ELEMENTS=OFF` でビルドした exe では ElementsDialog クラスは利用できません。\nWINVER (Windows ネイティブ / D3D11) ビルドでも ElementsDialog は利用できます\n(非モーダル / overlay モーダル / 独立ウィンドウモーダル / フロー /\nテキスト入力すべてに対応)。"
+      }
+    },
+    "ElementsDialog.ElementsDialog": {
+      "hash": "af2026962d97",
+      "ja": {
+        "summary": "ElementsDialog オブジェクトの構築",
+        "description": "ElementsDialog クラスのオブジェクトを構築します。"
+      }
+    },
+    "ElementsDialog.showJson": {
+      "hash": "b6a3a1de1d9f",
+      "ja": {
+        "summary": "JSON 文字列で非モーダルダイアログを表示する",
+        "description": "指定された JSON / JSONC 形式のレイアウト定義からダイアログを構築し、\n既存のゲーム画面にオーバーレイ表示します。表示中もメインループは\n止まらず、ユーザ操作のたびに [onAction](#onaction) が発火します。\n表示を終わらせるには [close](#close) を呼んでください。",
+        "returns": "表示開始に成功したら真を返します。",
+        "params": {
+          "json": "JSON / JSONC 形式のレイアウト定義文字列を指定します。",
+          "grabFocus": "キーボードフォーカスを取得するかどうか ( 既定 true )。\n\ntrue のときはパネルがキーボードフォーカスを取得し、input_box 等への文字\n入力やウィジェットのキー / パッド操作ができます。\n\nfalse のときはフォーカスを取らず、キー入力はホスト ( Window ) へ通ります。\n表示専用の常駐 HUD 的なパネルに指定します。この場合パネル内の input_box 等\nへの文字入力はできません。マウス操作は grabFocus に関わらず有効です。",
+          "modal": "モーダル ( 入力独占 ) にするかどうか。省略時は後方互換で\ngrabFocus と同じ値になります。\n\n`showJson(json, true, false)` = 「非モーダル + フォーカスあり」の中間状態で、\nキー / パッドはパネルへ届いてウィジェットを操作でき ( パッドの十字 = フォーカス\nナビ / A = 決定 )、パネルが処理しなかったキーだけがホスト\n( [Window.onKeyDown](Window.md#onkeydown) ) へ素通しされます。操作パネル用途は\nこの指定を推奨します。ホストが必ず受けたいキーは\n[registerHotKey](#registerhotkey) で確保してください。\n\n用途 3 態: モーダルダイアログ `showJson(json)` / 操作パネル\n`showJson(json, true, false)` / 表示専用 HUD `showJson(json, false)`。"
+        }
+      }
+    },
+    "ElementsDialog.showFile": {
+      "hash": "6ad3a275f02d",
+      "ja": {
+        "summary": "ファイルから非モーダルダイアログを表示する",
+        "description": "指定パスから JSON / JSONC レイアウト定義を読み込み、[showJson](#showjson)\nと同じ動作で表示します。パスは Storages 経由のパス指定が使えます。",
+        "returns": "表示開始に成功したら真を返します。",
+        "params": {
+          "path": "JSON / JSONC ファイルのパスを指定します。",
+          "grabFocus": "キーボードフォーカスを取得するかどうか ( 既定 true )。詳細は [showJson](#showjson) を参照。",
+          "modal": "モーダルにするかどうか ( 省略時は grabFocus に追従 )。詳細は [showJson](#showjson) を参照。"
+        }
+      }
+    },
+    "ElementsDialog.showDict": {
+      "hash": "710eccd01ea4",
+      "ja": {
+        "summary": "Dictionary で非モーダルダイアログを表示する",
+        "description": "[showJson](#showjson) のレイアウトを JSON 文字列ではなく TJS の\nDictionary / Array で直接指定する版です。内部で JSON へ変換して\n同じ経路で表示します ( 変換仕様は [dictToJson](#dicttojson) と同じ )。",
+        "returns": "表示開始に成功したら真を返します。",
+        "params": {
+          "dict": "レイアウト定義の Dictionary を指定します。",
+          "grabFocus": "キーボードフォーカスを取得するかどうか ( 既定 true )。詳細は [showJson](#showjson) を参照。",
+          "modal": "モーダルにするかどうか ( 省略時は grabFocus に追従 )。詳細は [showJson](#showjson) を参照。"
+        }
+      }
+    },
+    "ElementsDialog.showModalJson": {
+      "hash": "c7224d433a11",
+      "ja": {
+        "summary": "JSON 文字列でモーダルダイアログを表示する",
+        "description": "指定された JSON / JSONC 定義からダイアログを構築し、閉じるまで\nTJS の実行を止めてブロッキング表示します。\n\n- 引数を JSON 1 個だけで呼ぶと、既存のゲーム画面にオーバーレイ表示\n( in-game modal ) します。\n- title 以降を渡すと独立した新しいネイティブウィンドウを開いて表示\nします。\n\n戻り値は次の構造の Dictionary です。\n\n%[\naction: <閉じた button の id ( Esc / × は \"\" )>,\nvalues: %[ <id>: <値>, ... ]   // state widget の最終値マップ\n]\n\nモーダル表示中も [onAction](#onaction) は発火しますが、ダイアログを\n閉じるのは `\"close_on_click\": true` 指定の button が押されたとき\n( および Esc / × による中断 ) だけです。",
+        "returns": "action と values を保持する Dictionary が返ります。",
+        "params": {
+          "json": "JSON / JSONC 形式のレイアウト定義文字列を指定します。",
+          "title": "独立ウィンドウのタイトルを指定します ( 省略するとオーバーレイモードに切替わります )。",
+          "width": "独立ウィンドウの幅をピクセル単位で指定します ( 既定値 800 )。",
+          "height": "独立ウィンドウの高さをピクセル単位で指定します ( 既定値 600 )。"
+        }
+      }
+    },
+    "ElementsDialog.showModalFile": {
+      "hash": "718f62665650",
+      "ja": {
+        "summary": "ファイルからモーダルダイアログを表示する",
+        "description": "指定パスから JSON / JSONC レイアウト定義を読み込んで [showModalJson](#showmodaljson)\nと同じ動作で表示します。パスは Storages 経由のパス指定が使えます。",
+        "returns": "action と values を保持する Dictionary が返ります。",
+        "params": {
+          "path": "JSON / JSONC ファイルのパスを指定します。",
+          "title": "独立ウィンドウのタイトルを指定します ( 省略するとオーバーレイモードに切替わります )。",
+          "width": "独立ウィンドウの幅をピクセル単位で指定します ( 既定値 800 )。",
+          "height": "独立ウィンドウの高さをピクセル単位で指定します ( 既定値 600 )。"
+        }
+      }
+    },
+    "ElementsDialog.showModalDict": {
+      "hash": "ef49d0562b80",
+      "ja": {
+        "summary": "Dictionary でモーダルダイアログを表示する",
+        "description": "[showModalJson](#showmodaljson) のレイアウトを TJS の Dictionary /\nArray で直接指定する版です。引数 1 個で呼ぶとオーバーレイ、title\n以降を渡すと独立ウィンドウで表示する点、および戻り値の形式は\n[showModalJson](#showmodaljson) と同じです。",
+        "returns": "action と values を保持する Dictionary が返ります。",
+        "params": {
+          "dict": "レイアウト定義の Dictionary を指定します。",
+          "title": "独立ウィンドウのタイトルを指定します ( 省略するとオーバーレイモードに切替わります )。",
+          "width": "独立ウィンドウの幅をピクセル単位で指定します ( 既定値 800 )。",
+          "height": "独立ウィンドウの高さをピクセル単位で指定します ( 既定値 600 )。"
+        }
+      }
+    },
+    "ElementsDialog.dictToJson": {
+      "hash": "5530d48ffc8c",
+      "ja": {
+        "summary": "Dictionary / Array を JSON 文字列へ変換する",
+        "description": "[showDict](#showdict) / [showModalDict](#showmodaldict) が内部で行う\n変換をそのまま呼び出すユーティリティです。Dictionary で組み立てた\nレイアウトを JSON 資材として保存する、変換結果を確認する、といった\n用途に使えます。インスタンスを作らず `ElementsDialog.dictToJson(...)` として\n呼べます。\n\n対応する値の型は void / Integer / Real / String / Dictionary / Array\nです。それ以外 ( Octet や一般のオブジェクト、循環参照、非有限の実数 )\nは例外になります。",
+        "returns": "JSON 文字列が返ります。",
+        "params": {
+          "value": "変換する値 ( Dictionary / Array / 基本型 ) を指定します。"
+        }
+      }
+    },
+    "ElementsDialog.showFlow": {
+      "hash": "53fde875fb84",
+      "ja": {
+        "summary": "マニフェストから複数画面フローをブロッキング表示する",
+        "description": "`app.jsonc` 形式のマニフェスト ( Storages 経由のパス指定 ) を読み込んで、\n複数画面の遷移を含むフローを既存のゲーム画面にオーバーレイで実行します。\nフロー終了まで TJS の実行を止め、最後に閉じた画面の Dictionary\n`%[ action, values ]` を返します。\n\n画面が切り替わるたびに [onScreen](#onscreen) / [onScreenLeave](#onscreenleave)、\n各 widget の操作で [onAction](#onaction) が発火します。\n\n画面 JSON の `transitions` エントリを object 形式にすると、画面切替時の\n遷移エフェクトを宣言できます ( `effect: \"fade\"` = クロスフェード /\n`effect: \"universal\"` = rule 画像によるユニバーサルトランジション。\n`duration` = 所要 ms ( 省略時 200 )、universal では追加で `rule` =\nrule 画像パス ( 宣言した画面からの相対 / Storages パス / autopath 検索 )、\n`vague` = 境界ぼかし幅 0〜255 ( 省略時 64 ) を指定します )。\n\n```json\n\"transitions\": {\n\"next\": { \"target\": \"s2\", \"effect\": \"fade\", \"duration\": 300 },\n\"back\": { \"target\": \"<back>\", \"effect\": \"universal\",\n\"rule\": \"rule.png\", \"vague\": 64, \"duration\": 500 }\n}\n```",
+        "returns": "action と values を保持する Dictionary が返ります。",
+        "params": {
+          "manifestPath": "app.jsonc マニフェストの Storages パスを指定します。"
+        }
+      }
+    },
+    "ElementsDialog.showFlowScreens": {
+      "hash": "6d151b438430",
+      "ja": {
+        "summary": "インライン定義から複数画面フローをブロッキング表示する",
+        "description": "ファイル I/O を介さず、Dictionary で画面名 → レイアウト定義を渡して\nフローを実行する [showFlow](#showflow) のインライン版です。\n動作と戻り値は [showFlow](#showflow) と同じです。",
+        "returns": "action と values を保持する Dictionary が返ります。",
+        "params": {
+          "screensDict": "画面名 ( 文字列 ) をレイアウト定義 ( JSON 文字列、または Dictionary / Array ) にマップする Dictionary。両形式の混在も可能です。",
+          "entry": "起点画面名 ( screensDict のキー ) を指定します。"
+        }
+      }
+    },
+    "ElementsDialog.startFlow": {
+      "hash": "339a5102c8da",
+      "ja": {
+        "summary": "非モーダル ( 常駐 ) 複数画面フローを開始する",
+        "description": "[showFlow](#showflow) と同じマニフェストを非モーダル ( 非ブロッキング ) で\n開始し、即座に戻ります。ゲーム画面に出しっぱなしで進行させられるため、\nメインメニューや HUD のような常駐 UI に適しています。\n\n画面遷移は JSON 側 `transitions` 定義で行います。ボタン押下等を起点に\nTJS 側で処理する場合は、`\"close_on_click\"` を指定しない button の\n[onAction](#onaction) で振り分けてください。明示的に終了させるには\n[close](#close) を呼び、teardown が完了したかどうかは\n[active](#active) で判別できます。",
+        "returns": "開始に成功したら真を返します。",
+        "params": {
+          "manifestPath": "app.jsonc マニフェストの Storages パスを指定します。",
+          "grabFocus": "真でキーボード / ゲームパッドフォーカスを取ります ( 既定値 真 )。偽を指定するとフォーカスを取らない常駐 HUD として表示されます。"
+        }
+      }
+    },
+    "ElementsDialog.startFlowScreens": {
+      "hash": "3659d3c39376",
+      "ja": {
+        "summary": "インライン定義から非モーダル ( 常駐 ) 複数画面フローを開始する",
+        "description": "[showFlowScreens](#showflowscreens) と同じ Dictionary 形式の画面定義を\n非モーダル ( 非ブロッキング ) で開始する [startFlow](#startflow) の\nインライン版です。",
+        "returns": "開始に成功したら真を返します。",
+        "params": {
+          "screensDict": "画面名 ( 文字列 ) を JSON 文字列にマップする Dictionary。",
+          "entry": "起点画面名 ( screensDict のキー ) を指定します。",
+          "grabFocus": "真でキーボード / ゲームパッドフォーカスを取ります ( 既定値 真 )。偽を指定するとフォーカスを取らない常駐 HUD として表示されます。"
+        }
+      }
+    },
+    "ElementsDialog.close": {
+      "hash": "f9b1d7945e8b",
+      "ja": {
+        "summary": "ダイアログを閉じる",
+        "description": "このインスタンスで開いた非モーダル / モーダルダイアログ ( フロー含む )\nを閉じます。他のインスタンスが開いたダイアログは閉じません。\n\n内部の teardown は次フレームで行われるため、close を呼んだ直後でも\nしばらく [active](#active) は真のままです。次のモーダルを安全に\n起動したい場合は [active](#active) が偽になるのを待ってください。\n\n画面内の要素に `\"animate\"` の `\"on\": \"exit\"` 指定 ( 退場演出 ) がある\n場合、close でも退場演出を再生し、完了してから閉じます ( その間も\n[active](#active) は真のままです )。フロー実行中の close は画面遷移\n( transitions ) を解決せず、フローごと終了します。"
+      }
+    },
+    "ElementsDialog.registerFont": {
+      "hash": "0c709574bfbe",
+      "ja": {
+        "summary": "Elements 用フォントの登録",
+        "description": "Elements ダイアログで使用するフォントを krkrz Storages 経由で登録\nします。ThorVG がファイルから読み取った embedded family 名 ( 取れな\nかった場合は空文字 ) を戻り値として返します。スクリプトはこの戻り値\nを見て theme への組込みやログ表示に利用できます。\n\nweight / slant / stretch は font_constants の整数値です ( 詳細は\n`StoragesResourceLoader.h` を参照 )。",
+        "returns": "実際に登録された family 名 ( ThorVG embedded 優先 )。",
+        "params": {
+          "family": "登録時に使うファミリ名を指定します。",
+          "path": "フォントファイル ( .ttf / .otf ) の Storages パスを指定します。",
+          "weight": "weight 値を指定します ( 既定値 40 = normal )。",
+          "slant": "slant 値を指定します ( 既定値 0 = normal )。",
+          "stretch": "stretch 値を指定します ( 既定値 50 = normal )。"
+        }
+      }
+    },
+    "ElementsDialog.registerFontDir": {
+      "hash": "9c54d7d75684",
+      "ja": {
+        "summary": "Elements 用フォントの一括登録",
+        "description": "指定ディレクトリ配下の .ttf / .otf を全て列挙して登録します ( ファイル\n名から family / weight / slant / stretch を推定 )。dir は Storages 経由の\nパス指定で、相対パス ( \"font/\" ) も `System.exePath + \"data/font/\"` の\nような正規化済みパスも使えます。XP3 内のディレクトリを指すときは\n`\"data.xp3>font/\"` のようにアーカイブを明示してください\n( addAutoPath でマウントしただけではディレクトリ列挙はできません )。\nOS のパス ( \"D:/foo/font/\" ) をそのまま渡すと 0 本になります。",
+        "returns": "登録できたフォントの本数が返ります。0 = 1 本も登録できていない\n( ディレクトリが無い / フォントが無い )。例外にはならず、\n代わりに警告ログを出します。",
+        "params": {
+          "dir": "登録対象ディレクトリの Storages パスを指定します。"
+        }
+      }
+    },
+    "ElementsDialog.registerHotKey": {
+      "hash": "3aa9325e0c79",
+      "ja": {
+        "summary": "ホストホットキーの登録",
+        "description": "「ダイアログにフォーカスを渡しつつ、特定のキーだけは必ずホスト側で\n受けたい」ためのバイパス機構です。登録したキーはダイアログへ渡らず、\nそのまま通常のゲーム入力経路\n( [Window.onKeyDown](Window.md#onkeydown) /\n[Window.onMouseDown](Window.md#onmousedown) 等 ) へ届きます\n( 専用イベントはありません )。\n\n入力の配送優先順位は次の一列です。\n\n1. モーダルダイアログ ( 全入力を独占。ホットキーより優先 )\n2. ホストホットキー ( ダイアログをバイパスしてホストへ )\n3. フォーカスを持つ非モーダルパネル ( 未処理キーのみ素通し )\n4. ゲーム / レイヤ\n\nESC でのシーン復帰や PageUp/Down での画面切替を、slider 等を含む\n操作パネル ( `showJson(json, true, false)` ) の表示中でも確実に効かせる\n用途を想定しています。",
+        "returns": "戻り値はありません。同じ ( key, shift ) の再登録は\nduringTextInput の上書きになります。",
+        "params": {
+          "key": "仮想キーコード ( VK_ESCAPE 等 )。キーのほか、パッドボタン\n( VK_PAD1 〜 VK_PAD12 等 ) とマウスボタン ( VK_LBUTTON / VK_RBUTTON /\nVK_MBUTTON / VK_XBUTTON1 / VK_XBUTTON2 ) も同じ空間で指定できます。\n印字キーの登録は非推奨です ( onKeyPress の文字イベントまでは抑止\nされません )。",
+          "shift": "修飾キーの組合せ ( ssShift | ssAlt | ssCtrl、既定 0 )。\nキー down は完全一致で判定し、up はキーのみの一致で対にバイパスします。",
+          "duringTextInput": "真にすると、ダイアログ内のテキスト入力ウィジェット\n( input_box 等 ) にキャレットがある間も有効になります。既定の偽では\nテキスト入力中は抑止され、ESC / BackSpace 等を入力欄から奪いません。"
+        }
+      }
+    },
+    "ElementsDialog.unregisterHotKey": {
+      "hash": "6eb0eb22d3f5",
+      "ja": {
+        "summary": "ホストホットキーの解除",
+        "description": "[registerHotKey](#registerhotkey) で登録したホットキーを解除します\n( key と shift の両方が一致するエントリを削除 )。",
+        "params": {
+          "key": "仮想キーコードを指定します。",
+          "shift": "修飾キーの組合せ ( 既定 0 )。"
+        }
+      }
+    },
+    "ElementsDialog.clearHotKeys": {
+      "hash": "e7ba5a624bd5",
+      "ja": {
+        "summary": "ホストホットキーの全解除",
+        "description": "[registerHotKey](#registerhotkey) で登録したホットキーを全て解除します。"
+      }
+    },
+    "ElementsDialog.defaultFontFamily": {
+      "hash": "17d797c77eba",
+      "ja": {
+        "summary": "デフォルトフォントファミリ",
+        "description": "Elements の theme に適用される label / button 等の既定フォントファミリ\n名 ( カンマ区切り ) を取得 / 設定します。値の getter / setter とも\nElements ランタイムが初期化されたあと ( 最初のダイアログ表示後 ) に\n意味を持ちます。"
+      }
+    },
+    "ElementsDialog.active": {
+      "hash": "54ae8eba49a2",
+      "ja": {
+        "summary": "この ElementsDialog インスタンスがアクティブかどうか ( 読み取り専用 )",
+        "description": "この ElementsDialog で開いた非モーダルダイアログ / フローが現在アクティブな\nときに真になります。[close](#close) を呼んだ直後はまだ teardown が\n終わっていないため真のままで、teardown 完了後に偽に切り替わります。\n\n非モーダル UI を閉じてから次のモーダルダイアログを起動したい、\nといったタイミング制御に使います。"
+      }
+    },
+    "ElementsDialog.modalActive": {
+      "hash": "2c6ee4ab1a0f",
+      "ja": {
+        "summary": "モーダルなダイアログが表示中かどうか ( 読み取り専用 )",
+        "description": "[showModalJson](#showmodaljson) 系やモーダルフローで開いたインスタンスが\n1 つでもアクティブなら真になります ( どのインスタンスから読んでもプロセス\n全体の状態を返します )。フォーカスを取らない常駐オーバレイ ( 字幕・HUD 等 )\nは含みません。\n\n最上位ホットキー ( [System.registerHotKey](System.md#registerhotkey) ) の\nコールバックで「モーダル表示中は何もせず素通しする」判定に使います。"
+      }
+    },
+    "ElementsDialog.onScreen": {
+      "hash": "dab5e3f42c30",
+      "ja": {
+        "summary": "フロー画面遷移通知 ( 画面に入った )",
+        "description": "[showFlow](#showflow) / [startFlow](#startflow) 系で実行している\nフローの画面に入ったタイミングで発火します。TJS 側で override して\nください。",
+        "params": {
+          "name": "入った画面の名前 ( マニフェストの画面キー ) 。"
+        }
+      }
+    },
+    "ElementsDialog.onScreenLeave": {
+      "hash": "42dcd9a35df7",
+      "ja": {
+        "summary": "フロー画面遷移通知 ( 画面から出た )",
+        "description": "[showFlow](#showflow) / [startFlow](#startflow) 系で実行している\nフローの画面から離れるタイミングで発火します。TJS 側で override\nしてください。",
+        "params": {
+          "name": "出た画面の名前 ( マニフェストの画面キー ) 。",
+          "action": "画面を離れる契機となった button の id ( Esc / × は空文字列 ) 。"
+        }
+      }
+    },
+    "ElementsDialog.onAction": {
+      "hash": "5139bd5d521a",
+      "ja": {
+        "summary": "ダイアログ上の操作通知",
+        "description": "ダイアログ上で発生したアクション ( button click や state widget の値\n変化 ) を受け取るイベントです。TJS 側で override してください。\n\n非モーダル ( [showJson](#showjson) / [showFile](#showfile) ) では\n表示中ずっと発火します。モーダル ( [showModalJson](#showmodaljson) /\n[showModalFile](#showmodalfile) ) でも、`\"close_on_click\": true` で\n閉じる前に発生したアクションは順次このイベントに通知されます。\n\npayload の内容は widget の種類によって変わります。\n\n- button click ... void\n- checkbox / toggle ... bool ( 変更後の値 )\n- input_box ... string ( 編集後のテキスト )\n- slider 等 ... 各 widget が渡す値",
+        "params": {
+          "id": "発生元 widget の id 文字列。",
+          "payload": "widget が伴って渡す値 ( 上記参照 )。"
+        }
+      }
+    },
+    "ElementsDialog.onDrag": {
+      "hash": "0ef170755af6",
+      "ja": {
+        "summary": "ドラッグ通知",
+        "description": "画面 JSON で `\"drag_events\": true` を指定した widget の 押下 → 移動 →\n離す が届くイベントです。TJS 側で override してください。\n\npayload は Dictionary で、`id` ( 発生元 widget の id )、`phase`\n( `\"begin\"` / `\"move\"` / `\"end\"` )、`x` / `y` ( 現在位置 )、`dx` / `dy`\n( 前回からの差分 )、`startX` / `startY` ( 押下位置 )、`modifiers`\n( シフト状態 ) を持ちます。座標は画面 JSON に書いた座標系です。\n\n溜まった `\"move\"` は最新の 1 件へ畳まれます ( `\"begin\"` / `\"end\"` は\n畳まれません )。\n\n**絵をドラッグに追従させるだけならこのイベントは不要です**。widget に\n`\"drag_at_var\"` を書いてドラッグ位置を変数へ出し、canvas 子の `\"at_var\"`\nへ同じ変数を挿すとエンジン内で完結します ( `\"drag_bounds\"` で可動域も\n制限できます )。このイベントは「どこで離したか」のような判断を TJS 側で\n行う用途に使います。",
+        "params": {
+          "payload": "ドラッグ状態を表す Dictionary ( 上記参照 )。"
+        }
+      }
+    },
+    "ElementsDialog.onVar": {
+      "hash": "0601d4c02876",
+      "ja": {
+        "summary": "変数変化通知",
+        "description": "表示中ダイアログの変数 store の値が変わったときに届くイベントです。\nTJS 側で override してください。[setVar](#setvar) による自分の書き込み\nだけでなく、画面側が書いた値 ( `\"vars_on_hover\"` / `\"vars_on_focus\"` /\nslider の `\"value_var\"` / `\"drag_at_var\"` / 一覧の `\"index_offset_var\"`\n等 ) でも発火します。\n\n「絵はホスト側のレイヤ、当たり判定だけダイアログ」という構成で、hover や\n選択の変化をホスト処理へ繋ぐのに使います ( 大きすぎて atlas に積めない\n一枚絵を並べる一覧など )。\n\n通知は 1 フレーム遅延し、同じ変数の連続変化 ( hover 移動やドラッグ中の\n座標書き込み ) は最新の 1 件へ畳まれます。「いまの値」が必要なときは\n通知を待たず [getVar](#getvar) で読んでください。\n\n**このイベントを実装したダイアログだけが観測対象になります**。\n実装していないダイアログには一切コストがかかりません。受け取る変数を\n絞りたい場合は [watchVars](#watchvars) を使います。",
+        "params": {
+          "name": "変化した変数名。",
+          "value": "変化後の値 ( 文字列 )。"
+        }
+      }
+    },
+    "ElementsDialog.onClose": {
+      "hash": "3e26f54a5880",
+      "ja": {
+        "summary": "ダイアログ teardown 完了通知",
+        "description": "このインスタンスのダイアログが閉じ切った ( teardown 完了 ) タイミングで発火する\n非ブロッキング経路のイベントです。TJS 側で override してください。",
+        "params": {
+          "action": "閉じる契機となった button の id ( `close_on_click` / Esc で閉じた場合。\n[close](#close) 等で明示的に閉じた場合は空文字列 )。"
+        }
+      }
+    },
+    "ElementsDialog.beginKeyCapture": {
+      "hash": "cebc748fcf0f",
+      "ja": {
+        "summary": "キー捕捉を始める",
+        "description": "「次に押されたキーをそのまま受け取る」ためのメソッドです。キー割り当ての設定画面で\n「割り当てるキーを押してください」と出すときのように、キーをウィジェットの操作\n( フォーカス移動・決定・Esc で閉じる等 ) に使わせず、TJS で判定したい場面で使います。\n\n捕捉中のダイアログがキーボードフォーカスを持っている間は、キーの押下がすべて\n[onKeyCapture](#onkeycapture) へ届き、ウィジェットには渡りません。\n\n- モーダルの上でも、[registerHotKey](#registerhotkey) で登録したキーよりも優先します。\nただし [System.registerHotKey](System.md#registerhotkey) の最上位ホットキーは\n先に効きます。\n- Shift / Ctrl / Alt の単独押し、ゲームパッドのボタン ( `VK_PAD*` )、\nオートリピート ( `ssRepeat` 付き ) も届きます。リピートを無視するかは受け手が決めます。\n- 左以外のマウスボタン ( 右 / 中 / X ) の押下も `VK_RBUTTON` などで届きます\n( 右クリックで取り消す、など )。左クリックは通常どおりウィジェットへ届きます。\n- キーを離したときのイベントと文字入力は、捕捉中は捨てます。\n- 捕捉したキーを押したまま捕捉を終えても ( ダイアログを閉じても )、背面の画面へ\nリピートが漏れることはありません。\n\n[endKeyCapture](#endkeycapture) を呼ぶか、ダイアログを閉じると捕捉は終わります。\n\n説明文だけのダイアログを設定画面の上にモーダルで重ね、そのダイアログで\n捕捉するのが典型的な使い方です。[onKeyCapture](#onkeycapture) の中から\n[close](#close) を呼んでもかまいません。\n\n```tjs\nvar dlg = new ElementsDialog();\ndlg.onKeyCapture = function(key, shift) {\nif (shift & ssRepeat) return;          // リピートは無視\nif (key == VK_RBUTTON) { close(); return; }   // 右クリックで取り消し\nassignKey(key);\nclose();\n} incontextof dlg;\ndlg.showJson(promptJson);\ndlg.beginKeyCapture();\n```",
+        "returns": "捕捉を始められたら真。ダイアログが表示されていない ( アクティブでない ) ときは偽。"
+      }
+    },
+    "ElementsDialog.endKeyCapture": {
+      "hash": "7f206acb550f",
+      "ja": {
+        "summary": "キー捕捉を終える",
+        "description": "[beginKeyCapture](#beginkeycapture) で始めた捕捉を終えます。ダイアログを閉じた場合は\n自動で終わるので、呼ぶ必要はありません。",
+        "returns": "終えられたら真。ダイアログが表示されていない ( アクティブでない ) ときは偽。"
+      }
+    },
+    "ElementsDialog.onKeyCapture": {
+      "hash": "55d9356ccc08",
+      "ja": {
+        "summary": "捕捉したキー",
+        "description": "[beginKeyCapture](#beginkeycapture) で捕捉中に押されたキーを受け取るイベントです。\nTJS 側で override してください。既定は何もしません。",
+        "params": {
+          "key": "VK コード。左以外のマウスボタンは `VK_RBUTTON` / `VK_MBUTTON` /\n`VK_XBUTTON1` / `VK_XBUTTON2`、ゲームパッドのボタンは `VK_PAD*`。",
+          "shift": "`ss*` の組み合わせ。オートリピートは `ssRepeat` 付き。"
+        }
+      }
+    },
+    "ElementsDialog.registerImage": {
+      "hash": "e42abde79bde",
+      "ja": {
+        "summary": "実行時画像を登録する",
+        "description": "統一ストレージパス path のファイルを name で実行時画像ストアへ登録します。jsonc の\nimage ウィジェット等からは `\"mem://<name>\"` で参照します。セーブサムネイル等、実行時に\n変わる画像を Elements へ渡すための仕組みです。表示中の画面に `mem://<name>` の\nimage ウィジェットがあれば、再登録した時点で再デコードされ即時反映されます\n( 画面の開き直しは不要。パネルにも反映されます )。登録前に build した\nウィジェットは空表示のままなので、初回は画面を開く前に登録してください。",
+        "returns": "読込・登録に成功したかどうか。",
+        "params": {
+          "name": "ストア上の名前 ( `mem://<name>` で参照 )。",
+          "path": "登録する画像の統一ストレージパス。"
+        }
+      }
+    },
+    "ElementsDialog.unregisterImage": {
+      "hash": "6a363313403c",
+      "ja": {
+        "summary": "実行時画像を削除する",
+        "description": "[registerImage](#registerimage) で登録した name を実行時画像ストアから削除します。",
+        "params": {
+          "name": "削除する画像の名前。"
+        }
+      }
+    },
+    "ElementsDialog.clearImages": {
+      "hash": "82bd80471bde",
+      "ja": {
+        "summary": "実行時画像をすべて消去する",
+        "description": "実行時画像ストアを全消去します。"
+      }
+    },
+    "ElementsDialog.setSharedVar": {
+      "hash": "c2e11f09678c",
+      "ja": {
+        "summary": "セッション共有変数を書き換える",
+        "description": "画面 JSON の `\"shared_vars\"` が宣言した「画面をまたいで保つ変数」を書き換えます。\n変数 store は画面ごとに作り直されますが、`\"shared_vars\"` のパターン\n( 完全一致、または末尾 `*` の前方一致 ) に一致する変数はセッション共有ストアと\n双方向になり、次に開く画面へ引き継がれます。画面が未構築でも書けます。\n\nどの値を持ち回るかは画面側が決めるのでホスト実装は不要ですが、ゲームの\nセーブデータへ落とす / ロード後に流し込むときにこのメソッドを使います。",
+        "params": {
+          "name": "変数名。",
+          "value": "設定する値 ( 文字列 )。"
+        }
+      }
+    },
+    "ElementsDialog.getSharedVars": {
+      "hash": "617f5b91827f",
+      "ja": {
+        "summary": "セッション共有変数をすべて取得する",
+        "description": "セッション共有変数の現在値を辞書配列 ( 変数名 => 値 ) で返します。セーブデータへ\n書き出す用途を想定しています。値は文字列です。\n\n共有側へ出るのは「変化として書かれた」値だけで、ウィジェットの初期値\n( `\"initial\"` / `\"value\"` ) は出ません。「誰も触っていない項目」が最初に開いた\n画面の既定で固定されるのを避けるためです。",
+        "returns": "変数名 => 値 の辞書配列。"
+      }
+    },
+    "ElementsDialog.clearSharedVars": {
+      "hash": "1372f418299f",
+      "ja": {
+        "summary": "セッション共有変数をすべて捨てる",
+        "description": "セッション共有ストアを空にします。タイトルへ戻るとき、セーブデータをロードする\n直前などに呼びます。"
+      }
+    },
+    "ElementsDialog.setAtlasImage": {
+      "hash": "74e69076f0a7",
+      "ja": {
+        "summary": "差し替え可能アトラスの絵を差し替える",
+        "description": "画面 JSON の `\"atlases\"` で `\"swappable\": true` と宣言したアトラスの画像を、\n実行時に別の 1 枚へ差し替えます。ウィジェットは作り直さないので、レイアウトも\nフォーカスもそのまま保たれます。CG 鑑賞のグループタブのように「同じ画面・\n違う絵の束」を切り替える用途向けです。\n\n差し替え先は**同じ矩形割り**である必要があります。ウィジェットが持つ\nframes / rect は変わらないので、絵の位置がずれると別の絵が出ます。",
+        "returns": "差し替えられたかどうか ( 未宣言 / 読込失敗なら false。表示は変わりません )。",
+        "params": {
+          "name": "画面 JSON で宣言したアトラス名。",
+          "path": "差し替える画像のパス ( 画面の `resource_base` 起点 )。"
+        }
+      }
+    },
+    "ElementsDialog.swappableAtlases": {
+      "hash": "0b7ed6845b47",
+      "ja": {
+        "summary": "差し替え可能なアトラス名の一覧を取得する",
+        "description": "いま [setAtlasImage](#setatlasimage) で差し替えられるアトラス名を配列で返します。\n検証パネルや REPL からの確認用です。",
+        "returns": "アトラス名の配列。"
+      }
+    },
+    "ElementsDialog.setVar": {
+      "hash": "8c9a401d1aac",
+      "ja": {
+        "summary": "表示中ダイアログの変数を書き換える",
+        "description": "表示中ダイアログの変数 store へ値を書き込みます。JSON で `\"text_var\": name` を指定した\nlabel 等が次フレームで更新されます。自分のインスタンスが非アクティブなら false を返します。",
+        "returns": "書き込めたかどうか。",
+        "params": {
+          "name": "変数名。",
+          "value": "設定する値 ( 文字列 )。"
+        }
+      }
+    },
+    "ElementsDialog.getVar": {
+      "hash": "b9fc5479f0a1",
+      "ja": {
+        "summary": "表示中ダイアログの変数を読み出す",
+        "description": "表示中ダイアログの変数 store から値を読み出します。[setVar](#setvar) で\n書いた値だけでなく、画面側が書いた値 ( `\"vars_on_hover\"` /\n`\"vars_on_focus\"` / slider の `\"value_var\"` / `\"drag_at_var\"` /\n一覧の `\"index_offset_var\"` 等 ) も同じ store から読めます。\n\n未知の変数名、または自分のインスタンスが非アクティブなら void を返します\n( 空文字列と区別できます )。変化した時点で知りたい場合は\n[onVar](#onvar) を実装します。",
+        "returns": "変数の値 ( 文字列 )。未知の変数なら void。",
+        "params": {
+          "name": "変数名。"
+        }
+      }
+    },
+    "ElementsDialog.listVars": {
+      "hash": "72e888fd5c58",
+      "ja": {
+        "summary": "表示中ダイアログの変数一覧を取得する",
+        "description": "表示中ダイアログが使っている変数を名前順の配列で返します。要素は\n`name` / `value` / `usedBy` を持つ Dictionary で、`usedBy` は\n`id` ( いちばん近い祖先の widget id ) と `kind` ( 参照している JSON の\nキー。`\"text_var\"` / `\"visible_var\"` / `\"value_var\"` 等 ) を持つ\nDictionary の配列です。\n\n参照だけあって一度も書かれていない変数、逆に参照は無いが\n[setVar](#setvar) で作った変数も載ります。デバッグパネルや画面 JSON の\n検証に使います。",
+        "returns": "変数記述 Dictionary の配列。非アクティブなら空配列。"
+      }
+    },
+    "ElementsDialog.focus": {
+      "hash": "cc447e02c7fb",
+      "ja": {
+        "summary": "指定 id の widget へフォーカスを移す",
+        "description": "表示中ダイアログの widget ( JSON の `\"id\"` で指定 ) へフォーカスを\n移します。input_box は編集フォーカス ( キャレット表示 + テキスト受理 )\nになります。`at_var` の park / unpark などで画面を組み替えた後に、\n入力先を明示的に移す用途を想定しています。\n\n戻り値は「インスタンスへフォーカス移動を依頼できたか」で、id の存在\n確認はしません。自分のインスタンスが非アクティブなら false を返します。",
+        "returns": "依頼できたかどうか。非アクティブなら false。",
+        "params": {
+          "id": "フォーカスを移す widget の id。"
+        }
+      }
+    },
+    "ElementsDialog.activate": {
+      "hash": "2a8f2f33f5b9",
+      "ja": {
+        "summary": "指定 id の widget を実行する",
+        "description": "表示中ダイアログの widget ( JSON の `\"id\"` で指定 ) へフォーカスを移して\n実行 ( Enter 相当 ) します。[Agent.dialogClick](Agent.md#dialogclick) の\nインスタンス版で、[ElementsPanel.activate](ElementsPanel.md#activate) と\n同形です。",
+        "returns": "実行できたかどうか。id 不明 / 非アクティブなら false。",
+        "params": {
+          "id": "実行する widget の id。"
+        }
+      }
+    },
+    "ElementsDialog.atlasCacheStats": {
+      "hash": "cf0e28b01faa",
+      "ja": {
+        "summary": "アトラスのデコードキャッシュの常駐量 ( 読み取り専用 )",
+        "description": "アトラス画像は「パス + 倍率」をキーにデコード済みの絵をキャッシュして\n使い回します。**画面を切り替えても手放しません** — 長時間プレイでヒープが\n断片化したあと大きな連続領域が取れずデコードに失敗し、絵の無い画面が\n組まれてしまうのを避けるためです。どれだけ抱えているかを場面の切れ目で\n確認するためのプロパティです ( クラス全体に効く static 相当 )。\n\n辞書で `bytes` ( RGBA 展開後の合計バイト数 ) / `count` ( エントリ数 ) /\n`budget` ( 現在の予算 ) を返します。\n\n```tjs\nvar st = global.ElementsDialog.atlasCacheStats;\nDebug.message(\"アトラス常駐 %.1f MB (%d 件)\".sprintf(st.bytes / 1048576.0, st.count));\n```"
+      }
+    },
+    "ElementsDialog.trimAtlasCache": {
+      "hash": "8182a42c4de3",
+      "ja": {
+        "summary": "アトラスのデコードキャッシュを切り詰める",
+        "description": "アトラスのデコードキャッシュを `budget` バイトまで切り詰めます。\n0 ( 既定 ) を渡すと「使われていないものを全部」手放します。\n戻り値は解放できたバイト数です。\n\n⚠ **表示中の画面が使っているアトラスは参照が残っているので捨てられません。**\n場面の切れ目 ( 画面を閉じた後 ) に呼んでください。\n\n```tjs\ndlg.close();\nvar freed = global.ElementsDialog.trimAtlasCache();   // 使っていない分を全部\n```\n\n予算そのものは変わりません ( 一時的な切り詰め )。恒久的に下げたい場合は\n[atlasCacheBudget](#atlascachebudget) へ代入します。",
+        "returns": "解放できたバイト数。",
+        "params": {
+          "budget": "切り詰める上限 ( バイト )。0 / 省略で使われていない分を全解放。"
+        }
+      }
+    },
+    "ElementsDialog.atlasCacheBudget": {
+      "hash": "d525a1e195be",
+      "ja": {
+        "summary": "アトラスのデコードキャッシュの予算 ( バイト )",
+        "description": "代入すると**恒久的に**変わり、下げた場合はその場で切り詰めます。\n0 にするとキャッシュ無効 ( 毎回デコード ) になります。\n既定は 192MB で、1 画面ぶんのアトラスを載せたままにできる大きさです\n( クラス全体に効く static 相当 )。"
+      }
+    },
+    "ElementsDialog.setPadIconBase": {
+      "hash": "f7cf2de20be8",
+      "ja": {
+        "summary": "pad_icon のベースディレクトリを設定する",
+        "description": "pad_icon ( Kenney input prompts ) のベースディレクトリを設定します。dir は統一ストレージ\nパス ( XP3 内でも可 )。配下に xbox/ps/switch/keyboard の各ディレクトリ + vector/*.svg がある\n構成を想定します。未設定のままだと pad_icon は灰色プレースホルダになります。",
+        "params": {
+          "dir": "pad_icon 素材のベースディレクトリ ( 統一ストレージパス )。"
+        }
+      }
+    },
+    "ElementsDialog.setPadTheme": {
+      "hash": "ca8f50ce2ef0",
+      "ja": {
+        "summary": "pad_icon の全体テーマを設定する",
+        "description": "pad_icon の全体テーマ ( `\"xbox\"` / `\"ps\"` / `\"switch\"` / `\"keyboard\"` / `\"none\"` ) を\n設定します。`\"auto\"` を指定すると、接続しているパッドの系統\n( [System.padStyle](System.md#padstyle) ) からテーマを自動選択します。系統が\n判定できないプラットフォーム ( Windows など ) では、パッドが 1 つでも\nつながっていれば `\"xbox\"`、1 つも無ければ `\"keyboard\"` になります\n( パッドが無い状態で pad の絵を出しても、押せるキーが判らないためです )。\n\n`\"auto\"` の判定はパッドの接続数と系統を見張っていて、**変化したその場で\n決め直します**。コントローラを抜き差ししても画面を開き直す必要はなく、\n表示中の画面の pad_icon も次の描画で新しいテーマの絵に差し替わります。\n画面 JSON の top-level `\"pad_theme\"` が指定されていればそちらが優先されます。",
+        "returns": "名前を解釈できたかどうか。",
+        "params": {
+          "name": "テーマ名。"
+        }
+      }
+    },
+    "ElementsDialog.setPadIconAlias": {
+      "hash": "8985ed742809",
+      "ja": {
+        "summary": "pad_icon の名前解決をテーマ単位で上書きする",
+        "description": "pad_icon の論理名 ( `\"a\"` / `\"b\"` / `\"dpad\"` など ) から実際の素材ファイル名\n( Kenney pack の basename ) への対応表を、テーマ単位で上書きします。既定表\n( `\"a\"` = Enter / `\"b\"` = Esc / `\"dpad\"` = 矢印 … ) がタイトルの実際のキー\n割り当てと違うときに使います。\n\n```tjs\n// キャンセルが Esc ではなく BackSpace のタイトル\nglobal.ElementsDialog.setPadIconAlias(\"keyboard\", \"b\", \"keyboard_backspace\");\n```\n\n上書きは既定表より優先されます。basename に空文字を渡すとその名前の上書き\nだけを解除、name に空文字を渡すとそのテーマの上書きを全解除します。いずれも\n表示中の画面へ次の描画から反映されます。",
+        "returns": "テーマ名を解釈できたかどうか。",
+        "params": {
+          "theme": "対象のテーマ名 ( `\"xbox\"` / `\"ps\"` / `\"switch\"` / `\"keyboard\"` )。",
+          "name": "上書きする論理名。空文字ならそのテーマの上書きを全解除。",
+          "basename": "割り当てる素材の basename。空文字 / 省略でその名前の上書きを解除。"
+        }
+      }
+    },
+    "ElementsDialog.language": {
+      "hash": "a7a7b8eb24c8",
+      "ja": {
+        "summary": "i18n の表示言語",
+        "description": "画面 JSON の top-level `strings` ( textID → 言語別文字列 ) を引くときのキーです\n( クラス全体に効く static 相当 )。`\"ja\"` / `\"en\"` / `\"tc\"` / `\"sc\"` など、\n`strings` 側で使っているキーをそのまま指定します。\n\n```tjs\nglobal.ElementsDialog.language = \"en\";     // 表示中の画面もその場で切り替わる\n```\n\n代入すると**表示中の全ダイアログへ即時適用**されます ( `text_id` / `text_list_id` /\n`options_id` を持つ widget が再解決され、画面を開き直さずに表示が変わります )。\n以後に開く画面の既定にもなります。picker 系は選択 index を維持したまま\n表示文字列だけ差し替わります。\n\n読み出すと設定済みの言語を返します。未設定なら空文字 ( = 各画面 JSON の\n`lang` 指定に従う ) です。`strings` を持たない画面では何も起きません。"
+      }
+    },
+    "ElementsDialog.watchVars": {
+      "hash": "f6368914a10d",
+      "ja": {
+        "summary": "変数変化通知の対象",
+        "description": "[onVar](#onvar) で受け取る変数を絞る / 明示指定するプロパティです。\n\n- 変数名の配列 ... その変数だけ通知する\n- `\"*\"` ... すべての変数を通知する\n- 空配列 ... 通知しない ( 明示的に止める )\n- void ... 既定へ戻す\n\n既定 ( 未設定 ) は「[onVar](#onvar) を実装していればすべての変数」です。\n`\"vars_on_hover\"` の変数やドラッグ位置は毎フレーム書き換わるため、\n特定の変数だけ必要なら名前を並べたほうが軽くなります。表示中に設定しても\n即座に反映されます。"
+      }
+    },
+    "ElementsDialog.fontLanguages": {
+      "hash": "6eec2500165b",
+      "ja": {
+        "summary": "言語連動フォント置換表",
+        "description": "文字体系ごとの別フォント ( Noto Sans JP / TC / SC など ) を持つ多言語 UI で、\n表示言語に応じてフォント解決時にファミリを差し替えるための表です\n( クラス全体に効く static 相当 )。日中で共有しているコードポイントの漢字を、\n表示言語に合った地域字形で描画できます。\n\n言語コードをキーに、`map` ( ファミリ名または [registerFont](#registerfont) の\n別名 → 置換先ファミリ ) と `fallback` ( 任意。その言語のときの theme 既定\nファミリチェーンの並び ) を持つ辞書 ( または同形の JSON 文字列 ) を代入します。\n\n```tjs\nglobal.ElementsDialog.fontLanguages = %[\n\"tc\" => %[ \"map\" => %[ \"Noto Sans JP\" => \"Noto Sans TC\" ] ],\n\"sc\" => %[ \"map\" => %[ \"Noto Sans JP\" => \"Noto Sans SC\" ] ] ];\nglobal.ElementsDialog.language = \"sc\";   // 以後 \"Noto Sans JP\" 指定は SC フォントで描画\n```\n\n`map` は widget の `\"font\"` 指定と theme 既定チェーンの各ファミリトークンに\n適用され、`\"#tag=val\"` の可変軸サフィックスは温存されます ( JP/TC/SC が同じ\n軸を持つ可変フォントならウェイト指定がそのまま引き継がれます )。適用される\n言語は widget の明示 `\"locale\"` があればそれ、無ければ [language](#language)\nです。表にエントリの無い言語では置換されません。\n\n画面 JSON / app.jsonc の top-level `\"font_languages\"` と同じ表で、言語単位に\nマージ登録されます ( 後から設定した方が言語ごとに上書き )。読み出すと最後に\n代入した表を JSON 文字列で返します ( 未設定なら空文字。画面 JSON 側の宣言は\n含みません )。\n\n`text_area` はビルド時にフォントが確定するため、表示中の言語切替には追従\nしません ( 画面を開き直すと反映されます )。"
+      }
+    },
+    "ElementsDialog.virtualKeyboard": {
+      "hash": "bb84b812e879",
+      "ja": {
+        "summary": "内蔵仮想キーボードの動作モード",
+        "description": "テキスト欄 ( `input_box` 等 ) に focus が入ったとき、OS のソフトウェア\nキーボードの代わりに Elements 内蔵の英数キーボードを出すかどうかを\n指定します。設定できる値は次の通りです。\n\n| 値 | 意味 |\n|---|---|\n| `\"auto\"` | 既定。物理キーボードが接続されていないときだけ出す |\n| `\"always\"` | 物理キーボードがあっても常に出す ( テスト用。デスクトップでも出る ) |\n| `\"never\"` | 出さない ( OS 側に任せる )。表示中なら閉じる |\n\n初期値は環境変数 `KRKRZ_FORCE_VIRTUAL_KEYBOARD=1` があれば `\"always\"`、\n無ければ `\"auto\"` です。\n\n出るのは **Elements のテキスト欄に focus が入ったとき**で、ゲーム側が\n自前で描いている入力欄では出ません。押鍵は貯めずにその場で入力先へ\n流し込まれるため、入力欄がリアルタイムに更新されます。\n現バージョンでは大文字英数字のみ対応です。\n\n動作を確認できるコアデモは `softkey_ime` です。"
+      }
+    },
+    "ElementsDialog.hasPhysicalKeyboard": {
+      "hash": "9a4ccc245c3f",
+      "ja": {
+        "summary": "物理キーボードの有無",
+        "description": "物理 ( ハードウェア ) キーボードが接続されているかを返します。読み出し専用。\nデスクトップでは常に真、コンソール機等では USB キーボードの接続状態に\nなります。ゲーム側が独自のソフトウェアキーボードを出すかどうかの判断に\n使用します。"
+      }
+    },
+    "ElementsDialog.focusRing": {
+      "hash": "a5e2ce7c6372",
+      "ja": {
+        "summary": "フォーカス枠の表示",
+        "description": "フォーカス中の要素に Elements が描く汎用の枠 ( 青い角丸 ) の表示です\n( クラス全体に効く static 相当 )。既定は true。\n\n```tjs\nglobal.ElementsDialog.focusRing = false;    // アプリ全体で消す\n```\n\nbutton / slider / dial / thumbwheel の枠がまとめて消えます。状態別の絵\n( 通常 / オーバー / 押し下げ / 無効 ) を素材として持つ画像 UI では、汎用の枠が\n絵に重なって邪魔になるので切ります。**フォーカス自体は生きている**ので、\nキー/パッドのナビゲーションと hilite フレームへの切替は従来どおり動きます。\n\n画面単位ではなくアプリ全体の設定です ( グローバルテーマのフラグ )。\n\nクラス内から触るときは `global.ElementsDialog.focusRing` と書きます。ElementsDialog を継承した\nクラスのメソッド内で素の `ElementsDialog` と書くと親クラス参照になり、static プロパティへの\n代入が「メンバが見つかりません」になります。"
+      }
+    },
+    "ElementsDialog.baseSize": {
+      "hash": "689348ff96fc",
+      "ja": {
+        "summary": "UI の author 基準面サイズ",
+        "description": "オーバレイ表示の拡縮率 ( fit ) の分母になる基準面のサイズを `[w, h]` の\n配列で指定します。void ( または要素の無い配列 ) を設定すると既定 =\nゲームの基準面 ( primaryLayer のサイズ ) に戻ります。設定していないときの\ngetter は void です。\n\nゲーム画面と別解像度で UI を author しているタイトル ( ゲーム画面\n640x400 / UI 1920x1080 等 ) で設定すると、部分パネルの拡縮が author 基準\nどおりになり、ゲーム側の primaryLayer サイズ変更 ( 低解像度機種の\nエミュレーション等 ) にも巻き込まれません。表示中の画面にも次のフレーム\nから反映されます。"
+      }
+    },
+    "ElementsDialog.renderScale": {
+      "hash": "36d85b95273f",
+      "ja": {
+        "summary": "オーバーレイの描画密度モード",
+        "description": "overlay の描画密度モードです ( クラス全体に効く static 相当 )。\n\n- 0 ( 既定 ) = auto: 最終 present サイズで直接ラスタライズ。\n- >0 = authored 論理サイズ × この倍率で描き、present 時に拡縮 ( 1.0 = 原寸レンダ→拡縮表示、\n2.0 = supersampling 相当 )。\n\n表示中の画面にも次フレームから反映されます ( 描画品質/負荷の比較用 )。"
+      }
+    },
+    "ElementsDialog.renderCache": {
+      "hash": "84f56f7fe37f",
+      "ja": {
+        "summary": "オーバーレイの再ラスタライズ抑止",
+        "description": "true ( 既定 ) の間、変化の無いフレームはダイアログの再ラスタライズ ( CPU ) と\nテクスチャ再アップロードを省略し、前回の描画結果をそのまま提示します\n( クラス全体に効く static 相当 )。アイドル中の CPU 負荷が大きく下がります。\n\n入力イベント・フォーカス/ホバー変化・パーツ演出再生中・setVar の実変化・\nテキスト欄キャレットの点滅・画面遷移エフェクト中などは自動的に再描画されます。\nfalse にすると従来どおり毎フレーム再描画します ( 負荷比較・問題切り分け用 )。"
+      }
+    },
+    "ElementsDialog.partialRedraw": {
+      "hash": "61f77eb8762b",
+      "ja": {
+        "summary": "オーバーレイの部分再描画",
+        "description": "true ( 既定 ) の間、変化した範囲が矩形で特定できる場合は**その矩形だけ**を\n再ラスタライズしてテクスチャへ部分転送します ( クラス全体に効く static 相当 )。\n矩形が特定できるのはテキスト欄のキャレット点滅などに限られ、入力・フォーカス\n変化・パーツ演出・setVar などは従来どおり全面再描画になります。\n\n[ElementsDialog.renderCache](ElementsDialog.md#rendercache) が有効なときのみ機能します\n( 前回の描画結果が残っていることが前提 )。false にすると変化フレームは\n常に全面再描画します ( 負荷比較・問題切り分け用 )。実際に部分再描画できた\n回数は [ElementsDialog.renderStats](ElementsDialog.md#renderstats) の \"partials\" で確認できます。"
+      }
+    },
+    "ElementsDialog.renderCount": {
+      "hash": "3112b78e0a8f",
+      "ja": {
+        "summary": "ラスタライズ累計回数 ( 読み取り専用 )",
+        "description": "実際にラスタライズ ( 再描画 ) を行った累計回数です ( クラス全体で共通 )。\nアイドル時に増えていなければ renderCache が効いています ( 検証・負荷比較用 )。"
+      }
+    },
+    "ElementsDialog.renderStats": {
+      "hash": "c6a4846916f1",
+      "ja": {
+        "summary": "描画パイプラインの区間計測 ( 読み取り専用 )",
+        "description": "オーバーレイ描画の負荷内訳を Dictionary で返します ( クラス全体で共通の累積値 )。\n時間はすべてマイクロ秒です:\n%[ \"frames\" => 提示フレーム数, \"updates\" => 状態更新回数,\n\"rasters\" => ラスタライズ回数, \"partials\" => うち部分再描画だった回数,\n\"cachedPresents\" => ラスタ省略提示回数,\n\"presents\" => 提示回数, \"totalUs\" => 描画処理全体, \"updateUs\" => 状態更新,\n\"rasterUs\" => CPU ラスタライズ, \"acquireUs\" => バッファ確保,\n\"uploadUs\" => テクスチャ転送, \"presentUs\" => 提示 ]\n\n累積値なので 2 回読んで差分を取り、経過実時間との比で\n「Elements が消費した時間・割合」を計算します\n( [ElementsDialog.renderStatsReset](ElementsDialog.md#renderstatsreset) で 0 クリア )。\n計測用のベンチ画面がコアデモ `elements_bench` にあります\n( シナリオ切替 + renderCache A/B + 500ms ごとの内訳表示 )。"
+      }
+    },
+    "ElementsDialog.renderStatsReset": {
+      "hash": "9d6d88900f82",
+      "ja": {
+        "summary": "描画計測カウンタのリセット",
+        "description": "[ElementsDialog.renderStats](ElementsDialog.md#renderstats) の累積カウンタを 0 クリアします。\n計測区間の開始時に呼びます。"
+      }
+    },
+    "ElementsDialog.announce": {
+      "hash": "7ce816d503bd",
+      "ja": {
+        "summary": "スクリーンリーダーに読ませる",
+        "description": "text をスクリーンリーダーに読み上げさせます ( クラス全体に効く static 相当 )。\n最前面のダイアログの live region に入り、ダイアログが 1 つも無ければゲーム本体の\nlive region に入ります。同じ文を続けて渡しても毎回読みます。\n\nスクリーンリーダーが繋がっていなくても受け付けます ( 繋がった時点で最新の状態が\n渡ります )。REPL の動作中は読み上げログ ( [Agent.a11yLog](Agent.md#a11ylog) ) にも\n残ります。\n\n```tjs\nglobal.ElementsDialog.announce(\"セーブしました\");\nglobal.ElementsDialog.announce(\"体力が残りわずかです\", true);   // 割り込み\n```\n\n仕様の全体は [アクセシビリティ (スクリーンリーダー) 対応](../specification/accessibility.md)\nを参照してください。",
+        "params": {
+          "text": "読ませる文字列。",
+          "assertive": "真なら割り込みを指定します ( 既定 false )。実際にどう扱うかは\nスクリーンリーダー次第です。"
+        }
+      }
+    },
+    "ElementsDialog.a11yActive": {
+      "hash": "29dab2a86330",
+      "ja": {
+        "summary": "スクリーンリーダーが接続中かどうか ( 読み取り専用 )",
+        "description": "OS のスクリーンリーダー等が読み上げツリーを問い合わせ済みなら真です\n( クラス全体で共通 )。最初の問い合わせで真になります。Windows では\nウィンドウが前面になったときに問い合わせが来るため、起動直後はまだ偽です。\n\n「繋がっていたら本文を読ませる」判定に使う場合は、値をキャッシュせず\n読む直前にこのプロパティを見るか、\n[onA11yActiveChanged](#ona11yactivechanged) で受けてください。\n`KRKRZ_USE_A11Y=OFF` のビルドと [a11yMode](#a11ymode) が `\"off\"` のときは\n常に偽です。"
+      }
+    },
+    "ElementsDialog.onA11yActiveChanged": {
+      "hash": "c10998c91391",
+      "ja": {
+        "summary": "スクリーンリーダーの接続状態が変わった",
+        "description": "[a11yActive](#a11yactive) が変わったときに呼ばれます。`ElementsDialog` クラスへ\n関数を代入して受けます ( 描画の外で呼ばれ、WINVER の静止画面でも即時 )。\n\n```tjs\nglobal.ElementsDialog.onA11yActiveChanged = function(active) {\nDebug.message(\"スクリーンリーダー: \" + (active ? \"接続\" : \"切断\"));\n};\n```",
+        "params": {
+          "active": "接続中なら真。"
+        }
+      }
+    },
+    "ElementsDialog.a11yMode": {
+      "hash": "a72ac686f33a",
+      "ja": {
+        "summary": "読み上げツリーを OS へ出すかどうか",
+        "description": "`\"auto\"` ( 既定 ) はスクリーンリーダーが繋がったときだけ働きます。`\"off\"` は\nOS へ出しません ( クラス全体に効く static 相当 )。`\"off\"` でも\n[Agent.a11yTree](Agent.md#a11ytree) などの検証用の口は使えます。\nそれ以外の文字列を代入すると無視してログに警告を出します。"
+      }
+    },
+    "ElementsDialog.a11yLabel": {
+      "hash": "17ce2daf0d66",
+      "ja": {
+        "summary": "読み上げツリーの根 ( ウィンドウ ) の名前",
+        "description": "ゲーム名や場面名を入れます ( クラス全体に効く static 相当 )。空文字 ( 既定 ) なら\n最前面の画面の名前 ( 画面 JSON の `\"a11y\"` の `title` ) を使います。"
+      }
+    },
+    "ElementsDialog.setGameA11y": {
+      "hash": "c73ecf57f6c3",
+      "ja": {
+        "summary": "ゲーム本体の UI を読み上げツリーに載せる",
+        "description": "Layer に描いた選択肢・メニュー・設定画面などは Elements の外にあるので、\nスクリプトからノードの表を渡して読み上げツリーに載せます ( クラス全体に効く\nstatic 相当 )。呼ぶたびに表全体を差し替えます ( 差分は本体が取ります )。\n\n```tjs\nglobal.ElementsDialog.setGameA11y([\n%[ id:\"choices\", role:\"list\", name:\"選択肢\" ],\n%[ id:\"c1\", role:\"list_item\", name:\"北へ行く\", parent:\"choices\", rect:[100,400,600,48] ],\n%[ id:\"c2\", role:\"list_item\", name:\"南へ行く\", parent:\"choices\", rect:[100,460,600,48] ],\n%[ id:\"vol\", role:\"slider\", name:\"音量\", value:\"50%\", num_value:50, num_min:0, num_max:100 ],\n], \"c1\");\n```\n\nノードの辞書のキー:\n\n- `id` ... 必須。一意な文字列。空か重複しているノードはログを出して飛ばします\n- `role` ... `button` / `toggle_button` / `check_box` / `radio_button` / `tab` /\n`menu_item` / `list` / `list_item` / `slider` / `spin_button` / `text_input` /\n`label` / `heading` / `image` / `status` / `group` ( 省略と未知の値は group )\n- `name` / `value` / `description` ... 名前 / 値 / 補足説明\n- `states` ... 配列か `\"focusable,checked\"` の形。`focusable` / `disabled` /\n`checked` / `selected` / `expanded` / `read_only`\n- `rect` ... primary layer の座標 `[x, y, w, h]`。省略すると子を囲む矩形。\nウィンドウの拡縮とレターボックスは本体が換算します\n- `parent` ... 親の `id`。省略で最上位\n- `num_value` / `num_min` / `num_max` / `num_step` ... slider / spin_button の数値\n\nゲーム本体のノードはダイアログより下に並び、モーダルなダイアログの表示中は\n隠れます。スクリーンリーダーからの操作は\n[onGameA11yAction](#ongamea11yaction) に届きます。本体はフォーカスや値を\n自分では動かさないので、スクリプトがゲームの状態を変えてから\n`setGameA11y` を呼び直してください。メインウィンドウのみが対象です。",
+        "params": {
+          "nodes": "ノードの辞書の配列。",
+          "focus": "フォーカスを置くノードの `id` ( 省略で無し )。"
+        }
+      }
+    },
+    "ElementsDialog.clearGameA11y": {
+      "hash": "5b81021bd163",
+      "ja": {
+        "summary": "ゲーム本体のノードを全て外す",
+        "description": "[setGameA11y](#setgamea11y) で載せたノードを全て外します。ゲーム本体の\n枠と、[announce](#announce) が使う live region は残ります。"
+      }
+    },
+    "ElementsDialog.onGameA11yAction": {
+      "hash": "e2d200bbb8ad",
+      "ja": {
+        "summary": "ゲーム本体のノードへの操作",
+        "description": "スクリーンリーダーが [setGameA11y](#setgamea11y) のノードを操作したときに\n呼ばれます。`ElementsDialog` クラスへ関数を代入して受けます。どのスレッドから\n来た操作でも、描画の外のメインスレッドで呼ばれます。\n\naction はノードのロールから決まります。押せるもの ( button / check_box /\nlist_item など ) は `\"click\"`、slider / spin_button は `\"increment\"` /\n`\"decrement\"` / `\"set_value\"`、text_input は `\"set_value\"` です。どのロールも\n`\"focus\"` を受け、`disabled` のノードは `\"focus\"` だけを受けます。\n\n```tjs\nglobal.ElementsDialog.onGameA11yAction = function(id, action, arg) {\nif (action == \"focus\") { selectChoice(id); updateA11y(); }\nelse if (action == \"click\") { decideChoice(id); }\n};\n```",
+        "params": {
+          "id": "操作されたノードの `id`。",
+          "action": "`\"click\"` / `\"focus\"` / `\"increment\"` / `\"decrement\"` / `\"set_value\"`。",
+          "arg": "`\"set_value\"` のときの値 ( 文字列 )。"
+        }
+      }
+    },
+    "ElementsDialog.a11yLayers": {
+      "hash": "755adaa63c54",
+      "ja": {
+        "summary": "Layer を読み上げツリーに自動で載せる",
+        "description": "真にすると、メインウィンドウの primary layer 以下を辿ってゲーム本体の\nノードに足します ( 既定 false。クラス全体に効く static 相当 )。\n\n載るのは次の Layer です。\n\n- フォーカス連鎖に入っている Layer ( `focusable` かつ `joinFocusChain` )。\n名前は `hint`、ロールは button ( `CheckBoxLayer` は check_box、\n`EditLayer` は text_input )\n- `a11yName` か `a11yRole` を持つ Layer ( フォーカスできなくてもよい )\n- [ElementsPanel](ElementsPanel.md) を描いている Layer ( パネルの部品が\nその下に並び、操作もパネルへ届く )\n\n`visible` が偽の Layer と、`a11yHidden` が真の Layer は、子も含めて載りません。\nLayer に生やせるメンバ ( `a11yName` / `a11yRole` / `a11yValue` /\n`a11yDescription` / `a11yStates` / `a11yHidden` / `onA11yAction` ) は\n[Layer](Layer.md) のクラス説明を参照してください。\n\n[setGameA11y](#setgamea11y) と併用できます。並び順は setGameA11y のノードが先で、\nフォーカスも setGameA11y に渡したものが優先です。読み直しは 150ms に 1 回まで\n( フォーカス中の Layer が変わったら即時 ) で、スクリーンリーダーが繋がっている間か\nREPL の読み上げログを取っている間だけ行います。WINVER ではその間、アイドル時も\ncontinuous イベントが回り続けます。"
+      }
+    }
+  }
+}

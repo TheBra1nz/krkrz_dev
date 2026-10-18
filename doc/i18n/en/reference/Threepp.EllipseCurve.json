@@ -1,0 +1,88 @@
+{
+  "class": "Threepp.EllipseCurve",
+  "entries": {
+    "krkrthreepp:Threepp.EllipseCurve": {
+      "hash": "4337d0610f11",
+      "ja": {
+        "summary": "楕円カーブ",
+        "description": "楕円または円弧を表現するカーブです。"
+      }
+    },
+    "krkrthreepp:Threepp.EllipseCurve.EllipseCurve": {
+      "hash": "5231de031102",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "aX": "中心X座標",
+          "aY": "中心Y座標",
+          "xRadius": "X方向の半径",
+          "yRadius": "Y方向の半径",
+          "aStartAngle": "開始角度 (ラジアン)",
+          "aEndAngle": "終了角度 (ラジアン)",
+          "aClockwise": "時計回りかどうか",
+          "aRotation": "楕円の回転角度 (ラジアン)"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.EllipseCurve.aX": {
+      "hash": "6a66c22be269",
+      "ja": {
+        "summary": "中心X座標"
+      }
+    },
+    "krkrthreepp:Threepp.EllipseCurve.aY": {
+      "hash": "b86958003796",
+      "ja": {
+        "summary": "中心Y座標"
+      }
+    },
+    "krkrthreepp:Threepp.EllipseCurve.xRadius": {
+      "hash": "1d11d4a3d1dc",
+      "ja": {
+        "summary": "X方向の半径"
+      }
+    },
+    "krkrthreepp:Threepp.EllipseCurve.yRadius": {
+      "hash": "243058ff60fe",
+      "ja": {
+        "summary": "Y方向の半径"
+      }
+    },
+    "krkrthreepp:Threepp.EllipseCurve.aStartAngle": {
+      "hash": "2d7afd4332f6",
+      "ja": {
+        "summary": "開始角度"
+      }
+    },
+    "krkrthreepp:Threepp.EllipseCurve.aEndAngle": {
+      "hash": "5f2fcfd1df0b",
+      "ja": {
+        "summary": "終了角度"
+      }
+    },
+    "krkrthreepp:Threepp.EllipseCurve.aClockwise": {
+      "hash": "c094c863591c",
+      "ja": {
+        "summary": "時計回りフラグ"
+      }
+    },
+    "krkrthreepp:Threepp.EllipseCurve.aRotation": {
+      "hash": "5a58a950c711",
+      "ja": {
+        "summary": "回転角度"
+      }
+    },
+    "krkrthreepp:Threepp.EllipseCurve.getLength": {
+      "hash": "8d98a47bcea4",
+      "ja": {
+        "summary": "曲線の長さを取得"
+      }
+    },
+    "krkrthreepp:Threepp.EllipseCurve.getPoint": {
+      "hash": "1be3886a14b6",
+      "ja": {
+        "summary": "パラメータ t (0-1) の点を取得"
+      }
+    }
+  }
+}

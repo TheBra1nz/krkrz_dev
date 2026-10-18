@@ -1,0 +1,30 @@
+{
+  "class": "Threepp.LatheGeometry",
+  "entries": {
+    "krkrthreepp:Threepp.LatheGeometry": {
+      "hash": "efda6cdaaa98",
+      "ja": {
+        "summary": "旋盤ジオメトリ",
+        "description": "2D輪郭を回転軸周りに回転させて3D形状を生成します。"
+      }
+    },
+    "krkrthreepp:Threepp.LatheGeometry.LatheGeometry": {
+      "hash": "56a0236be4d4",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "points": "輪郭点の配列 (Vector2の配列または [x,y] の配列)",
+          "segments": "セグメント数",
+          "phiStart": "開始角度 (ラジアン)",
+          "phiLength": "回転角度 (ラジアン)"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.LatheGeometry.type": {
+      "hash": "426dab41c3ed",
+      "ja": {
+        "summary": "型名（読み取り専用）"
+      }
+    }
+  }
+}

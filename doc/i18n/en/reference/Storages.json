@@ -1,0 +1,988 @@
+{
+  "class": "Storages",
+  "entries": {
+    "Storages": {
+      "hash": "511b7f429b7c",
+      "ja": {
+        "summary": "Storages クラスは 吉里吉里本体の**ストレージシステム**に関するメソッドやプロパティを持ったクラスです。このクラスからオブジェクトを作成することはできません。"
+      }
+    },
+    "Storages.addAutoPath": {
+      "hash": "545f95fb4bb2",
+      "ja": {
+        "summary": "自動検索パスへの追加",
+        "description": "**自動検索パス**に、指定したパスを追加します。吉里吉里は、利用可能なストレージを\n検索するとき、この自動検索パスに登録されたパスを探します。\n\n自動検索パスは、後に指定したものがより優先されて検索されます。\n\nまた、プロジェクトフォルダはもっとも優先されて検索されます。",
+        "params": {
+          "path": "自動検索パスに追加するパスを指定します。\n\nパスの最後は、アーカイブ内のルートフォルダを指定するときは '>'、通常のフォルダを\n指定するときは '/' で終わる必要があります\n( 例 : `\"Archive/arc.xp3>\"` や `\"System/\"` ) 。\n\n2.19 beta 14 よりアーカイブの区切り文字が '#' から '>' に変わりました。"
+        }
+      }
+    },
+    "Storages.removeAutoPath": {
+      "hash": "6ffb40537f45",
+      "ja": {
+        "summary": "自動検索パスの削除",
+        "description": "自動検索パスから、指定したパスを削除します。",
+        "params": {
+          "path": "自動検索から削除するパスを指定します。"
+        }
+      }
+    },
+    "Storages.getFullPath": {
+      "hash": "b27a600b32b2",
+      "ja": {
+        "summary": "完全な統一ストレージ名の取得",
+        "description": "path で指定されたストレージ名を完全な**統一ストレージ名**に変換します。\n\n冗長なパスアクセス ( たとえば `system/flags/../data/` など ) はすべて圧縮されます。\n\nカレントメディア、カレントフォルダが指定されていなければ、補完します。",
+        "returns": "完全な統一ストレージ名",
+        "params": {
+          "path": "完全な統一ストレージ名にしたいストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.getPlacedPath": {
+      "hash": "d105ced4070e",
+      "ja": {
+        "summary": "ストレージの検索",
+        "description": "storage で指定されたストレージを**自動検索パス**から検索します。",
+        "returns": "発見された場所が統一ストレージ名で返ります。見つからなかった場合は空文字列が返ります。",
+        "params": {
+          "storage": "検索したいストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.isExistentStorage": {
+      "hash": "31cb666c258c",
+      "ja": {
+        "summary": "ストレージの存在確認",
+        "description": "storage で指定したストレージが存在するかどうかを確認します。getPlacedPath を用いるよりは高速\nです。",
+        "returns": "存在を確認できれば真、なければ偽が返ります。",
+        "params": {
+          "storage": "存在を確認したいストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.extractStorageExt": {
+      "hash": "b9ef2a2d96e6",
+      "ja": {
+        "summary": "ストレージ名の拡張子の抽出",
+        "description": "指定されたストレージ名から拡張子の部分を抽出して返します。",
+        "returns": "拡張子部分が返ります。拡張子部分は `.` (ドット)も含みます。拡張子が\nなかった場合は空文字列が返ります。",
+        "params": {
+          "storage": "拡張子部分を抽出したいストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.extractStorageName": {
+      "hash": "3ded2aafe9bc",
+      "ja": {
+        "summary": "ストレージ名の抽出",
+        "description": "指定されたストレージ名から、ストレージ名の部分 ( パスを除く ) を抽出して返します。\n\nたとえば `\"System/hoge.txt\"` を渡した場合、`\"hoge.txt\"` が返ります。",
+        "returns": "ストレージ名が返ります。ストレージ名がなかった場合は空文字列が返ります。",
+        "params": {
+          "storage": "ストレージ名を抽出したいストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.extractStoragePath": {
+      "hash": "5cf429a62188",
+      "ja": {
+        "summary": "ストレージ名のパスの抽出",
+        "description": "指定されたストレージ名から、パスの部分を抽出して返します。\n\nたとえば `\"file://home/dee/hoge.txt\"` を渡した場合、`\"file://home/dee/\"` が\n返ります。",
+        "returns": "パスが返ります。パスがなかった場合は空文字列が返ります。",
+        "params": {
+          "storage": "パスを抽出したいストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.chopStorageExt": {
+      "hash": "62d7dad9fba0",
+      "ja": {
+        "summary": "ストレージ名の拡張子の切り落とし",
+        "description": "指定されたストレージ名から拡張子の部分を切り落として返します。\n\nたとえば `\"file://home/dee/hoge.txt\"` を渡した場合、`\"file://home/dee/hoge\"` が返\nります。",
+        "returns": "拡張子部分が切り落とされたストレージ名が返ります。",
+        "params": {
+          "storage": "拡張子部分を切り落としたいストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.searchCD": {
+      "hash": "045508587162",
+      "ja": {
+        "summary": "CD の検索",
+        "description": "指定されたボリュームラベルを持つ CD ドライブを探して、そのドライブ文字 ( 'H' など ) を返し\nます。\n\nもちろん、ドライブには該当する CD-ROM が挿入されていなければなりません。",
+        "returns": "見つかった CD-ROM ドライブのドライブ文字が返ります。",
+        "params": {
+          "volume": "検索するCDのボリュームラベルを指定します。"
+        }
+      }
+    },
+    "Storages.getLocalName": {
+      "hash": "bae3019f14cb",
+      "ja": {
+        "summary": "ローカルファイル名の取得",
+        "description": "指定された統一ストレージ名を、OS ネイティブの形式 ( ローカルファイル名 ) に変換して返します。",
+        "returns": "ローカルファイル名が返ります。ローカルファイル名に変換できなかった場合は空文字が返るか、\n例外が発生します。",
+        "params": {
+          "path": "**ローカルファイル名** に変換したい統一ストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.selectFile": {
+      "hash": "ba1227a2ba42",
+      "ja": {
+        "summary": "ファイル選択ダイアログボックスを表示",
+        "description": "ファイル選択ダイアログボックスを開きます。\n\nvar params = %[\n\nfilter : [ \"テキストファイル(*.txt)|*.txt\", \"バイナリファイル(*.bin)|*.bin\" ],\n\nfilterIndex : 1,\n\nname : \"\",\n\ninitialDir : System.exePath,\n\ntitle : \"ファイルを開く\",\n\nsave : false,\n\n];\n\nif(Storages.selectFile(params))\n\nSystem.inform(\"選択したファイルは : \" + params.name);",
+        "returns": "ユーザがファイルを選択して OK ボタンを押せば真、キャンセルボタンを押せば偽が戻ります。",
+        "params": {
+          "params": "データの受け渡しに用いる辞書配列を指定します。\n\nこのメソッドに渡すとき、以下のメンバを指定することができます。また、\nいくつかのメンバはこのメソッドが終わると値が変更されます。\n\n**filter**\n\nフィルタ文字列を配列で渡します。\n\nフィルタ文字列は、フィルタの説明と フィルタを | (半角縦棒) で区切って指定\nするもので、フィルタにはワイルドカードを指定します。一つのフィルタに複数の\n拡張子が対応する場合は ; (半角セミコロン) で区切ります。\n\n複数のフィルタを指定するには配列で指定します。\n\n省略するとフィルタは用いません。\n\n例 :\n\n`[\"画像ファイル(*.bmp;*.png;*.jpg;*.jpeg;*.eri;*.tlg)|*.bmp;*.png;*.jpg;*.jpeg;*.eri;*.tlg\", `\n\n` \"スクリプトファイル(*.tjs;*.ks)|*.tjs;*.ks\"]`\n\n**filterIndex**\n\n選択されているフィルタの番号 ( filter で指定したもの ) を指定します。\n\n1 を指定すると、filter で指定された最初のフィルタが初期状態において\n選択されています。2 を指定すると2番目のフィルタが選択さている状態に\nなります ( 0 から始まるインデックス番号ではないことに注意してください;\n先頭は 1 です )。\n\n省略すると先頭のフィルタが選択されます。\n\nまた、ユーザが OK ボタンを押した場合、最後にダイアログボックス上で\n選ばれていたフィルタのインデックスがこのメンバに設定されます。\n\n**name**\n\nファイル名を指定します。省略したり、空文字列を指定すると初期状態ではなにもファイルを選択\nされていない状態にすることができます。\n\nまた、ユーザが OK ボタンを押した場合、選択されたファイルがこのメンバに\n設定されます。\n\n**initialDir**\n\n初期状態で表示するフォルダを指定します。\n\n省略するとカレントディレクトリが使用されます。\n\n**title**\n\nダイアログボックスのタイトルを表示します。\n\n省略されるとデフォルトの「開く」や「名前を付けて保存」になります\n( save メンバの設定によります )。\n\n**save**\n\nダイアログボックスの種類を指定します。\n\nfalse(デフォルト) の場合、「開く」のダイアログボックスが使われます。\n\ntrue の場合、「名前を付けて保存」のダイアログボックスが使われます。\n\n**defaultExt**\n\nデフォルトの拡張子を指定します。ユーザが拡張子を指定しなかった場合に\n自動的にこの拡張子を付加します。ここで指定する拡張子には . (ピリオド)を\n指定しないでください。\n\n省略すると、拡張子が付加されることはありません。\n\n**プラットフォームによる差異**\n\nWindows ネイティブ版では OS 標準のファイルダイアログ ( GetOpenFileName ) を、\nSDL 版では SDL のファイルダイアログを使用します ( いずれもデスクトップ向け )。\n\nSDL 版では filter のワイルドカード ( 例 `*.png;*.jpg` ) は SDL 形式へ変換されて\n適用されますが、title / defaultExt / filterIndex ( 初期選択・戻り値 ) は環境に\nよって無視される場合があります。選択結果の name は Windows 版と同様に正規化された\nストレージ名で書き戻されます。"
+        }
+      }
+    },
+    "Storages.selectDirectory": {
+      "hash": "294289dfef3d",
+      "ja": {
+        "summary": "フォルダ選択ダイアログボックスを表示",
+        "description": "フォルダ ( ディレクトリ ) 選択ダイアログボックスをモーダルで開きます。\n\nvar params = %[\n\nname : \"\",\n\ntitle : \"フォルダを選択\",\n\nrootDir : System.exePath,\n\n];\n\nif(Storages.selectDirectory(params))\n\nSystem.inform(\"選択したフォルダは : \" + params.name);",
+        "returns": "ユーザがフォルダを選択して OK ボタンを押せば真、キャンセルすれば偽が戻ります。",
+        "params": {
+          "params": "データの受け渡しに用いる辞書配列を指定します。指定できるメンバは\n次の通りです。\n\n**name**\n\n初期選択フォルダを指定します。ユーザが OK を押すと、選択されたフォルダの\n正規化ストレージ名がこのメンバに書き戻されます。\n\n**title**\n\nダイアログボックスのタイトルを指定します ( WINVER ビルドのみ反映 )。\n\n**rootDir**\n\n初期表示フォルダ ( name 未指定時のフォールバック ) を指定します。\n\n**window**\n\n親にするウィンドウを指定します ( 省略可 )。\n\n**プラットフォームによる差異**\n\nWindows ネイティブ版では OS 標準のフォルダ選択ダイアログ ( IFileOpenDialog )\nを、SDL 版では SDL のフォルダ選択ダイアログ ( SDL_ShowOpenFolderDialog ) を\n使用します。SDL 版では title は無視される場合があります。"
+        }
+      }
+    },
+    "Storages.addCacheTargetExtension": {
+      "hash": "bf0646b8ec82",
+      "ja": {
+        "summary": "オンメモリキャッシュ対象拡張子の追加",
+        "description": "ファイルロード時にオンメモリキャッシュ ( file 層 ) へ載せる拡張子を追加します。\nここで登録された拡張子のファイルは、ストレージから読み込まれた際に\n内容がメモリ上に保持され、再アクセス時のディスク I/O を省略します。",
+        "params": {
+          "ext": "対象とする拡張子を指定します。先頭に `.` (ピリオド) が\n無ければ自動的に補われます。",
+          "minSize": "この拡張子に適用する最小ファイルサイズ ( バイト ) を\n指定します。0 ( 既定 ) を指定するとサイズ閾値なし、それより小さい\nファイルは cache 対象外となります。"
+        }
+      }
+    },
+    "Storages.addDecodeTargetExtension": {
+      "hash": "64a6f443a69a",
+      "ja": {
+        "summary": "decode キャッシュ対象拡張子の追加",
+        "description": "画像デコード結果 ( decode 層キャッシュ ) に載せる拡張子を追加します。\nここで登録された拡張子のファイルは [Storages.requestCache](Storages.md#requestcache)\nからバックグラウンドでデコードまで実行されてキャッシュに載ります。",
+        "params": {
+          "ext": "対象とする拡張子を指定します。先頭に `.` (ピリオド) が\n無ければ自動的に補われます。",
+          "minSize": "この拡張子に適用する最小ファイルサイズ ( バイト ) を\n指定します。0 ( 既定 ) を指定するとサイズ閾値なし。"
+        }
+      }
+    },
+    "Storages.removeDecodeTargetExtension": {
+      "hash": "ad49c063eb85",
+      "ja": {
+        "summary": "decode キャッシュ対象拡張子の削除",
+        "description": "[Storages.addDecodeTargetExtension](Storages.md#adddecodetargetextension) で\n追加した拡張子を decode キャッシュ対象から除外します。",
+        "params": {
+          "ext": "削除する拡張子を指定します。"
+        }
+      }
+    },
+    "Storages.clearArchiveCache": {
+      "hash": "874002af4db2",
+      "ja": {
+        "summary": "アーカイブキャッシュの破棄",
+        "description": "XP3 等のアーカイブを開いた際にエンジン内部で保持しているアーカイブ\nメタ情報・展開バッファのキャッシュを全て破棄します。\n\n多数のアーカイブを順次切り替えるなどしてメモリ使用量を抑えたい場合に\n利用します。"
+      }
+    },
+    "Storages.clearCache": {
+      "hash": "516dd6cfcae0",
+      "ja": {
+        "summary": "キャッシュの破棄",
+        "description": "`Storages.requestCache` で読み込まれたファイルキャッシュを破棄します。\nfile 層 / decode 層の両層が対象です。",
+        "params": {
+          "path": "破棄するファイルのパスを指定します。省略または空文字列を\n指定すると transient なキャッシュ ( pin されていないもの ) のみを\n全破棄します。"
+        }
+      }
+    },
+    "Storages.clearAllCaches": {
+      "hash": "a877486452a0",
+      "ja": {
+        "summary": "全キャッシュの破棄",
+        "description": "file 層 / decode 層のキャッシュをすべて破棄します。\npin されているエントリも含めて消されるため、最大強度の `doCompact(clAll)`\nに相当します。"
+      }
+    },
+    "Storages.clearTransientCaches": {
+      "hash": "e7d6c7bed4ae",
+      "ja": {
+        "summary": "一時的キャッシュの破棄",
+        "description": "pin されていない ( transient な ) キャッシュエントリを file 層 / decode 層\nの両方から破棄します。タイトル画面に戻ったときなどの軽量なキャッシュ\nクリア用途を想定しています。"
+      }
+    },
+    "Storages.clearFastCache": {
+      "hash": "5b00b9b9b738",
+      "ja": {
+        "summary": "高速キャッシュの破棄",
+        "description": "`Storages.requestFastCache` で読み込まれたファイルキャッシュを破棄します。",
+        "params": {
+          "path": "破棄するファイルのパスを指定します。省略または空文字列を\n指定するとすべてのキャッシュを破棄します。"
+        }
+      }
+    },
+    "Storages.clearOldCache": {
+      "hash": "c93e2b6d0ce0",
+      "ja": {
+        "summary": "古いキャッシュの破棄",
+        "description": "一定時間以上アクセスされていないキャッシュエントリを破棄します。",
+        "params": {
+          "keepTime": "保持する秒数を指定します。0 を指定すると全てのキャッシュが\n対象になります。",
+          "force": "0 以外を指定すると参照中であっても強制的に破棄します。\n既定値は 0 (参照中のものは破棄しない) 。"
+        }
+      }
+    },
+    "Storages.commitSavedata": {
+      "hash": "7267745de983",
+      "ja": {
+        "summary": "セーブデータのコミット",
+        "description": "セーブデータ領域へ書き込まれた内容を確定 ( コミット ) します。\n一部プラットフォームでは、savedata 領域への書き込みがこの呼び出しまで\nバッファされている場合があります。"
+      }
+    },
+    "Storages.deleteFile": {
+      "hash": "6621d5b3fadd",
+      "ja": {
+        "summary": "ファイルの削除",
+        "description": "指定したストレージファイルを削除します。あわせて自動検索パスのキャッシュ\nからも該当エントリが除去されます。",
+        "returns": "削除に成功すれば真、失敗すれば偽が返ります。",
+        "params": {
+          "path": "削除するファイルのストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.dirlist": {
+      "hash": "885d941d478b",
+      "ja": {
+        "summary": "ディレクトリ内一覧の取得",
+        "description": "指定ディレクトリ直下のファイル名およびサブディレクトリ名を配列で返します。\n\nサブディレクトリのエントリは末尾に `/` が付加された形になります。\n`TVP_NO_NORMALIZE_PATH` が定義されていないビルドでは、結果はすべて\n小文字に正規化されます。\n\n`.` / `..` ( 自身と親 ) は含みません。\n\nローカルの実フォルダのほか、アーカイブ内やプラグインが提供するメディア\n( `proxy://` 等 ) のフォルダも列挙できます。",
+        "returns": "ファイル名 / ディレクトリ名を要素とする配列が返ります。",
+        "params": {
+          "path": "一覧を取得したいディレクトリのストレージ名を指定します。\n末尾は `/` で終わる必要があります。"
+        }
+      }
+    },
+    "Storages.dirtree": {
+      "hash": "db8cc7dfe484",
+      "ja": {
+        "summary": "ディレクトリツリーの取得",
+        "description": "指定ディレクトリ配下を再帰的に走査し、ファイル / ディレクトリ名を\n配列で返します。",
+        "returns": "パスを要素とする配列が返ります。",
+        "params": {
+          "path": "走査したいディレクトリのストレージ名を指定します。",
+          "dironly": "真を指定するとディレクトリのみを返します。既定値は偽。"
+        }
+      }
+    },
+    "Storages.getFileProperty": {
+      "hash": "5a7cf3ff76ef",
+      "ja": {
+        "summary": "ファイルプロパティの取得",
+        "description": "指定されたストレージ名から、プロパティを取得して返します。",
+        "returns": "プロパティが辞書形式で返ります。プロパティがなかった場合はnullが返ります。",
+        "params": {
+          "storage": "プロパティを取得したいファイル名を指定します。"
+        }
+      }
+    },
+    "Storages.isCacheLoading": {
+      "hash": "5fa0e145d83c",
+      "ja": {
+        "summary": "通常キャッシュ読み込み中の判定",
+        "description": "`Storages.requestCache` でリクエストしたファイルが、まだバックグラウンド\nスレッドで読み込み中であれば真を返します。",
+        "returns": "読み込み中であれば真、そうでなければ偽が返ります。"
+      }
+    },
+    "Storages.isExistentDirectory": {
+      "hash": "d32973dee731",
+      "ja": {
+        "summary": "ディレクトリの存在確認",
+        "description": "指定したディレクトリが存在するかどうかを確認します。",
+        "returns": "存在すれば真、存在しなければ偽が返ります。ローカルの実フォルダに\n対応しないストレージ名 ( アーカイブ内等 ) を渡した場合も偽が返ります\n( 例外にはなりません )。",
+        "params": {
+          "path": "確認したいディレクトリのストレージ名を指定します。\n末尾は `/` で終わる必要があります。"
+        }
+      }
+    },
+    "Storages.isFastCacheLoading": {
+      "hash": "7cb48770c6be",
+      "ja": {
+        "summary": "高速キャッシュ読み込み中の判定",
+        "description": "`Storages.requestFastCache` でリクエストしたファイルが、まだバックグラウンド\nスレッドで読み込み中であれば真を返します。",
+        "returns": "読み込み中であれば真、そうでなければ偽が返ります。"
+      }
+    },
+    "Storages.getLastModifiedFileTime": {
+      "hash": "89ff6dc321b0",
+      "ja": {
+        "summary": "ファイルの最終更新時刻の取得",
+        "description": "指定したストレージファイルの最終更新時刻を取得します。",
+        "returns": "最終更新時刻を Windows の FILETIME 形式の 64bit 整数値\n( 1601-01-01 00:00:00 UTC を起点とする 100 ナノ秒刻みの経過時間 ) で返します。\n取得に失敗した場合は 0 が返ります。\n全プラットフォーム共通で同一の単位・エポックを返すため、大小比較・差分検出の\nほか、値そのものを絶対時刻として解釈することもできます\n( fstat プラグインの Storages.getLastModifiedFileTime と同一仕様 )。",
+        "params": {
+          "path": "最終更新時刻を取得したいファイルのストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.moveFile": {
+      "hash": "0d2216eb0309",
+      "ja": {
+        "summary": "ファイルの移動 ( リネーム )",
+        "description": "指定したストレージファイルを別の場所へ移動 ( リネーム ) します。\n移動成功時は自動検索パスのキャッシュも更新されます。",
+        "returns": "移動に成功すれば真、失敗すれば偽が返ります。",
+        "params": {
+          "from": "移動元のストレージ名を指定します。",
+          "to": "移動先のストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.requestCache": {
+      "hash": "70d4712a9264",
+      "ja": {
+        "summary": "ファイルキャッシュへの読み込みリクエスト",
+        "description": "指定したファイルを通常のファイルキャッシュへバックグラウンドで\n読み込みます。\n`Storages.addCacheTargetExtension` で登録された拡張子は file 層の cache に、\n`Storages.addDecodeTargetExtension` で登録された画像拡張子は decode 層の cache\n( デコード結果 ) に載ります。両方該当する拡張子は両層に並行で発火します。",
+        "params": {
+          "path": "読み込み対象のファイルのストレージ名を指定します。",
+          "minSize": "この呼び出しに限った最小ファイルサイズ閾値 ( バイト ) を\n指定します。0 ( 既定 ) を指定すると拡張子側の登録設定に従います。"
+        }
+      }
+    },
+    "Storages.requestFastCache": {
+      "hash": "eae897327da5",
+      "ja": {
+        "summary": "高速ファイルキャッシュへの読み込みリクエスト",
+        "description": "指定したファイルを高速キャッシュへバックグラウンドで読み込みます。\n内部キューが通常キャッシュと別系統になっており、\n`Storages.requestCache` よりも高優先で処理されます。",
+        "params": {
+          "path": "読み込み対象のファイルのストレージ名を指定します。",
+          "minSize": "この呼び出しに限った最小ファイルサイズ閾値 ( バイト ) を\n指定します。0 ( 既定 ) を指定すると拡張子側の登録設定に従います。"
+        }
+      }
+    },
+    "Storages.isImagePrefetchLoading": {
+      "hash": "0c6501744152",
+      "ja": {
+        "summary": "画像 decode prefetch の進行状況の判定",
+        "description": "[Storages.requestCache](Storages.md#requestcache) などから発火された\n画像 decode prefetch ( decode 層 ) のジョブが、まだバックグラウンドで\n処理中の場合に真を返します。\n`Storages.isCacheLoading` が file 層を見るのに対し、こちらは decode 層\nの polling 用です。",
+        "returns": "進行中であれば真、そうでなければ偽が返ります。"
+      }
+    },
+    "Storages.pinCache": {
+      "hash": "e931c87fe133",
+      "ja": {
+        "summary": "キャッシュエントリの pin 化",
+        "description": "指定パスの cache エントリを file 層 / decode 層の両方で **pin** 状態に\nし、`clearCache(空文字列)` や `clearTransientCaches` の対象外にします。\n同時に、まだ cache に載っていなければ非同期 load を自動で発火します。\nautopath 経由のファイルでも、実体パスへ正規化した上で pin されます。",
+        "params": {
+          "path": "pin したいファイルのストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.unpinCache": {
+      "hash": "a51f8219e0c8",
+      "ja": {
+        "summary": "キャッシュエントリの pin 解除",
+        "description": "[Storages.pinCache](Storages.md#pincache) で pin したエントリを解除します。\n解除後は transient なクリア対象に戻ります ( ただちに破棄はされません )。",
+        "params": {
+          "path": "pin を解除したいファイルのストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.isCachePinned": {
+      "hash": "cf882a1344db",
+      "ja": {
+        "summary": "cache エントリが pin されているかの判定",
+        "description": "指定パスが file 層または decode 層で pin 状態かを返します。",
+        "returns": "pin 状態であれば真、そうでなければ偽が返ります。",
+        "params": {
+          "path": "判定したいファイルのストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.getFileCacheList": {
+      "hash": "178b74391de1",
+      "ja": {
+        "summary": "file 層キャッシュ一覧の取得",
+        "description": "file 層キャッシュ ( `requestCache` 系で確保されたバイナリ ) のエントリ\n一覧を、辞書の配列で返します。\n\n各エントリは以下のキーを持ちます。\n\n- `path`        : 正規化されたストレージパス ( String )\n- `size`        : バイト数 ( Integer )\n- `lastaccess`  : 最終アクセス時刻 ( プラットフォーム依存の整数 )\n- `usecount`    : 現在の参照カウント ( Integer )\n- `pinned`      : pin 状態 ( 0 or 1 )",
+        "returns": "cache エントリの辞書配列。"
+      }
+    },
+    "Storages.getImageCacheList": {
+      "hash": "09c4d4aa4ce9",
+      "ja": {
+        "summary": "decode 層キャッシュ一覧の取得",
+        "description": "decode 層キャッシュ ( デコード済み Bitmap ) のエントリ一覧を、辞書の\n配列で返します。\n\n各エントリは以下のキーを持ちます。\n\n- `path`    : 正規化されたストレージパス ( String )\n- `keyidx`  : 同一パス内のバリエーション番号 ( Integer )\n- `mode`    : 読み込みモード ( Integer; 内部定数 )\n- `dw, dh`  : 表示サイズ ( Integer )\n- `width, height` : 元 Bitmap サイズ ( Integer )\n- `bytes`   : 占有バイト数 ( Integer )\n- `pinned`  : pin 状態 ( 0 or 1 )",
+        "returns": "cache エントリの辞書配列。"
+      }
+    },
+    "Storages.dumpFileCacheList": {
+      "hash": "52af647a4b22",
+      "ja": {
+        "summary": "file 層キャッシュ一覧のログ出力",
+        "description": "file 層キャッシュエントリ一覧を WARNING レベルでログに出力します。\nMASTER ビルドでも出力されます。REPL の `.fcache` と同等です。"
+      }
+    },
+    "Storages.dumpImageCacheList": {
+      "hash": "536c21bf43da",
+      "ja": {
+        "summary": "decode 層キャッシュ一覧のログ出力",
+        "description": "decode 層キャッシュエントリ一覧を WARNING レベルでログに出力します。\nMASTER ビルドでも出力されます。REPL の `.icache` と同等です。"
+      }
+    },
+    "Storages.rollbackSavedata": {
+      "hash": "b644aba0d4cc",
+      "ja": {
+        "summary": "セーブデータのロールバック",
+        "description": "セーブデータ領域への書き込みを破棄し、最後にコミットされた状態へ戻します。"
+      }
+    },
+    "Storages.setCacheMaxSize": {
+      "hash": "cdaa8dc43608",
+      "ja": {
+        "summary": "ファイルキャッシュの最大サイズの設定",
+        "description": "`Storages.requestCache` 系で保持するファイルキャッシュ全体の最大サイズを\n設定します。キャッシュ済みファイルの合計サイズがこの値を超えると、古い\nエントリから順に破棄されます。既定値は 200MB ( 200 * 1024 * 1024 ) です。",
+        "params": {
+          "size": "キャッシュの最大サイズを「バイト単位」で指定します\n( エントリ数ではありません )。"
+        }
+      }
+    },
+    "Storages.fstat": {
+      "hash": "defc059dc662",
+      "ja": {
+        "summary": "ファイルのサイズと更新時刻の取得",
+        "description": "指定したストレージのサイズと最終更新時刻を辞書で返します。\n\n- `size` … ファイルサイズ ( バイト数 )\n- `mtime` … 最終更新時刻 ( Date オブジェクト )。時刻が取れない場合は入りません\n\nアーカイブ内のファイルやプラグインが提供するメディア ( `proxy://` 等 ) は\n実ファイルが無いため `size` だけが入ります。\n\nfstat プラグインを読み込んだ環境では、プラグイン版 ( `atime` / `ctime` も返す ) に\n置き換わります。更新時刻を数値で比較したい場合は\n[Storages.getLastModifiedFileTime](Storages.md#getlastmodifiedfiletime) を使います。",
+        "returns": "`%[ size, mtime ]` の辞書が返ります。開けない場合は例外になります。",
+        "params": {
+          "storage": "対象のストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.getTime": {
+      "hash": "f6309fe009b1",
+      "ja": {
+        "summary": "更新時刻の取得",
+        "description": "ローカルの実ファイルまたはフォルダの最終更新時刻を `%[ mtime ]` の辞書で返します\n( `mtime` は Date オブジェクト )。アーカイブ内のファイルは対象にできません。\n\nfstat プラグインを読み込んだ環境では、プラグイン版 ( `ctime` / `atime` も返す ) に\n置き換わります。",
+        "returns": "`%[ mtime ]` の辞書が返ります。見つからない場合は例外になります。",
+        "params": {
+          "target": "対象のファイルまたはフォルダのストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.currentPath": {
+      "hash": "269fdcf7d139",
+      "ja": {
+        "summary": "カレントディレクトリ",
+        "description": "プロセスのカレントディレクトリをストレージ名 ( 末尾は `/` ) で返します。\n`Storages.getFullPath(Storages.currentPath + name)` のように、相対パスの基準に使えます。\nカレントディレクトリの概念が無い環境では空文字列になります。\n\n本体版は読み取り専用です。fstat プラグインを読み込んだ環境 ( WINVER ) では\nプラグイン版に置き換わり、代入でカレントディレクトリを変更できます。"
+      }
+    },
+    "Storages.createDirectory": {
+      "hash": "57922882c531",
+      "ja": {
+        "summary": "ディレクトリの作成",
+        "description": "指定したディレクトリを作成します。途中の階層が無ければそれも作ります。",
+        "returns": "作成できれば真、できなければ偽が返ります。",
+        "params": {
+          "path": "作成するディレクトリのストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.removeDirectory": {
+      "hash": "fc96f1fb7d19",
+      "ja": {
+        "summary": "ディレクトリの削除",
+        "description": "指定したディレクトリを削除します。中にファイルが残っている場合は削除されません。",
+        "returns": "削除できれば真、できなければ偽が返ります。",
+        "params": {
+          "path": "削除するディレクトリのストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.copyFile": {
+      "hash": "3f500cee3356",
+      "ja": {
+        "summary": "ファイルのコピー",
+        "description": "ストレージ空間中のファイルを別のストレージ名へコピーします。\nコピー元はアーカイブ内のファイルでもかまいません。",
+        "returns": "コピーできれば真、コピー先があって止めた場合は偽が返ります。",
+        "params": {
+          "from": "コピー元のストレージ名を指定します。",
+          "to": "コピー先のストレージ名を指定します。",
+          "failIfExist": "真を指定すると、コピー先が既にある場合は何もせず偽を返します。\n偽 ( 既定 ) なら上書きします。"
+        }
+      }
+    },
+    "Storages.exportFile": {
+      "hash": "f2bc6fdd44a9",
+      "ja": {
+        "summary": "ファイルの書き出し",
+        "description": "ストレージ空間中のファイル ( アーカイブ内のものを含む ) を、指定したストレージ名へ\n書き出します。コピー先があれば上書きします。",
+        "params": {
+          "storage": "書き出すファイルのストレージ名を指定します。",
+          "dest": "書き出し先のストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.truncateFile": {
+      "hash": "64d6c2f61c1d",
+      "ja": {
+        "summary": "ファイルの切り詰め",
+        "description": "ローカルの実ファイルを指定したサイズに切り詰めます。\n成功するとそのファイルの読み込みキャッシュも破棄されます。",
+        "returns": "切り詰めできれば真、できなければ偽が返ります。",
+        "params": {
+          "storage": "対象のストレージ名を指定します。",
+          "size": "切り詰めた後のサイズ ( バイト数 ) を指定します。"
+        }
+      }
+    },
+    "Storages.getMD5HashString": {
+      "hash": "26130b49877b",
+      "ja": {
+        "summary": "MD5 ハッシュ値の取得",
+        "description": "指定したストレージの内容の MD5 ハッシュ値を返します。\nアーカイブ内のファイルも対象にできます。",
+        "returns": "32 文字の 16 進文字列 ( 小文字 ) が返ります。開けない場合は例外になります。",
+        "params": {
+          "storage": "対象のストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.getTemporaryName": {
+      "hash": "55584a1999cd",
+      "ja": {
+        "summary": "一時ファイル名の取得",
+        "description": "一時ファイルに使えるローカルのファイル名を 1 つ払い出します。\n\n置き場所は OS の一時フォルダです (Windows は環境変数 TMP → TEMP → USERPROFILE の順)。\nそこに書き込めない場合や、環境変数が全く無い状態で起動されて Windows ディレクトリに\nなってしまった場合は、ログに警告を出してセーブデータのフォルダ\n([System.dataPath](System.md#datapath)) を使います。アーカイブ内のプラグイン DLL を\n取り出すときも同じ場所が使われます。",
+        "returns": "一時ファイル名が返ります。"
+      }
+    },
+    "Storages.isExistentStorageNoSearchNoNormalize": {
+      "hash": "98ff97ff70a8",
+      "ja": {
+        "summary": "正規化・検索なしの存在確認",
+        "description": "パスの正規化も自動検索パスからの検索も行わずに、ストレージが存在するかを確認します。",
+        "returns": "存在すれば真、存在しなければ偽が返ります。",
+        "params": {
+          "storage": "確認するストレージ名を指定します。"
+        }
+      }
+    },
+    "Storages.clearStorageCaches": {
+      "hash": "82ae8a435a0e",
+      "ja": {
+        "summary": "ストレージのキャッシュの破棄",
+        "description": "アーカイブ ( XP3 ) のセグメントキャッシュと、自動検索パスのキャッシュを破棄します。\nエンジンの外でファイルを追加・削除した後に呼びます。"
+      }
+    },
+    "fstat:Storages": {
+      "hash": "fc9c5a5ef2e6",
+      "ja": {
+        "summary": "擬似コードによるマニュアル",
+        "description": "Copyright 2007 GoWatanabe"
+      }
+    },
+    "fstat:Storages.fstat": {
+      "hash": "bea1c18e7ee5",
+      "ja": {
+        "summary": "ファイル属性の取得",
+        "description": "※本体にも同名のメソッドがありますが、本プラグインを読み込むと\nこちらの版で上書きされます。本体版との違い: 本体版は size と mtime だけを返し、atime / ctime を返しません。",
+        "returns": "属性情報の入った辞書\nsize: ファイルサイズ\nmtime: 更新日時 (Date オブジェクト)\natime: アクセス日時 (Date オブジェクト)\nctime: 作成日時 (Date オブジェクト)",
+        "params": {
+          "file": "対象ファイル"
+        }
+      }
+    },
+    "fstat:Storages.exportFile": {
+      "hash": "9e1891b83509",
+      "ja": {
+        "summary": "吉里吉里のストレージ空間中のファイルを抽出する",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.exportFile](Storages.md#exportfile) を参照してください。",
+        "params": {
+          "src": "保存元ファイル",
+          "dest": "保存先ファイル"
+        }
+      }
+    },
+    "fstat:Storages.deleteFile": {
+      "hash": "294ded72d5bc",
+      "ja": {
+        "summary": "吉里吉里のストレージ空間中の指定ファイルを削除する。",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.deleteFile](Storages.md#deletefile) を参照してください。",
+        "returns": "実際に削除されたら true\n実ファイルがある場合のみ削除されます",
+        "params": {
+          "file": "削除対象ファイル"
+        }
+      }
+    },
+    "fstat:Storages.truncateFile": {
+      "hash": "073d717b00a1",
+      "ja": {
+        "summary": "吉里吉里のストレージ空間中の指定ファイルのサイズを変更する(切り捨てる)",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.truncateFile](Storages.md#truncatefile) を参照してください。",
+        "returns": "サイズ変更できたら true\n実ファイルがある場合のみ処理されます",
+        "params": {
+          "file": "ファイル",
+          "size": "指定サイズ"
+        }
+      }
+    },
+    "fstat:Storages.moveFile": {
+      "hash": "d4ad210d4b02",
+      "ja": {
+        "summary": "指定ファイルを移動する。",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.moveFile](Storages.md#movefile) を参照してください。",
+        "returns": "実際に移動されたら true\n移動対象ファイルが実在し、移動先パスにファイルが無い場合のみ移動されます\n※パスはNormalize/Placedチェックされないのでフルパスで記入のこと",
+        "params": {
+          "fromFile": "移動対象ファイル",
+          "toFile": "移動先パス"
+        }
+      }
+    },
+    "fstat:Storages.dirlist": {
+      "hash": "39e11d5ab241",
+      "ja": {
+        "summary": "指定ディレクトリのファイル一覧を取得する",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.dirlist](Storages.md#dirlist) を参照してください。",
+        "returns": "ファイル名一覧が格納された配列",
+        "params": {
+          "dir": "ディレクトリ名"
+        }
+      }
+    },
+    "fstat:Storages.dirlistEx": {
+      "hash": "4d9579134b6b",
+      "ja": {
+        "summary": "指定ディレクトリのファイル一覧と詳細情報を取得する",
+        "returns": "ファイル情報一覧が格納された配列\n[ %[ name:ファイル名, size, attrib, mtime, atime, ctime ], ... ]\ndirlistと違いnameにおいてフォルダの場合の末尾\"/\"追加がないので注意(attribで判定のこと)",
+        "params": {
+          "dir": "ディレクトリ名"
+        }
+      }
+    },
+    "fstat:Storages.dirtree": {
+      "hash": "5e66e21d5182",
+      "ja": {
+        "summary": "指定ディレクトリ以下のファイル・フォルダ一覧（サブフォルダ含む）を取得する",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.dirtree](Storages.md#dirtree) を参照してください。",
+        "returns": "一覧が格納された配列（木構造ではなくサブフォルダ含む全列挙）\n一覧には ./ ../ 系の自身や親の参照は含まれません",
+        "params": {
+          "dir": "ディレクトリ名",
+          "dironly": "フォルダ名のみでファイルは除外する"
+        }
+      }
+    },
+    "fstat:Storages.removeDirectory": {
+      "hash": "7c9503e4bc03",
+      "ja": {
+        "summary": "指定ディレクトリを削除する",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.removeDirectory](Storages.md#removedirectory) を参照してください。",
+        "returns": "実際に削除されたら true\n中にファイルが無い場合のみ削除されます",
+        "params": {
+          "dir": "ディレクトリ名"
+        }
+      }
+    },
+    "fstat:Storages.createDirectory": {
+      "hash": "205d35b524c1",
+      "ja": {
+        "summary": "ディレクトリを作成する",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.createDirectory](Storages.md#createdirectory) を参照してください。",
+        "returns": "実際に作成できたら true",
+        "params": {
+          "dir": "ディレクトリ名"
+        }
+      }
+    },
+    "fstat:Storages.createDirectoryNoNormalize": {
+      "hash": "ed4f7037e142",
+      "ja": {
+        "summary": "パスの正規化を行なわずディレクトリを作成する",
+        "description": "(ディレクトリ名が小文字に変換されない)",
+        "returns": "実際に作成できたら true",
+        "params": {
+          "dir": "ディレクトリ名"
+        }
+      }
+    },
+    "fstat:Storages.changeDirectory": {
+      "hash": "1e13e24c2c82",
+      "ja": {
+        "summary": "カレントディレクトリを変更する",
+        "returns": "実際に変更できたら true",
+        "params": {
+          "dir": "ディレクトリ名"
+        }
+      }
+    },
+    "fstat:Storages.setFileAttributes": {
+      "hash": "11edbaff4a6d",
+      "ja": {
+        "summary": "ファイルの属性を設定する",
+        "params": {
+          "fliename": "ファイル/ディレクトリ名",
+          "attr": "設定する属性(FILE_ATTRIBUTE_READONLY,FILE_ATTRIBUTE_HIDDEN,...)"
+        }
+      }
+    },
+    "fstat:Storages.resetFileAttributes": {
+      "hash": "81dd14767dda",
+      "ja": {
+        "summary": "ファイルの属性を解除する",
+        "params": {
+          "fliename": "ファイル/ディレクトリ名",
+          "attr": "解除する属性(FILE_ATTRIBUTE_READONLY,FILE_ATTRIBUTE_HIDDEN,...)"
+        }
+      }
+    },
+    "fstat:Storages.getFileAttributes": {
+      "hash": "4e54eed8b299",
+      "ja": {
+        "summary": "ファイルの属性を取得する",
+        "returns": "取得した属性(FILE_ATTRIBUTE_READONLY,FILE_ATTRIBUTE_HIDDEN,...)",
+        "params": {
+          "filename": "ファイル/ディレクトリ名"
+        }
+      }
+    },
+    "fstat:Storages.selectDirectory": {
+      "hash": "286f5a8a535f",
+      "ja": {
+        "summary": "フォルダ選択ダイアログを開く",
+        "description": "※本体に Storages.selectDirectory が実装されている環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。",
+        "returns": "フォルダを選択してOKボタンを押せば真、キャンセルボタンを押せば偽\nparams.name フォルダ名を指定します。OKボタンを押した場合、選択されたフォルダがこのメンバに設定されます\nparams.title ダイアログボックスのタイトルを表示します\nparams.window ダイアログを開くWindowオブジェクトを指定します(void なら mainWindow が、未指定ならデスクトップがオーナーウィンドウとなります。デスクトップがオーナーの場合は、モードレス)\nparams.rootDir フォルダ選択のルートを指定します(このフォルダ以下のみ表示されます)",
+        "params": {
+          "params": "selectFile と同様のパラメータを設定する"
+        }
+      }
+    },
+    "fstat:Storages.isExistentDirectory": {
+      "hash": "f8140c82a970",
+      "ja": {
+        "summary": "ディレクトリの存在チェック",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.isExistentDirectory](Storages.md#isexistentdirectory) を参照してください。",
+        "returns": "ディレクトリが存在すれば true/存在しなければ -1/ディレクトリでなければ false",
+        "params": {
+          "dir": "ディレクトリ名"
+        }
+      }
+    },
+    "fstat:Storages.getTime": {
+      "hash": "fa9a78d5740f",
+      "ja": {
+        "summary": "タイムスタンプ取得",
+        "returns": "タイムスタンプ情報の入った辞書\nmtime: 更新日時 (Date オブジェクト)\natime: アクセス日時 (Date オブジェクト)\nctime: 作成日時 (Date オブジェクト)\n⇒fstatとの違いは非アーカイブファイル限定で，sizeを返さないこと\n※本体にも同名のメソッドがありますが、本プラグインを読み込むと\nこちらの版で上書きされます。本体版との違い: 本体版は mtime だけを返し、ctime / atime を返しません。",
+        "params": {
+          "target": "対象ファイルまたはディレクトリ"
+        }
+      }
+    },
+    "fstat:Storages.setTime": {
+      "hash": "7376efd07b33",
+      "ja": {
+        "summary": "タイムスタンプ設定",
+        "returns": "成功したかどうか",
+        "params": {
+          "target": "対象ファイルまたはディレクトリ",
+          "times": "タイムスタンプ情報の入った辞書\nmtime: 更新日時 (Date オブジェクト)\natime: アクセス日時 (Date オブジェクト)\nctime: 作成日時 (Date オブジェクト)"
+        }
+      }
+    },
+    "fstat:Storages.getLastModifiedFileTime": {
+      "hash": "e0aa7202ff10",
+      "ja": {
+        "summary": "更新日取得（高速版）",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.getLastModifiedFileTime](Storages.md#getlastmodifiedfiletime) を参照してください。",
+        "returns": "時間（WINDOWSのFILETIME 64bit値）",
+        "params": {
+          "target": "対象ファイルまたはディレクトリ"
+        }
+      }
+    },
+    "fstat:Storages.setLastModifiedFileTime": {
+      "hash": "fff12cf720e4",
+      "ja": {
+        "summary": "更新日設定（高速版）",
+        "returns": "成功したかどうか",
+        "params": {
+          "target": "対象ファイルまたはディレクトリ",
+          "time": "時間（WINDOWSのFILETIME 64bit値）"
+        }
+      }
+    },
+    "fstat:Storages.copyFile": {
+      "hash": "43e698d37a01",
+      "ja": {
+        "summary": "吉里吉里のストレージ空間中の指定ファイルをコピーする",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.copyFile](Storages.md#copyfile) を参照してください。",
+        "returns": "実際にコピーできたら true",
+        "params": {
+          "from": "コピー元ファイル",
+          "to": "コピー先ファイル",
+          "failIfExist": "ファイルが存在するときに失敗するなら ture、上書きするなら false"
+        }
+      }
+    },
+    "fstat:Storages.copyFileNoNormalize": {
+      "hash": "64b73434b520",
+      "ja": {
+        "summary": "パスの正規化を行なわず吉里吉里のストレージ空間中の指定ファイルをコピーする",
+        "description": "(コピー先ファイルのファイル名が小文字に変換されない)",
+        "returns": "実際にコピーできたら true\n※toには「file://./c/～」のようにフルパスで記述しないと例外が発生します",
+        "params": {
+          "from": "コピー元ファイル",
+          "to": "コピー先ファイル",
+          "failIfExist": "ファイルが存在するときに失敗するなら ture、上書きするなら false"
+        }
+      }
+    },
+    "fstat:Storages.isExistentStorageNoSearchNoNormalize": {
+      "hash": "19540a8fdc34",
+      "ja": {
+        "summary": "パスの正規化を行なわず、autoPathからの検索も行なわずに",
+        "description": "ファイルの存在確認を行う\n※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.isExistentStorageNoSearchNoNormalize](Storages.md#isexistentstoragenosearchnonormalize) を参照してください。",
+        "returns": "ファイルが存在したらtrue",
+        "params": {
+          "filename": "ファイル名"
+        }
+      }
+    },
+    "fstat:Storages.getDisplayName": {
+      "hash": "408ab6177d27",
+      "ja": {
+        "summary": "表示名の取得",
+        "description": "実際にエクスプローラで表示されるファイル名を返す (SHGetFileInfoによる)",
+        "returns": "表示名",
+        "params": {
+          "filename": "ファイル名（親ディレクトリ以上のパスは落とされるので注意)。"
+        }
+      }
+    },
+    "fstat:Storages.getMD5HashString": {
+      "hash": "d31eb06d544b",
+      "ja": {
+        "summary": "MD5ハッシュ値の取得",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.getMD5HashString](Storages.md#getmd5hashstring) を参照してください。",
+        "returns": "ハッシュ値（32文字の16進数ハッシュ文字列（小文字））",
+        "params": {
+          "filename": "対象ファイル名"
+        }
+      }
+    },
+    "fstat:Storages.searchPath": {
+      "hash": "8d54fc8c8ce7",
+      "ja": {
+        "summary": "パスの検索",
+        "returns": "見つからなかった場合はvoid，見つかった場合はファイルのフルパス(file://./～)",
+        "params": {
+          "filename": "検索対象ファイル名",
+          "searchpath": "検索対象パス（ローカル表記(c:\\～等)で\";\"区切り，省略時はシステムのデフォルト検索パス）"
+        }
+      }
+    },
+    "fstat:Storages.getTemporaryName": {
+      "hash": "e6326e30ccf3",
+      "ja": {
+        "summary": "テンポラリファイル名の取得",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.getTemporaryName](Storages.md#gettemporaryname) を参照してください。",
+        "returns": "テンポラリファイル名（TVPGetTemporaryName()の文字列）"
+      }
+    },
+    "memfile:Storages": {
+      "hash": "797f1cad47f1",
+      "ja": {
+        "summary": "擬似コードによるマニュアル",
+        "description": "mem://./ファイル名 でオンメモリ確保されたファイルとしてアクセス可能になります。"
+      }
+    },
+    "memfile:Storages.isExistMemoryFile": {
+      "hash": "26223eb5667d",
+      "ja": {
+        "summary": "メモリファイルの存在確認",
+        "returns": "存在したら true",
+        "params": {
+          "filename": "対象ファイル名 (mem:///はつけない)"
+        }
+      }
+    },
+    "memfile:Storages.isExistMemoryDirectory": {
+      "hash": "8baf03f3b87b",
+      "ja": {
+        "summary": "メモリディレクトリの存在確認",
+        "returns": "存在したら true",
+        "params": {
+          "dirname": "対象ディレクトリ名 (mem:///はつけない)"
+        }
+      }
+    },
+    "memfile:Storages.deleteMemoryFile": {
+      "hash": "d5b0c641b593",
+      "ja": {
+        "summary": "メモリファイルを削除する",
+        "returns": "ファイルが削除されたら true",
+        "params": {
+          "filename": "対象ファイル名 (mem:///はつけない)"
+        }
+      }
+    },
+    "memfile:Storages.deleteMemoryDirectory": {
+      "hash": "0aac09bc0f25",
+      "ja": {
+        "summary": "メモリディレクトリを削除する",
+        "returns": "ディレクトリが削除されたら true",
+        "params": {
+          "dirname": "対象ディレクトリ名 (mem:///はつけない)"
+        }
+      }
+    },
+    "memfile:Storages.getMemoryFileInfo": {
+      "hash": "6a80e0d18c17",
+      "ja": {
+        "summary": "メモリファイル情報を取得する",
+        "returns": "ファイル情報 %[name:名前, size:サイズ, isDirectory:ディレクトリならtrue]",
+        "params": {
+          "filename": "対象ファイル名 (mem:///はつけない)"
+        }
+      }
+    },
+    "memfile:Storages.getMemoryFileData": {
+      "hash": "ef97cb500743",
+      "ja": {
+        "summary": "メモリファイル情報を取得する",
+        "returns": "ファイルが存在したら内容を octet で返す。なければ void",
+        "params": {
+          "filename": "対象ファイル名 (mem:///はつけない)"
+        }
+      }
+    },
+    "memfile:Storages.getMemoryDirectory": {
+      "hash": "5a2b5f896b13",
+      "ja": {
+        "summary": "メモリディレクトリ情報を取得する",
+        "returns": "ファイル情報の配列 %[name:名前, size:サイズ, isDirectory:ディレクトリならtrue]",
+        "params": {
+          "dirname": "対象ディレクトリ名 (mem:///はつけない)"
+        }
+      }
+    },
+    "minizip:Storages": {
+      "hash": "bd214be64f56",
+      "ja": {
+        "summary": "Storages クラス機能拡張"
+      }
+    },
+    "minizip:Storages.mountZip": {
+      "hash": "843df9e49997",
+      "ja": {
+        "summary": "zipファイルをファイルシステムとして mount します",
+        "description": "zip://ドメイン名/ファイル名 でアクセス可能になります。読み込み専用になります。",
+        "returns": "マウントに成功したら true",
+        "params": {
+          "name": "ドメイン名",
+          "zipfile": "マウントするZIPファイル名"
+        }
+      }
+    },
+    "minizip:Storages.unmountZip": {
+      "hash": "6dbad352ec53",
+      "ja": {
+        "summary": "zipファイルを unmount します",
+        "returns": "アンマウントに成功したら true",
+        "params": {
+          "name": "ドメイン名"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "class": "RichText",
+  "entries": {
+    "krkr_richtext:RichText": {
+      "hash": "a110170b6b0c",
+      "ja": {
+        "summary": "擬似コードによるマニュアル",
+        "description": "richtext - 吉里吉里用リッチテキストレンダリングプラグイン\n\nminikin (Android テキストレイアウトエンジン) による組版と、吉里吉里Z 本体の\n統一フォントエンジン (glyphware) によるグリフ描画で、高品質なテキスト\nレンダリングを提供します。フォントの実体・グリフのラスタライズを本体と共有\nするため、Layer.drawText や Elements ダイアログと見た目が揃います。\n\n特徴:\n- 複数フォントのフォールバック対応\n- 多言語対応（RTL含む）\n- 絵文字対応\n- HTMLライクなタグによるスタイル指定\n- 縁取り・影などの装飾効果\n- パラグラフレイアウト（自動改行）\n- 逐次表示対応（ParagraphLayout / StyledLayout 使用）"
+      }
+    },
+    "krkr_richtext:RichText.HALIGN_CENTER": {
+      "hash": "5b3c4fe14312",
+      "ja": {
+        "summary": "左揃え"
+      }
+    },
+    "krkr_richtext:RichText.HALIGN_RIGHT": {
+      "hash": "9ff2cf7f5cfd",
+      "ja": {
+        "summary": "中央揃え"
+      }
+    },
+    "krkr_richtext:RichText.HALIGN_JUSTIFY": {
+      "hash": "bacbd03e094c",
+      "ja": {
+        "summary": "右揃え"
+      }
+    },
+    "krkr_richtext:RichText.VALIGN_MIDDLE": {
+      "hash": "dbba96f87dfd",
+      "ja": {
+        "summary": "上揃え"
+      }
+    },
+    "krkr_richtext:RichText.VALIGN_BOTTOM": {
+      "hash": "9ff2cf7f5cfd",
+      "ja": {
+        "summary": "中央揃え"
+      }
+    },
+    "krkr_richtext:RichText.BREAK_HIGH_QUALITY": {
+      "hash": "b500ba3f4831",
+      "ja": {
+        "summary": "高速（各改行候補で即座に判断）"
+      }
+    },
+    "krkr_richtext:RichText.BREAK_BALANCED": {
+      "hash": "eba560368526",
+      "ja": {
+        "summary": "高品質（Knuth-Plassアルゴリズム）"
+      }
+    },
+    "krkr_richtext:RichText.BIDI_RTL": {
+      "hash": "a33a73508283",
+      "ja": {
+        "summary": "左から右"
+      }
+    },
+    "krkr_richtext:RichText.BIDI_DEFAULT_LTR": {
+      "hash": "c6887182864f",
+      "ja": {
+        "summary": "右から左"
+      }
+    },
+    "krkr_richtext:RichText.BIDI_DEFAULT_RTL": {
+      "hash": "97ec2a2ae97a",
+      "ja": {
+        "summary": "デフォルト左から右"
+      }
+    }
+  }
+}

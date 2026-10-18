@@ -1,0 +1,111 @@
+{
+  "class": "EffekseerEffect",
+  "entries": {
+    "krkreffekseer:EffekseerEffect": {
+      "hash": "8824ab5e06ab",
+      "ja": {
+        "summary": "エフェクト素材",
+        "description": "読み込み済みのエフェクトを保持する。複数の EffekseerPlayer から共有できるので、\n同じエフェクトを多数同時再生する場合はこちらを使い回すとよい。"
+      }
+    },
+    "krkreffekseer:EffekseerEffect.EffekseerEffect": {
+      "hash": "05ad90beed89",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "device": "EffekseerDevice インスタンス"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerEffect.device": {
+      "hash": "592334de1581",
+      "ja": {
+        "summary": "読み出し専用"
+      }
+    },
+    "krkreffekseer:EffekseerEffect.load": {
+      "hash": "39c02035bf2e",
+      "ja": {
+        "summary": "エフェクトファイルを読み込む",
+        "params": {
+          "filename": "ストレージ名 (.efkzip / .efkefc / .efk)",
+          "magnification": "読み込み時の拡大率 (省略時 1.0)",
+          "entry": ".efkzip 内のエフェクトファイル名 (省略可)\n\n・.efkzip … エフェクト本体とテクスチャ/モデル一式を固めた ZIP。\nEffekseer のエフェクトは資材が複数ファイルに分かれるため、通常はこの形式を使う\n(Live2D の .l2d と同じ考え方)。資材は ZIP 内の相対パスで解決される。\nentry 省略時は ZIP 内の最初の .efkefc (無ければ .efk) を使う。\n・.efkefc / .efk … 単体ファイル指定。資材は filename と同じディレクトリを基準に\n解決され、見つからない場合はファイル名だけで自動検索パスも探す\n(XP3 へパックしてディレクトリ構造が畳まれた場合の対策)。\n\n失敗した場合は例外が発生する。"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerEffect.clear": {
+      "hash": "e95412471a62",
+      "ja": {
+        "summary": "内容消去"
+      }
+    },
+    "krkreffekseer:EffekseerEffect.unloadResources": {
+      "hash": "43ee15154753",
+      "ja": {
+        "summary": "資材(テクスチャ/モデル等)の破棄・再読込"
+      }
+    },
+    "krkreffekseer:EffekseerEffect.meta": {
+      "hash": "e8bdbdfb6d01",
+      "ja": {
+        "summary": ".efkzip に同梱された付属情報 (effect.json)。無ければ void",
+        "description": "エフェクトのバイナリには「動的パラメータの名前」が残らない。入るのは\n既定値とコンパイル済みのコードだけで、本来は番号でしか触れない。そこで\n名前と番号の対応などを JSON で持たせておく約束にしてある。\n.efkzip を読んだ時点で自動的に解釈されるので、読み込み側の手続きは要らない。\n\n意味づけが決まっているのは次の 2 つだけで、残りはそのまま渡される:\ndynamicInputs … [ %[ name:\"emitter.x\", index:0 ], ... ]\nsetDynamicInputByName() の対応表として自動で取り込まれる\nmotions       … [ %[ name:\"...\", file:\"motion/....json\", ... ], ... ]\n\nvar meta = effect.meta;\nif (meta !== void && meta.motions !== void)\nvar path = effect.readMeta(meta.motions[0].file);"
+      }
+    },
+    "krkreffekseer:EffekseerEffect.readMeta": {
+      "hash": "021a50361d64",
+      "ja": {
+        "summary": ".efkzip 内の JSON ファイルを辞書 / 配列として読む",
+        "returns": "解釈できなければ void",
+        "params": {
+          "name": "ZIP 内のパス"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerEffect.setDynamicInputNames": {
+      "hash": "ce9040d1da51",
+      "ja": {
+        "summary": "動的パラメータの名前と入力番号の対応を差し替える",
+        "description": ".efkzip なら effect.json から自動で入るので普通は呼ばなくてよい。\n.efk / .efkefc を直接読んだ場合や、名前を付け替えたい場合に使う。\n\neffect.setDynamicInputNames(%[ \"emitter.x\" => 0, \"emitter.y\" => 1 ]);\neffect.setDynamicInputNames([\"emitter.x\", \"emitter.y\"]);  // 並び順が番号\neffect.setDynamicInputNames([ %[ name:\"emitter.x\", index:0 ] ]);\n\nvoid を渡すと登録を消す。"
+      }
+    },
+    "krkreffekseer:EffekseerEffect.findDynamicInput": {
+      "hash": "12c1ff62eb10",
+      "ja": {
+        "summary": "登録した対応から入力番号を引く",
+        "returns": "見つからなければ -1"
+      }
+    },
+    "krkreffekseer:EffekseerEffect.loaded": {
+      "hash": "8a4fe5c1d3ad",
+      "ja": {
+        "summary": "読み出し専用: 読み込み済みか"
+      }
+    },
+    "krkreffekseer:EffekseerEffect.filename": {
+      "hash": "e79de6e133a5",
+      "ja": {
+        "summary": "読み出し専用: 正規化済みストレージ名"
+      }
+    },
+    "krkreffekseer:EffekseerEffect.magnification": {
+      "hash": "2fff962d271a",
+      "ja": {
+        "summary": "読み出し専用: 読み込み時拡大率"
+      }
+    },
+    "krkreffekseer:EffekseerEffect.termMin": {
+      "hash": "7d0a92068340",
+      "ja": {
+        "summary": "読み出し専用: 想定再生長の最小(フレーム)"
+      }
+    },
+    "krkreffekseer:EffekseerEffect.termMax": {
+      "hash": "a1996df4f4eb",
+      "ja": {
+        "summary": "読み出し専用: 想定再生長の最大(フレーム)"
+      }
+    }
+  }
+}

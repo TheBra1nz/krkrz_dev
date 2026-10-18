@@ -1,0 +1,95 @@
+{
+  "class": "ResourceReader",
+  "entries": {
+    "resourceRW:ResourceReader.open": {
+      "hash": "010c51e5c9a6",
+      "ja": {
+        "summary": "操作対象のファイルをオープン",
+        "params": {
+          "file": "ファイル名(exeまたはdll)"
+        }
+      }
+    },
+    "resourceRW:ResourceReader.close": {
+      "hash": "23abc6945361",
+      "ja": {
+        "summary": "操作対象のファイルをクローズ"
+      }
+    },
+    "resourceRW:ResourceReader.setLang": {
+      "hash": "d411685a82bc",
+      "ja": {
+        "summary": "読み出しの言語を指定",
+        "returns": "設定されたWORD値\nいずれもLANG_*やSUBLANG_*の文字列か，数値を指定します。\n詳細は MAKELANGID などで検索してください。",
+        "params": {
+          "primaryLang": "主言語",
+          "subLang": "副言語"
+        }
+      }
+    },
+    "resourceRW:ResourceReader.isExistentResource": {
+      "hash": "d2a4c94b0540",
+      "ja": {
+        "summary": "リソースが存在するかどうか",
+        "returns": "存在する場合はtrue",
+        "params": {
+          "type": "リソースタイプ（文字列か数値，もしくは rt*定数を指定）",
+          "name": "リソース名（文字列か数値）"
+        }
+      }
+    },
+    "resourceRW:ResourceReader.readToText": {
+      "hash": "10a56f5b93f1",
+      "ja": {
+        "summary": "リソースの読み込み",
+        "returns": "voidの場合はリソースが存在しない，存在する場合は関数ごとに値が異なる",
+        "params": {
+          "type": "リソースタイプ（文字列か数値，もしくは rt*定数を指定）",
+          "name": "リソース名（文字列か数値）",
+          "utf8": "(readToTextのみ)対象がUTF-8エンコードの場合はtrue（falseの場合はUnicode）",
+          "file": "(readToFileのみ)書き出しファイル名"
+        }
+      }
+    },
+    "resourceRW:ResourceReader.readToFile": {
+      "hash": "def8c35a597b",
+      "ja": {
+        "summary": "-> 書き出したファイルサイズ"
+      }
+    },
+    "resourceRW:ResourceReader.readToOctet": {
+      "hash": "4b4fee5e4921",
+      "ja": {
+        "summary": "-> リソースのoctet"
+      }
+    },
+    "resourceRW:ResourceReader.enumTypes": {
+      "hash": "01ca728d4977",
+      "ja": {
+        "summary": "リソースタイプ一覧取得",
+        "returns": "[ type1, type2, ... ]"
+      }
+    },
+    "resourceRW:ResourceReader.enumNames": {
+      "hash": "49da1c174a2a",
+      "ja": {
+        "summary": "リソース名一覧取得",
+        "returns": "[ name1, name2, ... ]",
+        "params": {
+          "type": "リソースタイプ（文字列か数値，もしくは rt*定数を指定）"
+        }
+      }
+    },
+    "resourceRW:ResourceReader.enumLangs": {
+      "hash": "9202beeac006",
+      "ja": {
+        "summary": "リソース言語一覧取得",
+        "returns": "[ lang1, lang2, ... ]\n返る言語はprimaryLang,subLangを統合した数値なので注意してください。\nこの値をsetLangに渡したい場合は，setLang(lang&0x3FF, lang>>10) とします。",
+        "params": {
+          "type": "リソースタイプ（文字列か数値，もしくは rt*定数を指定）",
+          "name": "リソース名（文字列か数値）"
+        }
+      }
+    }
+  }
+}

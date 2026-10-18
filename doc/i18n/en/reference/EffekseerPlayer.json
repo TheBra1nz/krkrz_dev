@@ -1,0 +1,279 @@
+{
+  "class": "EffekseerPlayer",
+  "entries": {
+    "krkreffekseer:EffekseerPlayer": {
+      "hash": "6e97db2dad8b",
+      "ja": {
+        "summary": "再生用プレイヤー",
+        "description": "エフェクト 1 インスタンスの再生・配置・描画を担当する。"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.EffekseerPlayer": {
+      "hash": "05ad90beed89",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "device": "EffekseerDevice インスタンス"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.device": {
+      "hash": "592334de1581",
+      "ja": {
+        "summary": "読み出し専用"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.effect": {
+      "hash": "6eaad9d7b115",
+      "ja": {
+        "summary": "読み出し専用: loadEffect() で割り当てた EffekseerEffect"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.load": {
+      "hash": "c70b39d69a3c",
+      "ja": {
+        "summary": "エフェクトファイルを読み込む (このプレイヤー専用)",
+        "description": "引数は EffekseerEffect.load と同じ (.efkzip 対応)",
+        "params": {
+          "filename": "ストレージ名 (.efkzip / .efkefc / .efk)",
+          "magnification": "読み込み時の拡大率 (省略時 1.0)",
+          "entry": ".efkzip 内のエフェクトファイル名 (省略可)"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.loadEffect": {
+      "hash": "19deab6a8319",
+      "ja": {
+        "summary": "読み込み済みの EffekseerEffect を割り当てる",
+        "params": {
+          "effect": "EffekseerEffect インスタンス"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.clear": {
+      "hash": "87e1631e36d0",
+      "ja": {
+        "summary": "割り当て解除 (再生中なら停止する)"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.loaded": {
+      "hash": "592334de1581",
+      "ja": {
+        "summary": "読み出し専用"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.play": {
+      "hash": "8cf681bb8244",
+      "ja": {
+        "summary": "再生開始。再生中の場合はいったん停止してから再スタートする。",
+        "params": {
+          "startFrame": "開始フレーム (省略時 0)"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.stop": {
+      "hash": "b0b50a4675d0",
+      "ja": {
+        "summary": "即時停止 (パーティクルも消える)"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.stopRoot": {
+      "hash": "0bfdc6c57da3",
+      "ja": {
+        "summary": "ルートのみ停止。新規パーティクルの生成を止め、残りは自然消滅させる。",
+        "description": "「エフェクトを綺麗に終わらせる」場合はこちら。"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.progress": {
+      "hash": "0aecf31a40a9",
+      "ja": {
+        "summary": "進行",
+        "params": {
+          "tick": "経過時間(ミリ秒)\n配置系の設定は progress() より前に行うこと。"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.moveToFrame": {
+      "hash": "4e7c1441c4b5",
+      "ja": {
+        "summary": "指定フレームへ移動 (先頭から再計算するため低速)",
+        "params": {
+          "frame": "フレーム数 (60fps基準)"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.render": {
+      "hash": "5823e6a619fb",
+      "ja": {
+        "summary": "描画。OpenGL コンテキスト上で、device.onBeginScene()〜onEndScene() の間で呼ぶ。"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.playing": {
+      "hash": "4bb515beb7ed",
+      "ja": {
+        "summary": "読み出し専用: 再生中か"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.instanceCount": {
+      "hash": "b0957fac1182",
+      "ja": {
+        "summary": "読み出し専用: このエフェクトのパーティクル数"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.setRenderMatrix": {
+      "hash": "b941a9289800",
+      "ja": {
+        "summary": "描画行列 (外側のアフィン変換) を設定する",
+        "description": "X' = m11*x + m12*y + m13\nY' = m21*x + m22*y + m23"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.getRenderMatrix": {
+      "hash": "72627e15f15a",
+      "ja": {
+        "summary": "%[ m11:, m12:, m13:, m21:, m22:, m23: ]"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.setRenderScale": {
+      "hash": "03ea610b035f",
+      "ja": {
+        "summary": "描画行列の線形部にかかる倍率 (既定 1.0)"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.setCoord": {
+      "hash": "cd00f58e8357",
+      "ja": {
+        "summary": "表示位置 (画面中央からのピクセルオフセット)"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.getCoord": {
+      "hash": "4ec0a26524b0",
+      "ja": {
+        "summary": "%[ x:, y:, z: ]"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.setZoom": {
+      "hash": "ffdaacd0076f",
+      "ja": {
+        "summary": "拡縮 (既定 1.0)"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.getZoom": {
+      "hash": "b9f27a3b658b",
+      "ja": {
+        "summary": "%[ x:, y: ]"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.setAngleDeg": {
+      "hash": "d32a3618367e",
+      "ja": {
+        "summary": "画面内回転。角度が正のとき画面上では時計回り。"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.angle": {
+      "hash": "7c00b30f2895",
+      "ja": {
+        "summary": "度"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.setRotate": {
+      "hash": "85666b2cc872",
+      "ja": {
+        "summary": "3軸回転(度)。z は setAngleDeg と同じ画面内回転。",
+        "description": "x / y は奥行き方向の傾きで、透視投影と組み合わせると効果が分かりやすい。"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.getRotate": {
+      "hash": "4ec0a26524b0",
+      "ja": {
+        "summary": "%[ x:, y:, z: ]"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.setSpeed": {
+      "hash": "493d796f31e2",
+      "ja": {
+        "summary": "再生速度 (1.0 が等速)"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.color": {
+      "hash": "b9c982c164f5",
+      "ja": {
+        "summary": "全体色 0xAARRGGBB (既定 0xFFFFFFFF)。エフェクト全体に乗算される。"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.paused": {
+      "hash": "e0d87997a9f7",
+      "ja": {
+        "summary": "一時停止"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.shown": {
+      "hash": "18b878eda495",
+      "ja": {
+        "summary": "表示/非表示"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.spawnDisabled": {
+      "hash": "9fb843f8c4a4",
+      "ja": {
+        "summary": "新規パーティクル生成の停止"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.layer": {
+      "hash": "120d6227e94c",
+      "ja": {
+        "summary": "所属レイヤー (0〜31)"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.setTargetLocation": {
+      "hash": "7b8992d0b626",
+      "ja": {
+        "summary": "ターゲット位置 (エフェクト側で「ターゲット依存」を使っている場合)",
+        "description": "座標は配置と同じ画面中央原点のピクセル座標。"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.setRandomSeed": {
+      "hash": "b7720086c6cf",
+      "ja": {
+        "summary": "乱数シードを固定する"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.setDynamicInput": {
+      "hash": "a258cb0bf1a4",
+      "ja": {
+        "summary": "動的パラメータ (Effekseer エディタの Dynamic Input)",
+        "params": {
+          "index": "エフェクト側で定義された動的入力の番号 (0 始まり)\n範囲外の index は無視される (取得は 0 を返す)。"
+        }
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.setDynamicInputByName": {
+      "hash": "87d2a5a71f07",
+      "ja": {
+        "summary": "動的パラメータを名前で差し込む / 読む",
+        "description": "対応は .efkzip の effect.json から自動で入る\n(EffekseerEffect.setDynamicInputNames() で差し替えもできる)。\n知らない名前を渡すと例外。\n\nplayer.setDynamicInputByName(\"emitter.x\", 120);"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.findDynamicInput": {
+      "hash": "9c5a5cd28489",
+      "ja": {
+        "summary": "差し込める名前かどうかの確認。知らなければ -1"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.meta": {
+      "hash": "66a7ff053abb",
+      "ja": {
+        "summary": "再生している素材の付属情報 (EffekseerEffect.meta と同じもの)",
+        "description": "player.load() で読んだ場合も触れるよう橋渡ししてある。"
+      }
+    },
+    "krkreffekseer:EffekseerPlayer.sendTrigger": {
+      "hash": "e987bd1239f2",
+      "ja": {
+        "summary": "トリガー送出 (Effekseer エディタの Trigger)",
+        "params": {
+          "index": "エフェクト側で定義されたトリガーの番号 (0 始まり)"
+        }
+      }
+    }
+  }
+}

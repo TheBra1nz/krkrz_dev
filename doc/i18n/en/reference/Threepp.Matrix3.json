@@ -1,0 +1,113 @@
+{
+  "class": "Threepp.Matrix3",
+  "entries": {
+    "krkrthreepp:Threepp.Matrix3": {
+      "hash": "445337199d1a",
+      "ja": {
+        "summary": "3x3 行列クラス"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.Matrix3": {
+      "hash": "b51e2be63271",
+      "ja": {
+        "summary": "コンストラクタ"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.set": {
+      "hash": "3642b37ac684",
+      "ja": {
+        "summary": "要素を設定"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.identity": {
+      "hash": "5e5b96acd1e5",
+      "ja": {
+        "summary": "単位行列に設定"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.copy": {
+      "hash": "516f384aeae7",
+      "ja": {
+        "summary": "コピー"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.setFromMatrix4": {
+      "hash": "0a407c586efb",
+      "ja": {
+        "summary": "Matrix4から設定"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.multiply": {
+      "hash": "158cd6875be6",
+      "ja": {
+        "summary": "乗算"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.premultiply": {
+      "hash": "91eac0b09877",
+      "ja": {
+        "summary": "前置乗算"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.multiplyMatrices": {
+      "hash": "24a8ed81ce1f",
+      "ja": {
+        "summary": "2つの行列の積"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.multiplyScalar": {
+      "hash": "107fd79be5c9",
+      "ja": {
+        "summary": "スカラー乗算"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.determinant": {
+      "hash": "b4cda915629b",
+      "ja": {
+        "summary": "行列式"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.invert": {
+      "hash": "160c2010a79c",
+      "ja": {
+        "summary": "逆行列"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.transpose": {
+      "hash": "572d8f2be607",
+      "ja": {
+        "summary": "転置"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.getNormalMatrix": {
+      "hash": "3411ab585aa9",
+      "ja": {
+        "summary": "法線行列を取得"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.scale": {
+      "hash": "ac976adef9b7",
+      "ja": {
+        "summary": "スケーリング"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.rotate": {
+      "hash": "9793742af13d",
+      "ja": {
+        "summary": "回転"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.translate": {
+      "hash": "89ec109eb2ec",
+      "ja": {
+        "summary": "平行移動"
+      }
+    },
+    "krkrthreepp:Threepp.Matrix3.equals": {
+      "hash": "471e7b3a033f",
+      "ja": {
+        "summary": "等価判定"
+      }
+    }
+  }
+}

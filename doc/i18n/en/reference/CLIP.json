@@ -1,0 +1,224 @@
+{
+  "class": "CLIP",
+  "entries": {
+    "clipfile:CLIP": {
+      "hash": "4b7c4c7cc904",
+      "ja": {
+        "summary": "擬似コードによるマニュアル",
+        "description": "CLIP STUDIO PAINT (.clip) 読み込み / 編集プラグイン clipfile.dll\n\nCLIPファイルストレージ機能\n以下のパス名で CLIP ファイルのレイヤ画像を直接ファイルとしてロードできます\n\nclip://CLIPファイル名/root/フォルダ名/.../レイヤ名.bmp\nclip://CLIPファイル名/id/LayerId.bmp\n\n・CLIPファイル名はベース名のみで小文字で正規化されます\n・フォルダ名、レイヤ名は全て小文字で正規化されて含まれる\"/\" は \"_\" に置換されます\n・名前が重複する場合は後にあるものが優先になります\n・画像を持たないレイヤ(フォルダ・調整レイヤ・空レイヤ)は列挙されません\n\npsdfile プラグインの psd:// と同じ規則です。"
+      }
+    },
+    "clipfile:CLIP.load": {
+      "hash": "5c8b2f1b8bef",
+      "ja": {
+        "summary": "CLIP ファイルのロード。",
+        "description": "ローカルに実体があるファイルは mmap で開き、画素は 256x256 ブロック単位で\n必要になったときだけ読みます(大きなファイルでも load 自体は軽い)。\nアーカイブ内などローカルパスに落ちない場合はストリームから全体をメモリへ\n読み込んでから解析します。",
+        "returns": "ロードに成功したら true(失敗理由は error プロパティ)",
+        "params": {
+          "filename": "ファイル名"
+        }
+      }
+    },
+    "clipfile:CLIP.loadOctet": {
+      "hash": "9376267d2a33",
+      "ja": {
+        "summary": "octet に入った CLIP データをロードする。",
+        "description": "バイト列はこのオブジェクトが保持します。ファイル名を持たないため\nclip:// ストレージへは登録されません。",
+        "returns": "ロードに成功したら true",
+        "params": {
+          "data": "ファイル全体を格納した octet"
+        }
+      }
+    },
+    "clipfile:CLIP.clearData": {
+      "hash": "0e103b9389a3",
+      "ja": {
+        "summary": "保持しているデータを明示的に破棄する。",
+        "description": "吉里吉里のオブジェクト寿命は GC 依存なので、大きなファイルを掴んだままに\nしたくないときに呼びます。"
+      }
+    },
+    "clipfile:CLIP.width": {
+      "hash": "5323dff5ffd8",
+      "ja": {
+        "summary": "キャンバスの横幅(実ピクセル)。",
+        "description": "CLIP の Canvas.CanvasWidth は CanvasUnit 依存で mm 単位のファイルが実在する\nため、100% ミップの属性から求めた実ピクセル値を返します。未ロードは -1"
+      }
+    },
+    "clipfile:CLIP.height": {
+      "hash": "310b3c13336b",
+      "ja": {
+        "summary": "キャンバスの縦幅(実ピクセル)。未ロードは -1"
+      }
+    },
+    "clipfile:CLIP.resolution": {
+      "hash": "a830fd85a9b1",
+      "ja": {
+        "summary": "解像度(dpi)。未ロードは 0"
+      }
+    },
+    "clipfile:CLIP.layer_count": {
+      "hash": "626c52c3e040",
+      "ja": {
+        "summary": "レイヤ数。未ロードは -1"
+      }
+    },
+    "clipfile:CLIP.root_layer": {
+      "hash": "3aafe7d8c7c7",
+      "ja": {
+        "summary": "ルートフォルダの LayerId。未ロードは -1"
+      }
+    },
+    "clipfile:CLIP.is_loaded": {
+      "hash": "c4877c95ed50",
+      "ja": {
+        "summary": "ロード済みかどうか"
+      }
+    },
+    "clipfile:CLIP.error": {
+      "hash": "4f6bea503bb5",
+      "ja": {
+        "summary": "直近の失敗理由。無ければ空文字列"
+      }
+    },
+    "clipfile:CLIP.getLayerName": {
+      "hash": "f0adb6044b2a",
+      "ja": {
+        "summary": "レイヤ名の取得",
+        "returns": "レイヤ名",
+        "params": {
+          "no": "レイヤ番号"
+        }
+      }
+    },
+    "clipfile:CLIP.getLayerInfo": {
+      "hash": "b8ad04d57f3f",
+      "ja": {
+        "summary": "レイヤ情報の取得",
+        "description": "レイヤ番号 no は 0 から layer_count-1 までで、並び順は psdfile と同じ\n「中身が先、フォルダが後、下から上」の平坦順です。",
+        "returns": "レイヤ情報がはいった辞書\n辞書の内容\nleft         左座標(キャンバス座標)\ntop          上座標\nright        右座標\nbottom       底座標\nwidth        横幅\nheight       縦幅\nname         レイヤ名\nlayer_id     LayerId (CLIP の Layer.MainId)。CLIPWriter の各メソッドや\nclip://~/id/ で使うのはこの値\nvisible      表示状態\nopacity      不透明度 0..255 (PSD / 吉里吉里 と揃えた値)\nopacity_raw  不透明度の生値 0..**256** (CLIP は 256 段)\nclipping     下のレイヤでクリッピングするか (0/1)\ncomposite    合成モードの生値 (CLIP の LayerComposite。CLIPWriter の\ncomposite_* 定数と同じ値)\ntype         合成モード(吉里吉里の対応モード)。対応が無いモードは\nltPsNormal に落ちるので、正確に見たいときは composite を使う\nblend_mode_key 合成モードを PSD の 4 文字コードで表したもの。psdfile の\ngetLayerInfo().blend_mode_key と見比べるとき用\nis_group     フォルダレイヤか\nis_filter    調整レイヤか(自分の画素を持たない)\nis_text      テキストレイヤか\nhas_mask     レイヤマスクを持つか\nfolder       フォルダ属性の生値 (bit0=フォルダ / bit4=折り畳み)\ncollapsed    フォルダが折り畳まれているか\nlayer_type_raw LayerType の生値 (bit12(4096)=調整レイヤ / bit1(2)=マスク有)\nparent_index 親フォルダのレイヤ番号(最上位は -1)\nchildren     直接の子のレイヤ番号配列(下から上)。フォルダ以外は空配列",
+        "params": {
+          "no": "レイヤ番号"
+        }
+      }
+    },
+    "clipfile:CLIP.getRoots": {
+      "hash": "a4cfc51a628c",
+      "ja": {
+        "summary": "最上位(ルート直下)のレイヤ番号配列を取得する。下から上の順",
+        "returns": "レイヤ番号の配列"
+      }
+    },
+    "clipfile:CLIP.getChildren": {
+      "hash": "7880e34031fd",
+      "ja": {
+        "summary": "フォルダの直接の子のレイヤ番号配列を取得する。下から上の順",
+        "returns": "レイヤ番号の配列(フォルダ以外は空配列)",
+        "params": {
+          "no": "レイヤ番号"
+        }
+      }
+    },
+    "clipfile:CLIP.getLayerIndexById": {
+      "hash": "9e80a16e8376",
+      "ja": {
+        "summary": "LayerId からレイヤ番号を引く",
+        "returns": "レイヤ番号。見つからなければ -1",
+        "params": {
+          "layerId": "getLayerInfo().layer_id の値"
+        }
+      }
+    },
+    "clipfile:CLIP.getLayerAttribute": {
+      "hash": "2f63ecbc9c25",
+      "ja": {
+        "summary": "100% ミップの Offscreen 属性を取得する(ブロックグリッドや表現色の確認用)",
+        "returns": "%[ width:, height:,        // 論理サイズ\ncols:, rows:,           // ブロックグリッド\ncolor_mode:             // 33=RGBA / 17=グレー・モノクロ / 1=マスク\nnum_channels:           // 4 / 1 / 0\nbit_depth:              // 5=8bpp RGBA / 2=8bpp / 1=1bpp\nplane_bytes:,\nblock_width:, block_height:,\nhas_init_color:,\ninit_color:             // RGBA をパックした値\nblock_count:            // ブロック数\n]  実体が無ければ void\n\n**ここで返る width / height はキャンバスサイズとは限りません** — CSP は\nレイヤによって 256x256 ブロック境界に切り上げた大きさ(300x400 のキャンバスでも\n512x512 等)で画素を持ちます。`CLIPWriter.setPixels` に渡す Layer のサイズは\nこの値に合わせる必要があるので、書き換えるときはここで調べてください。",
+        "params": {
+          "no": "レイヤ番号",
+          "mask": "true でマスク側のミップ連鎖を見る。既定 false"
+        }
+      }
+    },
+    "clipfile:CLIP.getLayerData": {
+      "hash": "e8219e1d60d0",
+      "ja": {
+        "summary": "レイヤ画像の読み出し(マスクをアルファに繰り込んだもの)",
+        "params": {
+          "layer": "読み出し先レイヤ",
+          "no": "レイヤ番号\n\nフォルダ・調整レイヤ・空レイヤは画像を持たないので何もしません\n(吉里吉里の Layer は 0 サイズにできないため)。\nデータ内容のほか以下のプロパティが自動的にレイヤに設定されます\nleft          左座標\ntop           上座標\nwidth         横幅\nheight        縦幅\ntype          合成モード\nopacity       不透明度(0..255 に正規化した値)\nvisible       表示状態\nimageLeft     0になります\nimageTop      0になります\nimageWidth    width になります\nimageHeight   height になります\nname          name が設定されます"
+        }
+      }
+    },
+    "clipfile:CLIP.getLayerDataRaw": {
+      "hash": "81a7c3be4db6",
+      "ja": {
+        "summary": "レイヤ画像の読み出し(マスクを繰り込まない生画像)。",
+        "description": "設定されるプロパティは getLayerData と同じ",
+        "params": {
+          "layer": "読み出し先レイヤ",
+          "no": "レイヤ番号"
+        }
+      }
+    },
+    "clipfile:CLIP.getLayerDataMask": {
+      "hash": "aaff7c2f6517",
+      "ja": {
+        "summary": "レイヤのマスクのみ(グレー)の読み出し。",
+        "description": "マスクを持たないレイヤでは何もしません。\nopacity は 255、type は ltPsNormal になります",
+        "params": {
+          "layer": "読み出し先レイヤ",
+          "no": "レイヤ番号"
+        }
+      }
+    },
+    "clipfile:CLIP.getLayerRegion": {
+      "hash": "6d411025d722",
+      "ja": {
+        "summary": "レイヤ画像のうち指定矩形(キャンバス座標)だけを読み出す。",
+        "description": "CLIP は画素を 256x256 タイルで持っているので、**重なるタイルしか\n展開されません**。大きなレイヤの一部だけ欲しいときはこちらが安いです\n(PSD は行 RLE なので同じことができない = clipparse 固有の口)。\n読み出し先 Layer の left/top には x/y が設定されます。",
+        "params": {
+          "layer": "読み出し先レイヤ",
+          "no": "レイヤ番号",
+          "x": "矩形の左(キャンバス座標)",
+          "y": "矩形の上",
+          "w": "矩形の幅",
+          "h": "矩形の高さ",
+          "mode": "image_mode_*(既定 image_mode_masked)"
+        }
+      }
+    },
+    "clipfile:CLIP.getBlend": {
+      "hash": "d539631b73e8",
+      "ja": {
+        "summary": "全レイヤを下から合成した画像の取得。",
+        "description": "psdfile の getBlend が「PSD に保存済みの合成結果を読むだけ」なのとは違い、\nこちらは clipparse 側で実際に合成します(CSP の CanvasPreview と一致するのが\n正しい状態)。合成モード 27 種・表現色 4 種・マスク・クリッピング・\n通過フォルダ・調整レイヤ 5 種に対応しています。\n保存済みの完成画をそのまま使いたいだけなら getPreviewPNG() の方が安いです。",
+        "returns": "取得に成功したら true",
+        "params": {
+          "layer": "格納先レイヤ(キャンバスサイズに調整される)"
+        }
+      }
+    },
+    "clipfile:CLIP.getPreviewPNG": {
+      "hash": "20cedb27c968",
+      "ja": {
+        "summary": "ファイルに埋まっている完成画(CanvasPreview)を PNG の octet で返す。",
+        "description": "CSP が保存した画そのものなので合成の計算が不要ですが、**等倍とは限りません**。",
+        "returns": "PNG データの octet。無ければ void"
+      }
+    },
+    "clipfile:CLIP.check": {
+      "hash": "1c16de11f1f5",
+      "ja": {
+        "summary": "全ブロックの構造アサーションを回す(診断用)",
+        "returns": "問題があればレポート文字列、問題が無ければ void"
+      }
+    },
+    "clipfile:CLIP.clearStorageCache": {
+      "hash": "17d2ddf452b3",
+      "ja": {
+        "summary": "static method",
+        "description": "ストレージとして保持されてるキャッシュをクリアする"
+      }
+    }
+  }
+}

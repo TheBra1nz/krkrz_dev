@@ -1,0 +1,58 @@
+{
+  "class": "Threepp.LineCurve",
+  "entries": {
+    "krkrthreepp:Threepp.LineCurve": {
+      "hash": "11fd957de585",
+      "ja": {
+        "summary": "2D直線カーブ",
+        "description": "2点間の直線を表現するカーブです。"
+      }
+    },
+    "krkrthreepp:Threepp.LineCurve.LineCurve": {
+      "hash": "ce3962e8ac39",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "v1": "始点 (Vector2 または [x, y])",
+          "v2": "終点 (Vector2 または [x, y])"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.LineCurve.v1": {
+      "hash": "c793333c3c1d",
+      "ja": {
+        "summary": "始点（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.LineCurve.v2": {
+      "hash": "7e184ac2b862",
+      "ja": {
+        "summary": "終点（読み取り専用）"
+      }
+    },
+    "krkrthreepp:Threepp.LineCurve.getLength": {
+      "hash": "8d98a47bcea4",
+      "ja": {
+        "summary": "曲線の長さを取得"
+      }
+    },
+    "krkrthreepp:Threepp.LineCurve.getPoint": {
+      "hash": "1be3886a14b6",
+      "ja": {
+        "summary": "パラメータ t (0-1) の点を取得"
+      }
+    },
+    "krkrthreepp:Threepp.LineCurve.getPointAt": {
+      "hash": "5dd8fd257e98",
+      "ja": {
+        "summary": "等間隔パラメータ u の点を取得"
+      }
+    },
+    "krkrthreepp:Threepp.LineCurve.getTangent": {
+      "hash": "2e6d1275082e",
+      "ja": {
+        "summary": "接線ベクトルを取得"
+      }
+    }
+  }
+}

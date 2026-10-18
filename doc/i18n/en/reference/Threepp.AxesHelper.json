@@ -1,0 +1,27 @@
+{
+  "class": "Threepp.AxesHelper",
+  "entries": {
+    "krkrthreepp:Threepp.AxesHelper": {
+      "hash": "68bf205fb8b1",
+      "ja": {
+        "summary": "軸ヘルパー",
+        "description": "X(赤), Y(緑), Z(青)の軸を表示します。"
+      }
+    },
+    "krkrthreepp:Threepp.AxesHelper.AxesHelper": {
+      "hash": "211b19181482",
+      "ja": {
+        "summary": "コンストラクタ",
+        "params": {
+          "size": "軸の長さ"
+        }
+      }
+    },
+    "krkrthreepp:Threepp.AxesHelper.type": {
+      "hash": "37fbd7ac9728",
+      "ja": {
+        "summary": "\"AxesHelper\"（読み取り専用）"
+      }
+    }
+  }
+}

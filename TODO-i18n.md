@@ -76,7 +76,12 @@ Elements 以外の描画 (drawText / setInfo / メニュー / samples.tjs の ti
 
 段階:
 
-- [ ] Phase 0: 土台 (プラグイン導入 + requirements + CI、切替 UI、nav 訳、check スクリプト、カタログ抽出)
+- [x] Phase 0: 土台 (プラグイン導入 + requirements + CI、切替 UI、nav 訳、check スクリプト、カタログ抽出) — 2026-10-19。
+  `mkdocs.yml` の `i18n` (en は `nav_translations` 付き)。index.md を nav 先頭 (「ホーム」) に入れた
+  (nav に無いとプラグインがホームを見つけられず strict で失敗する)。`tjsdoc.py --extract/--lang` +
+  `refi18n.py` (dump / merge) + `check_translations.py`、見出し語 `doc/i18n/en/reference_labels.json`、
+  用語集 `doc/i18n/glossary.md`。`doc/i18n/` はサイトに出さない。CI は翻訳レポートを出すだけ。
+  手順は `tools/docgen/README.md`「翻訳」。試訳として Rect を全訳
 - [ ] Phase 1: トップ / about / 起動 / デモ一覧
 - [ ] Phase 2: reference の主要クラス
 - [ ] Phase 3: guide / tjs2 / specification / topics

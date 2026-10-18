@@ -1,0 +1,83 @@
+{
+  "class": "Process",
+  "entries": {
+    "process:Process": {
+      "hash": "904b602eeb38",
+      "ja": {
+        "summary": "擬似コードによるマニュアル",
+        "description": "外部アプリを機動してその終了を待つ機構を提供します。"
+      }
+    },
+    "process:Process.status": {
+      "hash": "3f67c0b9f3d0",
+      "ja": {
+        "summary": "現在の状態",
+        "description": "0:未実行\n1:実行中"
+      }
+    },
+    "process:Process.execute": {
+      "hash": "96397376beba",
+      "ja": {
+        "summary": "バックグラウンドでの外部プログラムの実行",
+        "description": "処理がおわったら onExecuted イベントが発生します。",
+        "returns": "起動成功時は true",
+        "params": {
+          "target": "プログラム",
+          "param": "引数",
+          "folder": "実行時フォルダ(未指定時はカレントフォルダ)"
+        }
+      }
+    },
+    "process:Process.commandExecute": {
+      "hash": "f506eb345e3a",
+      "ja": {
+        "summary": "コンソール出力取得つきコマンドラインプログラムの実行",
+        "description": "コンソールの行単位出力で onOutput イベントが発生します。\n処理がおわったら onExecuted イベントが発生します。",
+        "returns": "起動成功時は true",
+        "params": {
+          "target": "プログラム",
+          "param": "引数",
+          "folder": "実行時フォルダ(未指定時はカレントフォルダ)"
+        }
+      }
+    },
+    "process:Process.terminate": {
+      "hash": "9b2f15518aaf",
+      "ja": {
+        "summary": "実行中の外部プログラムの強制終了",
+        "params": {
+          "endCode": "終了コード"
+        }
+      }
+    },
+    "process:Process.sendSignal": {
+      "hash": "8e30fcb6739f",
+      "ja": {
+        "summary": "Ctrl+Cイベントの送信(experimental:すべての環境で動作するとは限りません)",
+        "returns": "成功したらtrue",
+        "params": {
+          "isBreak": "Ctrl+CではなくCtrl+Breakを送る"
+        }
+      }
+    },
+    "process:Process.onExecuted": {
+      "hash": "c56cf852c35f",
+      "ja": {
+        "summary": "イベント:シェル実行終了",
+        "params": {
+          "endCode": "終了コード"
+        }
+      }
+    },
+    "process:Process.onOutput": {
+      "hash": "b160eef7afe6",
+      "ja": {
+        "summary": "イベント:コンソール出力",
+        "params": {
+          "line": "行番号",
+          "text": "出力テキスト（１行単位）"
+        }
+      }
+    }
+  }
+}
