@@ -5,12 +5,18 @@
       "hash": "a3df9813238a",
       "ja": {
         "description": "2次元用の3x2行列です。\nOpenGLのため列優先行列であることに注意してください。"
+      },
+      "tr": {
+        "description": "A 3x2 matrix for 2D.\nNote that it is column-major, for OpenGL."
       }
     },
     "Matrix32.Matrix32": {
       "hash": "20bf2354d943",
       "ja": {
         "summary": "コンストラクタ(単位行列)"
+      },
+      "tr": {
+        "summary": "Constructor (identity matrix)"
       }
     },
     "Matrix32.Matrix32@2": {
@@ -26,6 +32,18 @@
           "m31": "[3][1]位置の値です。",
           "m32": "[3][2]位置の値です。"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "description": "Initializes the matrix with the given values.",
+        "params": {
+          "m11": "Value at [1][1].",
+          "m12": "Value at [1][2].",
+          "m21": "Value at [2][1].",
+          "m22": "Value at [2][2].",
+          "m31": "Value at [3][1].",
+          "m32": "Value at [3][2]."
+        }
       }
     },
     "Matrix32.set": {
@@ -40,6 +58,17 @@
           "m31": "[3][1]位置の値です。",
           "m32": "[3][2]位置の値です。"
         }
+      },
+      "tr": {
+        "summary": "Sets the matrix",
+        "params": {
+          "m11": "Value at [1][1].",
+          "m12": "Value at [1][2].",
+          "m21": "Value at [2][1].",
+          "m22": "Value at [2][2].",
+          "m31": "Value at [3][1].",
+          "m32": "Value at [3][2]."
+        }
       }
     },
     "Matrix32.set@2": {
@@ -49,6 +78,13 @@
         "description": "1次元配列からコピー",
         "params": {
           "array": "6要素の配列を渡します。"
+        }
+      },
+      "tr": {
+        "summary": "Sets the matrix",
+        "description": "Copies from a one-dimensional array.",
+        "params": {
+          "array": "An array of 6 elements."
         }
       }
     },
@@ -60,12 +96,22 @@
         "params": {
           "matrix": "Matrix32クラスのインスタンスを渡します。"
         }
+      },
+      "tr": {
+        "summary": "Sets the matrix",
+        "description": "Copies from matrix.",
+        "params": {
+          "matrix": "A Matrix32 instance."
+        }
       }
     },
     "Matrix32.reset": {
       "hash": "547d91e3e7d7",
       "ja": {
         "summary": "単位行列化"
+      },
+      "tr": {
+        "summary": "Resets to the identity matrix"
       }
     },
     "Matrix32.setTranslate": {
@@ -75,6 +121,13 @@
         "params": {
           "x": "設定するX座標値",
           "y": "設定するY座標値"
+        }
+      },
+      "tr": {
+        "summary": "Sets a translation matrix",
+        "params": {
+          "x": "X coordinate to set.",
+          "y": "Y coordinate to set."
         }
       }
     },
@@ -86,6 +139,13 @@
           "x": "設定するX軸拡大率",
           "y": "設定するY軸拡大率"
         }
+      },
+      "tr": {
+        "summary": "Sets a scaling matrix",
+        "params": {
+          "x": "Scale factor along the X axis.",
+          "y": "Scale factor along the Y axis."
+        }
       }
     },
     "Matrix32.setRotate": {
@@ -94,6 +154,12 @@
         "summary": "回転行列を設定する",
         "params": {
           "degree": "回転角度"
+        }
+      },
+      "tr": {
+        "summary": "Sets a rotation matrix",
+        "params": {
+          "degree": "Rotation angle."
         }
       }
     },
@@ -104,6 +170,12 @@
         "params": {
           "degree": "傾斜角度"
         }
+      },
+      "tr": {
+        "summary": "Sets an X-axis skew matrix",
+        "params": {
+          "degree": "Skew angle."
+        }
       }
     },
     "Matrix32.setSkewY": {
@@ -112,6 +184,12 @@
         "summary": "Y軸傾斜行列を設定する",
         "params": {
           "degree": "傾斜角度"
+        }
+      },
+      "tr": {
+        "summary": "Sets a Y-axis skew matrix",
+        "params": {
+          "degree": "Skew angle."
         }
       }
     },
@@ -123,6 +201,13 @@
           "x": "移動するX座標値",
           "y": "移動するY座標値"
         }
+      },
+      "tr": {
+        "summary": "Translates the matrix",
+        "params": {
+          "x": "Amount to move along X.",
+          "y": "Amount to move along Y."
+        }
       }
     },
     "Matrix32.rotate": {
@@ -131,6 +216,12 @@
         "summary": "行列を回転させる",
         "params": {
           "degree": "回転角度"
+        }
+      },
+      "tr": {
+        "summary": "Rotates the matrix",
+        "params": {
+          "degree": "Rotation angle."
         }
       }
     },
@@ -143,6 +234,14 @@
           "px": "中心点",
           "py": "中心点"
         }
+      },
+      "tr": {
+        "summary": "Rotates the matrix",
+        "params": {
+          "degree": "Rotation angle.",
+          "px": "Center point.",
+          "py": "Center point."
+        }
       }
     },
     "Matrix32.scale": {
@@ -152,6 +251,13 @@
         "params": {
           "x": "拡大率X座標値",
           "y": "拡大率Y座標値"
+        }
+      },
+      "tr": {
+        "summary": "Scales the matrix",
+        "params": {
+          "x": "Scale factor along X.",
+          "y": "Scale factor along Y."
         }
       }
     },
@@ -163,6 +269,13 @@
           "x": "拡大率X座標値",
           "y": "拡大率Y座標値"
         }
+      },
+      "tr": {
+        "summary": "Scales the matrix (pre-scale)",
+        "params": {
+          "x": "Scale factor along X.",
+          "y": "Scale factor along Y."
+        }
       }
     },
     "Matrix32.skewX": {
@@ -172,6 +285,12 @@
         "params": {
           "degree": "傾斜角度"
         }
+      },
+      "tr": {
+        "summary": "Skews the matrix along the X axis",
+        "params": {
+          "degree": "Skew angle."
+        }
       }
     },
     "Matrix32.skewY": {
@@ -180,6 +299,12 @@
         "summary": "行列をY軸傾斜させる",
         "params": {
           "degree": "傾斜角度"
+        }
+      },
+      "tr": {
+        "summary": "Skews the matrix along the Y axis",
+        "params": {
+          "degree": "Skew angle."
         }
       }
     },
@@ -192,6 +317,14 @@
           "x": "X座標値",
           "y": "Y座標値"
         }
+      },
+      "tr": {
+        "summary": "Transforms XY coordinates by this matrix",
+        "description": "The input arguments are overwritten with the result.",
+        "params": {
+          "x": "X coordinate.",
+          "y": "Y coordinate."
+        }
       }
     },
     "Matrix32.multiply": {
@@ -200,6 +333,12 @@
         "summary": "行列をかける(this = this * matrix)",
         "params": {
           "matrix": "かける行列"
+        }
+      },
+      "tr": {
+        "summary": "Multiplies by a matrix (this = this * matrix)",
+        "params": {
+          "matrix": "The matrix to multiply by."
         }
       }
     },
@@ -210,48 +349,75 @@
         "params": {
           "matrix": "かける行列"
         }
+      },
+      "tr": {
+        "summary": "Multiplies by a matrix in the opposite order (this = matrix * this)",
+        "params": {
+          "matrix": "The matrix to multiply by."
+        }
       }
     },
     "Matrix32.array": {
       "hash": "5c3c638c25d4",
       "ja": {
         "summary": "1次元配列で受け取る[r]"
+      },
+      "tr": {
+        "summary": "Gets the matrix as a one-dimensional array [r]"
       }
     },
     "Matrix32.m11": {
       "hash": "405bcd07f22e",
       "ja": {
         "summary": "[1][1]位置の値[r/w]"
+      },
+      "tr": {
+        "summary": "Value at [1][1] [r/w]"
       }
     },
     "Matrix32.m12": {
       "hash": "e2c8416de98c",
       "ja": {
         "summary": "[1][2]位置の値[r/w]"
+      },
+      "tr": {
+        "summary": "Value at [1][2] [r/w]"
       }
     },
     "Matrix32.m21": {
       "hash": "316ace07ddd7",
       "ja": {
         "summary": "[2][1]位置の値[r/w]"
+      },
+      "tr": {
+        "summary": "Value at [2][1] [r/w]"
       }
     },
     "Matrix32.m22": {
       "hash": "5ba4bfeb51be",
       "ja": {
         "summary": "[2][2]位置の値[r/w]"
+      },
+      "tr": {
+        "summary": "Value at [2][2] [r/w]"
       }
     },
     "Matrix32.m31": {
       "hash": "d7ad42f081d2",
       "ja": {
         "summary": "[3][1]位置の値[r/w]"
+      },
+      "tr": {
+        "summary": "Value at [3][1] [r/w]"
       }
     },
     "Matrix32.m32": {
       "hash": "089676225478",
       "ja": {
         "summary": "[3][2]位置の値[r/w]"
+      },
+      "tr": {
+        "summary": "Value at [3][2] [r/w]"
       }
     }
   }

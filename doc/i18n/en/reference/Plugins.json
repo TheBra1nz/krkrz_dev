@@ -5,6 +5,9 @@
       "hash": "1110b280c7c0",
       "ja": {
         "summary": "Plugins クラスは **プラグイン**に関する管理を行うクラスです。このクラスからオブジェクトを作成することはできません。"
+      },
+      "tr": {
+        "summary": "The Plugins class manages **plugins**. You cannot create objects of this class."
       }
     },
     "Plugins.link": {
@@ -14,6 +17,13 @@
         "description": "指定されたプラグインを吉里吉里本体に接続します ( 読み込みます )。",
         "params": {
           "name": "接続するプラグインを指定します。"
+        }
+      },
+      "tr": {
+        "summary": "Links a plugin",
+        "description": "Links (loads) the specified plugin into the Kirikiri engine.",
+        "params": {
+          "name": "Plugin to link."
         }
       }
     },
@@ -26,6 +36,14 @@
         "params": {
           "name": "切り離すプラグインを指定します。"
         }
+      },
+      "tr": {
+        "summary": "Unlinks a plugin",
+        "description": "Unlinks the specified plugin.\n\nSome plugins refuse to be released (for example, while their objects are still in use). If the plugin refuses and unlinking fails, false is returned.",
+        "returns": "true if the plugin was unlinked, false otherwise",
+        "params": {
+          "name": "Plugin to unlink."
+        }
       }
     },
     "Plugins.getList": {
@@ -34,6 +52,11 @@
         "summary": "リストの取得",
         "description": "プラグインのリストを取得します。返される配列は、リンクした順番でプラグイン名が列挙された物です。",
         "returns": "リンクされているプラグイン名が格納された配列"
+      },
+      "tr": {
+        "summary": "Gets the list",
+        "description": "Gets the list of plugins. The returned array lists plugin names in the order they were linked.",
+        "returns": "Array containing the names of the linked plugins"
       }
     },
     "Plugins.canLink": {
@@ -44,6 +67,14 @@
         "returns": "リンク可能であれば真、不可能であれば偽が返ります。",
         "params": {
           "name": "判定したいプラグインのファイル名を指定します。"
+        }
+      },
+      "tr": {
+        "summary": "Checks whether a plugin can be linked",
+        "description": "Checks in advance whether the specified plugin file can be loaded (linked) by the engine.\nIt does not actually perform [Plugins.link](Plugins.md#link).\n\nReturns false if the plugin is not in the automatic search path or cannot be linked\nin the current environment.",
+        "returns": "true if the plugin can be linked, false otherwise.",
+        "params": {
+          "name": "File name of the plugin to check."
         }
       }
     }

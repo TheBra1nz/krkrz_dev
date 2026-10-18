@@ -1675,7 +1675,7 @@ void が返ります。
 `-name`
 
 の形式で吉里吉里に渡されている必要があります。前者の場合は値として `value` が
-返り、前者の場合は値として `'yes'` が返ります。
+返り、後者の場合は値として `'yes'` が返ります。
 
 **関連:** [System.setArgument](System.md#setargument)
 

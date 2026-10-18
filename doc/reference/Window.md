@@ -1702,7 +1702,7 @@ postInputEvent('onKeyDown', %[key: VK_UP, shift: ssShift]);
 
 postInputEvent('onKeyUp',   %[key: VK_UP, shift: ssShift]);
 
-// 左カーソルキーを押す
+// 上カーソルキーを押す
 
 ---
 
@@ -1834,7 +1834,7 @@ TVP_WM_DETACH と TVP_WM_ATTACH という２つの重要なメッセージもト
 
 ウィンドウ内に入った瞬間から計測開始されています。
 
-[Window.resetMouseVelocity](Window.md#resetmousevelocity) を使用して計測をリセットし、任意のタイミングか計測得できるように出来ます。
+[Window.resetMouseVelocity](Window.md#resetmousevelocity) を使用して計測をリセットし、任意のタイミングから計測できるようにできます。
 
 **関連:** [Window.getTouchVelocity](Window.md#gettouchvelocity) / [Window.resetMouseVelocity](Window.md#resetmousevelocity)
 
@@ -1849,9 +1849,9 @@ TVP_WM_DETACH と TVP_WM_ATTACH という２つの重要なメッセージもト
 | 引数 | 既定値 | 説明 |
 | --- | --- | --- |
 | `id` | `&nbsp;` | タッチIDを指定します。 |
-| `x` | `&nbsp;` | X軸方向のマウス座標移動速度が返ります。 |
-| `y` | `&nbsp;` | Y軸方向のマウス座標移動速度が返ります。 |
-| `speed` | `&nbsp;` | マウス座標移動速度が返ります。 |
+| `x` | `&nbsp;` | X軸方向のタッチ座標移動速度が返ります。 |
+| `y` | `&nbsp;` | Y軸方向のタッチ座標移動速度が返ります。 |
+| `speed` | `&nbsp;` | タッチ座標移動速度が返ります。 |
 
 **戻り値**
 
