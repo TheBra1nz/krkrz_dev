@@ -17,6 +17,8 @@ extra_javascript:
 
 theme:
   name: material
+  # 他言語版の未訳ページに注記を出す (tools/docgen/theme_overrides/main.html)
+  custom_dir: tools/docgen/theme_overrides
   language: ja
   palette:
     - media: "(prefers-color-scheme: light)"
