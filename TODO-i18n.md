@@ -88,3 +88,35 @@ Elements 以外の描画 (drawText / setInfo / メニュー / samples.tjs の ti
 - [x] Phase 1: トップ / about / 起動 / デモ一覧 (+ CommandLine / Configure / 各索引)
 - [x] Phase 2: reference のコアクラス 41 + plugin 描画系 23 (2026-10-19)
 - [x] Phase 3: guide / tjs2 / specification / topics — 手書き全 104 ページ (2026-10-19)
+
+## D. 翻訳中に見つかった日本語原文の疑問点 (未修正分)
+
+2026-10-19 の英訳で訳者が報告したもの。訳は原文の意味どおりにしてある (直したら英訳も合わせる)。
+umbrella の doc/manual 分のうち明らかな誤りは同日修正済み (コミット 1a7859f / fa2471d)。
+
+- **リンクの抜け** (「〜については [空] を参照してください」「( 参照 )」等、旧文書整理時にリンクが落ちた跡):
+  guide/Startup・Configure・CommandLine・StorageSystem・ComputerDependentProblems・Files、
+  tjs2/pp・basictypes・variant・dictionary・regexp・string・ttjs、guide/about の「TJS2 ヘルプ」
+- guide/GraphicSystem: ltScreen の説明が「ltLighten は…」、ltPsColorDodge5 が「ltPsColorDodge は…」、
+  文字化け「縲鰀」2 か所 (〜)、主語抜け 2 か所 (画像フォーマットコンバータ)
+- guide/ElementsDialog: リンク文字列が旧名「Dialog」のまま。topics/tjs2/pitfalls も `Dialog.dictToJson`
+- specification/graphics: No.4 加算合成の式が No.3 と同じ、No.17 ソフトライトの式が書きかけ
+- specification/fileformat: JPEG の ANN / AAN 表記揺れ、末尾に執筆メモ、ERI のリンク先が古い
+- topics/core/engine_setting: JSON 例と表の `\n` が実改行になっている
+- topics/core/viewport: `viewportBgColor` が表では 0xRRGGBB、例では 8 桁
+- topics/core/repl: コード例のラベル文字列 (一般的な語へ変えるか)
+- tjs2: class (メンバ関数 → メンバ変数?)、expr_and_op (単項 - が「左側」)、switch の例 (a/b) と default の説明、
+  factor `getBoolen`、token の指数表記、array (pop 節の書き出し / saveStruct の構文行)、
+  interface (TJS_OP_SR の説明 / IsInstanceOf の引数説明)、vmcodes (clt / cgt、asc / chr が逆に見える)、
+  octet の例のコメント
+- guide/BundledLicenses は生成物 (gen_licenses_c.py) なので、再生成のたびに英訳が要再訳になる
+- **plugin の manual.tjs (各 submodule)**:
+  - krkrthreepp: 節見出しや補足が member の summary に入っている箇所多数 (Object3D.position /
+    各 Light.setShadowMapSize / VRM.* / Shape.moveTo 等)、VRM.update の文が summary と description に分断
+  - krkr_richtext: RichTextRenderBase の summary 先頭の "/ "、`<style:bold>` 等がそのまま HTML として出る
+  - krkreffekseer: EffekseerDevice.setCapacity の summary が途中で切れている
+  - krkrgles: GLESAdaptor の引数名が "a," "tx," のように割れている (`@param a, b, c, d` 書式)、`screenHeihgt`
+  - layerExDraw / layerExVector: drawPie が「円錐」、@description が summary に混入
+  - layerExSave: getCropRect の文が summary / description に分断、`threthold`
+  - windowEx: onNcMouseMove / ncHitTest の `@param x, y`、findWindoeEx
+  - shellExecute「機動」・sigcheck「内臓」、fstat `fliename`、Scripts.getClassNames `obect`
