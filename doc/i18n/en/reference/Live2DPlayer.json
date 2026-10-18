@@ -6,6 +6,10 @@
       "ja": {
         "summary": "描画用プレイヤー",
         "description": "Live2DModel と同じインターフェースに加えて描画用メソッドを持つ\n生成には Live2DDevice が必要"
+      },
+      "tr": {
+        "summary": "Player for drawing",
+        "description": "Has the same interface as Live2DModel plus methods for drawing.\nRequires a Live2DDevice to create."
       }
     },
     "krkrlive2d:Live2DPlayer.Live2DPlayer": {
@@ -15,12 +19,21 @@
         "params": {
           "device": "Live2DDevice インスタンス"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "device": "Live2DDevice instance"
+        }
       }
     },
     "krkrlive2d:Live2DPlayer.clear": {
       "hash": "e95412471a62",
       "ja": {
         "summary": "内容消去"
+      },
+      "tr": {
+        "summary": "Clears the contents"
       }
     },
     "krkrlive2d:Live2DPlayer.loadModel": {
@@ -31,30 +44,49 @@
         "params": {
           "model": "Live2DModel インスタンス"
         }
+      },
+      "tr": {
+        "summary": "Creates the player from a Live2DModel instance",
+        "description": "Inherits the state of the loaded model.",
+        "params": {
+          "model": "Live2DModel instance"
+        }
       }
     },
     "krkrlive2d:Live2DPlayer.clone": {
       "hash": "c28ab4b7229a",
       "ja": {
         "summary": "複製"
+      },
+      "tr": {
+        "summary": "Duplicates the player"
       }
     },
     "krkrlive2d:Live2DPlayer.setScale": {
       "hash": "87eb1bdbf80e",
       "ja": {
         "summary": "表示スケール設定"
+      },
+      "tr": {
+        "summary": "Sets the display scale"
       }
     },
     "krkrlive2d:Live2DPlayer.setMatrix": {
       "hash": "47e963f591df",
       "ja": {
         "summary": "表示マトリクス指定"
+      },
+      "tr": {
+        "summary": "Sets the display matrix"
       }
     },
     "krkrlive2d:Live2DPlayer.render": {
       "hash": "b360e342309c",
       "ja": {
         "summary": "表示処理。OpenGLコンテキストで実行すると描画される"
+      },
+      "tr": {
+        "summary": "Renders the model. Drawing happens when called on an OpenGL context"
       }
     }
   }

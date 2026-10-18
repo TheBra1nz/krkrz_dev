@@ -6,12 +6,19 @@
       "ja": {
         "summary": "描画外観クラス",
         "description": "Illustrator のアピアランスに相当します。\n塗り（Fill）とストローク（縁取り）を複数重ねて装飾効果を実現します。\n先に追加したものが下（奥）に描画されます。\n\n典型的な使用順序:\n1. 影 (addShadow または addFill でオフセット付き)\n2. 縁取り (addStroke)\n3. 本体の塗り (addFill)"
+      },
+      "tr": {
+        "summary": "Drawing appearance class",
+        "description": "Corresponds to Illustrator's Appearance.\nDecorations are produced by stacking multiple fills and strokes (outlines).\nItems added earlier are drawn underneath (further back).\n\nTypical order:\n1. Shadow (addShadow, or addFill with an offset)\n2. Outline (addStroke)\n3. Main fill (addFill)"
       }
     },
     "krkr_richtext:RichText.Appearance.Appearance": {
       "hash": "b51e2be63271",
       "ja": {
         "summary": "コンストラクタ"
+      },
+      "tr": {
+        "summary": "Constructor"
       }
     },
     "krkr_richtext:RichText.Appearance.addFill": {
@@ -23,6 +30,15 @@
           "color": "ARGB色値 (例: 0xFFFFFFFF = 白, 0xFF000000 = 黒)",
           "offsetX": "X方向オフセット（省略時: 0）",
           "offsetY": "Y方向オフセット（省略時: 0）"
+        }
+      },
+      "tr": {
+        "summary": "Adds a fill",
+        "description": "Example:\napp.addFill(0xFFFFFFFF);  // 白で塗り\napp.addFill(0x80000000, 2, 2);  // 半透明黒で影効果",
+        "params": {
+          "color": "ARGB color value (e.g. 0xFFFFFFFF = white, 0xFF000000 = black)",
+          "offsetX": "X offset (default: 0)",
+          "offsetY": "Y offset (default: 0)"
         }
       }
     },
@@ -37,6 +53,16 @@
           "offsetX": "X方向オフセット（省略時: 0）",
           "offsetY": "Y方向オフセット（省略時: 0）"
         }
+      },
+      "tr": {
+        "summary": "Adds a stroke (outline)",
+        "description": "Example:\napp.addStroke(0xFF000000, 2);  // 黒2pxの縁取り",
+        "params": {
+          "color": "ARGB color value",
+          "width": "Line width",
+          "offsetX": "X offset (default: 0)",
+          "offsetY": "Y offset (default: 0)"
+        }
       }
     },
     "krkr_richtext:RichText.Appearance.addShadow": {
@@ -49,6 +75,15 @@
           "offsetX": "X方向オフセット",
           "offsetY": "Y方向オフセット"
         }
+      },
+      "tr": {
+        "summary": "Adds a shadow",
+        "description": "Shadows are always added at the bottom (furthest back).\nExample:\napp.addShadow(0x80000000, 2, 2);  // 半透明黒の影",
+        "params": {
+          "color": "Shadow color (ARGB)",
+          "offsetX": "X offset",
+          "offsetY": "Y offset"
+        }
       }
     },
     "krkr_richtext:RichText.Appearance.setColor": {
@@ -58,6 +93,13 @@
         "description": "既存の通常 Fill（オフセット 0,0 の Fill）を指定色に置き換えます。\n通常 Fill が無い場合は新規追加します。\n使用例:\napp.setColor(0xFFFF0000);  // テキスト色を赤に変更",
         "params": {
           "color": "ARGB色値"
+        }
+      },
+      "tr": {
+        "summary": "Sets the text color (replaces the existing normal fill)",
+        "description": "Replaces the existing normal fill (the fill with offset 0,0) with the given color.\nIf there is no normal fill, a new one is added.\nExample:\napp.setColor(0xFFFF0000);  // テキスト色を赤に変更",
+        "params": {
+          "color": "ARGB color value"
         }
       }
     },
@@ -70,6 +112,15 @@
           "color": "ARGB色値",
           "offsetX": "X方向オフセット（省略時: 0）",
           "offsetY": "Y方向オフセット（省略時: 0）"
+        }
+      },
+      "tr": {
+        "summary": "Adds a text color (on top)",
+        "description": "Like addFill, but added in front of everything else.",
+        "params": {
+          "color": "ARGB color value",
+          "offsetX": "X offset (default: 0)",
+          "offsetY": "Y offset (default: 0)"
         }
       }
     },
@@ -84,6 +135,16 @@
           "offsetX": "X方向オフセット（省略時: 0）",
           "offsetY": "Y方向オフセット（省略時: 0）"
         }
+      },
+      "tr": {
+        "summary": "Sets the outline (replaces the existing stroke)",
+        "description": "Replaces the existing stroke with the given one.\nIf there is no stroke, a new one is added.",
+        "params": {
+          "color": "ARGB color value",
+          "width": "Line width",
+          "offsetX": "X offset (default: 0)",
+          "offsetY": "Y offset (default: 0)"
+        }
       }
     },
     "krkr_richtext:RichText.Appearance.addOutline": {
@@ -95,6 +156,15 @@
           "width": "線幅",
           "offsetX": "X方向オフセット（省略時: 0）",
           "offsetY": "Y方向オフセット（省略時: 0）"
+        }
+      },
+      "tr": {
+        "summary": "Adds an outline (as the rearmost stroke)",
+        "params": {
+          "color": "ARGB color value",
+          "width": "Line width",
+          "offsetX": "X offset (default: 0)",
+          "offsetY": "Y offset (default: 0)"
         }
       }
     },
@@ -108,12 +178,24 @@
           "offsetX": "X方向オフセット",
           "offsetY": "Y方向オフセット"
         }
+      },
+      "tr": {
+        "summary": "Sets the shadow (replaces the existing shadow fill)",
+        "description": "Replaces the existing shadow (a fill with an offset) with the given one.",
+        "params": {
+          "color": "Shadow color (ARGB)",
+          "offsetX": "X offset",
+          "offsetY": "Y offset"
+        }
       }
     },
     "krkr_richtext:RichText.Appearance.clear": {
       "hash": "74fd9c1873a3",
       "ja": {
         "summary": "全スタイルのクリア"
+      },
+      "tr": {
+        "summary": "Clears all styles"
       }
     },
     "krkr_richtext:RichText.Appearance.clone": {
@@ -121,18 +203,28 @@
       "ja": {
         "summary": "外観の複製",
         "returns": "複製された Appearance オブジェクト"
+      },
+      "tr": {
+        "summary": "Duplicates the appearance",
+        "returns": "The duplicated Appearance object"
       }
     },
     "krkr_richtext:RichText.Appearance.isEmpty": {
       "hash": "ee3fc48e6d9b",
       "ja": {
         "summary": "スタイルが空かどうか（読み取り専用）"
+      },
+      "tr": {
+        "summary": "Whether there are no styles (read-only)"
       }
     },
     "krkr_richtext:RichText.Appearance.count": {
       "hash": "1c7f3ea89bee",
       "ja": {
         "summary": "スタイル数（読み取り専用）"
+      },
+      "tr": {
+        "summary": "Number of styles (read-only)"
       }
     }
   }

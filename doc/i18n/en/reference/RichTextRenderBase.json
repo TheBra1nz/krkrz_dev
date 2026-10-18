@@ -6,12 +6,19 @@
       "ja": {
         "summary": "TextRender 互換テキストレンダリングクラス",
         "description": "../textrender の TextRender クラスと API 互換のインターフェースを提供します。\n内部では richtext ライブラリ（StyledLayout）を使用して描画を行います。\n\nTextRender のエスケープ記法入りテキストを受け取り、レイアウト結果を\n文字情報・タイミング情報・リンク情報として返します。\n\n入力用特殊テキスト書式:\n\\n      改行\n\\t      タブ文字\n\\i      インデント開始（次行から）※非対応\n\\r      インデント解除（次行から）※非対応\n\\w      空白相当分表示位置を進める\n\\k      キー入力待ち情報を生成\n\\x      nul文字相当\n\\文字   エスケープ指定（特殊機能を無効化）\n[xxxx]         ルビ指定（次の1文字にかかる）\n[xxxx,文字数]  ルビ指定（次の指定個数の文字にかかる）\n\nフォント指定:\n%f名前;     フォントフェイス指定\n%bX         ボールド指定（0:off 1:on その他:デフォルト）\n%iX         イタリック指定（0:off 1:on その他:デフォルト）\n%sX         影指定（0:off 1:on その他:デフォルト）\n%eX         エッジ指定（0:off 1:on その他:デフォルト）\n%数値;      フォントサイズ指定（デフォルトに対するパーセント）\n%B          大サイズフォント\n%S          小サイズフォント\n#xxxxxx;    色指定（16進RGB）\n%s#xxxxxx;  影色指定\n%e#xxxxxx;  エッジ色指定\n%r          フォントリセット\n\nスタイル指定:\n%C          センタリング\n%R          右よせ\n%L          左寄せ\n%p数値;     ピッチ（字間）\n\n特殊指定:\n%d数値;     文字あたり表示時間（標準に対するパーセント、100で標準速度）\n%a数値;     文字あたり表示時間（ms）\n%w数値;     時間待ち（1文字時間に対するパーセント、100で1文字分）\n%t数値;     時間待ち（ms）\n%D数値;     時間同期指定（ms）\n%D$xxx;     時間同期指定（ラベル参照）\n\n$xxx;       埋め込み指定（変数名）※onEval で処理\n&xxx;       グラフィック文字指定（画像名）※onGetGraphSize で処理\n\nリンク指定:\n%lリンク名;  リンク指定開始\n%l;          リンク指定解除\n\n非対応:\n縦書き、rubyoffset、ワードブレーク制御（%k0/%k1）\n\n使用フロー:\nclear() → setFont/setStyle → render() [複数回可] → done()\n→ getCharacters() / calcShowCount() / getKeyWait() 等で結果取得\n\n使用例:\nvar tr = new TextRenderBase();\ntr.setDefault(%[ face: \"MSゴシック\", fontsize: 24, color: 0xFFFFFF ]);\ntr.setRenderSize(400, 300);\ntr.clear();\ntr.render(\"こんにちは%B世界%r！\\n2行目\", 0, 30, 0, false);\ntr.done();\n\nvar chars = tr.getCharacters(0, 0);  // 全文字情報取得\nvar count = tr.calcShowCount(500);    // 500ms時点の表示文字数"
+      },
+      "tr": {
+        "summary": "TextRender-compatible text rendering class",
+        "description": "Provides an interface API-compatible with the TextRender class in ../textrender.\nInternally it draws using the richtext library (StyledLayout).\n\nIt accepts text with TextRender escape notation and returns the layout result\nas character, timing, and link information.\n\nSpecial input text notation:\n\\n      line break\n\\t      tab character\n\\i      start indent (from the next line) *not supported\n\\r      end indent (from the next line) *not supported\n\\w      advance the position by one space\n\\k      generate key-wait information\n\\x      equivalent to a NUL character\n\\{char}  escape (disables the special meaning)\n[xxxx]          ruby (applies to the next character)\n[xxxx,{count}]  ruby (applies to the next {count} characters)\n\nFont:\n%f{name};   font face\n%bX         bold (0: off, 1: on, other: default)\n%iX         italic (0: off, 1: on, other: default)\n%sX         shadow (0: off, 1: on, other: default)\n%eX         edge (0: off, 1: on, other: default)\n%{number};  font size (percentage of the default)\n%B          large font\n%S          small font\n#xxxxxx;    color (hex RGB)\n%s#xxxxxx;  shadow color\n%e#xxxxxx;  edge color\n%r          reset font\n\nStyle:\n%C          center\n%R          right-align\n%L          left-align\n%p{number}; pitch (letter spacing)\n\nSpecial:\n%d{number}; display time per character (percentage of standard; 100 = standard speed)\n%a{number}; display time per character (ms)\n%w{number}; wait (percentage of one character's time; 100 = one character)\n%t{number}; wait (ms)\n%D{number}; time sync (ms)\n%D$xxx;     time sync (label reference)\n\n$xxx;       embedding (variable name) *handled by onEval\n&xxx;       graphic character (image name) *handled by onGetGraphSize\n\nLinks:\n%l{link name};  start link\n%l;             end link\n\nNot supported:\nvertical text, rubyoffset, word-break control (%k0/%k1)\n\nWorkflow:\nclear() → setFont/setStyle → render() [can be called multiple times] → done()\n→ get results with getCharacters() / calcShowCount() / getKeyWait(), etc.\n\nExample:\nvar tr = new TextRenderBase();\ntr.setDefault(%[ face: \"MSゴシック\", fontsize: 24, color: 0xFFFFFF ]);\ntr.setRenderSize(400, 300);\ntr.clear();\ntr.render(\"こんにちは%B世界%r！\\n2行目\", 0, 30, 0, false);\ntr.done();\n\nvar chars = tr.getCharacters(0, 0);  // 全文字情報取得\nvar count = tr.calcShowCount(500);    // 500ms時点の表示文字数"
       }
     },
     "krkr_richtext:RichTextRenderBase.TextRenderBase": {
       "hash": "b51e2be63271",
       "ja": {
         "summary": "コンストラクタ"
+      },
+      "tr": {
+        "summary": "Constructor"
       }
     },
     "krkr_richtext:RichTextRenderBase.setOption": {
@@ -21,6 +28,13 @@
         "description": "設定可能なキー:\nignore_color  色指定を無視\nignore_size   サイズ指定を無視\nignore_type   フォント種別指定を無視（bold/italic/shadow/edge）\nignore_face   フォントフェイス指定を無視\nignore_style  スタイル指定を無視（align/pitch）\nignore_ruby   ルビ指定を無視\nignore_delay  時間指定を無視\nwidth_time_scale  文字幅による時間補正（0:しない 1:する）\nlocale        ロケール文字列（例: \"ja_JP\"）",
         "params": {
           "elm": "辞書"
+        }
+      },
+      "tr": {
+        "summary": "Sets rendering options",
+        "description": "Available keys:\nignore_color  ignore color specifications\nignore_size   ignore size specifications\nignore_type   ignore font type specifications (bold/italic/shadow/edge)\nignore_face   ignore font face specifications\nignore_style  ignore style specifications (align/pitch)\nignore_ruby   ignore ruby specifications\nignore_delay  ignore timing specifications\nwidth_time_scale  adjust timing by character width (0: no, 1: yes)\nlocale        locale string (e.g. \"ja_JP\")",
+        "params": {
+          "elm": "Dictionary"
         }
       }
     },
@@ -32,6 +46,13 @@
         "params": {
           "elm": "辞書"
         }
+      },
+      "tr": {
+        "summary": "Sets default values",
+        "description": "Only keys present in the dictionary are applied (other keys keep their current values).\nAfter setDefault, the equivalent of resetFont() / resetStyle() runs internally,\nsyncing the current font and style state to the defaults.\n\nAvailable keys:\nface          font face\nBesides a collection name registered with registerCollection, it can be\na name registered with registerFont, a family name in the font file\n(e.g. \"Noto Sans JP\"), or a combined \"family Style\" name\n(e.g. \"Noto Sans JP Bold\").\nfontsize      font size\nbigfontsize   large font size (for %B)\nsmallfontsize small font size (for %S)\nbold          bold\nitalic        italic\ncolor         text color (RGB)\nshadow        shadow\nshadowcolor   shadow color\nedge          edge\nedgecolor     edge color\nlinespacing   line spacing\npitch         letter spacing\nlinesize      line size\nalign         horizontal alignment (-1: left, 0: center, 1: right)\nvalign        vertical alignment (-1: top, 0: middle, 1: bottom)\nrubysize      ruby size",
+        "params": {
+          "elm": "Dictionary"
+        }
       }
     },
     "krkr_richtext:RichTextRenderBase.setRenderSize": {
@@ -42,30 +63,49 @@
           "width": "領域横幅（0で無制限）",
           "height": "領域縦幅（0で無制限）"
         }
+      },
+      "tr": {
+        "summary": "Sets the size of the rendering area",
+        "params": {
+          "width": "Area width (0 for unlimited)",
+          "height": "Area height (0 for unlimited)"
+        }
       }
     },
     "krkr_richtext:RichTextRenderBase.timeScale": {
       "hash": "3e12fc3ff335",
       "ja": {
         "summary": "レンダリング時間補正"
+      },
+      "tr": {
+        "summary": "Rendering time scale"
       }
     },
     "krkr_richtext:RichTextRenderBase.fontScale": {
       "hash": "868270191048",
       "ja": {
         "summary": "フォントサイズ補正倍率"
+      },
+      "tr": {
+        "summary": "Font size scale factor"
       }
     },
     "krkr_richtext:RichTextRenderBase.defaultFace": {
       "hash": "cf7f03b88eaf",
       "ja": {
         "summary": "デフォルト値プロパティ"
+      },
+      "tr": {
+        "summary": "Default value properties"
       }
     },
     "krkr_richtext:RichTextRenderBase.clear": {
       "hash": "fecc02bc97db",
       "ja": {
         "summary": "レンダリング結果の消去"
+      },
+      "tr": {
+        "summary": "Clears the rendering result"
       }
     },
     "krkr_richtext:RichTextRenderBase.setFont": {
@@ -76,12 +116,22 @@
         "params": {
           "elm": "辞書"
         }
+      },
+      "tr": {
+        "summary": "Sets the font",
+        "description": "Available keys:\nface, fontsize, bold, italic, color, shadow, shadowcolor, edge, edgecolor",
+        "params": {
+          "elm": "Dictionary"
+        }
       }
     },
     "krkr_richtext:RichTextRenderBase.resetFont": {
       "hash": "5e10b3cc430e",
       "ja": {
         "summary": "フォント状態をデフォルトに戻す"
+      },
+      "tr": {
+        "summary": "Resets the font state to the defaults"
       }
     },
     "krkr_richtext:RichTextRenderBase.setStyle": {
@@ -92,12 +142,22 @@
         "params": {
           "elm": "辞書"
         }
+      },
+      "tr": {
+        "summary": "Sets the style",
+        "description": "Available keys:\nlinespacing, pitch, linesize, align, valign",
+        "params": {
+          "elm": "Dictionary"
+        }
       }
     },
     "krkr_richtext:RichTextRenderBase.resetStyle": {
       "hash": "0d3d9ffa62d5",
       "ja": {
         "summary": "スタイル指定をデフォルトに戻す"
+      },
+      "tr": {
+        "summary": "Resets the style to the defaults"
       }
     },
     "krkr_richtext:RichTextRenderBase.render": {
@@ -113,12 +173,27 @@
           "all": "総時間指定（0は自動、ms）",
           "noResetDelay": "true だと以前の表示時間を維持する"
         }
+      },
+      "tr": {
+        "summary": "Renders text",
+        "description": "Can be called multiple times after clear(). The result is not finalized until done() is called.",
+        "returns": "true if rendering succeeded without overflowing",
+        "params": {
+          "str": "String to render (may contain escape notation)",
+          "autoIndent": "Auto indent (0: disabled, 1: enabled, -1: hanging indent) *currently not supported",
+          "diff": "Display time per character (ms)",
+          "all": "Total time (0 for automatic, ms)",
+          "noResetDelay": "If true, the previous display time is kept"
+        }
       }
     },
     "krkr_richtext:RichTextRenderBase.newline": {
       "hash": "8fb1fed71eba",
       "ja": {
         "summary": "新規行にする"
+      },
+      "tr": {
+        "summary": "Starts a new line"
       }
     },
     "krkr_richtext:RichTextRenderBase.done": {
@@ -126,6 +201,10 @@
       "ja": {
         "summary": "レンダリング完了",
         "description": "render() で蓄積したテキストを一括でレイアウトし、\nタイミング・リンク等の情報を確定します。"
+      },
+      "tr": {
+        "summary": "Finishes rendering",
+        "description": "Lays out all the text accumulated by render() at once\nand finalizes timing, link, and other information."
       }
     },
     "krkr_richtext:RichTextRenderBase.onEval": {
@@ -136,6 +215,14 @@
         "returns": "変数値（文字列）",
         "params": {
           "name": "変数名"
+        }
+      },
+      "tr": {
+        "summary": "Handles variable references during rendering",
+        "description": "Called when referenced with the $xxx; notation.\nCan be overridden in a subclass.",
+        "returns": "Variable value (string)",
+        "params": {
+          "name": "Variable name"
         }
       }
     },
@@ -148,6 +235,14 @@
         "params": {
           "name": "ラベル名"
         }
+      },
+      "tr": {
+        "summary": "Handles label references during rendering",
+        "description": "Called when referenced with the %D$xxx; notation.",
+        "returns": "Tick value (ms)",
+        "params": {
+          "name": "Label name"
+        }
       }
     },
     "krkr_richtext:RichTextRenderBase.onGetGraphSize": {
@@ -159,42 +254,68 @@
         "params": {
           "name": "画像名"
         }
+      },
+      "tr": {
+        "summary": "Gets the size of a graphic character",
+        "description": "Called when referenced with the &xxx; notation.",
+        "returns": "%[width: width, height: height]",
+        "params": {
+          "name": "Image name"
+        }
       }
     },
     "krkr_richtext:RichTextRenderBase.renderOver": {
       "hash": "87928b7e794d",
       "ja": {
         "summary": "/ レンダリング結果が領域をはみ出ているかどうか"
+      },
+      "tr": {
+        "summary": "Whether the rendering result overflows the area"
       }
     },
     "krkr_richtext:RichTextRenderBase.renderLines": {
       "hash": "be1a0c1dd428",
       "ja": {
         "summary": "/ レンダリング結果の行数"
+      },
+      "tr": {
+        "summary": "Number of lines in the rendering result"
       }
     },
     "krkr_richtext:RichTextRenderBase.renderCount": {
       "hash": "244662bb78c6",
       "ja": {
         "summary": "/ レンダリング結果の文字数"
+      },
+      "tr": {
+        "summary": "Number of characters in the rendering result"
       }
     },
     "krkr_richtext:RichTextRenderBase.renderDelay": {
       "hash": "546faa9924d3",
       "ja": {
         "summary": "/ レンダリング結果の総表示時間"
+      },
+      "tr": {
+        "summary": "Total display time of the rendering result"
       }
     },
     "krkr_richtext:RichTextRenderBase.renderLeft": {
       "hash": "0ae3caff6a49",
       "ja": {
         "summary": "/ レンダリング結果領域情報"
+      },
+      "tr": {
+        "summary": "Area information of the rendering result"
       }
     },
     "krkr_richtext:RichTextRenderBase.renderText": {
       "hash": "2d13726e9b70",
       "ja": {
         "summary": "/ レンダリング結果テキスト（エスケープ除去済み）"
+      },
+      "tr": {
+        "summary": "Text of the rendering result (escapes removed)"
       }
     },
     "krkr_richtext:RichTextRenderBase.getKeyWait": {
@@ -202,6 +323,10 @@
       "ja": {
         "summary": "キー待ち情報の配列を返す",
         "returns": "[%[pos: 文字位置, time: 時間], ...]"
+      },
+      "tr": {
+        "summary": "Returns an array of key-wait information",
+        "returns": "[%[pos: character position, time: time], ...]"
       }
     },
     "krkr_richtext:RichTextRenderBase.calcShowCount": {
@@ -212,6 +337,13 @@
         "params": {
           "time": "時間（ms）"
         }
+      },
+      "tr": {
+        "summary": "Returns the number of characters displayed at the given time",
+        "returns": "Number of characters displayed",
+        "params": {
+          "time": "Time (ms)"
+        }
       }
     },
     "krkr_richtext:RichTextRenderBase.calcLineOffset": {
@@ -221,6 +353,13 @@
         "returns": "オフセット値",
         "params": {
           "lineno": "行番号"
+        }
+      },
+      "tr": {
+        "summary": "Returns the offset of the given line",
+        "returns": "Offset value",
+        "params": {
+          "lineno": "Line number"
         }
       }
     },
@@ -234,6 +373,15 @@
           "start": "開始文字位置",
           "num": "取得文字数（0で末尾まで）"
         }
+      },
+      "tr": {
+        "summary": "Gets character information of the rendering result",
+        "description": "Each element is a dictionary with the following keys:\ntext       text to display\ngraph      image name when displaying a graphic (void for normal characters)\nx          display X coordinate\ny          display Y coordinate\ncw         display width\nsize       font size\nface       font face\ncolor      display color\nbold       bold\nitalic     italic\nshadow     shadow\nedge       edge\nshadowColor  shadow color\nedgeColor    edge color\ndelay      display timing (elapsed time from the start of display)\nlink       link number (-1 if none)\nlinkName   link name (void if none)\nruby       ruby array [%[text, x, y, size], ...]",
+        "returns": "Array of drawing information",
+        "params": {
+          "start": "Start character position",
+          "num": "Number of characters to get (0 for up to the end)"
+        }
       }
     },
     "krkr_richtext:RichTextRenderBase.getLinkNames": {
@@ -241,6 +389,10 @@
       "ja": {
         "summary": "含まれるリンク名の一覧を返す",
         "returns": "リンク名の配列（重複する名前もそのまま列挙）"
+      },
+      "tr": {
+        "summary": "Returns the list of link names contained",
+        "returns": "Array of link names (duplicate names are listed as is)"
       }
     },
     "krkr_richtext:RichTextRenderBase.getLinkRects": {
@@ -252,6 +404,14 @@
         "params": {
           "link": "リンク番号"
         }
+      },
+      "tr": {
+        "summary": "Gets the area information of a link",
+        "description": "If the link spans multiple lines, multiple rectangles are returned.",
+        "returns": "Array of areas [%[left, top, width, height], ...]",
+        "params": {
+          "link": "Link number"
+        }
       }
     },
     "krkr_richtext:RichTextRenderBase.getLinkCharacters": {
@@ -261,6 +421,13 @@
         "returns": "描画情報の配列（getCharacters と同形式）",
         "params": {
           "link": "リンク番号"
+        }
+      },
+      "tr": {
+        "summary": "Gets the character information belonging to a link",
+        "returns": "Array of drawing information (same format as getCharacters)",
+        "params": {
+          "link": "Link number"
         }
       }
     },
@@ -274,6 +441,15 @@
           "x": "X位置",
           "y": "Y位置"
         }
+      },
+      "tr": {
+        "summary": "Checks whether a position is inside a link",
+        "returns": "true if the position is inside the link",
+        "params": {
+          "link": "Link number",
+          "x": "X position",
+          "y": "Y position"
+        }
       }
     },
     "krkr_richtext:RichTextRenderBase.getLinkOfPosition": {
@@ -284,6 +460,14 @@
         "params": {
           "x": "X位置",
           "y": "Y位置"
+        }
+      },
+      "tr": {
+        "summary": "Returns the link number at the given position",
+        "returns": "Link number (-1: none)",
+        "params": {
+          "x": "X position",
+          "y": "Y position"
         }
       }
     },
@@ -298,6 +482,17 @@
           "x": "描画開始X座標",
           "y": "描画開始Y座標",
           "maxChars": "描画する文字数の上限（-1で全て、省略時: -1）"
+        }
+      },
+      "tr": {
+        "summary": "Draws the rendering result to a layer",
+        "description": "Draws the rendering result finalized by done() to the given layer.\nSpecifying maxChars enables character-by-character display animations.\n\nExample:\ntr.render(\"テキスト\", 0, 50, 0);\ntr.done();\ntr.drawToLayer(layer, 10, 10);\n\n// 文字送り\nvar count = tr.calcShowCount(elapsed);\ntr.drawToLayer(layer, 10, 10, count);",
+        "returns": "Array of the drawn area [x, y, width, height]",
+        "params": {
+          "layer": "Destination layer object",
+          "x": "Drawing start X coordinate",
+          "y": "Drawing start Y coordinate",
+          "maxChars": "Maximum number of characters to draw (-1 for all; default: -1)"
         }
       }
     }

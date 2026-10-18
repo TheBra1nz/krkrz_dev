@@ -6,6 +6,10 @@
       "ja": {
         "summary": "OpenGL ES の描画コンテキストを保持できるアダプター (EGLベース)",
         "description": "描画に使うオブジェクトは egl を使ってコンテキスト処理する前提になります"
+      },
+      "tr": {
+        "summary": "Adapter that holds an OpenGL ES rendering context (EGL-based)",
+        "description": "Objects used for drawing are expected to handle the context via EGL."
       }
     },
     "krkrgles:GLESAdaptor.GLESAdaptor": {
@@ -15,30 +19,48 @@
         "params": {
           "window": "対象ウインドウ"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "window": "Target window"
+        }
       }
     },
     "krkrgles:GLESAdaptor.setScreenSize": {
       "hash": "eaa19a36a106",
       "ja": {
         "summary": "スクリーンサイズの設定"
+      },
+      "tr": {
+        "summary": "Sets the screen size"
       }
     },
     "krkrgles:GLESAdaptor.screenWidth": {
       "hash": "3ed45b7b8307",
       "ja": {
         "summary": "スクリーン横幅"
+      },
+      "tr": {
+        "summary": "Screen width"
       }
     },
     "krkrgles:GLESAdaptor.screenHeihgt": {
       "hash": "3411f773d631",
       "ja": {
         "summary": "スクリーン縦幅"
+      },
+      "tr": {
+        "summary": "Screen height"
       }
     },
     "krkrgles:GLESAdaptor.makeCurrent": {
       "hash": "2f19d2037c0d",
       "ja": {
         "summary": "OpenGL コンテキスト設定"
+      },
+      "tr": {
+        "summary": "Makes the OpenGL context current"
       }
     },
     "krkrgles:GLESAdaptor.capture": {
@@ -51,6 +73,15 @@
           "param": "追加パラメータ",
           "color": "塗りつぶし色"
         }
+      },
+      "tr": {
+        "summary": "Runs OpenGL drawing",
+        "params": {
+          "layer": "Layer that receives the result",
+          "callback": "Drawing function  function(width, height, param)  Runs in this object's context",
+          "param": "Extra parameter",
+          "color": "Fill color"
+        }
       }
     },
     "krkrgles:GLESAdaptor.copyLayer": {
@@ -61,6 +92,14 @@
           "layer": "レイヤ または GLESTexture",
           "left": "左位置",
           "top": "上位置"
+        }
+      },
+      "tr": {
+        "summary": "Copies a layer",
+        "params": {
+          "layer": "Layer or GLESTexture",
+          "left": "Left position",
+          "top": "Top position"
         }
       }
     },
@@ -74,12 +113,24 @@
           "tx,": "ty 平行移動",
           "opacity": "不透明度 0～255 (省略時 255)"
         }
+      },
+      "tr": {
+        "summary": "Draws a layer",
+        "params": {
+          "layer": "Layer or GLESTexture",
+          "a,": "b, c, d: affine transformation matrix (2x2)",
+          "tx,": "ty: translation",
+          "opacity": "Opacity 0-255 (255 if omitted)"
+        }
       }
     },
     "krkrgles:GLESAdaptor.blendMode": {
       "hash": "b03c62154c0a",
       "ja": {
         "summary": "ブレンドモード (tTVPBlendMode 相当: 0=Disable,1=Opaque,2=Alpha,3=Add,...)"
+      },
+      "tr": {
+        "summary": "Blend mode (equivalent to tTVPBlendMode: 0=Disable,1=Opaque,2=Alpha,3=Add,...)"
       }
     },
     "krkrgles:GLESAdaptor.beginEffect": {
@@ -87,6 +138,10 @@
       "ja": {
         "summary": "エフェクト捕捉の開始",
         "description": "以降の描画は中間フレームバッファ(透明クリア済み)へ行われる。\n対応する endEffect() を必ず呼ぶこと。\n\nbeginEffect() ～ endEffect() で囲んだ描画を中間バッファに捕捉し、\n画像加工コマンド列を GPU 上で適用してから直前の描画先へ合成する。\ncapture() のコールバック内で、モジュール(Live2D / drawLayer 等)\nの描画ごとに個別のエフェクトを掛けられる。ネスト可。"
+      },
+      "tr": {
+        "summary": "Starts capturing for an effect",
+        "description": "Subsequent drawing goes to an intermediate framebuffer (cleared to transparent).\nAlways call the matching endEffect().\n\nDrawing enclosed in beginEffect() ... endEffect() is captured into an intermediate buffer,\na sequence of image-processing commands is applied on the GPU, and the result is composited onto the previous render target.\nInside a capture() callback, this lets you apply a separate effect to each module's drawing\n(Live2D, drawLayer, etc.). Can be nested."
       }
     },
     "krkrgles:GLESAdaptor.endEffect": {
@@ -98,6 +153,14 @@
           "commands": "加工コマンドの配列。各要素は辞書で cmd メンバに種別、\n残りのメンバにパラメータを持つ。下記「コマンド一覧」参照。",
           "opacity": "合成時の不透明度(0～255、省略時 255)。α に乗算される。\nLive2D のように自前描画で opacity を解釈しない\nモジュールのレイヤ不透明度を反映するのに使う。\n加工不要なら commands に空配列を渡せば\n「捕捉して opacity 付きで合成するだけ」になる。"
         }
+      },
+      "tr": {
+        "summary": "Applies the effect and composites",
+        "description": "Applies commands in order to what has been drawn since the last beginEffect(), then\ncomposites it onto the previous render target using the current blendMode.\n\nExample: [ %[ cmd:\"grayscale\" ], %[ cmd:\"gamma\", value:1.2 ] ]\n\n**Commands**\n\nPoint operations (consecutive ones are fused into a single pass):\n\n- `%[ cmd:\"grayscale\" ]` — converts to grayscale Y=(19*B+183*G+54*R)>>8\n- `%[ cmd:\"gamma\", value:r ]` (all channels at once) /\n`%[ cmd:\"gamma\", rgamma:.., rfloor:.., rceil:.., ggamma:.., gfloor:.., gceil:.., bgamma:.., bfloor:.., bceil:.. ]` (per channel)\n— gamma correction out = pow(in/255, 1/gamma)*(ceil-floor)+floor\n(same as the engine's Layer.adjustGamma; floor defaults to 0 / ceil defaults to 255)\n- `%[ cmd:\"light\", brightness:b, contrast:c ]` — brightness b (-255 to 255) / contrast c (-100 to 100)\n- `%[ cmd:\"lut\", table:[ ...256要素... ] ]` — 256-entry lookup table shared by all channels\n- `%[ cmd:\"colorize\", hue:h, sat:s, blend:b ]` — hue h (0 to 255) / saturation s (0 to 255) / blend ratio b (0 to 1)\n- `%[ cmd:\"modulate\", hue:h, saturation:s, luminance:l ]` — hue h (-180 to 180) / saturation s (-100 to 100) / luminance l (-100 to 100)\n- `%[ cmd:\"noise\", level:n ]` — adds noise n (0 to 255)\n- `%[ cmd:\"generateWhiteNoise\" ]` — generates grayscale white noise (alpha is preserved)\n- `%[ cmd:\"overcolor\", color:0xAARRGGBB, type:mode, opacity:o ]`\n— composites a fill of the given color over the whole image (follows Kirikiri's fillOperateRect).\nThe upper 8 bits of color (AA) and opacity (0 to 255, default 255) form the compositing alpha.\ntype is a Kirikiri blend mode value (tTVPBlendOperationMode):\n1=Opaque 2=Alpha(default) 3=Additive 4=Subtractive 5=Multiplicative\n8=Dodge 9=Darken 10=Lighten 11=Screen 12=AddAlpha\n13=PsNormal 14=PsAdditive 15=PsSubtractive 16=PsMultiplicative\n17=PsScreen 18=PsOverlay 19=PsHardLight 20=PsSoftLight\n21=PsColorDodge 22=PsColorDodge5 23=PsColorBurn\n24=PsLighten 25=PsDarken 26=PsDifference 27=PsDifference5 28=PsExclusion\n\nNeighborhood operations (two passes, H/V, via an intermediate buffer):\n\n- `%[ cmd:\"boxBlur\", area:r, iter:n ]` — uniform blur of radius r, applied n times (iter defaults to 1)\n- `%[ cmd:\"gaussianBlur\", radius:r ]` — Gaussian blur of radius r\n\nNote: noise, the outermost edge of blurs, and colorize are visually equivalent to, but not bit-exact with, the CPU versions.",
+        "params": {
+          "commands": "Array of processing commands. Each element is a dictionary whose cmd member gives the type\nand whose other members are parameters. See \"Commands\" below.",
+          "opacity": "Opacity used when compositing (0-255, 255 if omitted). Multiplied into alpha.\nUse it to reflect the layer opacity of modules that draw by themselves and do not\ninterpret opacity, such as Live2D.\nIf no processing is needed, pass an empty array as commands to simply\ncapture and composite with opacity."
+        }
       }
     },
     "krkrgles:GLESAdaptor.setClipRect": {
@@ -108,12 +171,22 @@
         "params": {
           "left,": "top, width, height クリップ矩形 (レイヤ座標、左上原点)"
         }
+      },
+      "tr": {
+        "summary": "Sets a rectangular clip",
+        "description": "Subsequent compositing by drawLayer / endEffect / endMaskClip is limited to the rectangle.\nIt also affects direct drawing if the drawing module respects the scissor state, but\nto clip reliably, wrap the drawing in beginMaskClip/endMaskClip.\n\n**Clipping methods** (equivalent to AffineLayer's clip / clipImage)\n\n- Rectangular clip: setClipRect / clearClipRect. Implemented with scissor.\n- Image clip (mask method): drawing enclosed in beginMaskClip() ... endMaskClip() is captured\ninto an intermediate buffer and composited onto the previous render target while multiplying by the mask image's alpha.\nOutside the mask rectangle, alpha is 0 (equivalent to passing 0 as the 8th argument of the CPU Layer.clipAlphaRect).\nSafe to use with drawing modules (Live2D, etc.) as well.\n- Image clip (stencil method): beginStencilClip() ... endStencilClip().\nWrites the mask alpha into the stencil buffer to cut out the drawing. Alpha is binarized by a threshold.\nThis conflicts with drawing modules that use the stencil themselves, so it is\nonly for simple texture drawing with drawLayer.\n\n```tjs\n// 矩形クリップ (単純テクスチャ描画)\nsetClipRect(100, 100, 200, 150);\ndrawLayer(src, 1, 0, 0, 1, 0, 0);\nclearClipRect();\n\n// 画像クリップ mask 方式 (モジュール描画にも安全)\nbeginMaskClip();\ndrawLayer(src, 1, 0, 0, 1, 0, 0);   // または player.render() 等\nendMaskClip(maskTexture, 100, 100);\n\n// 画像クリップ stencil 方式 (drawLayer 専用)\nbeginStencilClip(maskTexture, 100, 100, 1);\ndrawLayer(src, 1, 0, 0, 1, 0, 0);\nendStencilClip();\n```",
+        "params": {
+          "left,": "top, width, height: clip rectangle (layer coordinates, top-left origin)"
+        }
       }
     },
     "krkrgles:GLESAdaptor.clearClipRect": {
       "hash": "a75ed361acda",
       "ja": {
         "summary": "矩形クリップの解除"
+      },
+      "tr": {
+        "summary": "Clears the rectangular clip"
       }
     },
     "krkrgles:GLESAdaptor.beginMaskClip": {
@@ -121,6 +194,10 @@
       "ja": {
         "summary": "マスククリップ捕捉の開始",
         "description": "以降の描画は中間フレームバッファ(透明クリア済み)へ行われる。\n対応する endMaskClip() を必ず呼ぶこと。beginEffect() とネスト可。"
+      },
+      "tr": {
+        "summary": "Starts capturing for a mask clip",
+        "description": "Subsequent drawing goes to an intermediate framebuffer (cleared to transparent).\nAlways call the matching endMaskClip(). Can be nested with beginEffect()."
       }
     },
     "krkrgles:GLESAdaptor.endMaskClip": {
@@ -131,6 +208,14 @@
         "params": {
           "mask": "マスク画像 (GLESTexture または Layer)。void なら素通し合成\n(矩形クリップだけを合成時に確実に適用したい場合に使う)",
           "x,": "y マスク配置位置 (レイヤ座標)"
+        }
+      },
+      "tr": {
+        "summary": "Composites with the mask applied",
+        "description": "Multiplies what has been drawn since the last beginMaskClip() by the mask image's alpha\nand composites it onto the previous render target using the current blendMode.\nOutside the mask rectangle, alpha is 0 (fully clipped).",
+        "params": {
+          "mask": "Mask image (GLESTexture or Layer). If void, composites without masking\n(useful when you only want the rectangular clip to be reliably applied at compositing time)",
+          "x,": "y: mask position (layer coordinates)"
         }
       }
     },
@@ -144,12 +229,24 @@
           "x,": "y マスク配置位置 (レイヤ座標)",
           "threshold": "クリップを有効とする α 閾値 (1～255、省略不可)"
         }
+      },
+      "tr": {
+        "summary": "Starts a stencil clip",
+        "description": "Writes the area where the mask image's alpha is at or above the threshold into the stencil,\nand clips subsequent drawLayer calls to that area.",
+        "params": {
+          "mask": "Mask image (GLESTexture or Layer)",
+          "x,": "y: mask position (layer coordinates)",
+          "threshold": "Alpha threshold at which clipping takes effect (1-255, required)"
+        }
       }
     },
     "krkrgles:GLESAdaptor.endStencilClip": {
       "hash": "5588e0283a68",
       "ja": {
         "summary": "ステンシルクリップの終了"
+      },
+      "tr": {
+        "summary": "Ends the stencil clip"
       }
     }
   }

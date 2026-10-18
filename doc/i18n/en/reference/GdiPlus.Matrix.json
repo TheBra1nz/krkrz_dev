@@ -5,6 +5,9 @@
       "hash": "4215c28d787a",
       "ja": {
         "summary": "マトリックス情報を取り扱うクラス"
+      },
+      "tr": {
+        "summary": "Class that handles matrix information"
       }
     },
     "layerExDraw:GdiPlus.Matrix.Matrix": {
@@ -12,6 +15,10 @@
       "ja": {
         "summary": "コンストラクタ",
         "description": "正規マトリックスを生成する"
+      },
+      "tr": {
+        "summary": "Constructor",
+        "description": "Creates an identity matrix."
       }
     },
     "layerExDraw:GdiPlus.Matrix.Matrix@2": {
@@ -21,6 +28,13 @@
         "params": {
           "rectF": "矩形(RectFクラス) マトリックスの回転部",
           "pointF": "ポイント(PointFクラス) マトリックスの移動部"
+        }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "rectF": "Rectangle (RectF class): the rotation part of the matrix",
+          "pointF": "Point (PointF class): the translation part of the matrix"
         }
       }
     },
@@ -36,12 +50,26 @@
           "dx": "第3行1列",
           "dy": "第3行2列"
         }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "m11": "Row 1, column 1",
+          "m12": "Row 1, column 2",
+          "m21": "Row 2, column 1",
+          "m22": "Row 2, column 2",
+          "dx": "Row 3, column 1",
+          "dy": "Row 3, column 2"
+        }
       }
     },
     "layerExVector:GdiPlus.Matrix": {
       "hash": "4215c28d787a",
       "ja": {
         "summary": "マトリックス情報を取り扱うクラス"
+      },
+      "tr": {
+        "summary": "Class that handles matrix information"
       }
     },
     "layerExVector:GdiPlus.Matrix.Matrix": {
@@ -49,6 +77,10 @@
       "ja": {
         "summary": "コンストラクタ",
         "description": "正規マトリックスを生成する"
+      },
+      "tr": {
+        "summary": "Constructor",
+        "description": "Creates an identity matrix."
       }
     },
     "layerExVector:GdiPlus.Matrix.Matrix@2": {
@@ -62,6 +94,17 @@
           "m22": "第2行2列",
           "dx": "第3行1列",
           "dy": "第3行2列"
+        }
+      },
+      "tr": {
+        "summary": "Constructor",
+        "params": {
+          "m11": "Row 1, column 1",
+          "m12": "Row 1, column 2",
+          "m21": "Row 2, column 1",
+          "m22": "Row 2, column 2",
+          "dx": "Row 3, column 1",
+          "dy": "Row 3, column 2"
         }
       }
     }

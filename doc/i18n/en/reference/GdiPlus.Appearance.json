@@ -6,18 +6,28 @@
       "ja": {
         "summary": "描画外観情報",
         "description": "Illustrator のアピアランスをイメージしてください。\n描画に対して、複数のブラシ（塗り）とペン（線）を指定できます。\n先に追加した方が下に入ります"
+      },
+      "tr": {
+        "summary": "Drawing appearance",
+        "description": "Think of it as Illustrator's Appearance.\nYou can specify multiple brushes (fills) and pens (strokes) for a drawing.\nItems added earlier are placed underneath."
       }
     },
     "layerExDraw:GdiPlus.Appearance.Appearance": {
       "hash": "b51e2be63271",
       "ja": {
         "summary": "コンストラクタ"
+      },
+      "tr": {
+        "summary": "Constructor"
       }
     },
     "layerExDraw:GdiPlus.Appearance.clear": {
       "hash": "e960dad0c5db",
       "ja": {
         "summary": "情報のクリア"
+      },
+      "tr": {
+        "summary": "Clears the information"
       }
     },
     "layerExDraw:GdiPlus.Appearance.addBrush": {
@@ -29,6 +39,15 @@
           "colorOrBrush": "ARGB色指定またはブラシ情報（辞書）",
           "ox": "表示オフセットX",
           "oy": "表示オフセットY"
+        }
+      },
+      "tr": {
+        "summary": "Adds a brush",
+        "description": "Brush definition\nBasics: a point is an array [x,y] or a dictionary %[x:x, y:y]\nA rectangle is an array [x,y,width,height] or a dictionary %[x:x, y:y, width:w, height:h]\nA color is a 32-bit ARGB integer\nFor the parameters, study the GDI+ documentation.\n\ntype: brush type, specified with BrushType\n\nFor BrushTypeSolidColor (same as specifying an ARGB color directly)\ncolor: color (white if omitted)\n\nFor BrushTypeHatchFill\nhatchStyle: hatch style (HatchStyleHorizontal if omitted)\nforeColor: foreground color (white if omitted)\nbackColor: background color (black if omitted)\n\nFor BrushTypeTextureFill\nimage: image\nwrapMode: wrap pattern (WrapModeTile if omitted)\ndstRect: texture area rectangle (whole image if omitted)\n\nFor BrushTypePathGradient\npoints: array of points\ncenterColor: center color\ncenterPoint: center point\nfocusScale: focus scales, [xScale,yScale] or %[xScale:, yScale:]\nsurroundColors: surround colors, an array of colors\n---- The following also apply to BrushTypeLinearGradient\nblend: blend factors, a numeric array [blendFactors, blendPositions] or a dictionary\nblendBellShape: blend shape (bell-shaped) [focus, scale]\nblendTriangularShape: blend shape (triangular) [focus, scale]\ngammaCorrection: whether to enable gamma correction, true/false\ninterpolationColors: [presetColors (array of colors), blendPositions (numeric array)]\n\nFor BrushTypeLinearGradient\nCommon\ncolor1: start color\ncolor2: end color\nwrapMode: wrap pattern (WrapModeTile if omitted)\nPoint form\npoint1: start point\npoint2: end point\nNote: the angle appears to be determined automatically\nRectangle form\nrect: rectangle; the top-left is the start and the bottom-right is the end\nangle: angle (only valid in rectangle form)\nisAngleScalable (whether the angle is scalable)\nmode: mode (LinearGradientModeHorizontal if omitted); effective when angle is not specified",
+        "params": {
+          "colorOrBrush": "ARGB color or brush definition (dictionary)",
+          "ox": "Display offset X",
+          "oy": "Display offset Y"
         }
       }
     },
@@ -43,6 +62,16 @@
           "ox": "表示オフセットX",
           "oy": "表示オフセットY"
         }
+      },
+      "tr": {
+        "summary": "Adds a pen",
+        "description": "Pen definition: if widthOrOption is a dictionary, it is a detailed definition.\nFor the parameters, study the GDI+ documentation.\n\nwidth: pen width\nalignment: alignment; PenAlignmentCenter if omitted\ncompoundArray: compound array, a numeric array\ndashCap: cap style of dashes; DashCapFlat if omitted\ndashOffset: dash offset; 0 if omitted\ndashStyle: dash style. An array (numeric) gives a user-defined pattern. The default is DasyStyleSolid\nstartCap: cap style at the start. LineCapFlat if omitted; AdjustableArrowCap if a dictionary\nendCap: cap style at the end. LineCapFlat if omitted; AdjustableArrowCap if a dictionary\nlineJoin: join style; LineJoinMiter if omitted\nmiterLimit: miter limit (number)\n\nAdjustableArrowCap: for when LineCapArrowAnchor is not enough\nwidth (arrow width), height (arrow height), and filled (true for a triangle, false for a three-pronged arrow) can be specified",
+        "params": {
+          "colorOrBrush": "ARGB color or brush definition (dictionary)",
+          "widthOrOption": "Pen width or pen definition (dictionary)",
+          "ox": "Display offset X",
+          "oy": "Display offset Y"
+        }
       }
     },
     "layerExVector:GdiPlus.Appearance": {
@@ -50,18 +79,28 @@
       "ja": {
         "summary": "描画外観情報",
         "description": "Illustrator のアピアランスをイメージしてください。\n描画に対して、複数のブラシ（塗り）とペン（線）を指定できます。\n先に追加した方が下に入ります"
+      },
+      "tr": {
+        "summary": "Drawing appearance",
+        "description": "Think of it as Illustrator's Appearance.\nYou can specify multiple brushes (fills) and pens (strokes) for a drawing.\nItems added earlier are placed underneath."
       }
     },
     "layerExVector:GdiPlus.Appearance.Appearance": {
       "hash": "b51e2be63271",
       "ja": {
         "summary": "コンストラクタ"
+      },
+      "tr": {
+        "summary": "Constructor"
       }
     },
     "layerExVector:GdiPlus.Appearance.clear": {
       "hash": "e960dad0c5db",
       "ja": {
         "summary": "情報のクリア"
+      },
+      "tr": {
+        "summary": "Clears the information"
       }
     },
     "layerExVector:GdiPlus.Appearance.addBrush": {
@@ -73,6 +112,15 @@
           "colorOrBrush": "ARGB色指定またはブラシ情報（辞書）",
           "ox": "表示オフセットX",
           "oy": "表示オフセットY"
+        }
+      },
+      "tr": {
+        "summary": "Adds a brush",
+        "description": "Brush definition\nBasics: a point is an array [x,y] or a dictionary %[x:x, y:y]\nA color is a 32-bit ARGB integer\n\ntype: brush type, specified with BrushType\n\nFor BrushTypeSolidColor (same as specifying an ARGB color directly)\ncolor: color (white if omitted)\n\nFor BrushTypePathGradient (approximated with a RadialGradient)\ncenterPoint: center point\ncenterColor: center color\nradius: radius (100 if omitted)\n\nFor BrushTypeLinearGradient\npoint1: start point\npoint2: end point\ncolor1: start color\ncolor2: end color",
+        "params": {
+          "colorOrBrush": "ARGB color or brush definition (dictionary)",
+          "ox": "Display offset X",
+          "oy": "Display offset Y"
         }
       }
     },
@@ -86,6 +134,16 @@
           "widthOrOption": "ペン幅またはペン情報（辞書）",
           "ox": "表示オフセットX",
           "oy": "表示オフセットY"
+        }
+      },
+      "tr": {
+        "summary": "Adds a pen",
+        "description": "Pen definition: if widthOrOption is a dictionary, it is a detailed definition.\n\nwidth: pen width\nstartCap / endCap: cap style, specified with a LineCap constant. LineCapFlat if omitted\nlineJoin: join style, specified with a LineJoin constant. LineJoinBevel if omitted\nmiterLimit: miter limit (number)\ndashStyle: dash pattern, specified as a numeric array\ndashOffset: dash offset; 0 if omitted",
+        "params": {
+          "colorOrBrush": "ARGB color or brush definition (dictionary)",
+          "widthOrOption": "Pen width or pen definition (dictionary)",
+          "ox": "Display offset X",
+          "oy": "Display offset Y"
         }
       }
     }
