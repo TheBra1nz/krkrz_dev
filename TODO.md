@@ -41,7 +41,19 @@ krkrz_dev 全体の未対応課題をここに集約する。**詳細な SSOT �
 
 [Versioning.md](src/core/doc/Versioning.md) の「移行メモ」= サマリとタグメッセージの冒頭に置く一覧。 リリース枝へ反映するときに拾う。
 
-(なし)
+- **macOS: ウィンドウのサイズと座標が実ピクセル基準になった** (src/core 6993e5c1)。Retina では
+  `Window.width` / `innerWidth` / `setSize` などの値が従来 (論理ポイント) の 2 倍になる
+  (Windows と同じく「物理ピクセルの大きさを保つ」既定に揃えた)。従来の見え方 (OS の拡大率に
+  合わせた仮想解像度) にしたい場合は起動オプション `-dpiscaling=yes`
+- **Linux (Wayland) も同じ DPI ポリシーになった** (src/core 9d92ac0a)。拡大率 1.25 などの画面では
+  サイズが実ピクセルになる。X11 は従来どおり。`-dpiscaling=yes` も効く
+- **macOS: `Window.width` / `height` (外形) にタイトルバーが入るようになった** (src/core bf80e640)。
+  以前は inner と同じ値だった。外形の値で画面中央に寄せる計算をしている場合は位置が変わる
+- **Windows 以外の共有プラグインはシンボルを既定で公開しない** (tp_stub 35ef31a / src/core 4aac7ad5)。
+  公開されるのは `DLL_EXPORT` 付きの `V2Link` / `V2Unlink` だけ。ncbind / simplebinder の雛形は
+  そのまま動く。入口を自前で書いているプラグインは `DLL_EXPORT` が必要
+- macOS の .app でプラグインを `Contents/MacOS` (実行ファイルと同じ場所) から探すようになった
+  (以前は `Contents/Resources` を見ていて見つからなかった。不具合修正)
 
 2.6.3 (2026-10-13) までの分は krkrz.git のサマリ `247a7592` と タグ `v2.6.3` の「■ 移行メモ」へ載せた
 (非 Windows の物理メモリ量 / macOS の Retina と縦横比 / aspectLock の幅基準 / user:// の 0 バイト)。

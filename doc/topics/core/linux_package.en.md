@@ -1,5 +1,5 @@
 ---
-source_hash: 1638f70fd534
+source_hash: 3b64345ac2fd
 ---
 
 # Linux Distribution Packages (krkrz_linux)
@@ -84,6 +84,20 @@ name would be loaded first. DT_RPATH is searched before that, so
 the bundled version is reliably used. Plugins that set RPATH in their own CMake should use
 `--disable-new-dtags` (if a plugin has RUNPATH, the executable's
 DT_RPATH also stops taking effect).
+
+### Plugin symbol visibility (2026-10 onward)
+
+Shared plugins built with `krkrz_plugin()` no longer export their symbols by default on
+platforms other than Windows (equivalent to `-fvisibility=hidden`). Only `V2Link` /
+`V2Unlink`, which are marked `DLL_EXPORT`, are visible. The ncbind and simplebinder
+scaffolds already mark them, so they work as is. If your plugin defines its own entry
+points, mark them with `DLL_EXPORT`.
+
+Previously everything was exported, so on Linux inline static members with the same name
+(such as ncbind's auto-registration list) were merged across plugins, and loading a second
+ncbind plugin stopped during its load (the same happened on macOS). If you build a plugin
+with your own CMake, use the same settings (`C_VISIBILITY_PRESET` / `CXX_VISIBILITY_PRESET hidden`
+and `VISIBILITY_INLINES_HIDDEN`).
 
 ## Save data location (2026-10 onward)
 
