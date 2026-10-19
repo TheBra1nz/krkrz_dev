@@ -153,6 +153,8 @@ registerHotKey の WINVER 配線)。
 
 | 優先 | 課題 | 内容 |
 |---|---|---|
+| ✅ | Linux で ncbind プラグインを 2 本読むと abort | inline static な ncbAutoRegister::_top が STB_GNU_UNIQUE で公開され、プラグインをまたいで 1 つにまとまっていた (vector_demo = layerExVector + layerExImage で発覚)。2026-10-19 に krkrz_plugin() で Windows 以外の共有プラグインを hidden visibility にして解消 (tp_stub 35ef31a / src/core 4aac7ad5)。sniper で 26 本の _top が 0 件・最小再現 rc=0・ギャラリー 22 シーン ja / en ok・GLIBC 上限 2.30 のまま、macOS / iOS もビルド ok |
+| 低 | 共有プラグインが静的リンクしたサードパーティのシンボルを公開している | krkreffekseer / minizip / sigcheck が OpenSSL 等のシンボルを数千個公開したまま。同じライブラリを 2 本のプラグインが別々に静的リンクすると同種の衝突が起き得る。対策候補 = `-Wl,--exclude-libs,ALL` (未検証) |
 | 中 | 多言語化: デモ用 i18n 基礎ライブラリ + 実効表示言語の公開 | `demolib/demo_i18n.tjs` (Elements の `strings` と同じ形の表を共用) と `System.uiLanguage` / `uiLanguageCandidates`。当面 ja / en、chs を後から足せる作り。SSOT = [TODO-i18n.md](TODO-i18n.md) A・B |
 | 中 | 多言語化: 公開ドキュメントの英語版 | 公開サイトの範囲のみ。mkdocs-static-i18n (接尾辞方式 `*.en.md`) + reference は JSON の翻訳カタログから生成 + 訳の鮮度チェック。SSOT = [TODO-i18n.md](TODO-i18n.md) C |
 | 中 | krkrlive2d のドライバソースを版固定取得へ | ドライバ側 CMake がローカルパス (`LIVE2DLIB_FOLDER` / `CUBISM_SDK` 等) を直接参照する作りで、そのフォルダの版がずれると **umbrella の configure ごと失敗する** (実例: ドライバが `find_package(minizip)` を要求する版になり、本体 vcpkg マニフェストに minizip が無くて configure 不能)。 版を固定して fetch する形へ直すまで、`CMakeLists.txt` の `CUBISM_SDK` ブロックをコメントアウトしてビルド対象から外してある (2edc380)。 直したら除外を戻す |
