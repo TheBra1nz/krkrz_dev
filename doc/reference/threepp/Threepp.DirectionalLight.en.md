@@ -4,6 +4,10 @@ Directional light (like sunlight)
 
 A light whose rays are emitted in parallel from infinitely far away. It can cast shadows.
 
+To cast shadows, set castShadow=true, call renderer.setShadowMapEnabled(true),
+and set receiveShadow=true on the receiving objects.
+Directional light shadows are rendered with an orthographic camera, so specify the area covering the scene with setShadowOrthoBounds.
+
 ## Members
 
 ### Constructors
@@ -66,7 +70,7 @@ Method
 
 **Description**
 
---- Shadows (ShadowMap) --- For this light to cast shadows, set castShadow=true, call renderer.setShadowMapEnabled(true), and set receiveShadow=true on the receiving objects. Directional light shadows are rendered with an orthographic camera, so specify the area covering the scene with setShadowOrthoBounds.
+Shadow map resolution (default 2048x2048)
 
 ---
 

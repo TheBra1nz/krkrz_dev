@@ -1,5 +1,5 @@
 ---
-source_hash: 681013a76569
+source_hash: 8783ef22bb24
 ---
 
 # Dictionary Class
@@ -65,7 +65,7 @@ Instead, use the **incontextof** operator to run a method that belongs directly 
 
 saveStruct writes structured data to a file.
 
-See the method of the same name in .
+See the method of the same name in the [Array class](array.md#savestruct).
 
 ## assign
 

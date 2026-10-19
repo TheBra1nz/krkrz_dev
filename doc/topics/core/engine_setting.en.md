@@ -1,5 +1,5 @@
 ---
-source_hash: b5acb6b1eb48
+source_hash: c833111d89e0
 ---
 
 # Adding/Editing Engine Settings
@@ -55,14 +55,12 @@ For the real thing, see the engine's `src/core/resource/optiondesc.json` ( 7 cat
     "options": [
       {
         "caption":     "データ保存場所",
-        "description": "吉里吉里が様々なデータを保存する場所を指定します。
-
-...",
+        "description": "吉里吉里が様々なデータを保存する場所を指定します。\n\n...",
         "name":        "datapath",
         "type":        "string",
         "length":      255,
         "user":        false,
-        "value":       "$(exepath)\savedata"
+        "value":       "$(exepath)\\savedata"
       },
       {
         "caption":     "処理ウェイト",
@@ -92,8 +90,7 @@ For the real thing, see the engine's `src/core/resource/optiondesc.json` ( 7 cat
 | Key | Required | Description |
 |---|---|---|
 | `caption`     | ○ | Item name shown in the configuration tool |
-| `description` | ○ | Description text. Use `
-` for a line break |
+| `description` | ○ | Description text. Use `\n` for a line break |
 | `name`        | ○ | Command-line option name ( without the leading `-`; `datapath` means `-datapath=` ) |
 | `type`        | ○ | `"select"` ( choose from options ) or `"string"` ( free input ) |
 | `user`        | ○ | Whether to show it in the end-user configuration tool ( `-userconf` ). If `false`, it appears only in the Releaser's settings for developers |

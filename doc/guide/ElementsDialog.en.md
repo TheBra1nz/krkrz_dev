@@ -1,5 +1,5 @@
 ---
-source_hash: 1d467109bfc4
+source_hash: f21ded550dcf
 ---
 
 # Dialogs
@@ -302,7 +302,7 @@ If you write code expecting your own name to arrive in `id`, **only that input s
 
 ## Minimal example
 
-Implement [onAction](../reference/ElementsDialog.md#onaction) in a class derived from [Dialog](../reference/ElementsDialog.md), and show it by passing a JSON layout.
+Implement [onAction](../reference/ElementsDialog.md#onaction) in a class derived from [ElementsDialog](../reference/ElementsDialog.md), and show it by passing a JSON layout.
 
 ```tjs
 class TestDialog extends ElementsDialog {
@@ -339,7 +339,7 @@ dlg.showJson(json);             // 非モーダル
 // var r = dlg.showModalJson(json);                       // ゲーム画面オーバーレイ
 ```
 
-For the list of how to describe widgets such as buttons and text fields in JSON, see the [Dialog](../reference/ElementsDialog.md) class reference.
+For the list of how to describe widgets such as buttons and text fields in JSON, see the [ElementsDialog](../reference/ElementsDialog.md) class reference.
 
 ## Registering fonts
 

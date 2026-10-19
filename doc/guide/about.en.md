@@ -1,5 +1,5 @@
 ---
-source_hash: 542c54e1fc50
+source_hash: 972af010b035
 ---
 
 # About Kirikiri Z
@@ -10,7 +10,7 @@ Kirikiri Z is a fork of Kirikiri 2 that aims to support building with Visual C++
 
 This documentation covers the derivative maintained by Wamsoft Ltd. Partnership ( [wamsoft/krkrz_dev](https://github.com/wamsoft/krkrz_dev) ).
 
-For the TJS2 syntax, see the TJS2 help.
+For the TJS2 syntax, see the [TJS2 Language Reference](../tjs2/index.md).
 
 This documentation focuses on the Kirikiri classes.
 

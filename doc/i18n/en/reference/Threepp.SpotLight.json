@@ -2,14 +2,14 @@
   "class": "Threepp.SpotLight",
   "entries": {
     "krkrthreepp:Threepp.SpotLight": {
-      "hash": "91294d1c308f",
+      "hash": "189ae304840a",
       "ja": {
         "summary": "スポットライト",
-        "description": "一点から円錐状に照射される光源です。"
+        "description": "一点から円錐状に照射される光源です。\n\n影の設定は DirectionalLight と同様です。スポットライトの影は透視カメラで焼きます (角度は angle に依存)。"
       },
       "tr": {
         "summary": "Spotlight",
-        "description": "A light emitted from a single point in a cone."
+        "description": "A light emitted from a single point in a cone.\n\nShadows are set up in the same way as for DirectionalLight. Spotlight shadows are rendered with a perspective camera (its angle depends on angle)."
       }
     },
     "krkrthreepp:Threepp.SpotLight.SpotLight": {
@@ -101,12 +101,48 @@
       }
     },
     "krkrthreepp:Threepp.SpotLight.setShadowMapSize": {
-      "hash": "c94daf3e0502",
+      "hash": "b82110712d1d",
       "ja": {
-        "summary": "--- 影(ShadowMap) --- スポットライトの影は透視カメラで焼く(角度は angle 依存)"
+        "summary": "シャドウマップ解像度 (既定 2048x2048)"
       },
       "tr": {
-        "summary": "--- Shadows (ShadowMap) --- Spotlight shadows are rendered with a perspective camera (its angle depends on angle)."
+        "summary": "Shadow map resolution (default 2048x2048)"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.setShadowBias": {
+      "hash": "eeb49b75ef3d",
+      "ja": {
+        "summary": "影のアクネ対策バイアス (例 -0.0005)"
+      },
+      "tr": {
+        "summary": "Shadow bias to reduce shadow acne (e.g. -0.0005)"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.setShadowNormalBias": {
+      "hash": "3fb6131d7c96",
+      "ja": {
+        "summary": "法線方向バイアス"
+      },
+      "tr": {
+        "summary": "Bias along the normal"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.setShadowRadius": {
+      "hash": "608bd86dc8e5",
+      "ja": {
+        "summary": "ソフトシャドウ半径 (PCF)"
+      },
+      "tr": {
+        "summary": "Soft shadow radius (PCF)"
+      }
+    },
+    "krkrthreepp:Threepp.SpotLight.setShadowNearFar": {
+      "hash": "f7803d0ec7c7",
+      "ja": {
+        "summary": "影用カメラの near/far"
+      },
+      "tr": {
+        "summary": "near/far of the shadow camera"
       }
     },
     "krkrthreepp:Threepp.SpotLight.dispose": {

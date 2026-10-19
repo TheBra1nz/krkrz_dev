@@ -39,31 +39,31 @@
         "summary": "Render both faces"
       }
     },
-    "krkrthreepp:Threepp.Loop_Once@2": {
-      "hash": "abf8fcfc3bcf",
+    "krkrthreepp:Threepp.Loop_Once": {
+      "hash": "7435875ccd9a",
       "ja": {
-        "summary": "Loop モード定数 (AnimationAction.setLoop に渡す)"
+        "summary": "1回で停止"
       },
       "tr": {
-        "summary": "Loop mode constants (passed to AnimationAction.setLoop)"
+        "summary": "Stop after one pass"
       }
     },
-    "krkrthreepp:Threepp.Loop_Repeat@2": {
+    "krkrthreepp:Threepp.Loop_Repeat": {
       "hash": "13152bbeb00a",
       "ja": {
         "summary": "ループ (ModelAnimator.play の既定)"
       },
       "tr": {
-        "summary": "Loop (default for ModelAnimator.play)"
+        "summary": "Loop (the default of ModelAnimator.play)"
       }
     },
-    "krkrthreepp:Threepp.Loop_PingPong@2": {
+    "krkrthreepp:Threepp.Loop_PingPong": {
       "hash": "ab4f075439e5",
       "ja": {
         "summary": "往復"
       },
       "tr": {
-        "summary": "Ping-pong"
+        "summary": "Back and forth"
       }
     }
   }

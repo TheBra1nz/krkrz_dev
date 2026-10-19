@@ -57,7 +57,7 @@ Method
 
 | Arguments | Default | Description |
 | --- | --- | --- |
-| `newline` | `1` |  |
+| `newline` | `1` | Newline code. 0: CRLF, 1: LF. |
 | `option` | `0` | Formatting options: a combination of sso* flags (see below), or a numeric value. |
 
 **Return value**

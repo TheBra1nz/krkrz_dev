@@ -15,7 +15,7 @@
 ### メソッド
 
 - [start](#start)
-- [start](#start)
+- [stop](#stop)
 - [onRequest](#onrequest)
 
 ### 定数
@@ -83,7 +83,7 @@
 
 ---
 
-### start
+### stop
 
 メソッド
 

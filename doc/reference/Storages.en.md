@@ -1706,7 +1706,7 @@ Method
 
 | Arguments | Default | Description |
 | --- | --- | --- |
-| `filename` | `&nbsp;` |  |
+| `filename` | `&nbsp;` | File or directory name |
 | `attr` | `&nbsp;` | Attributes to set (FILE_ATTRIBUTE_READONLY, FILE_ATTRIBUTE_HIDDEN, ...) |
 
 **Description**
@@ -1723,7 +1723,7 @@ Method
 
 | Arguments | Default | Description |
 | --- | --- | --- |
-| `filename` | `&nbsp;` |  |
+| `filename` | `&nbsp;` | File or directory name |
 | `attr` | `&nbsp;` | Attributes to clear (FILE_ATTRIBUTE_READONLY, FILE_ATTRIBUTE_HIDDEN, ...) |
 
 **Description**
@@ -1962,9 +1962,8 @@ true if the file exists
 
 **Description**
 
-Without normalizing the path or searching autoPath,
+Checks whether a file exists without normalizing the path or searching autoPath
 
-checks whether the file exists.
 Note: in environments where the engine has a method of the same name, the engine version is used
 (this plugin registers it only as a fallback in older environments where the engine lacks it).
 See the engine's [Storages.isExistentStorageNoSearchNoNormalize](Storages.md#isexistentstoragenosearchnonormalize) for the specification.

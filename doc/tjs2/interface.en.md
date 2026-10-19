@@ -1,5 +1,5 @@
 ---
-source_hash: 107aef1563f5
+source_hash: afc2e564d15a
 ---
 
 # The iTJSDispatch2 Interface
@@ -635,9 +635,9 @@ The arguments are as follows.
 - **tjs_uint32 flag**  
   Call flags (see below).
 - **const tjs_char * membername**  
-  The name of the member to operate on.
+  The name of the member to check.
   
-  If NULL, the operation applies to this object itself. In that case, this object must be able to create new objects.
+  If NULL, checks whether this object itself is an instance of the specified class.
 - **tjs_uint32 *hint**  
   The storage for a variable that holds the hint. May be NULL.
   
@@ -645,7 +645,7 @@ The arguments are as follows.
 - **const tjs_char *classname**  
   The class name as a string.
 - **iTJSDispatch2 *objthis**  
-  The context (this object) used when creating the object.
+  The context (this object) in which this method runs.
 
 ## IsInstanceOfByNum
 
@@ -751,7 +751,7 @@ The arguments are as follows.
     
     v <<= p
   - **TJS_OP_SR**  
-    Bitwise left shift
+    Logical right shift (unsigned right shift)
     
     v >>>= p
   - **TJS_OP_INC**  

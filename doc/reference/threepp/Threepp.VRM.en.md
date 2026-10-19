@@ -125,9 +125,9 @@ Method
 
 **Description**
 
-Per-frame update. Applies humanoid rig transfer + constraints (node_constraint) + expressions + look-at +
+Per-frame update
 
-spring bones (springBone) all together.
+Applies humanoid rig transfer + constraints (node_constraint) + expressions + look-at + spring bones (springBone) all together.
 
 ---
 
@@ -144,7 +144,7 @@ Method
 
 **Description**
 
---- Expressions ---
+Sets an expression weight (name: "happy"/"blink"/"aa", etc.; weight 0..1)
 
 ---
 
@@ -213,7 +213,9 @@ Method
 
 **Description**
 
---- Raw morphs (specify blend shapes directly; applied as an override after expressions) ---
+Sets an individual morph by name (VRoid: "Fcl_*", etc.)
+
+Specifies a blend shape directly. Applied as an override after expressions.
 
 ---
 
@@ -277,7 +279,7 @@ Method
 
 **Description**
 
---- Look-at (LookAt) ---
+Sets the look-at target (world coordinates)
 
 ---
 
@@ -316,8 +318,6 @@ Method
 
 Applies a VRM animation at time (seconds). After applying, update(dt) transfers it to the raw bones.
 
---- Animation ---
-
 ---
 
 ### applyAnimationBlend
@@ -353,7 +353,7 @@ Method
 
 Applies a pose. arr is a flat array of [bone name, qx, qy, qz, qw, …].
 
---- Pose (local rotations of the normalized rig) ---
+The rotations are local rotations of the normalized rig.
 
 ---
 
@@ -443,9 +443,8 @@ Method
 
 Uniform scale for springBone collider radii (default 1.0 = faithful).
 
-VRoid models have colliders that fit the body tightly and cover the sides of the torso poorly, so if hair sinks into clothing, a value around 1.2 to 1.4 helps (opt-in; non-standard).
-
---- Spring bones (SpringBone) ---
+VRoid models have colliders that fit the body tightly and cover the sides of the torso poorly, so if hair sinks into clothing,
+a value around 1.2 to 1.4 helps (opt-in; non-standard).
 
 ---
 
@@ -477,7 +476,7 @@ Method
 
 **Description**
 
---- Materials (per glTF material) --- name prefers an exact match; if there is none, the operation applies to every material that partially matches. The return value is the number of materials affected. Use these to show or hide VRoid clothing parts (jackets, ribbons, etc.), recolor them, or darken the whole model. Effective color = original color × setMaterialColor color × setTint color (applied to MToon's lit/shade/emissive/rim/matcap and outline colors).
+-> int
 
 ---
 
@@ -520,7 +519,10 @@ Method
 
 **Description**
 
--> number of materials affected
+Shows or hides materials -> number of materials affected
+
+name prefers an exact match; if there is none, the operation applies to every material that partially matches. The return value is the number of materials affected.
+Use it to show or hide VRoid clothing parts (jackets, ribbons, etc.).
 
 ---
 
@@ -557,6 +559,10 @@ Method
 
 Multiply color (1,1,1 = original color) -> number of materials affected
 
+name prefers an exact match; if there is none, the operation applies to every material that partially matches. The return value is the number of materials affected.
+Effective color = original color × setMaterialColor color × setTint color (applied to MToon's lit/shade/emissive/rim/
+matcap and outline colors). Use it to recolor VRoid clothing parts.
+
 ---
 
 ### setTint
@@ -575,6 +581,8 @@ Method
 
 Multiply color for all materials (1,1,1 = original color)
 
+Multiplied on top of the setMaterialColor color. Use it to adjust the overall darkness.
+
 ---
 
 ### getMetaName
@@ -583,7 +591,7 @@ Method
 
 **Description**
 
---- Meta information ---
+-> string
 
 ---
 

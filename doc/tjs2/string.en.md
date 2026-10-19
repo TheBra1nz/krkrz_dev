@@ -1,5 +1,5 @@
 ---
-source_hash: dea0706e7d63
+source_hash: 4674a32a7098
 ---
 
 # Operations on Strings
@@ -141,9 +141,7 @@ The replace method performs string replacement.
 
 Replaces parts of the string according to the regular expression pattern and returns the resulting string. The original string is not modified.
 
-For details on its behavior, see the replace method of
-
-.
+For details on its behavior, see the replace method of the [RegExp class](regexp.md#replace).
 
 ## split
 
@@ -155,9 +153,7 @@ The split method splits the string.
 
 The first argument is a pattern or a set of delimiter characters; the second is reserved; the third specifies whether to ignore empty elements (default false). Returns an array object containing the result of splitting the string.
 
-See also the split method of
-
-(note the different argument order).
+See also the split method of the [RegExp class](regexp.md#split) (note the different argument order).
 
 ## escape
 

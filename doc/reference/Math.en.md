@@ -18,8 +18,8 @@ Method
 
 | Arguments | Default | Description |
 | --- | --- | --- |
-| `a` | `&nbsp;` |  |
-| `b` | `void` |  |
+| `a` | `&nbsp;` | octet |
+| `b` | `void` | octet (optional) |
 
 **Return value**
 

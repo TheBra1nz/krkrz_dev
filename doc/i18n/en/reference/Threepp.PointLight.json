@@ -2,14 +2,14 @@
   "class": "Threepp.PointLight",
   "entries": {
     "krkrthreepp:Threepp.PointLight": {
-      "hash": "2690bc326ca9",
+      "hash": "d12197814f37",
       "ja": {
         "summary": "点光源",
-        "description": "一点から全方向に照射される光源です。"
+        "description": "一点から全方向に照射される光源です。\n\n影の設定は DirectionalLight と同様です。ただし setShadowOrthoBounds は平行光源専用で、点光源では効果がありません。"
       },
       "tr": {
         "summary": "Point light",
-        "description": "A light emitted from a single point in all directions."
+        "description": "A light emitted from a single point in all directions.\n\nShadows are set up in the same way as for DirectionalLight. However, setShadowOrthoBounds is for directional lights only and has no effect on point lights."
       }
     },
     "krkrthreepp:Threepp.PointLight.PointLight": {
@@ -79,12 +79,48 @@
       }
     },
     "krkrthreepp:Threepp.PointLight.setShadowMapSize": {
-      "hash": "d1f11a7ac60c",
+      "hash": "b82110712d1d",
       "ja": {
-        "summary": "--- 影(ShadowMap) --- ※ setShadowOrthoBounds は平行光源専用(点光源では無効)"
+        "summary": "シャドウマップ解像度 (既定 2048x2048)"
       },
       "tr": {
-        "summary": "--- Shadows (ShadowMap) --- Note: setShadowOrthoBounds is for directional lights only (it has no effect on point lights)."
+        "summary": "Shadow map resolution (default 2048x2048)"
+      }
+    },
+    "krkrthreepp:Threepp.PointLight.setShadowBias": {
+      "hash": "eeb49b75ef3d",
+      "ja": {
+        "summary": "影のアクネ対策バイアス (例 -0.0005)"
+      },
+      "tr": {
+        "summary": "Shadow bias to reduce shadow acne (e.g. -0.0005)"
+      }
+    },
+    "krkrthreepp:Threepp.PointLight.setShadowNormalBias": {
+      "hash": "3fb6131d7c96",
+      "ja": {
+        "summary": "法線方向バイアス"
+      },
+      "tr": {
+        "summary": "Bias along the normal"
+      }
+    },
+    "krkrthreepp:Threepp.PointLight.setShadowRadius": {
+      "hash": "608bd86dc8e5",
+      "ja": {
+        "summary": "ソフトシャドウ半径 (PCF)"
+      },
+      "tr": {
+        "summary": "Soft shadow radius (PCF)"
+      }
+    },
+    "krkrthreepp:Threepp.PointLight.setShadowNearFar": {
+      "hash": "f7803d0ec7c7",
+      "ja": {
+        "summary": "影用カメラの near/far"
+      },
+      "tr": {
+        "summary": "near/far of the shadow camera"
       }
     },
     "krkrthreepp:Threepp.PointLight.dispose": {

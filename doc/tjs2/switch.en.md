@@ -1,5 +1,5 @@
 ---
-source_hash: 48e9412963df
+source_hash: 0d64eeb16ed5
 ---
 
 # switch Statement
@@ -29,7 +29,7 @@ base_expression is an expression, and it is evaluated first. Each condition_expr
 
 The condition_expression? entries are evaluated one after another within the block. When a result equals base_expression, execution starts from there. Statements written before a matching condition_expression? are skipped. Once a match is found, subsequent case and default labels are ignored.
 
-default: can be omitted. If default is present, the statements following default are executed unconditionally.
+default: can be omitted. If default is present, the statements following default are executed when none of the condition_expression? entries match.
 
 To leave the block, write **break**;. Forgetting break and running on into the next case is a common mistake, so be careful.
 
@@ -40,13 +40,13 @@ To leave the block, write **break**;. Forgetting break and running on into the n
 		inform("a is 0");
 		break;
 	case 1:
-		inform("b is 1");
+		inform("a is 1");
 		break;
 	case 2:
-		inform("b is 2");
+		inform("a is 2");
 		break;
 	default:
-		inform("b is neither 0, 1 nor 2");
+		inform("a is neither 0, 1 nor 2");
 	}
 
 

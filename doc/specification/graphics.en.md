@@ -1,5 +1,5 @@
 ---
-source_hash: 888fd9b54553
+source_hash: 5e623e59194b
 ---
 
 # Image Processing
@@ -54,7 +54,7 @@ The table below lists the layer compositing operations (layer types). In the for
 | 1 | Opaque | result = src | Composites without referring to the alpha channel. |
 | 2 | Alpha | result = blend(dest, src, α) | Performs alpha compositing.<br>This is the most basic type for transparency. |
 | 3 | Additive alpha | result = min(1.0, dest × ( 1.0 - α ) + src) | Performs additive alpha compositing. |
-| 4 | Additive | result = min(1.0, dest × ( 1.0 - α ) + src) | Performs additive compositing. Well suited to glow effects.<br>Equivalent to Photoshop's "Linear Dodge" (see 11), except that alpha is ignored in this operation.<br>The neutral color (the color that causes no change when composited) is black. |
+| 4 | Additive | result = min(1.0, dest + src) | Performs additive compositing. Well suited to glow effects.<br>Equivalent to Photoshop's "Linear Dodge" (see 11), except that alpha is ignored in this operation.<br>The neutral color (the color that causes no change when composited) is black. |
 | 5 | Subtractive | result = max(0.0, dest + src - 1.0)<br>* The only difference from result = dest - src is whether src is inverted. | Performs subtractive compositing. α is ignored.<br>The neutral color is white. |
 | 6 | Multiplicative | result = dest × src | Performs multiplicative compositing.<br>α is ignored.<br>The neutral color is white. |
 | 7 | Dodge | result = min(1.0, dest ÷ ( 1.0 - src ) ) | Performs dodge compositing.<br>Well suited to depicting objects lit by light.<br>α is ignored.<br>The neutral color is black. |
@@ -67,7 +67,7 @@ The table below lists the layer compositing operations (layer types). In the for
 | 14 | Photoshop-compatible<br>Screen | result = blend(dest, 1.0 - (1.0 - dest) × (1.0 - src), α) | Performs Photoshop-compatible "Screen" compositing.<br>Unlike 10 (Screen), α is not ignored.<br>The neutral color is black. |
 | 15 | Photoshop-compatible<br>Overlay | result = blend(dest, overlay(dest, src), α)<br>where overlay(a, b) =<br>a × b × 2.0 (if a < 0.5)<br>1.0 - (1.0 - a) × (1.0 - b) × 2.0 (otherwise) | Performs Photoshop-compatible "Overlay" compositing.<br>The neutral color is 50% gray. |
 | 16 | Photoshop-compatible<br>Hard Light | result = blend(dest, hardlight(dest, src), α)<br>where hardlight(a, b) =<br>a × b × 2.0 (if b < 0.5)<br>1.0 - (1.0 - a) × (1.0 - b) × 2.0 (otherwise) | Performs Photoshop-compatible "Hard Light" compositing.<br>The neutral color is 50% gray. |
-| 17 | Photoshop-compatible<br>Soft Light | result = blend(dest, softlight(dest, src), α)<br>where softlight(a, b) =<br>(formula to be added later) | Performs Photoshop-compatible "Soft Light" compositing.<br>The neutral color is 50% gray. |
+| 17 | Photoshop-compatible<br>Soft Light | result = blend(dest, softlight(dest, src), α)<br>where softlight(a, b) =<br>a<sup>0.5 ÷ b</sup> (when b ≥ 0.5)<br>a<sup>2.0 × (1.0 - b)</sup> (otherwise) | Performs Photoshop-compatible "Soft Light" compositing.<br>The neutral color is 50% gray. |
 | 18 | Photoshop-compatible<br>Color Dodge | result = blend(dest, min(1.0, dest ÷ ( 1.0 - src ) ), α) | Performs Photoshop-compatible "Color Dodge" compositing.<br>Unlike ltDodge, α is not ignored.<br>The neutral color is black. |
 | 19 | Photoshop 5.x and earlier compatible<br>Color Dodge | result = min(1.0, dest ÷ ( 1.0 - src × α) ) | Performs "Color Dodge" compositing compatible with Photoshop 5.x and earlier.<br>The formula differs slightly from 18 (Photoshop-compatible Color Dodge).<br>The neutral color is black. |
 | 20 | Photoshop-compatible<br>Color Burn | result = blend(dest, max(0.0, 1.0 - (1.0 - dest) ÷ src), α) | Performs Photoshop-compatible "Color Burn" compositing.<br>The neutral color is white. |

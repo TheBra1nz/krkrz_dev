@@ -2164,21 +2164,27 @@
       }
     },
     "windowEx:System.getDisplayMonitors": {
-      "hash": "e7ac3247b567",
+      "hash": "fff95eb2b2b8",
       "ja": {
         "summary": "モニタの情報一覧を取得",
-        "description": "全てのモニタを列挙する",
+        "description": "範囲枠 (x, y, w, h) を指定すると交わるモニタのみを返す。全省略で全てのモニタを返す。\n全てのモニタを列挙する",
         "returns": "[ %[ name, primary, monitor:%[ x, y, w, h ], work:%[ x,y,w,h ], intersect:%[ x,y,w,h ] ], ... ];\nname:      モニタの名前('\\\\.\\DISPLAY?' 等)\nprimary:   プライマリモニタかどうか\nmonitor:   モニタの範囲辞書\nwork:      モニタのワークエリア範囲(ウィンドウを最大化したときなどの表示範囲)\nintersect: 指定範囲と交わる領域(指定しなかった場合は monitor と同じ)",
         "params": {
-          "x,y,w,h": "範囲枠指定。交わるモニタのみを返す。全省略で全てのモニタを返す。"
+          "x": "範囲枠の左端",
+          "y": "範囲枠の上端",
+          "w": "範囲枠の幅",
+          "h": "範囲枠の高さ"
         }
       },
       "tr": {
         "summary": "Gets the list of monitor information",
-        "description": "Enumerates all monitors.",
+        "description": "If a range (x, y, w, h) is specified, only monitors that intersect it are returned. If all are omitted, all monitors are returned.\nEnumerates all monitors.",
         "returns": "[ %[ name, primary, monitor:%[ x, y, w, h ], work:%[ x,y,w,h ], intersect:%[ x,y,w,h ] ], ... ];\nname:      monitor name ('\\\\.\\DISPLAY?', etc.)\nprimary:   whether it is the primary monitor\nmonitor:   dictionary of the monitor's area\nwork:      the monitor's work area (the visible area when a window is maximized, etc.)\nintersect: area intersecting the specified range (same as monitor if no range is specified)",
         "params": {
-          "x,y,w,h": "Range. Only monitors that intersect it are returned. If all are omitted, all monitors are returned."
+          "x": "Left edge of the range",
+          "y": "Top edge of the range",
+          "w": "Width of the range",
+          "h": "Height of the range"
         }
       }
     },
@@ -2192,15 +2198,17 @@
       }
     },
     "windowEx:System.getMonitorInfo": {
-      "hash": "f5538b5d46f9",
+      "hash": "210aeab6d5bc",
       "ja": {
         "summary": "モニタ情報を取得",
         "description": "プライマリモニタを返す",
         "returns": "%[ name, primary, monitor:%[ x, y, w, h ], work:%[ x, y, w, h ] ];\nモニタの情報。辞書内容は getDisplayMonitors と同じ (ただし intersect 情報は無い)。\nnear=false 時でモニタが無い場合は void を返す。",
         "params": {
           "near": "trueなら対象モニタが無かった場合に最も近いモニタの情報を返す",
-          "x,y": "座標指定",
-          "x,y,w,h": "範囲指定",
+          "x": "座標指定のX / 範囲指定の左端",
+          "y": "座標指定のY / 範囲指定の上端",
+          "w": "範囲指定の幅 (x,y,w,h で範囲指定)",
+          "h": "範囲指定の高さ",
           "window": "ウィンドウ指定（Window オブジェクトを渡す）"
         }
       },
@@ -2210,8 +2218,10 @@
         "returns": "%[ name, primary, monitor:%[ x, y, w, h ], work:%[ x, y, w, h ] ];\nMonitor information. The dictionary contents are the same as getDisplayMonitors (but without intersect).\nWhen near=false and there is no monitor, void is returned.",
         "params": {
           "near": "If true, returns the information of the nearest monitor when there is no target monitor",
-          "x,y": "Coordinates",
-          "x,y,w,h": "Range",
+          "x": "X of the coordinates / left edge of the range",
+          "y": "Y of the coordinates / top edge of the range",
+          "w": "Width of the range (x,y,w,h specify a range)",
+          "h": "Height of the range",
           "window": "Window (pass a Window object)"
         }
       }
@@ -2390,9 +2400,9 @@
       }
     },
     "windowEx:System.findWindowEx": {
-      "hash": "a11ee2977c25",
+      "hash": "70845bc436a0",
       "ja": {
-        "summary": "findWindoeEx のラッパ",
+        "summary": "Win32 API FindWindowEx のラッパ",
         "returns": "成功した場合はHWND数値",
         "params": {
           "winname": "ウインドウ名",
@@ -2402,7 +2412,7 @@
         }
       },
       "tr": {
-        "summary": "Wrapper for FindWindowEx",
+        "summary": "Wrapper for the Win32 API FindWindowEx",
         "returns": "The HWND as a number on success",
         "params": {
           "winname": "Window name",

@@ -1,5 +1,5 @@
 ---
-source_hash: 28d2ba50587d
+source_hash: 73a367d441bf
 ---
 
 # TJS2 Basic Types
@@ -43,9 +43,7 @@ tjsTypes.h defines several primitive types.
 
 tTJSString is the string type used by TJS2. It holds a zero-terminated string of tjs_char. It is defined in tjsString.cpp / tjsString.h, and is also available under the shorter name `ttstr`.
 
-In addition to managing string memory automatically, this type
-
-works well with other types.
+In addition to managing string memory automatically, this type works well with the [tTJSVariant type](variant.md).
 
 ## eTJS
 

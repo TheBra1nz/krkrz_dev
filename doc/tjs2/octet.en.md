@@ -1,5 +1,5 @@
 ---
-source_hash: 3f4ed12677a9
+source_hash: 245a513d8031
 ---
 
 # Operations on Octet Strings
@@ -41,7 +41,7 @@ You cannot use it as the target of an assignment.
 ```
 	var oct = <% 11 22 33 44 55 %>;
 	var c = oct[0];  // 0x11 が c に代入される
-	var c = oct[2];  // 0x22 が c に代入される
+	var c = oct[2];  // 0x33 が c に代入される
 	oct[3] = 'A'; // 代入式は生成できないのでエラーになる
 	var c = oct[100]; // 値が範囲外なのでエラーになる
 ```

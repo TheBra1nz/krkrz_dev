@@ -1,5 +1,5 @@
 ---
-source_hash: 9be4d35a83fb
+source_hash: d149c5cad1a1
 ---
 
 # Virtual Machine
@@ -104,13 +104,13 @@ Those with p in the suffix invoke the property handler of the target register (t
   Syntax: `clt %reg1, %reg2`
   
   
-  Sets the flag to true if %reg1 > %reg2, and to false otherwise.
+  Sets the flag to true if %reg1 < %reg2, and to false otherwise.
 - ****cgt**  
 (compare greater than)**  
   Syntax: `cgt %reg1, %reg2`
   
   
-  Sets the flag to true if %reg1 < %reg2, and to false otherwise.
+  Sets the flag to true if %reg1 > %reg2, and to false otherwise.
 - ****setf**  
 (set flag)**  
   Syntax: `setf %dest`
@@ -562,17 +562,17 @@ Those with p in the suffix invoke the property handler of the target register (t
   
   Inverts each bit of %reg and stores the result back in %reg.
 - ****asc**  
-(make ascii string)**  
+(ascii code)**  
   Syntax: `asc %reg`
   
   
-  Creates the single character corresponding to the number in %reg and stores it back in %reg.
+  Stores in %reg the character code of the first character of the string in %reg (the `#` operator).
 - ****chr**  
-(cheracter code)**  
+(make character)**  
   Syntax: `chr %reg`
   
   
-  Stores in %reg the character code of the first character of the string in %reg.
+  Creates the single character corresponding to the number in %reg and stores it back in %reg (the `$` operator).
 - ****num**  
 (number)**  
   Syntax: `num %reg`

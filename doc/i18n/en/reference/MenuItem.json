@@ -271,23 +271,25 @@
       }
     },
     "windowEx:MenuItem.bmpChecked": {
-      "hash": "1bab44611b96",
+      "hash": "8d9f2282a454",
       "ja": {
-        "summary": "アイコンの表示",
-        "description": "設定内容は MenuItem.bi* 定数を使用するか，レイヤオブジェクトを渡す\n※ 値を設定する時点で Window.menu の子で visible でないと機能しないので注意\nまた，プルダウンメニューは，Window.registerExEvent()をして拡張イベントを登録しないと表示されないので注意\nproperty bmpItem      { getter; setter }; //< 文字列位置アイコン（チェック／未チェックアイコンの同時指定不可？） チェック時アイコン (0でデフォルト)"
+        "summary": "チェック時アイコン (0でデフォルト)",
+        "description": "設定内容は MenuItem.bi* 定数を使用するか，レイヤオブジェクトを渡す\n※ 値を設定する時点で Window.menu の子で visible でないと機能しないので注意\nまた，プルダウンメニューは，Window.registerExEvent()をして拡張イベントを登録しないと表示されないので注意"
       },
       "tr": {
-        "summary": "Icon display",
-        "description": "Use the MenuItem.bi* constants, or pass a layer object.\nNote: this has no effect unless the item is a child of Window.menu and visible at the time the value is set.\nAlso note that pull-down menus are not displayed unless extended events are registered with Window.registerExEvent().\nproperty bmpItem      { getter; setter }; //< icon at the text position (cannot be combined with the checked/unchecked icons?) Icon when checked (0 for the default)"
+        "summary": "Icon when checked (0 for the default)",
+        "description": "Use the MenuItem.bi* constants, or pass a layer object.\nNote: this has no effect unless the item is a child of Window.menu and visible at the time the value is set.\nAlso note that pull-down menus are not displayed unless extended events are registered with Window.registerExEvent()."
       }
     },
     "windowEx:MenuItem.bmpUnchecked": {
-      "hash": "908f2710addd",
+      "hash": "7f58ee847bae",
       "ja": {
-        "summary": "未チェック時アイコン (0でデフォルト)"
+        "summary": "未チェック時アイコン (0でデフォルト)",
+        "description": "設定内容と注意点は bmpChecked と同じ"
       },
       "tr": {
-        "summary": "Icon when unchecked (0 for the default)"
+        "summary": "Icon when unchecked (0 for the default)",
+        "description": "The values and notes are the same as for bmpChecked."
       }
     },
     "windowEx:MenuItem.biSystem": {
@@ -381,13 +383,14 @@
       }
     },
     "windowEx:MenuItem.popupEx": {
-      "hash": "ab3847564505",
+      "hash": "135a41259a0b",
       "ja": {
         "summary": "ポップアップ表示",
         "description": "MenuItem.popupのようにウィンドウメニュー所属である必要はなく，また一覧も辞書の配列を渡すなどができる\nこの関数によるポップアップでのbmp*プロパティによるアイコン表示はされないので注意",
         "returns": "選択されたオブジェクト",
         "params": {
-          "x,": "y  表示位置（スクリーン座標，省略時マウスカーソル位置）",
+          "x": "表示位置 X（スクリーン座標，省略時マウスカーソル位置）",
+          "y": "表示位置 Y（スクリーン座標，省略時マウスカーソル位置）",
           "hwnd": "オーナウィンドウ（省略時インスタンス所属ウィンドウ）",
           "rect": "オーバーラップ禁止範囲（%[ x, y, w, h ]，省略時禁止範囲無し）",
           "menulist": "メニュー一覧配列（MenuItemのインスタンスである必要はなく，辞書を並べても良い）"
@@ -398,7 +401,8 @@
         "description": "Unlike MenuItem.popup, the item does not need to belong to a window menu, and the list can be given as, for example, an array of dictionaries.\nNote that icons set with the bmp* properties are not shown in pop-ups opened by this function.",
         "returns": "The selected object.",
         "params": {
-          "x,": "y  Display position (screen coordinates; the mouse cursor position if omitted).",
+          "x": "Display position X (screen coordinates; the mouse cursor position if omitted).",
+          "y": "Display position Y (screen coordinates; the mouse cursor position if omitted).",
           "hwnd": "Owner window (the window the instance belongs to if omitted).",
           "rect": "Area the menu must not overlap (%[ x, y, w, h ]; no restriction if omitted).",
           "menulist": "Array of menu entries (they need not be MenuItem instances; dictionaries are fine)."

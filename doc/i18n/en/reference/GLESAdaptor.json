@@ -45,7 +45,7 @@
         "summary": "Screen width"
       }
     },
-    "krkrgles:GLESAdaptor.screenHeihgt": {
+    "krkrgles:GLESAdaptor.screenHeight": {
       "hash": "3411f773d631",
       "ja": {
         "summary": "スクリーン縦幅"
@@ -104,13 +104,17 @@
       }
     },
     "krkrgles:GLESAdaptor.drawLayer": {
-      "hash": "612a1d2fa8d8",
+      "hash": "05e88e778aa7",
       "ja": {
         "summary": "レイヤの描画",
         "params": {
           "layer": "レイヤ または GLESTexture",
-          "a,": "b, c, d アフィン変換行列 (2x2)",
-          "tx,": "ty 平行移動",
+          "a": "アフィン変換行列 (2x2) の a 成分",
+          "b": "アフィン変換行列 (2x2) の b 成分",
+          "c": "アフィン変換行列 (2x2) の c 成分",
+          "d": "アフィン変換行列 (2x2) の d 成分",
+          "tx": "平行移動 X",
+          "ty": "平行移動 Y",
           "opacity": "不透明度 0～255 (省略時 255)"
         }
       },
@@ -118,8 +122,12 @@
         "summary": "Draws a layer",
         "params": {
           "layer": "Layer or GLESTexture",
-          "a,": "b, c, d: affine transformation matrix (2x2)",
-          "tx,": "ty: translation",
+          "a": "a component of the affine transformation matrix (2x2)",
+          "b": "b component of the affine transformation matrix (2x2)",
+          "c": "c component of the affine transformation matrix (2x2)",
+          "d": "d component of the affine transformation matrix (2x2)",
+          "tx": "Translation X",
+          "ty": "Translation Y",
           "opacity": "Opacity 0-255 (255 if omitted)"
         }
       }
@@ -164,19 +172,25 @@
       }
     },
     "krkrgles:GLESAdaptor.setClipRect": {
-      "hash": "90e7b87da4ed",
+      "hash": "13453c197d53",
       "ja": {
         "summary": "矩形クリップの設定",
         "description": "以降の drawLayer / endEffect / endMaskClip の合成が矩形内に制限される。\n描画モジュールが scissor 状態を尊重する場合は直接描画にも効くが、\n確実にクリップしたい場合は beginMaskClip/endMaskClip で囲むこと。\n\n**クリッピングの方式** (AffineLayer の clip / clipImage 相当)\n\n- 矩形クリップ: setClipRect / clearClipRect。scissor で実現。\n- 画像クリップ (mask 方式): beginMaskClip() ～ endMaskClip() で囲んだ描画を\n中間バッファに捕捉し、マスク画像の α を乗算しながら直前の描画先へ合成する。\nマスク矩形の外側は α=0 (CPU 版 Layer.clipAlphaRect の第8引数 0 相当)。\n描画モジュール (Live2D 等) にも安全に使える。\n- 画像クリップ (stencil 方式): beginStencilClip() ～ endStencilClip()。\nマスク α をステンシルに書き込み描画を切り抜く。α は閾値で2値化される。\n描画モジュールが自前でステンシルを使う場合は競合するため、\ndrawLayer による単純テクスチャ描画専用。\n\n```tjs\n// 矩形クリップ (単純テクスチャ描画)\nsetClipRect(100, 100, 200, 150);\ndrawLayer(src, 1, 0, 0, 1, 0, 0);\nclearClipRect();\n\n// 画像クリップ mask 方式 (モジュール描画にも安全)\nbeginMaskClip();\ndrawLayer(src, 1, 0, 0, 1, 0, 0);   // または player.render() 等\nendMaskClip(maskTexture, 100, 100);\n\n// 画像クリップ stencil 方式 (drawLayer 専用)\nbeginStencilClip(maskTexture, 100, 100, 1);\ndrawLayer(src, 1, 0, 0, 1, 0, 0);\nendStencilClip();\n```",
         "params": {
-          "left,": "top, width, height クリップ矩形 (レイヤ座標、左上原点)"
+          "left": "クリップ矩形の左端 (レイヤ座標、左上原点)",
+          "top": "クリップ矩形の上端 (レイヤ座標、左上原点)",
+          "width": "クリップ矩形の幅",
+          "height": "クリップ矩形の高さ"
         }
       },
       "tr": {
         "summary": "Sets a rectangular clip",
         "description": "Subsequent compositing by drawLayer / endEffect / endMaskClip is limited to the rectangle.\nIt also affects direct drawing if the drawing module respects the scissor state, but\nto clip reliably, wrap the drawing in beginMaskClip/endMaskClip.\n\n**Clipping methods** (equivalent to AffineLayer's clip / clipImage)\n\n- Rectangular clip: setClipRect / clearClipRect. Implemented with scissor.\n- Image clip (mask method): drawing enclosed in beginMaskClip() ... endMaskClip() is captured\ninto an intermediate buffer and composited onto the previous render target while multiplying by the mask image's alpha.\nOutside the mask rectangle, alpha is 0 (equivalent to passing 0 as the 8th argument of the CPU Layer.clipAlphaRect).\nSafe to use with drawing modules (Live2D, etc.) as well.\n- Image clip (stencil method): beginStencilClip() ... endStencilClip().\nWrites the mask alpha into the stencil buffer to cut out the drawing. Alpha is binarized by a threshold.\nThis conflicts with drawing modules that use the stencil themselves, so it is\nonly for simple texture drawing with drawLayer.\n\n```tjs\n// 矩形クリップ (単純テクスチャ描画)\nsetClipRect(100, 100, 200, 150);\ndrawLayer(src, 1, 0, 0, 1, 0, 0);\nclearClipRect();\n\n// 画像クリップ mask 方式 (モジュール描画にも安全)\nbeginMaskClip();\ndrawLayer(src, 1, 0, 0, 1, 0, 0);   // または player.render() 等\nendMaskClip(maskTexture, 100, 100);\n\n// 画像クリップ stencil 方式 (drawLayer 専用)\nbeginStencilClip(maskTexture, 100, 100, 1);\ndrawLayer(src, 1, 0, 0, 1, 0, 0);\nendStencilClip();\n```",
         "params": {
-          "left,": "top, width, height: clip rectangle (layer coordinates, top-left origin)"
+          "left": "Left edge of the clip rectangle (layer coordinates, top-left origin)",
+          "top": "Top edge of the clip rectangle (layer coordinates, top-left origin)",
+          "width": "Width of the clip rectangle",
+          "height": "Height of the clip rectangle"
         }
       }
     },
@@ -201,13 +215,14 @@
       }
     },
     "krkrgles:GLESAdaptor.endMaskClip": {
-      "hash": "b219532dc1f7",
+      "hash": "0c5857cb3a0e",
       "ja": {
         "summary": "マスク適用合成",
         "description": "直前の beginMaskClip() 以降に描画された内容へマスク画像の α を\n乗算し、現在の blendMode で直前の描画先へ合成する。\nマスク矩形の外側は α=0 (完全クリップ)。",
         "params": {
           "mask": "マスク画像 (GLESTexture または Layer)。void なら素通し合成\n(矩形クリップだけを合成時に確実に適用したい場合に使う)",
-          "x,": "y マスク配置位置 (レイヤ座標)"
+          "x": "マスク配置位置 X (レイヤ座標)",
+          "y": "マスク配置位置 Y (レイヤ座標)"
         }
       },
       "tr": {
@@ -215,18 +230,20 @@
         "description": "Multiplies what has been drawn since the last beginMaskClip() by the mask image's alpha\nand composites it onto the previous render target using the current blendMode.\nOutside the mask rectangle, alpha is 0 (fully clipped).",
         "params": {
           "mask": "Mask image (GLESTexture or Layer). If void, composites without masking\n(useful when you only want the rectangular clip to be reliably applied at compositing time)",
-          "x,": "y: mask position (layer coordinates)"
+          "x": "Mask position X (layer coordinates)",
+          "y": "Mask position Y (layer coordinates)"
         }
       }
     },
     "krkrgles:GLESAdaptor.beginStencilClip": {
-      "hash": "3d260ed8634c",
+      "hash": "9cb9ece90daf",
       "ja": {
         "summary": "ステンシルクリップの開始",
         "description": "マスク画像の α が閾値以上の領域をステンシルへ書き込み、\n以降の drawLayer をその領域内に切り抜く。",
         "params": {
           "mask": "マスク画像 (GLESTexture または Layer)",
-          "x,": "y マスク配置位置 (レイヤ座標)",
+          "x": "マスク配置位置 X (レイヤ座標)",
+          "y": "マスク配置位置 Y (レイヤ座標)",
           "threshold": "クリップを有効とする α 閾値 (1～255、省略不可)"
         }
       },
@@ -235,7 +252,8 @@
         "description": "Writes the area where the mask image's alpha is at or above the threshold into the stencil,\nand clips subsequent drawLayer calls to that area.",
         "params": {
           "mask": "Mask image (GLESTexture or Layer)",
-          "x,": "y: mask position (layer coordinates)",
+          "x": "Mask position X (layer coordinates)",
+          "y": "Mask position Y (layer coordinates)",
           "threshold": "Alpha threshold at which clipping takes effect (1-255, required)"
         }
       }

@@ -90,43 +90,23 @@ Elements 以外の描画 (drawText / setInfo / メニュー / samples.tjs の ti
 - [x] Phase 2: reference のコアクラス 41 + plugin 描画系 23 (2026-10-19)
 - [x] Phase 3: guide / tjs2 / specification / topics — 手書き全 104 ページ (2026-10-19)
 
-## D. 翻訳中に見つかった日本語原文の疑問点 (未修正分)
+## D. 翻訳中に見つかった日本語原文の疑問点
 
-2026-10-19 の英訳で訳者が報告したもの。訳は原文の意味どおりにしてある (直したら英訳も合わせる)。
-umbrella の doc/manual 分のうち明らかな誤りは同日修正済み (コミット 1a7859f / fa2471d)。
+2026-10-19 の英訳で訳者が報告したもの。umbrella の doc/manual 分のうち明らかな誤りは同日修正済み
+(コミット 1a7859f / fa2471d)。
 
-- **リンクの抜け** (「〜については [空] を参照してください」「( 参照 )」等、旧文書整理時にリンクが落ちた跡):
-  guide/Startup・Configure・CommandLine・StorageSystem・ComputerDependentProblems・Files、
-  tjs2/pp・basictypes・variant・dictionary・regexp・string・ttjs、guide/about の「TJS2 ヘルプ」
-- guide/GraphicSystem: ltScreen の説明が「ltLighten は…」、ltPsColorDodge5 が「ltPsColorDodge は…」、
-  文字化け「縲鰀」2 か所 (〜)、主語抜け 2 か所 (画像フォーマットコンバータ)
-- guide/ElementsDialog: リンク文字列が旧名「Dialog」のまま。topics/tjs2/pitfalls も `Dialog.dictToJson`
-- specification/graphics: No.4 加算合成の式が No.3 と同じ、No.17 ソフトライトの式が書きかけ
-- specification/fileformat: JPEG の ANN / AAN 表記揺れ、末尾に執筆メモ、ERI のリンク先が古い
-- topics/core/engine_setting: JSON 例と表の `\n` が実改行になっている
-- topics/core/viewport: `viewportBgColor` が表では 0xRRGGBB、例では 8 桁
+✅ 2026-10-19 に残りを修正 (日本語原文 + 英訳とも。実装と照合して直し、原文が正しかったものはそのまま):
+手書きページ 30 組 (リンク抜け、GraphicSystem の取り違え・文字化け・ソフトライトの式、ElementsDialog の旧名、
+specification の加算 / ソフトライトの式・JPEG の AAN/LLM・執筆メモ、engine_setting の `\n`、
+viewportBgColor の 0xAARRGGBB、tjs2 の各項目 (vmcodes の clt/cgt・asc/chr、switch の default 等))、
+plugin の manual.tjs 19 本 + doc/manual (summary / description の分断、`@param a, b` 書式、実装と違う名前、誤字)。
+krkrthreepp で二重に宣言されていた `Threepp.Loop_*` は末尾側を削除 (説明は先頭側へ移した)。
+Steam の DummySteam.tjs も実装の名前 (clearAchievement / cloudFileCount) に合わせた。
+
+残り (判断待ち / 対象外):
 - topics/core/repl: コード例のラベル文字列 (一般的な語へ変えるか)
-- tjs2: class (メンバ関数 → メンバ変数?)、expr_and_op (単項 - が「左側」)、switch の例 (a/b) と default の説明、
-  factor `getBoolen`、token の指数表記、array (pop 節の書き出し / saveStruct の構文行)、
-  interface (TJS_OP_SR の説明 / IsInstanceOf の引数説明)、vmcodes (clt / cgt、asc / chr が逆に見える)、
-  octet の例のコメント
 - guide/BundledLicenses は生成物 (gen_licenses_c.py) なので、再生成のたびに英訳が要再訳になる
-- **plugin の manual.tjs (各 submodule)**:
-  - krkrthreepp: 節見出しや補足が member の summary に入っている箇所多数 (Object3D.position /
-    各 Light.setShadowMapSize / VRM.* / Shape.moveTo 等)、VRM.update の文が summary と description に分断
-  - krkr_richtext: RichTextRenderBase の summary 先頭の "/ "、`<style:bold>` 等がそのまま HTML として出る
-  - krkreffekseer: EffekseerDevice.setCapacity の summary が途中で切れている
-  - krkrgles: GLESAdaptor の引数名が "a," "tx," のように割れている (`@param a, b, c, d` 書式)、`screenHeihgt`
-  - layerExDraw / layerExVector: drawPie が「円錐」、@description が summary に混入
-  - layerExSave: getCropRect の文が summary / description に分断、`threthold`
-  - windowEx: onNcMouseMove / ncHitTest の `@param x, y`、findWindoeEx
-  - shellExecute「機動」・sigcheck「内臓」、fstat `fliename`、Scripts.getClassNames `obect`
-  - XMLParser: currentColumnNumber の summary が「行番号」、`currentButeCount`
-  - SimpleHTTPServer: start の 2 つ目 (summary「サービス停止」) は stop の名前違いに見える
-  - Steam: manual のメソッド名の綴り (`clearAchievment` → 実装は clearAchievement、`coundFileCount`、
-    `isIsSubscribedApp`、`ssDlcInstalled`)
-  - Unzip.list「CRD」(CRC)、Math.octetVectorSum / MenuItem.popupEx の `@param a, ...` 書式、
-    Array.toStructString の引数名と説明が逆、WIN32Dialog.openProgress `activate[optional]`、
-    WIN32Dialog.left の summary が「サイズ取得」、MenuItem.bmpChecked に宣言行が混入、
-    Console `maxmimize` / `restoreMaxmimize`
-  - PSD: summary / description に文が分断された項目 6 つ、getLayerComp の戻り値説明が getGuides の写し
+- expat: XMLParser の current* は C++ では読み取り専用だが、doc は読み書きの property のまま
+- clipfile: summary が "static method" だけの項目 (PSD と同じ形) が残っている
+- Steam の `isIsSubscribedApp` は実装の名前がこの綴り (doc は実装に合わせたまま)
+

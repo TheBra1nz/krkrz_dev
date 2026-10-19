@@ -1,5 +1,5 @@
 ---
-source_hash: 4ce95ede8337
+source_hash: 51d940a6276d
 ---
 
 # Tokens
@@ -109,9 +109,9 @@ A number written normally is a decimal numeric literal.
 For decimal numbers, you can also use `e` or `E` for an **exponent** in base 10. `e` and `E` mean the same thing.
 
 ```
-	1e-3   // 1×10-3
-	3.4e10   // 3.4×1010
-	9.3E-2  // 9.3×10-2
+	1e-3   // 1×10^-3 ( 0.001 )
+	3.4e10   // 3.4×10^10
+	9.3E-2  // 9.3×10^-2 ( 0.093 )
 ```
 
 Prefixing a number with `0x` or `0X` makes it **hexadecimal**. `0x` and `0X` mean the same thing.
@@ -141,7 +141,7 @@ Hexadecimal, octal and binary numbers also support a fractional part and an expo
 ```
 	0b1.1    // 1 + 1/2, i.e. 1.5
 	0x2.f    // 2 + 15/16, i.e. 2.9375
-	0x1p8    // 1 × 28, i.e. 256.0
+	0x1p8    // 1 × 2^8, i.e. 256.0
 ```
 
 A numeric literal continues as one literal as long as the characters are valid numeric literal characters.

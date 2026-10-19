@@ -14,14 +14,14 @@ Steam class (static)
 - [personaName](#personaname)
 - [appID](#appid)
 - [cloudEnabled](#cloudenabled)
-- [coundFileCount](#coundfilecount)
+- [cloudFileCount](#cloudfilecount)
 
 ### Methods
 
 - [requestInitialize](#requestinitialize)
 - [getAchievement](#getachievement)
 - [setAchievement](#setachievement)
-- [clearAchievment](#clearachievment)
+- [clearAchievement](#clearachievement)
 - [getLanguage](#getlanguage)
 - [RestartAppIfNecessary](#restartappifnecessary)
 - [getCloudQuota](#getcloudquota)
@@ -34,7 +34,7 @@ Steam class (static)
 - [isBroadcasting](#isbroadcasting)
 - [hookBroadcasting](#hookbroadcasting)
 - [isIsSubscribedApp](#isissubscribedapp)
-- [ssDlcInstalled](#ssdlcinstalled)
+- [isDlcInstalled](#isdlcinstalled)
 - [getDLCCount](#getdlccount)
 - [getDLCData](#getdlcdata)
 
@@ -120,9 +120,9 @@ Whether Steam Cloud is enabled
 
 ---
 
-### coundFileCount
+### cloudFileCount
 
-Property \ Access: `r/w`
+Property \ Access: `r`
 
 **Description**
 
@@ -168,7 +168,7 @@ Method
 
 ---
 
-### clearAchievment
+### clearAchievement
 
 Method
 
@@ -176,7 +176,7 @@ Method
 
 | Arguments | Default | Description |
 | --- | --- | --- |
-| `n` | `&nbsp;` | Index or API name. |
+| `n` | `&nbsp;` | Index or identifier |
 
 **Description**
 
@@ -377,7 +377,7 @@ only use this member if you need to check ownership of another game related to y
 
 ---
 
-### ssDlcInstalled
+### isDlcInstalled
 
 Method
 

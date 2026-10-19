@@ -3655,10 +3655,12 @@ Array of the actual drawn area [x, y, width, height]
 
 Draws text with style tags
 
-Draws text while switching styles with <style:name> tags.
+Draws text while switching styles with `<style:name>` tags.
 Passing a single object for styles / appearances treats it as the "default" key.
 
 Example:
+
+```tjs
 // Draw with a single style
 layer.drawStyledText(
 "テキスト",
@@ -3676,6 +3678,7 @@ layer.drawStyledText(
 RichText.HALIGN_LEFT, RichText.VALIGN_TOP,
 styles, apps
 );
+```
 
 ---
 
@@ -4105,7 +4108,9 @@ Property \ Access: `r/w`
 
 **Description**
 
-Antialiasing setting for drawing (SmoothingMode) @description Default: SmoothingModeAntiAlias
+Antialiasing setting for drawing (SmoothingMode)
+
+Default: SmoothingModeAntiAlias
 
 ---
 
@@ -4115,7 +4120,9 @@ Property \ Access: `r/w`
 
 **Description**
 
-Rendering setting for text drawing (TextRenderingHint) @description Default: TextRenderingHintAntiAlias
+Rendering setting for text drawing (TextRenderingHint)
+
+Default: TextRenderingHintAntiAlias
 
 ---
 
@@ -4294,7 +4301,7 @@ Updated area information (RectF)
 
 **Description**
 
-Draws a pie
+Draws a pie (sector)
 
 ---
 
@@ -5373,9 +5380,7 @@ Dictionary of the form %[ x, y, w, h], or void (when everything is transparent)
 
 **Description**
 
-When the layer image is cropped (trimming the transparent margins on the top, bottom, left, and right),
-
-gets the resulting size.
+Gets the size the layer image would have if cropped (trimming the transparent margins on the top, bottom, left, and right).
 
 ---
 
@@ -5389,9 +5394,7 @@ Dictionary of the form %[ x, y, w, h], or void (when everything is transparent)
 
 **Description**
 
-When the layer image is cropped (trimming the fully transparent (0x00000000) parts on the top, bottom, left, and right),
-
-gets the resulting size.
+Gets the size the layer image would have if cropped (trimming the fully transparent (0x00000000) parts on the top, bottom, left, and right).
 
 ---
 
@@ -5499,7 +5502,7 @@ Method
 
 | Arguments | Default | Description |
 | --- | --- | --- |
-| `threthold` | `0` | Alpha lower bound |
+| `threshold` | `0` | Alpha threshold. Pixels whose alpha is at or below this value are filled |
 | `fillColor` | `0` | Fill color (0x00RRGGBB) |
 
 **Description**
@@ -5846,7 +5849,7 @@ Updated area information (RectF)
 
 **Description**
 
-Draws a pie
+Draws a pie (sector)
 
 ---
 

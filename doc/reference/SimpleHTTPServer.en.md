@@ -15,7 +15,7 @@
 ### Methods
 
 - [start](#start)
-- [start](#start)
+- [stop](#stop)
 - [onRequest](#onrequest)
 
 ### Constants
@@ -83,7 +83,7 @@ Starts the service
 
 ---
 
-### start
+### stop
 
 Method
 

@@ -351,14 +351,41 @@
       }
     },
     "win32dialog:WIN32Dialog.left": {
-      "hash": "8ce1e4e53925",
+      "hash": "a45e57e08882",
       "ja": {
-        "summary": "ダイアログサイズの取得",
-        "description": "読み取り専用。サイズの変更はできないので注意"
+        "summary": "ダイアログの左端位置",
+        "description": "読み取り専用。位置の変更は setPos、サイズの変更は setSize を使用する"
       },
       "tr": {
-        "summary": "Gets the dialog size",
-        "description": "Read-only. Note that the size cannot be changed through it."
+        "summary": "Left position of the dialog",
+        "description": "Read-only. Use setPos to change the position and setSize to change the size."
+      }
+    },
+    "win32dialog:WIN32Dialog.top": {
+      "hash": "8515ffa2a009",
+      "ja": {
+        "summary": "ダイアログの上端位置 (読み取り専用)"
+      },
+      "tr": {
+        "summary": "Top position of the dialog (read-only)"
+      }
+    },
+    "win32dialog:WIN32Dialog.width": {
+      "hash": "9a361084ed10",
+      "ja": {
+        "summary": "ダイアログの幅 (読み取り専用)"
+      },
+      "tr": {
+        "summary": "Width of the dialog (read-only)"
+      }
+    },
+    "win32dialog:WIN32Dialog.height": {
+      "hash": "50889c703d04",
+      "ja": {
+        "summary": "ダイアログの高さ (読み取り専用)"
+      },
+      "tr": {
+        "summary": "Height of the dialog (read-only)"
       }
     },
     "win32dialog:WIN32Dialog.onInit": {
@@ -657,7 +684,7 @@
       }
     },
     "win32dialog:WIN32Dialog.openProgress": {
-      "hash": "adb5d3bfe3d0",
+      "hash": "e2676465271c",
       "ja": {
         "summary": "プログレスダイアログを表示する",
         "description": "プログレスダイアログのstyleにはWS_VISIBLEを指定しないこと\n閉じるときは必ず closeProgress() を使用すること\nプログレス表示の場合，onInit以外のコールバックは来ないので注意",
@@ -667,7 +694,7 @@
           "window": "[optional] オーナーwindow (void=オーナーなし,null=Application)",
           "dsapp": "[optional] プログレス表示中はアプリケーションウィンドウを無効にするか",
           "breathe": "[optional] progressValueのsetterでbreatheするかどうか",
-          "activate[optional]": "表示時にアクティブ化するかどうか"
+          "activate": "[optional] 表示時にアクティブ化するかどうか"
         }
       },
       "tr": {
@@ -679,7 +706,7 @@
           "window": "[optional] Owner window (void = no owner, null = Application).",
           "dsapp": "[optional] Whether to disable the application windows while progress is shown.",
           "breathe": "[optional] Whether the progressValue setter calls breathe.",
-          "activate[optional]": "Whether to activate the dialog when it is shown."
+          "activate": "[optional] Whether to activate the dialog when it is shown."
         }
       }
     },

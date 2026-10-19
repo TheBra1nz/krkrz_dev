@@ -128,7 +128,7 @@ Method
 
 **Description**
 
-Drawing methods (same as Path)
+Moves the pen
 
 ---
 
@@ -292,7 +292,7 @@ Method
 
 **Description**
 
-Hole management
+Adds a hole (a Path object)
 
 ---
 

@@ -1224,14 +1224,14 @@
       }
     },
     "Window.viewportBgColor": {
-      "hash": "6dc1e1448dff",
+      "hash": "f8f02e4517cd",
       "ja": {
         "summary": "ビューポート余白の背景色",
-        "description": "ビューポートで生じた余白を塗る背景色を `0xRRGGBB` 形式の整数で表します(上位 8bit は alpha)。既定は黒。\n値を設定することもできます。壁紙([Window.setViewportWallpaper](Window.md#setviewportwallpaper))が設定されている場合は壁紙が優先されます。\n\nWindows ネイティブ ( WINVER ) ビルドと SDL3 / 汎用ビルドの双方で利用できます ( WINVER 対応は 2026-08-17 )。"
+        "description": "ビューポートで生じた余白を塗る背景色を `0xAARRGGBB` 形式の整数で表します (上位 8bit が alpha。不透明にするには `0xff` を付けます)。既定は `0xff000000` (不透明の黒)。\n値を設定することもできます。壁紙([Window.setViewportWallpaper](Window.md#setviewportwallpaper))が設定されている場合は壁紙が優先されます。\n\nWindows ネイティブ ( WINVER ) ビルドと SDL3 / 汎用ビルドの双方で利用できます ( WINVER 対応は 2026-08-17 )。"
       },
       "tr": {
         "summary": "Background color of viewport margins",
-        "description": "The background color used to fill margins created by the viewport, as an integer in `0xRRGGBB` form (the upper 8 bits are alpha). The default is black.\nThis property can also be set. If a wallpaper ([Window.setViewportWallpaper](Window.md#setviewportwallpaper)) is set, the wallpaper takes priority.\n\nAvailable in both the native Windows (WINVER) build and the SDL3 / generic builds (WINVER support since 2026-08-17)."
+        "description": "The background color used to fill margins created by the viewport, as an integer in `0xAARRGGBB` form (the upper 8 bits are alpha; add `0xff` for an opaque color). The default is `0xff000000` (opaque black).\nThis property can also be set. If a wallpaper ([Window.setViewportWallpaper](Window.md#setviewportwallpaper)) is set, the wallpaper takes priority.\n\nAvailable in both the native Windows (WINVER) build and the SDL3 / generic builds (WINVER support since 2026-08-17)."
       }
     },
     "Window.drawDevice": {
@@ -2357,10 +2357,10 @@
       }
     },
     "shellExecute:Window": {
-      "hash": "db1aec043eb5",
+      "hash": "2f5cfe7d79c6",
       "ja": {
         "summary": "擬似コードによるマニュアル",
-        "description": "外部アプリを機動してその終了を待つ機構を提供します。\nウインドウメッセージとして WM_APP + 1 を利用しています"
+        "description": "外部アプリを起動してその終了を待つ機構を提供します。\nウインドウメッセージとして WM_APP + 1 を利用しています"
       },
       "tr": {
         "summary": "Manual in pseudo-code",
@@ -2491,10 +2491,10 @@
       }
     },
     "sigcheck:Window.checkSignature": {
-      "hash": "abb1fba7622f",
+      "hash": "3735c918ed59",
       "ja": {
         "summary": "署名チェックの開始",
-        "description": "処理中に onCheckSignatureProgress、\n終了時に onCheckSignatureDone イベントが発生します。\nexe や dll の場合は署名はファイルに内臓されます。xp3 などの場合は、\n元のファイルに .sig をつけた外部ファイルを署名として処理されます。",
+        "description": "処理中に onCheckSignatureProgress、\n終了時に onCheckSignatureDone イベントが発生します。\nexe や dll の場合は署名はファイルに内蔵されます。xp3 などの場合は、\n元のファイルに .sig をつけた外部ファイルを署名として処理されます。",
         "returns": "handler 識別ハンドラ",
         "params": {
           "filename": "確認対象ファイル",
@@ -2730,15 +2730,17 @@
       }
     },
     "windowEx:Window.setClientRect": {
-      "hash": "14b390e52fd1",
+      "hash": "d8575577b001",
       "ja": {
         "summary": "クライアント領域の設定",
+        "description": "rect の x,y,w,h のうち void のものは現在の値を使用します。",
         "params": {
           "rect": "%[ x,y,w,h ]"
         }
       },
       "tr": {
         "summary": "Sets the client area",
+        "description": "Values among x,y,w,h in rect that are void keep their current values.",
         "params": {
           "rect": "%[ x,y,w,h ]"
         }
@@ -2762,12 +2764,12 @@
       }
     },
     "windowEx:Window.sendToBack": {
-      "hash": "acb701f15ca5",
+      "hash": "739750e6af03",
       "ja": {
-        "summary": "/ alias method"
+        "summary": "bringTo(\"bottom\") の別名"
       },
       "tr": {
-        "summary": "/ alias method"
+        "summary": "Alias for bringTo(\"bottom\")"
       }
     },
     "windowEx:Window.acquireImeControl": {
@@ -2908,17 +2910,19 @@
       }
     },
     "windowEx:Window.onMove": {
-      "hash": "a34181576ffc",
+      "hash": "c3cf834822f4",
       "ja": {
         "summary": "■拡張イベント：ウィンドウ移動（完了）",
         "params": {
-          "x,y": "クライアント領域左上のスクリーン座標\n※ innerSunken枠分はクライアント領域に含まれるので注意"
+          "x": "クライアント領域左上のスクリーン座標 X\n※ innerSunken枠分はクライアント領域に含まれるので注意",
+          "y": "クライアント領域左上のスクリーン座標 Y"
         }
       },
       "tr": {
         "summary": "■ Extended event: window moved (completed)",
         "params": {
-          "x,y": "Screen coordinates of the top-left of the client area\nNote: the innerSunken border is included in the client area."
+          "x": "Screen X coordinate of the top-left of the client area\nNote: the innerSunken border is included in the client area.",
+          "y": "Screen Y coordinate of the top-left of the client area"
         }
       }
     },
@@ -3118,11 +3122,12 @@
       }
     },
     "windowEx:Window.onNcMouseMove": {
-      "hash": "adc609a7fb01",
+      "hash": "edd96fe4f557",
       "ja": {
         "summary": "■拡張イベント：非クライアントエリアマウスイベント",
         "params": {
-          "x,": "y マウス座標",
+          "x": "マウス座標 X",
+          "y": "マウス座標 Y",
           "ht": "領域の種類（NCHITTEST定数）",
           "btn": "マウスボタン（mbLeft, mbRight, mbMiddle）"
         }
@@ -3130,24 +3135,29 @@
       "tr": {
         "summary": "■ Extended event: non-client area mouse event",
         "params": {
-          "x,": "y mouse coordinates",
+          "x": "Mouse X coordinate",
+          "y": "Mouse Y coordinate",
           "ht": "Area type (NCHITTEST constant)",
           "btn": "Mouse button (mbLeft, mbRight, mbMiddle)"
         }
       }
     },
     "windowEx:Window.ncHitTest": {
-      "hash": "6f7bf9a5f980",
+      "hash": "b6c314379630",
       "ja": {
         "summary": "非クライアントエリア調査",
+        "returns": "領域の種類（NCHITTEST定数）",
         "params": {
-          "x,": "y スクリーン座標"
+          "x": "スクリーン座標 X",
+          "y": "スクリーン座標 Y"
         }
       },
       "tr": {
         "summary": "Examines the non-client area",
+        "returns": "Area type (NCHITTEST constant)",
         "params": {
-          "x,": "y screen coordinates"
+          "x": "Screen X coordinate",
+          "y": "Screen Y coordinate"
         }
       }
     },

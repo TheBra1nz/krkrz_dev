@@ -104,9 +104,9 @@ Property \ Access: `r`
 
 **Description**
 
-Gets the dialog size
+Left position of the dialog
 
-Read-only. Note that the size cannot be changed through it.
+Read-only. Use setPos to change the position and setSize to change the size.
 
 ---
 
@@ -114,17 +114,29 @@ Read-only. Note that the size cannot be changed through it.
 
 Property \ Access: `r`
 
+**Description**
+
+Top position of the dialog (read-only)
+
 ---
 
 ### width
 
 Property \ Access: `r`
 
+**Description**
+
+Width of the dialog (read-only)
+
 ---
 
 ### height
 
 Property \ Access: `r`
+
+**Description**
+
+Height of the dialog (read-only)
 
 ---
 
@@ -963,7 +975,7 @@ Method
 | `window` | `&nbsp;` | [optional] Owner window (void = no owner, null = Application). |
 | `dsapp` | `(typeof window!="Object")` | [optional] Whether to disable the application windows while progress is shown. |
 | `breathe` | `(typeof window=="Object")` | [optional] Whether the progressValue setter calls breathe. |
-| `activate` | `true` |  |
+| `activate` | `true` | [optional] Whether to activate the dialog when it is shown. |
 
 **Return value**
 

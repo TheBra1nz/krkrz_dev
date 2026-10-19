@@ -1,5 +1,5 @@
 ---
-source_hash: 8fc51ea3c383
+source_hash: 574ead5a8817
 ---
 
 # RegExp Class
@@ -37,9 +37,7 @@ The l flag enables locale-aware collation.
 
 ## Regular expression patterns
 
-A regular expression pattern can also be written between / and /.
-
-See .
+A regular expression pattern can also be written between / and /. See "Regular Expression Patterns" in [Tokens](token.md).
 
 ## compile
 
@@ -91,7 +89,7 @@ The replace method performs string replacement and returns the resulting string.
 
 It matches against the target string (first argument), replaces the matched parts with the replacement string (second argument), and returns the resulting string.
 
-If you pass a function instead of a string as the replacement, that function is called to perform each replacement. The function takes one argument: an array object representing the matched part of the target string (see the exec method for this array). The matched part of the target string is replaced with the string the function returns.
+If you pass a function instead of a string as the replacement, that function is called to perform each replacement. The function takes one argument: an array object representing the matched part of the target string (see the [exec](#exec) method for this array). The matched part of the target string is replaced with the string the function returns.
 
 This method ignores the start property.
 
@@ -109,7 +107,7 @@ If the pattern contains capture groups ( `(...)` ), the substrings captured by e
 
 If the third argument is true, empty elements (both segments and capture groups) are removed from the result (default false).
 
-See also the split method of the String class.
+See also the [split](string.md#split) method of the String class.
 
 ## matches
 

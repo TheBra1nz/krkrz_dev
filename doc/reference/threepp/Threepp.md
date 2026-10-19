@@ -47,9 +47,6 @@ threepp は three.js の C++ ポートです。
 - [Loop_Once](#loop_once)
 - [Loop_Repeat](#loop_repeat)
 - [Loop_PingPong](#loop_pingpong)
-- [Loop_Once](#loop_once)
-- [Loop_Repeat](#loop_repeat)
-- [Loop_PingPong](#loop_pingpong)
 - [CatmullRomCurve3_CurveType_centripetal](#catmullromcurve3_curvetype_centripetal)
 - [CatmullRomCurve3_CurveType_chordal](#catmullromcurve3_curvetype_chordal)
 - [CatmullRomCurve3_CurveType_catmullrom](#catmullromcurve3_curvetype_catmullrom)
@@ -354,33 +351,9 @@ threepp は three.js の C++ ポートです。
 
 値: `2200`
 
----
-
-### Loop_Repeat
-
-定数
-
-値: `2201`
-
----
-
-### Loop_PingPong
-
-定数
-
-値: `2202`
-
----
-
-### Loop_Once
-
-定数
-
-値: `2200`
-
 **解説**
 
-Loop モード定数 (AnimationAction.setLoop に渡す)
+1回で停止
 
 ---
 

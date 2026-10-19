@@ -3460,6 +3460,7 @@ intersect: area intersecting the specified range (same as monitor if no range is
 
 Gets the list of monitor information
 
+If a range (x, y, w, h) is specified, only monitors that intersect it are returned. If all are omitted, all monitors are returned.
 Enumerates all monitors.
 
 ---
@@ -3771,7 +3772,7 @@ The HWND as a number on success
 
 **Description**
 
-Wrapper for FindWindowEx
+Wrapper for the Win32 API FindWindowEx
 
 ---
 

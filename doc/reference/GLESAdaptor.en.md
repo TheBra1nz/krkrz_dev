@@ -13,7 +13,7 @@ Objects used for drawing are expected to handle the context via EGL.
 ### Properties
 
 - [screenWidth](#screenwidth)
-- [screenHeihgt](#screenheihgt)
+- [screenHeight](#screenheight)
 - [blendMode](#blendmode)
 
 ### Methods
@@ -60,7 +60,7 @@ Screen width
 
 ---
 
-### screenHeihgt
+### screenHeight
 
 Property \ Access: `r/w`
 
@@ -153,12 +153,12 @@ Method
 | Arguments | Default | Description |
 | --- | --- | --- |
 | `layer` | `&nbsp;` | Layer or GLESTexture |
-| `a` | `&nbsp;` |  |
-| `b` | `&nbsp;` |  |
-| `c` | `&nbsp;` |  |
-| `d` | `&nbsp;` |  |
-| `tx` | `&nbsp;` |  |
-| `ty` | `&nbsp;` |  |
+| `a` | `&nbsp;` | a component of the affine transformation matrix (2x2) |
+| `b` | `&nbsp;` | b component of the affine transformation matrix (2x2) |
+| `c` | `&nbsp;` | c component of the affine transformation matrix (2x2) |
+| `d` | `&nbsp;` | d component of the affine transformation matrix (2x2) |
+| `tx` | `&nbsp;` | Translation X |
+| `ty` | `&nbsp;` | Translation Y |
 | `opacity` | `&nbsp;` | Opacity 0-255 (255 if omitted) |
 
 **Description**
@@ -248,10 +248,10 @@ Method
 
 | Arguments | Default | Description |
 | --- | --- | --- |
-| `left` | `&nbsp;` |  |
-| `top` | `&nbsp;` |  |
-| `width` | `&nbsp;` |  |
-| `height` | `&nbsp;` |  |
+| `left` | `&nbsp;` | Left edge of the clip rectangle (layer coordinates, top-left origin) |
+| `top` | `&nbsp;` | Top edge of the clip rectangle (layer coordinates, top-left origin) |
+| `width` | `&nbsp;` | Width of the clip rectangle |
+| `height` | `&nbsp;` | Height of the clip rectangle |
 
 **Description**
 
@@ -324,8 +324,8 @@ Method
 | Arguments | Default | Description |
 | --- | --- | --- |
 | `mask` | `&nbsp;` | Mask image (GLESTexture or Layer). If void, composites without masking<br>(useful when you only want the rectangular clip to be reliably applied at compositing time) |
-| `x` | `&nbsp;` |  |
-| `y` | `&nbsp;` |  |
+| `x` | `&nbsp;` | Mask position X (layer coordinates) |
+| `y` | `&nbsp;` | Mask position Y (layer coordinates) |
 
 **Description**
 
@@ -346,8 +346,8 @@ Method
 | Arguments | Default | Description |
 | --- | --- | --- |
 | `mask` | `&nbsp;` | Mask image (GLESTexture or Layer) |
-| `x` | `&nbsp;` |  |
-| `y` | `&nbsp;` |  |
+| `x` | `&nbsp;` | Mask position X (layer coordinates) |
+| `y` | `&nbsp;` | Mask position Y (layer coordinates) |
 | `threshold` | `&nbsp;` | Alpha threshold at which clipping takes effect (1-255, required) |
 
 **Description**

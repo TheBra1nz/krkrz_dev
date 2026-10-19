@@ -2,12 +2,14 @@
   "class": "GdiPlus.Image",
   "entries": {
     "layerExDraw:GdiPlus.Image": {
-      "hash": "bfb0ae6078e6",
+      "hash": "1a075e9c94e4",
       "ja": {
-        "description": "画像情報を取り扱うクラス\n※ベクトル画像データの領域は座標が負の領域にある場合もあります"
+        "summary": "画像情報を取り扱うクラス",
+        "description": "※ベクトル画像データの領域は座標が負の領域にある場合もあります"
       },
       "tr": {
-        "description": "Class that handles image information.\nNote: the area of vector image data may extend into negative coordinates."
+        "summary": "Class that handles image information",
+        "description": "Note: the area of vector image data may extend into negative coordinates."
       }
     },
     "layerExDraw:GdiPlus.Image.Image": {

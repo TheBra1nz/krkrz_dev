@@ -1,5 +1,5 @@
 ---
-source_hash: abb58c1923b5
+source_hash: ab53ad84abf3
 ---
 
 # Graphic System
@@ -87,7 +87,7 @@ For explanation, the following functions are defined here:
 - ****ltAddAlpha****  
   ltAddAlpha performs additive alpha blending.
   
-  Images suited to this format can be output with the image format converter. You can also convert from ltAlpha to this format with the [Layer.convertType](../reference/Layer.md#converttype) method.
+  Images suited to this format can be output with the [image format converter](TPC.md). You can also convert from ltAlpha to this format with the [Layer.convertType](../reference/Layer.md#converttype) method.
   
   An ltAddAlpha layer does not display correctly when it is a direct child of an ltAlpha layer.
   
@@ -226,9 +226,9 @@ For explanation, the following functions are defined here:
   
   where softlight(*a*, *b*) =
   
-  *a*(0.5 ÷ *b*)  (when *b* > 0.5)
+  *a*<sup>0.5 ÷ *b*</sup>  (when *b* ≥ 0.5)
   
-  *a*((1.0 - *b*) × 2)  (otherwise)
+  *a*<sup>(1.0 - *b*) × 2</sup>  (otherwise)
 - ****ltPsColorDodge****  
   ltPsColorDodge performs Photoshop-compatible "Color Dodge" blending. Unlike ltDodge, *α* is not ignored.
   
@@ -311,9 +311,7 @@ Kirikiri has two alpha blending modes.
   - It can express additive blending together with alpha blending
   - Almost no graphics software supports this format
   
-  Since few graphics programs support the same blend mode as ltAddAlpha, to use another program's output in this format in Kirikiri,
-  
-  you need to output images of this type with the image format converter, or convert from ltAlpha with the [Layer.convertType](../reference/Layer.md#converttype) method.
+  Since few graphics programs support the same blend mode as ltAddAlpha, to use another program's output in this format in Kirikiri, you need to output images of this type with the [image format converter](TPC.md), or convert from ltAlpha with the [Layer.convertType](../reference/Layer.md#converttype) method.
   
   The image format converter accepts Photoshop-format input that combines "Normal" layers and "Linear Dodge" layers as input for additive alpha blending images.
 

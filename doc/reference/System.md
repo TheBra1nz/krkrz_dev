@@ -3468,6 +3468,7 @@ intersect: 指定範囲と交わる領域(指定しなかった場合は monitor
 
 モニタの情報一覧を取得
 
+範囲枠 (x, y, w, h) を指定すると交わるモニタのみを返す。全省略で全てのモニタを返す。
 全てのモニタを列挙する
 
 ---
@@ -3779,7 +3780,7 @@ TVPBreathe, TVPGetBreathing のラッパ
 
 **解説**
 
-findWindoeEx のラッパ
+Win32 API FindWindowEx のラッパ
 
 ---
 

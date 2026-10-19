@@ -47,9 +47,6 @@ It provides 3D graphics rendering.
 - [Loop_Once](#loop_once)
 - [Loop_Repeat](#loop_repeat)
 - [Loop_PingPong](#loop_pingpong)
-- [Loop_Once](#loop_once)
-- [Loop_Repeat](#loop_repeat)
-- [Loop_PingPong](#loop_pingpong)
 - [CatmullRomCurve3_CurveType_centripetal](#catmullromcurve3_curvetype_centripetal)
 - [CatmullRomCurve3_CurveType_chordal](#catmullromcurve3_curvetype_chordal)
 - [CatmullRomCurve3_CurveType_catmullrom](#catmullromcurve3_curvetype_catmullrom)
@@ -354,33 +351,9 @@ Constant
 
 Value: `2200`
 
----
-
-### Loop_Repeat
-
-Constant
-
-Value: `2201`
-
----
-
-### Loop_PingPong
-
-Constant
-
-Value: `2202`
-
----
-
-### Loop_Once
-
-Constant
-
-Value: `2200`
-
 **Description**
 
-Loop mode constants (passed to AnimationAction.setLoop)
+Stop after one pass
 
 ---
 
@@ -392,7 +365,7 @@ Value: `2201`
 
 **Description**
 
-Loop (default for ModelAnimator.play)
+Loop (the default of ModelAnimator.play)
 
 ---
 
@@ -404,7 +377,7 @@ Value: `2202`
 
 **Description**
 
-Ping-pong
+Back and forth
 
 ---
 

@@ -49,12 +49,14 @@
       }
     },
     "krkrthreepp:Threepp.GLTFModel.getPartCount": {
-      "hash": "49425ff1393f",
+      "hash": "5a8a65878f79",
       "ja": {
-        "summary": "--- パーツ (メッシュ) の取り出し --- 同じモデルを何百個も並べたいとき、GLB を個数ぶん読んで Mesh を並べると draw call がそのまま個数になる。ここから取り出して InstancedMesh へ まとめると 1 個で済む。"
+        "summary": "-> int (モデル内のメッシュ数。深さ優先の出現順)",
+        "description": "同じモデルを何百個も並べたいとき、GLB を個数ぶん読んで Mesh を並べると\ndraw call がそのまま個数になる。getPartGeometry / getPartMaterial で取り出して\nInstancedMesh へまとめると 1 個で済む。"
       },
       "tr": {
-        "summary": "--- Extracting parts (meshes) --- To place hundreds of copies of the same model, loading the GLB once per copy and placing Meshes results in one draw call per copy. Extracting the parts here and combining them into an InstancedMesh needs only one."
+        "summary": "-> int (number of meshes in the model, in depth-first order of appearance)",
+        "description": "To place hundreds of copies of the same model, loading the GLB once per copy and placing Meshes\nresults in one draw call per copy. Extracting the parts with getPartGeometry / getPartMaterial and\ncombining them into an InstancedMesh needs only one."
       }
     },
     "krkrthreepp:Threepp.GLTFModel.getPartGeometry": {

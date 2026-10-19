@@ -98,18 +98,18 @@
       }
     },
     "krkreffekseer:EffekseerDevice.setCapacity": {
-      "hash": "c42122fd0dd0",
+      "hash": "c25d0cdb2804",
       "ja": {
-        "summary": "内部バッファ容量を設定する。内部のマネージャ/レンダラが作り直されるため、",
-        "description": "※エフェクト読み込み前・プレイヤー生成前に呼ぶこと。\n既存の EffekseerEffect / EffekseerPlayer は無効化される。",
+        "summary": "内部バッファ容量を設定する。",
+        "description": "内部のマネージャ/レンダラが作り直されるため、既存の EffekseerEffect / EffekseerPlayer は無効化される。\n※エフェクト読み込み前・プレイヤー生成前に呼ぶこと。\n現在と同じ値を指定したときは何もしない。0 以下の値を指定すると例外になる。",
         "params": {
           "instanceMax": "同時に存在できるパーティクル数の上限 (既定 4000)",
           "squareMaxCount": "1描画あたりのスプライト数の上限 (既定 8192)"
         }
       },
       "tr": {
-        "summary": "Sets the internal buffer capacities. This recreates the internal manager/renderer, so",
-        "description": "Note: call this before loading effects and before creating players.\nExisting EffekseerEffect / EffekseerPlayer objects are invalidated.",
+        "summary": "Sets the internal buffer capacities.",
+        "description": "This recreates the internal manager/renderer, so existing EffekseerEffect / EffekseerPlayer objects are invalidated.\nNote: call this before loading effects and before creating players.\nDoes nothing if the values are the same as the current ones. Values of 0 or less throw an exception.",
         "params": {
           "instanceMax": "Maximum number of particles that can exist at once (default 4000)",
           "squareMaxCount": "Maximum number of sprites per draw (default 8192)"

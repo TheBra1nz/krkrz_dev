@@ -77,7 +77,11 @@ Method
 
 **Description**
 
---- Extracting parts (meshes) --- To place hundreds of copies of the same model, loading the GLB once per copy and placing Meshes results in one draw call per copy. Extracting the parts here and combining them into an InstancedMesh needs only one.
+-> int (number of meshes in the model, in depth-first order of appearance)
+
+To place hundreds of copies of the same model, loading the GLB once per copy and placing Meshes
+results in one draw call per copy. Extracting the parts with getPartGeometry / getPartMaterial and
+combining them into an InstancedMesh needs only one.
 
 ---
 

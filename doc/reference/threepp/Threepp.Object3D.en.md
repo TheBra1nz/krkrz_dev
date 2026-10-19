@@ -151,7 +151,11 @@ Property \ Access: `r/w`
 
 **Description**
 
-Note: the position/rotation/scale/quaternion getters return a copy of the value, so writing obj.position.set(...) or obj.position.x = ... does not affect the object. Use setPosition/setRotation/setScale below to change the position, rotation and scale.
+Position (Vector3; a copy of the value, so effectively read-only)
+
+Note: the position/rotation/scale/quaternion getters return a copy of the value, so
+writing obj.position.set(...) or obj.position.x = ... does not affect the object.
+Use setPosition/setRotation/setScale (setQuaternion for quaternion) to change the position, rotation and scale.
 
 ---
 
@@ -523,7 +527,9 @@ Method
 
 **Description**
 
-The quaternion property returns a copy of the value, so use this to write it back (Object3D only)
+Sets the rotation from quaternion components
+
+The quaternion property returns a copy of the value, so use this to write it back (Object3D only).
 
 ---
 
@@ -533,7 +539,12 @@ Method
 
 **Description**
 
---- Getting world transforms (computed from matrixWorld) --- For the result to be up to date, render or call updateMatrixWorld(true) just before (the world matrix must be resolved by walking up the parents). Useful for getting the world coordinates of bones (head, hips, etc.) when framing a character portrait.
+-> Vector3 (world position)
+
+getWorldPosition / getWorldQuaternion / getWorldScale are computed from matrixWorld.
+For the result to be up to date, render or call updateMatrixWorld(true) just before
+(the world matrix must be resolved by walking up the parents).
+Useful for getting the world coordinates of bones (head, hips, etc.) when framing a character portrait.
 
 ---
 

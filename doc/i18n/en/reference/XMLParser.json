@@ -79,15 +79,15 @@
       }
     },
     "expat:XMLParser.currentColumnNumber": {
-      "hash": "f92250373d3a",
+      "hash": "cb6feb1fb75b",
       "ja": {
-        "summary": "現在の行番号"
+        "summary": "現在の列番号"
       },
       "tr": {
-        "summary": "Current line number"
+        "summary": "Current column number"
       }
     },
-    "expat:XMLParser.currentButeCount": {
+    "expat:XMLParser.currentByteCount": {
       "hash": "b27651632469",
       "ja": {
         "summary": "現在のバイトカウント"

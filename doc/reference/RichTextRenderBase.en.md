@@ -308,7 +308,7 @@ Property \ Access: `r/w`
 
 **Description**
 
-Area information of the rendering result
+Left edge of the rendering result area
 
 ---
 
@@ -316,17 +316,29 @@ Area information of the rendering result
 
 Property \ Access: `r/w`
 
+**Description**
+
+Top edge of the rendering result area
+
 ---
 
 ### renderRight
 
 Property \ Access: `r/w`
 
+**Description**
+
+Right edge of the rendering result area
+
 ---
 
 ### renderBottom
 
 Property \ Access: `r/w`
+
+**Description**
+
+Bottom edge of the rendering result area
 
 ---
 

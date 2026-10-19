@@ -1,5 +1,5 @@
 ---
-source_hash: e1da4dbade1c
+source_hash: 16f9754600c1
 ---
 
 # Controlling the Game Screen's Display Area (Viewport)
@@ -135,7 +135,7 @@ The following members have been added to the [Window](../../reference/Window.md)
 | [viewportAlignY](../../reference/Window.md#viewportaligny) | Vertical alignment: 0=top / 0.5=center / 1=bottom |
 | [viewportOffsetX](../../reference/Window.md#viewportoffsetx) | Horizontal offset (px) |
 | [viewportOffsetY](../../reference/Window.md#viewportoffsety) | Vertical offset (px) |
-| [viewportBgColor](../../reference/Window.md#viewportbgcolor) | Margin background color `0xRRGGBB` |
+| [viewportBgColor](../../reference/Window.md#viewportbgcolor) | Margin background color `0xAARRGGBB` ( the top 8 bits are alpha; use `0xff` for opaque. Default `0xff000000` ) |
 | [aspectLock](../../reference/Window.md#aspectlock) | Locks the aspect ratio of the window itself (`"16:9"`, etc.). Default `""` = no lock. **SDL3 / generic build only** |
 
 ### Methods

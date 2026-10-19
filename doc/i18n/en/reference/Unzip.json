@@ -37,10 +37,10 @@
       }
     },
     "minizip:Unzip.list": {
-      "hash": "b518cdaa4942",
+      "hash": "6706850bb403",
       "ja": {
         "summary": "ZIPアーカイブ中に含まれるファイルの情報を取得します",
-        "returns": "ファイル一覧(ファイル情報の配列)\nファイル情報は辞書の形で、以下の情報を含みます\n<dl>\n<dt>filename <dd>アーカイブ内パス名\n<dt>uncompressed_size <dd>展開サイズ\n<dt>compressed_size <dd>圧縮サイズ\n<dt>crypted <dd>暗号化されているか\n<dt>deflated <dd>圧縮されているか\n<dt>deflateLevel <dd>圧縮レベル\n<dt>crc <dd>ファイルのCRD\n</dl>"
+        "returns": "ファイル一覧(ファイル情報の配列)\nファイル情報は辞書の形で、以下の情報を含みます\n<dl>\n<dt>filename <dd>アーカイブ内パス名\n<dt>uncompressed_size <dd>展開サイズ\n<dt>compressed_size <dd>圧縮サイズ\n<dt>crypted <dd>暗号化されているか\n<dt>deflated <dd>圧縮されているか\n<dt>deflateLevel <dd>圧縮レベル\n<dt>crc <dd>ファイルのCRC\n</dl>"
       },
       "tr": {
         "summary": "Gets information on the files contained in the ZIP archive",

@@ -100,7 +100,7 @@ Method
 
 **Description**
 
-Draws a pie
+Draws a pie (sector)
 
 ---
 
@@ -431,7 +431,7 @@ Method
 
 **Description**
 
-Draws a pie
+Draws a pie (sector)
 
 ---
 

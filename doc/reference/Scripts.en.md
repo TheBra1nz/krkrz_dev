@@ -249,7 +249,7 @@ Method
 
 | Arguments | Default | Description |
 | --- | --- | --- |
-| `obect` | `&nbsp;` | Object whose class names to get. |
+| `object` | `&nbsp;` | Object whose class names to get. |
 
 **Return value**
 

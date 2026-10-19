@@ -1,5 +1,5 @@
 ---
-source_hash: 1ea3e676f282
+source_hash: 53661e42f7e3
 ---
 
 # Preprocessor
@@ -24,13 +24,9 @@ The @set directive evaluates a conditional compilation expression and discards t
 	,  =  !=  ==  ||  &&  |  ^  &  <  >  <=  >=  +  -  %  *  /  !  +  -  ( )
 ```
 
-For the meaning of these operators, see
+For the meaning of these operators, see [Expressions and Operators](expr_and_op.md). However, the only data type that can be handled is integer.
 
-. However, the only data type that can be handled is integer.
-
-You can also use arbitrary variables and immediate values. Variable names follow the same naming rules, and immediate values the same rules, as described in
-
-.
+You can also use arbitrary variables and immediate values. Variable names follow the same naming rules as TJS2 [variables](variable.md), and immediate values the same rules as the immediate values in [Tokens](token.md).
 
 However, variables used in the preprocessor and variables used in TJS2 scripts do not interfere with each other (they do not share the same namespace).
 

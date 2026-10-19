@@ -2,24 +2,24 @@
   "class": "Console",
   "entries": {
     "windowEx:Console": {
-      "hash": "87a2df7a619a",
+      "hash": "8bae552ef806",
       "ja": {
-        "description": "Debug.console拡張"
+        "description": "Debug.console拡張\n\n※ 起動後１度は visible=true してウィンドウを生成しないと失敗する"
       },
       "tr": {
-        "description": "Debug.console extensions"
+        "description": "Debug.console extensions\n\nNote: these fail unless the console window has been created at least once after startup by setting visible=true."
       }
     },
-    "windowEx:Console.restoreMaxmimize": {
+    "windowEx:Console.restoreMaximize": {
       "hash": "bbe18b8c05c2",
       "ja": {
         "summary": "ウィンドウ最大化の復帰（最大化のまま終了すると次回サイズが狂う問題解決用）"
       },
       "tr": {
-        "summary": "Restores from the maximized state (works around the window size being wrong on the next launch if the console is closed while maximized)"
+        "summary": "Restores the window from the maximized state (works around the window size being wrong on the next launch if the program exits while maximized)"
       }
     },
-    "windowEx:Console.maxmimize": {
+    "windowEx:Console.maximize": {
       "hash": "fb87b3257eb5",
       "ja": {
         "summary": "ウィンドウを最大化"
@@ -65,12 +65,12 @@
       }
     },
     "windowEx:Console.bringAfter": {
-      "hash": "d8ad80dda5e5",
+      "hash": "d98d9f41a78f",
       "ja": {
-        "summary": "※ 起動後１度はvisible=trueしてウィンドウを生成しないと失敗する 優先順位の変更"
+        "summary": "優先順位の変更"
       },
       "tr": {
-        "summary": "Changes the z-order (fails unless the window has been created at least once after startup by setting visible=true)"
+        "summary": "Changes the z-order"
       }
     }
   }

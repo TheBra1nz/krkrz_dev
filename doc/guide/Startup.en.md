@@ -1,20 +1,16 @@
 ---
-source_hash: dfbd16a13dc4
+source_hash: 6c1a8cd064d8
 ---
 
 # Starting Kirikiri
 
 ## About Starting Kirikiri
 
-To start Kirikiri and specify the scripts to run, a **project folder** normally has to be determined (
-
-see ).
+To start Kirikiri and specify the scripts to run, a **project folder** normally has to be determined ( see "Project Folder" in [Storage System](StorageSystem.md) ).
 
 There are several ways to determine the project folder; they take precedence in the order listed below (the first one that applies is used).
 
-For the options passed to Kirikiri at startup, see
-
-.
+For the options passed to Kirikiri at startup, see [Command-Line Options](CommandLine.md).
 
 ## Order in Which the Project Folder Is Determined
 
@@ -41,9 +37,7 @@ If none of these methods determines the project folder, a folder/archive selecti
 
 The SDL version checks, in order: the command-line argument, data.xp3, an XP3 archive appended to the executable itself, and the data folder (if data/startup.tjs exists). It does not check the content-data folder or data.exe.
 
-However, if the release option "Run only from XP3 archives" is set, only data.xp3, data.exe, and an XP3 archive appended to the executable itself are used (
-
-see ).
+However, if the release option "Run only from XP3 archives" is set, only data.xp3, data.exe, and an XP3 archive appended to the executable itself are used ( see `forcedataxp3` in [Releaser](Releaser.md) ).
 
 ## Folder/Archive Selection
 
@@ -60,26 +54,14 @@ The folder/archive selection screen looks like this.
 
 After the project folder is determined, the first file executed is startup.tjs in the project folder. If it does not exist, an error occurs.
 
-You can also specify the first file to execute with -startup.
-
-See
-
-.
+You can also specify the first file to execute with -startup. See [Command-Line Options](CommandLine.md).
 
 ## Message Map File
 
-Right after starting, Kirikiri checks whether msgmap.tjs exists in the same folder as Kirikiri, and executes it if it does, unless a release option specifies not to load it (
-
-see ). In msgmap.tjs you can use [System.assignMessage](../reference/System.md#assignmessage) to change message assignments. msgmap.tjs can also be created with
-
-.
+Right after starting, Kirikiri checks whether msgmap.tjs exists in the same folder as Kirikiri, and executes it if it does, unless a release option specifies not to load it ( see `disablemsgmap` in [Releaser](Releaser.md) ). In msgmap.tjs you can use [System.assignMessage](../reference/System.md#assignmessage) to change message assignments.
 
 ## Configuration Files
 
-Kirikiri reads the configuration files (.cf and .cfu files) created with
+Kirikiri reads the configuration files (.cf and .cfu files) created with [Kirikiri Configuration](Configure.md) and behaves according to the settings written in them.
 
-and behaves according to the settings written in them.
-
-For the file names and where the files are created, see
-
-.
+For the file names and where the files are created, see "Configuration File Names and Locations" in [Command-Line Options](CommandLine.md).

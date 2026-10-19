@@ -648,7 +648,7 @@ Property \ Access: `r/w`
 
 Background color of viewport margins
 
-The background color used to fill margins created by the viewport, as an integer in `0xRRGGBB` form (the upper 8 bits are alpha). The default is black.
+The background color used to fill margins created by the viewport, as an integer in `0xAARRGGBB` form (the upper 8 bits are alpha; add `0xff` for an opaque color). The default is `0xff000000` (opaque black).
 This property can also be set. If a wallpaper ([Window.setViewportWallpaper](Window.md#setviewportwallpaper)) is set, the wallpaper takes priority.
 
 Available in both the native Windows (WINVER) build and the SDL3 / generic builds (WINVER support since 2026-08-17).
@@ -3964,6 +3964,8 @@ Method
 
 Sets the client area
 
+Values among x,y,w,h in rect that are void keep their current values.
+
 ---
 
 ### bringTo
@@ -3989,7 +3991,7 @@ Method
 
 **Description**
 
-/ alias method
+Alias for bringTo("bottom")
 
 ---
 
@@ -4169,8 +4171,8 @@ Method
 
 | Arguments | Default | Description |
 | --- | --- | --- |
-| `x` | `&nbsp;` |  |
-| `y` | `&nbsp;` |  |
+| `x` | `&nbsp;` | Screen X coordinate of the top-left of the client area<br>Note: the innerSunken border is included in the client area. |
+| `y` | `&nbsp;` | Screen Y coordinate of the top-left of the client area |
 
 **Description**
 
@@ -4419,8 +4421,8 @@ Method
 
 | Arguments | Default | Description |
 | --- | --- | --- |
-| `x` | `&nbsp;` |  |
-| `y` | `&nbsp;` |  |
+| `x` | `&nbsp;` | Mouse X coordinate |
+| `y` | `&nbsp;` | Mouse Y coordinate |
 | `ht` | `&nbsp;` | Area type (NCHITTEST constant) |
 
 **Description**
@@ -4473,8 +4475,12 @@ Method
 
 | Arguments | Default | Description |
 | --- | --- | --- |
-| `x` | `&nbsp;` |  |
-| `y` | `&nbsp;` |  |
+| `x` | `&nbsp;` | Screen X coordinate |
+| `y` | `&nbsp;` | Screen Y coordinate |
+
+**Return value**
+
+Area type (NCHITTEST constant)
 
 **Description**
 

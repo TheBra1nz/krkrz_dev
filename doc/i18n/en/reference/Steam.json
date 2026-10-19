@@ -39,7 +39,7 @@
         "summary": "Number of achievements"
       }
     },
-    "steam:Steam.clearAchievment": {
+    "steam:Steam.clearAchievement": {
       "hash": "19df6b779c51",
       "ja": {
         "summary": "実績を解除する",
@@ -50,7 +50,7 @@
       "tr": {
         "summary": "Clears an achievement",
         "params": {
-          "n": "Index or API name."
+          "n": "Index or identifier"
         }
       }
     },
@@ -147,7 +147,7 @@
         "returns": "%[total: total size, available: available space]"
       }
     },
-    "steam:Steam.coundFileCount": {
+    "steam:Steam.cloudFileCount": {
       "hash": "658144c22dff",
       "ja": {
         "summary": "Steamクラウドのファイル数"
@@ -267,7 +267,7 @@
         "summary": "only use this member if you need to check ownership of another game related to yours, a demo for example"
       }
     },
-    "steam:Steam.ssDlcInstalled": {
+    "steam:Steam.isDlcInstalled": {
       "hash": "fe85f77acd43",
       "ja": {
         "summary": "Takes AppID of DLC and checks if the user owns the DLC & if the DLC is installed"

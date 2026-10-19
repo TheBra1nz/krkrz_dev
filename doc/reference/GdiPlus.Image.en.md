@@ -4,7 +4,8 @@ This class is extended by several plugins.
 
 ## Plugin extension: layerExDraw
 
-Class that handles image information.
+Class that handles image information
+
 Note: the area of vector image data may extend into negative coordinates.
 
 ### Members

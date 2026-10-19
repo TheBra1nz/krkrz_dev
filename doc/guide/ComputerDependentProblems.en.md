@@ -1,5 +1,5 @@
 ---
-source_hash: 5859802d680f
+source_hash: 7bbf820749ca
 ---
 
 # Environment-Dependent Problems
@@ -23,9 +23,7 @@ Some problems can be solved by addressing the individual symptom, but in general
 
 Most of the options that can be set for the Kirikiri engine exist to deal with environment-dependent problems.
 
-Please also see
-
-.
+Please also see [Command-Line Options](CommandLine.md).
 
 ## Environment-Dependent Symptoms
 

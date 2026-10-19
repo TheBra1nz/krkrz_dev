@@ -1,5 +1,5 @@
 ---
-source_hash: 61c3e72ef148
+source_hash: 09444b2646ee
 ---
 
 # Storage System
@@ -54,9 +54,7 @@ Since 2.19 beta 14, the archive separator has changed from '#' to '>'.
 
 
 
-By default, Kirikiri can handle XP3, Kirikiri's own archive storage format ( it is the third generation of the XPK format, hence XP3 ). For how to create XP3 archives, see
-
-.
+By default, Kirikiri can handle XP3, Kirikiri's own archive storage format ( it is the third generation of the XPK format, hence XP3 ). For how to create XP3 archives, see [xp3 Archive Tool](Xp3Tool.md).
 
 ## Project Folder
 

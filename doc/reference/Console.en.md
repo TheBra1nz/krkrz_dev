@@ -2,12 +2,14 @@
 
 Debug.console extensions
 
+Note: these fail unless the console window has been created at least once after startup by setting visible=true.
+
 ## Members
 
 ### Methods
 
-- [restoreMaxmimize](#restoremaxmimize)
-- [maxmimize](#maxmimize)
+- [restoreMaximize](#restoremaximize)
+- [maximize](#maximize)
 - [getRect](#getrect)
 - [setPos](#setpos)
 - [getPlacement](#getplacement)
@@ -16,17 +18,17 @@ Debug.console extensions
 
 ---
 
-### restoreMaxmimize
+### restoreMaximize
 
 Method
 
 **Description**
 
-Restores from the maximized state (works around the window size being wrong on the next launch if the console is closed while maximized)
+Restores the window from the maximized state (works around the window size being wrong on the next launch if the program exits while maximized)
 
 ---
 
-### maxmimize
+### maximize
 
 Method
 
@@ -103,6 +105,6 @@ Method
 
 **Description**
 
-Changes the z-order (fails unless the window has been created at least once after startup by setting visible=true)
+Changes the z-order
 
 ---

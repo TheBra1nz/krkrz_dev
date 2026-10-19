@@ -1202,35 +1202,35 @@
       }
     },
     "fstat:Storages.setFileAttributes": {
-      "hash": "11edbaff4a6d",
+      "hash": "ff04e946a189",
       "ja": {
         "summary": "ファイルの属性を設定する",
         "params": {
-          "fliename": "ファイル/ディレクトリ名",
+          "filename": "ファイル/ディレクトリ名",
           "attr": "設定する属性(FILE_ATTRIBUTE_READONLY,FILE_ATTRIBUTE_HIDDEN,...)"
         }
       },
       "tr": {
         "summary": "Sets file attributes",
         "params": {
-          "fliename": "File or directory name",
+          "filename": "File or directory name",
           "attr": "Attributes to set (FILE_ATTRIBUTE_READONLY, FILE_ATTRIBUTE_HIDDEN, ...)"
         }
       }
     },
     "fstat:Storages.resetFileAttributes": {
-      "hash": "81dd14767dda",
+      "hash": "c325067167bc",
       "ja": {
         "summary": "ファイルの属性を解除する",
         "params": {
-          "fliename": "ファイル/ディレクトリ名",
+          "filename": "ファイル/ディレクトリ名",
           "attr": "解除する属性(FILE_ATTRIBUTE_READONLY,FILE_ATTRIBUTE_HIDDEN,...)"
         }
       },
       "tr": {
         "summary": "Clears file attributes",
         "params": {
-          "fliename": "File or directory name",
+          "filename": "File or directory name",
           "attr": "Attributes to clear (FILE_ATTRIBUTE_READONLY, FILE_ATTRIBUTE_HIDDEN, ...)"
         }
       }
@@ -1411,18 +1411,18 @@
       }
     },
     "fstat:Storages.isExistentStorageNoSearchNoNormalize": {
-      "hash": "19540a8fdc34",
+      "hash": "6c6ea5600d70",
       "ja": {
-        "summary": "パスの正規化を行なわず、autoPathからの検索も行なわずに",
-        "description": "ファイルの存在確認を行う\n※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.isExistentStorageNoSearchNoNormalize](Storages.md#isexistentstoragenosearchnonormalize) を参照してください。",
+        "summary": "パスの正規化を行なわず、autoPathからの検索も行なわずにファイルの存在確認を行う",
+        "description": "※本体に同名のメソッドがある環境では本体版が使われます\n(本プラグインは本体に無い旧環境でのみ補完登録します)。\n仕様は本体の [Storages.isExistentStorageNoSearchNoNormalize](Storages.md#isexistentstoragenosearchnonormalize) を参照してください。",
         "returns": "ファイルが存在したらtrue",
         "params": {
           "filename": "ファイル名"
         }
       },
       "tr": {
-        "summary": "Without normalizing the path or searching autoPath,",
-        "description": "checks whether the file exists.\nNote: in environments where the engine has a method of the same name, the engine version is used\n(this plugin registers it only as a fallback in older environments where the engine lacks it).\nSee the engine's [Storages.isExistentStorageNoSearchNoNormalize](Storages.md#isexistentstoragenosearchnonormalize) for the specification.",
+        "summary": "Checks whether a file exists without normalizing the path or searching autoPath",
+        "description": "Note: in environments where the engine has a method of the same name, the engine version is used\n(this plugin registers it only as a fallback in older environments where the engine lacks it).\nSee the engine's [Storages.isExistentStorageNoSearchNoNormalize](Storages.md#isexistentstoragenosearchnonormalize) for the specification.",
         "returns": "true if the file exists",
         "params": {
           "filename": "File name"

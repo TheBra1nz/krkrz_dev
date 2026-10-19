@@ -1,5 +1,5 @@
 ---
-source_hash: b8096672d38b
+source_hash: 9c18522bd20b
 ---
 
 # Expressions and Operators
@@ -212,7 +212,7 @@ All of the following are unary operators (`instanceof` is an exception).
 - **`**+** operator`**  
   The unary `**+**` operator evaluates its right side. If the right side is a real number or an integer, it does nothing. Otherwise, it tries to convert it to a real number or a number, and that becomes the result of the whole operator. When converting a string to a number, a failed conversion does not raise an exception but yields 0. A real number representation containing a decimal point is converted to a real number; otherwise it is converted to an integer. If the string starts with 0x, 0b or 0, it is interpreted as hexadecimal, binary or octal, respectively.
 - **`**-** operator`**  
-  The unary `-` operator evaluates its left side, treats the result as a number, and yields it with its sign reversed.
+  The unary `-` operator evaluates its right side (the operand that follows it), treats the result as a number, and yields it with its sign reversed.
 - **`**&** operator`**  
   The unary `&` operator changes access to the object member written on its right into access to the property object itself, bypassing the property handlers. For example, in propobj = &obj.prop;, the property handlers of obj's member property prop are not invoked; instead, a reference to the **property object** of member property prop itself is assigned to propobj. The behavior is undefined if the right side is not a property access.
 - **`***** operator`**  

@@ -73,12 +73,12 @@
       }
     },
     "krkrthreepp:Threepp.Shape.moveTo": {
-      "hash": "b5538b37c0f0",
+      "hash": "c52530716006",
       "ja": {
-        "summary": "Pathと同じ描画メソッド"
+        "summary": "ペンを移動"
       },
       "tr": {
-        "summary": "Drawing methods (same as Path)"
+        "summary": "Moves the pen"
       }
     },
     "krkrthreepp:Threepp.Shape.lineTo": {
@@ -154,12 +154,12 @@
       }
     },
     "krkrthreepp:Threepp.Shape.addHole": {
-      "hash": "a7255adc1a75",
+      "hash": "81d2b7aa514a",
       "ja": {
-        "summary": "穴の管理"
+        "summary": "穴を追加（Pathオブジェクト）"
       },
       "tr": {
-        "summary": "Hole management"
+        "summary": "Adds a hole (a Path object)"
       }
     },
     "krkrthreepp:Threepp.Shape.getHole": {

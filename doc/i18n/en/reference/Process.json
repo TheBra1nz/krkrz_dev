@@ -2,10 +2,10 @@
   "class": "Process",
   "entries": {
     "process:Process": {
-      "hash": "904b602eeb38",
+      "hash": "c0a27dec2741",
       "ja": {
         "summary": "擬似コードによるマニュアル",
-        "description": "外部アプリを機動してその終了を待つ機構を提供します。"
+        "description": "外部アプリを起動してその終了を待つ機構を提供します。"
       },
       "tr": {
         "summary": "Manual written as pseudo-code",

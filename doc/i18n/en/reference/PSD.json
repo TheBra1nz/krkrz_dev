@@ -303,14 +303,14 @@
       }
     },
     "psdfile:PSD.getLayerComp": {
-      "hash": "5de4c88a4e0c",
+      "hash": "f48febc4ec76",
       "ja": {
         "summary": "レイヤーカンプデータの読み出し",
-        "returns": "ガイド情報辞書 %[ last_applied_id,  // Photoshp上で最後に適用状態だったid\ncomps:[id,                // カンプID\nrecord_visibility, // 表示/非表示を記録しているか\nrecord_position,   // 位置を記録しているか\nrecord_appearance, // 外観(レイヤーエフェクト)を記録しているか\nname,              // カンプ名\ncomment,           // コメント\n],... ]\nカンプ情報がない場合は void を返す\n\n・record_xxx フラグが立っていな場合は最後に適用したカンプ(last_applied_id ではなく\nプログラムで最後に適用したカンプ)の状態を引き継ぎます\n・カンプIDに対応した各レイヤーごとの表示状態情報は、レイヤー情報の layer_comp\nプロパティにカンプIDをキーとした辞書に格納してあります。"
+        "returns": "カンプ情報辞書 %[ last_applied_id,  // Photoshop上で最後に適用状態だったカンプID\ncomps:[ %[ id,                // カンプID\nrecord_visibility, // 表示/非表示を記録しているか\nrecord_position,   // 位置を記録しているか\nrecord_appearance, // 外観(レイヤーエフェクト)を記録しているか\nname,              // カンプ名\ncomment,           // コメント\n],... ] ]\nカンプ情報がない場合は void を返す\n\n・record_xxx フラグが立っていない場合は最後に適用したカンプ(last_applied_id ではなく\nプログラムで最後に適用したカンプ)の状態を引き継ぎます\n・カンプIDに対応した各レイヤーごとの表示状態情報は、レイヤー情報の layer_comp\nプロパティにカンプIDをキーとした辞書に格納してあります。"
       },
       "tr": {
         "summary": "Reads layer comp data",
-        "returns": "Guide information dictionary %[ last_applied_id,  // id last applied in Photoshop\ncomps:[id,                // comp ID\nrecord_visibility, // whether visibility is recorded\nrecord_position,   // whether position is recorded\nrecord_appearance, // whether appearance (layer effects) is recorded\nname,              // comp name\ncomment,           // comment\n],... ]\nReturns void if there is no comp information.\n\n- If a record_xxx flag is not set, the state of the last applied comp (the comp last applied\nby the program, not last_applied_id) carries over\n- The visibility information of each layer for each comp ID is stored in the layer_comp\nproperty of the layer information, as a dictionary keyed by comp ID."
+        "returns": "Comp information dictionary %[ last_applied_id,  // ID of the comp last applied in Photoshop\ncomps:[ %[ id,                // comp ID\nrecord_visibility, // whether visibility is recorded\nrecord_position,   // whether position is recorded\nrecord_appearance, // whether appearance (layer effects) is recorded\nname,              // comp name\ncomment,           // comment\n],... ] ]\nReturns void if there is no comp information.\n\n- If a record_xxx flag is not set, the state of the last applied comp (the comp last applied\nby the program, not last_applied_id) carries over\n- The visibility information of each layer for each comp ID is stored in the layer_comp\nproperty of the layer information, as a dictionary keyed by comp ID."
       }
     },
     "psdfile:PSD.getLayerMask": {
@@ -331,18 +331,18 @@
       }
     },
     "psdfile:PSD.getLayerBlendingRanges": {
-      "hash": "bdbc45e792b8",
+      "hash": "fc8ffab82637",
       "ja": {
-        "summary": "レイヤのブレンド範囲を取得する。source/dest は 32bit の生値で、",
-        "description": "上下 16bit に黒側/白側の範囲が詰まっている(詳細は PSD 仕様書を参照)。",
+        "summary": "レイヤのブレンド範囲を取得する。",
+        "description": "source/dest は 32bit の生値で、上下 16bit に黒側/白側の範囲が詰まっている(詳細は PSD 仕様書を参照)。",
         "returns": "%[ gray:     %[ source:, dest: ],\nchannels: [ %[ source:, dest: ],... ]\n]  ブレンド範囲ブロックが無い場合は void",
         "params": {
           "no": "レイヤ番号"
         }
       },
       "tr": {
-        "summary": "Gets the layer's blending ranges. source/dest are raw 32-bit values,",
-        "description": "with the black and white ranges packed into the upper and lower 16 bits (see the PSD specification for details).",
+        "summary": "Gets the layer's blending ranges.",
+        "description": "source/dest are raw 32-bit values, with the black and white ranges packed into the upper and lower 16 bits (see the PSD specification for details).",
         "returns": "%[ gray:     %[ source:, dest: ],\nchannels: [ %[ source:, dest: ],... ]\n]  void if there is no blending ranges block",
         "params": {
           "no": "Layer index."
@@ -447,10 +447,9 @@
       }
     },
     "psdfile:PSD.getLayerFill": {
-      "hash": "5d3fe40c75d4",
+      "hash": "93fc5052a8ef",
       "ja": {
-        "summary": "塗りつぶしレイヤの内容('SoCo'単色/'GdFl'グラデーション/'PtFl'パターン)を",
-        "description": "取得する",
+        "summary": "塗りつぶしレイヤの内容('SoCo'単色/'GdFl'グラデーション/'PtFl'パターン)を取得する",
         "returns": "%[ type: // \"solid\" / \"gradient\" / \"pattern\"\ndata: // ディスクリプタ辞書\n]  塗りつぶしレイヤでない場合は void",
         "params": {
           "no": "レイヤ番号"
@@ -458,7 +457,6 @@
       },
       "tr": {
         "summary": "Gets the contents of a fill layer ('SoCo' solid color / 'GdFl' gradient / 'PtFl' pattern)",
-        "description": "Gets the fill contents.",
         "returns": "%[ type: // \"solid\" / \"gradient\" / \"pattern\"\ndata: // descriptor dictionary\n]  void if the layer is not a fill layer",
         "params": {
           "no": "Layer index."
@@ -674,10 +672,10 @@
       }
     },
     "psdfile:PSD.moveLayerRange": {
-      "hash": "7357375baad7",
+      "hash": "be452bd7a38a",
       "ja": {
         "summary": "レイヤ一覧上の [from, from+count) の範囲をまとめて to の位置へ動かす",
-        "description": "(低水準。フォルダごと動かすなら groupSpan の戻り値を渡す)。",
+        "description": "低水準の操作。フォルダごと動かすなら groupSpan の戻り値を渡す。",
         "returns": "成功したら true(引数が不正なら false)",
         "params": {
           "from": "移動元先頭レイヤ番号",
@@ -687,7 +685,7 @@
       },
       "tr": {
         "summary": "Moves the range [from, from+count) of the layer list to position to as a group",
-        "description": "(Low level. To move a whole folder, pass the return value of groupSpan.)",
+        "description": "A low-level operation. To move a whole folder, pass the return value of groupSpan.",
         "returns": "true on success (false if the arguments are invalid).",
         "params": {
           "from": "First layer index to move.",
@@ -870,10 +868,10 @@
       }
     },
     "psdfile:PSD.setLayerDescriptor": {
-      "hash": "ae9a50a3112e",
+      "hash": "2168c9e9b393",
       "ja": {
         "summary": "任意の追加レイヤ情報キーに対する setLayerEffects の一般版",
-        "description": "(塗りつぶしレイヤの 'SoCo'/'GdFl'/'PtFl' 等)。\n該当キーを持たないレイヤの場合は例外。",
+        "description": "塗りつぶしレイヤの 'SoCo'/'GdFl'/'PtFl' 等に使う。\n該当キーを持たないレイヤの場合は例外。",
         "params": {
           "index": "レイヤ番号",
           "key": "4文字のキー",
@@ -883,7 +881,7 @@
       },
       "tr": {
         "summary": "General version of setLayerEffects for any additional layer information key",
-        "description": "(such as 'SoCo'/'GdFl'/'PtFl' of fill layers).\nThrows an exception if the layer does not have the key.",
+        "description": "Used for things such as 'SoCo'/'GdFl'/'PtFl' of fill layers.\nThrows an exception if the layer does not have the key.",
         "params": {
           "index": "Layer index.",
           "key": "4-character key.",
@@ -990,10 +988,10 @@
       }
     },
     "psdfile:PSD.setLayerMaskPixels": {
-      "hash": "60e8fb0ee9c4",
+      "hash": "53f4fbeef2bd",
       "ja": {
-        "summary": "レイヤのマスク画素を Layer オブジェクトの内容(B 成分をグレーとして使用)で",
-        "description": "差し替える。マスク矩形も (top,left,imageWidth,imageHeight) に設定する。\nマスクが無ければ新規作成する。8bit 文書のみ。",
+        "summary": "レイヤのマスク画素を Layer オブジェクトの内容(B 成分をグレーとして使用)で差し替える。",
+        "description": "マスク矩形も (top,left,imageWidth,imageHeight) に設定する。\nマスクが無ければ新規作成する。8bit 文書のみ。",
         "returns": "成功したら true",
         "params": {
           "index": "レイヤ番号",
@@ -1003,7 +1001,7 @@
         }
       },
       "tr": {
-        "summary": "Replaces a layer's mask pixels with the contents of a Layer object (the B component is used as gray)",
+        "summary": "Replaces a layer's mask pixels with the contents of a Layer object (the B component is used as gray).",
         "description": "Also sets the mask rectangle to (top,left,imageWidth,imageHeight).\nCreates a mask if there is none. 8-bit documents only.",
         "returns": "true on success.",
         "params": {
@@ -1084,10 +1082,10 @@
       }
     },
     "psdfile:PSD.setLayerRunStyle": {
-      "hash": "ecebdaa493bf",
+      "hash": "95626443465c",
       "ja": {
-        "summary": "テキストレイヤの runIndex 番目のラン(getLayerInfo().text.runs に対応)の",
-        "description": "スタイルを編集する。style 辞書のうち指定されたキーだけ上書きする。\n%[ font:      // フォント名。文書のフォントセットに無ければ追加される\n// (getLayerFonts() が返す PostScript 風の名前。表示名では\n//  ないことに注意。手元に無い名前は Photoshop 側で代替される)\nsize_px:   // フォントサイズ(px)\ncolor:     // RGBA 各 0..1 の配列 `[ r, g, b, a ]` (a 省略で `[ r, g, b ]` も可)\ntracking:  // トラッキング(1/1000 em)\nkerning:   // 手動カーニング\nbold:      // 疑似ボールド(FauxBold) true/false\nitalic:    // 疑似イタリック(FauxItalic) true/false\nunderline: // 下線(Underline) true/false\n]\n本文とランの長さは変わらない。継承でキーを持たないランには追加される。\nテキストレイヤ以外や runIndex 範囲外の場合は例外。",
+        "summary": "テキストレイヤの runIndex 番目のラン(getLayerInfo().text.runs に対応)のスタイルを編集する。",
+        "description": "style 辞書のうち指定されたキーだけ上書きする。\n%[ font:      // フォント名。文書のフォントセットに無ければ追加される\n// (getLayerFonts() が返す PostScript 風の名前。表示名では\n//  ないことに注意。手元に無い名前は Photoshop 側で代替される)\nsize_px:   // フォントサイズ(px)\ncolor:     // RGBA 各 0..1 の配列 `[ r, g, b, a ]` (a 省略で `[ r, g, b ]` も可)\ntracking:  // トラッキング(1/1000 em)\nkerning:   // 手動カーニング\nbold:      // 疑似ボールド(FauxBold) true/false\nitalic:    // 疑似イタリック(FauxItalic) true/false\nunderline: // 下線(Underline) true/false\n]\n本文とランの長さは変わらない。継承でキーを持たないランには追加される。\nテキストレイヤ以外や runIndex 範囲外の場合は例外。",
         "params": {
           "index": "レイヤ番号",
           "runIndex": "ラン番号",
@@ -1095,7 +1093,7 @@
         }
       },
       "tr": {
-        "summary": "Edits the style of run runIndex of a text layer (corresponding to getLayerInfo().text.runs)",
+        "summary": "Edits the style of run runIndex of a text layer (corresponding to getLayerInfo().text.runs).",
         "description": "Only the keys given in the style dictionary are overwritten.\n%[ font:      // font name; added to the document's font set if missing\n// (the PostScript-style name returned by getLayerFonts(), not the\n//  display name. Names not available locally are substituted by Photoshop)\nsize_px:   // font size (px)\ncolor:     // RGBA array, each 0..1, `[ r, g, b, a ]` (`[ r, g, b ]` without a is also accepted)\ntracking:  // tracking (1/1000 em)\nkerning:   // manual kerning\nbold:      // faux bold (FauxBold) true/false\nitalic:    // faux italic (FauxItalic) true/false\nunderline: // underline (Underline) true/false\n]\nThe body text and run lengths do not change. Keys are added to runs that lack them through inheritance.\nThrows an exception for non-text layers or if runIndex is out of range.",
         "params": {
           "index": "Layer index.",
@@ -1206,10 +1204,10 @@
       }
     },
     "psdfile:PSD.moveTextLayer": {
-      "hash": "8bbf23446c3a",
+      "hash": "36ef8b3b1d51",
       "ja": {
-        "summary": "テキストレイヤを平行移動する。アフィン変換の tx/ty とレイヤ矩形",
-        "description": "(マスク矩形があればそれも)を同じだけずらすので、PSD 内蔵のラスタも\n一緒に動く。テキストレイヤ以外の場合は例外。",
+        "summary": "テキストレイヤを平行移動する。",
+        "description": "アフィン変換の tx/ty とレイヤ矩形(マスク矩形があればそれも)を同じだけずらすので、\nPSD 内蔵のラスタも一緒に動く。テキストレイヤ以外の場合は例外。",
         "params": {
           "index": "レイヤ番号",
           "dx": "X 移動量(px)",
@@ -1217,8 +1215,8 @@
         }
       },
       "tr": {
-        "summary": "Translates a text layer. Shifts tx/ty of the affine transform and the layer rectangle",
-        "description": "(and the mask rectangle, if any) by the same amount, so the raster stored in the PSD\nmoves along with it. Throws an exception for non-text layers.",
+        "summary": "Translates a text layer.",
+        "description": "Shifts tx/ty of the affine transform and the layer rectangle (and the mask rectangle, if any) by the same amount,\nso the raster stored in the PSD moves along with it. Throws an exception for non-text layers.",
         "params": {
           "index": "Layer index.",
           "dx": "Amount to move in X (px).",
@@ -1271,14 +1269,14 @@
       }
     },
     "psdfile:PSD.clearStorageCache": {
-      "hash": "17d2ddf452b3",
+      "hash": "cac904b2f6a9",
       "ja": {
-        "summary": "static method",
-        "description": "ストレージとして保持されてるキャッシュをクリアする"
+        "summary": "ストレージとして保持されてるキャッシュをクリアする",
+        "description": "static メソッド。"
       },
       "tr": {
-        "summary": "static method",
-        "description": "Clears the cache held for the storage."
+        "summary": "Clears the cache held for the storage",
+        "description": "A static method."
       }
     },
     "psdfile:PSD.getComposite": {
@@ -1394,10 +1392,10 @@
       }
     },
     "psdfile:PSD.flattenPath": {
-      "hash": "01c9c66d35b7",
+      "hash": "9acc43a1f050",
       "ja": {
-        "summary": "static method",
-        "description": "パスを折れ線にする。",
+        "summary": "パスを折れ線にする。",
+        "description": "static メソッド。",
         "returns": "[ %[ closed, operation, points:[ [x,y], ... ] ], ... ]",
         "params": {
           "path": "getVectorMask の path と同じ形の辞書、またはサブパスの配列。\nknot は [x, y] だけでもよい (直線の頂点)。closed の省略は true、\noperation の省略は -1",
@@ -1405,8 +1403,8 @@
         }
       },
       "tr": {
-        "summary": "static method",
-        "description": "Converts a path into polylines.",
+        "summary": "Converts a path into polylines.",
+        "description": "A static method.",
         "returns": "[ %[ closed, operation, points:[ [x,y], ... ] ], ... ]",
         "params": {
           "path": "A dictionary in the same shape as path in getVectorMask, or an array of subpaths.\nA knot may be just [x, y] (a straight-line vertex). closed defaults to true and\noperation to -1.",
@@ -1415,10 +1413,10 @@
       }
     },
     "psdfile:PSD.rasterizePath": {
-      "hash": "cc409c3b8db4",
+      "hash": "409db6832fa4",
       "ja": {
-        "summary": "static method",
-        "description": "パスの塗りをラスタライズする (被覆率を B=G=R=値, A=255 で)。",
+        "summary": "パスの塗りをラスタライズする (被覆率を B=G=R=値, A=255 で)。",
+        "description": "static メソッド。",
         "params": {
           "layer": "格納先レイヤ (width x height になる)",
           "path": "flattenPath と同じ",
@@ -1429,8 +1427,8 @@
         }
       },
       "tr": {
-        "summary": "static method",
-        "description": "Rasterizes the fill of a path (coverage as B=G=R=value, A=255).",
+        "summary": "Rasterizes the fill of a path (coverage as B=G=R=value, A=255).",
+        "description": "A static method.",
         "params": {
           "layer": "Destination layer (resized to width x height).",
           "path": "Same as flattenPath.",
@@ -1442,10 +1440,10 @@
       }
     },
     "psdfile:PSD.strokePath": {
-      "hash": "ee71d1683915",
+      "hash": "8cc19b0bb362",
       "ja": {
-        "summary": "static method",
-        "description": "パスの線をラスタライズする (被覆率を B=G=R=値, A=255 で)。",
+        "summary": "パスの線をラスタライズする (被覆率を B=G=R=値, A=255 で)。",
+        "description": "static メソッド。",
         "params": {
           "layer": "格納先レイヤ (width x height になる)",
           "path": "flattenPath と同じ",
@@ -1455,8 +1453,8 @@
         }
       },
       "tr": {
-        "summary": "static method",
-        "description": "Rasterizes the stroke of a path (coverage as B=G=R=value, A=255).",
+        "summary": "Rasterizes the stroke of a path (coverage as B=G=R=value, A=255).",
+        "description": "A static method.",
         "params": {
           "layer": "Destination layer (resized to width x height).",
           "path": "Same as flattenPath.",
@@ -1467,17 +1465,17 @@
       }
     },
     "psdfile:PSD.setThreads": {
-      "hash": "20719ae57543",
+      "hash": "0db71677c48e",
       "ja": {
-        "summary": "static method",
-        "description": "描画系 (getComposite / renderLayer / ラスタライズ) の並列処理のスレッド数。\n大きな画像は行ごとに複数のスレッドへ分けて処理する (結果はスレッド数によらない)。\n主な描画モードの合成は、AVX2 の CPU なら 8 画素ずつの SIMD 版で処理する。",
+        "summary": "描画系 (getComposite / renderLayer / ラスタライズ) の並列処理のスレッド数。",
+        "description": "static メソッド。\n大きな画像は行ごとに複数のスレッドへ分けて処理する (結果はスレッド数によらない)。\n主な描画モードの合成は、AVX2 の CPU なら 8 画素ずつの SIMD 版で処理する。",
         "params": {
           "count": "使うスレッド数 (呼び出し元を含む)。0 = 自動 (論理コア数、最大 16)、\n1 = 分けない。プラグインの登録解除のときに作業スレッドは止める"
         }
       },
       "tr": {
-        "summary": "static method",
-        "description": "Number of threads used for parallel processing in rendering (getComposite / renderLayer / rasterization).\nLarge images are split by rows across multiple threads (the result does not depend on the thread count).\nOn CPUs with AVX2, compositing for the main blend modes uses a SIMD version that processes 8 pixels at a time.",
+        "summary": "Number of threads used for parallel processing in rendering (getComposite / renderLayer / rasterization).",
+        "description": "A static method.\nLarge images are split by rows across multiple threads (the result does not depend on the thread count).\nOn CPUs with AVX2, compositing for the main blend modes uses a SIMD version that processes 8 pixels at a time.",
         "params": {
           "count": "Number of threads to use (including the caller). 0 = automatic (number of logical cores, up to 16),\n1 = no splitting. The worker threads are stopped when the plugin is unregistered."
         }

@@ -1,5 +1,5 @@
 ---
-source_hash: 6601ff014f3f
+source_hash: e55949e6798a
 ---
 
 # Array Class
@@ -176,7 +176,7 @@ The second argument specifies whether to perform a stable sort. If omitted, fals
 saveStruct writes structured data to a file.
 
 ```
-構文 : save(<ファイル名>, <モード=''>)
+構文 : saveStruct(<ファイル名>, <モード=''>)
 ```
 
 The saveStruct method writes the elements to a file in a form from which their state can be restored.

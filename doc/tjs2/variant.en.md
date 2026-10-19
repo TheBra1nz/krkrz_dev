@@ -1,5 +1,5 @@
 ---
-source_hash: 710dff733aad
+source_hash: d1c4b56a59f9
 ---
 
 # The tTJSVariant Type
@@ -33,9 +33,7 @@ An enumeration that represents the internal type of a tTJSVariant. It can be obt
 
 Among the internal types, objects are managed with reference counting.
 
-tTJSVariant manages reference counts automatically by itself, but note that it does not manage the reference count after you extract a pointer to an object through the methods that obtain
-
-from a tTJSVariant, or through the methods that obtain a tTJSVariantClosure.
+tTJSVariant manages reference counts automatically by itself, but note that it does not manage the reference count after you extract a pointer to an object through the methods that obtain an [iTJSDispatch2](interface.md) from a tTJSVariant, or through the methods that obtain a tTJSVariantClosure.
 
 ## Object type
 

@@ -1,5 +1,5 @@
 ---
-source_hash: 27620770f47f
+source_hash: c876a2985f76
 ---
 
 # Factors
@@ -14,7 +14,7 @@ Factors have the highest precedence in expression evaluation. In addition to ord
 
 
 
-Avoid comparing `true` or `false` with other expressions. For example, instead of writing `if(true != getBoolean())`, write `if(!getBoolen())`. In logical expressions, "0 is false" and "anything other than 0 is true", not "`1` is true". Also, TJS2 has no logical (Boolean) type, so no automatic conversion between numbers and Booleans takes place.
+Avoid comparing `true` or `false` with other expressions. For example, instead of writing `if(true != getBoolean())`, write `if(!getBoolean())`. In logical expressions, "0 is false" and "anything other than 0 is true", not "`1` is true". Also, TJS2 has no logical (Boolean) type, so no automatic conversion between numbers and Booleans takes place.
 
 ## void
 

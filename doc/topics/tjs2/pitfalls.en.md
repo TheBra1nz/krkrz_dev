@@ -1,5 +1,5 @@
 ---
-source_hash: 0fcdecd56b98
+source_hash: 79ab1a80fa57
 ---
 
 # Common Pitfalls (TJS2 / Engine API)
@@ -162,7 +162,7 @@ It returns void, not an empty string. Check with `if (v === void)`.
 ### Don't assume a plugin for building JSON
 
 `Scripts.toJSONString` / `evalJSON` are extensions from the json plugin. If you want to stay within core
-features only, build the JSON by hand or use `Dialog.dictToJson` (when Elements is enabled).
+features only, build the JSON by hand or use [`ElementsDialog.dictToJson`](../../reference/ElementsDialog.md#dicttojson) (when Elements is enabled).
 
 ---
 

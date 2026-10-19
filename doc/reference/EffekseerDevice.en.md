@@ -324,10 +324,11 @@ Method
 
 **Description**
 
-Sets the internal buffer capacities. This recreates the internal manager/renderer, so
+Sets the internal buffer capacities.
 
+This recreates the internal manager/renderer, so existing EffekseerEffect / EffekseerPlayer objects are invalidated.
 Note: call this before loading effects and before creating players.
-Existing EffekseerEffect / EffekseerPlayer objects are invalidated.
+Does nothing if the values are the same as the current ones. Values of 0 or less throw an exception.
 
 ---
 

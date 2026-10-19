@@ -2620,10 +2620,10 @@
       }
     },
     "krkr_richtext:Layer.drawStyledText": {
-      "hash": "b889a2878065",
+      "hash": "2717a305bd21",
       "ja": {
         "summary": "スタイルタグ付きテキストを描画",
-        "description": "<style:名前> タグでスタイルを切り替えながらテキストを描画します。\nstyles / appearances に単体オブジェクトを渡すと \"default\" キーとして扱われます。\n\n使用例:\n// 単一スタイルで描画\nlayer.drawStyledText(\n\"テキスト\",\n10, 10, 400, 300,\nRichText.HALIGN_LEFT, RichText.VALIGN_TOP,\nstyle, app\n);\n\n// 複数スタイルで描画\nvar styles = %[ \"default\": normalStyle, \"bold\": boldStyle ];\nvar apps = %[ \"default\": normalApp, \"bold\": boldApp ];\nlayer.drawStyledText(\n\"通常<style:bold>太字</style>通常\",\n10, 10, 400, 300,\nRichText.HALIGN_LEFT, RichText.VALIGN_TOP,\nstyles, apps\n);",
+        "description": "`<style:名前>` タグでスタイルを切り替えながらテキストを描画します。\nstyles / appearances に単体オブジェクトを渡すと \"default\" キーとして扱われます。\n\n使用例:\n\n```tjs\n// 単一スタイルで描画\nlayer.drawStyledText(\n\"テキスト\",\n10, 10, 400, 300,\nRichText.HALIGN_LEFT, RichText.VALIGN_TOP,\nstyle, app\n);\n\n// 複数スタイルで描画\nvar styles = %[ \"default\": normalStyle, \"bold\": boldStyle ];\nvar apps = %[ \"default\": normalApp, \"bold\": boldApp ];\nlayer.drawStyledText(\n\"通常<style:bold>太字</style>通常\",\n10, 10, 400, 300,\nRichText.HALIGN_LEFT, RichText.VALIGN_TOP,\nstyles, apps\n);\n```",
         "returns": "実際の描画領域の配列 [x, y, width, height]",
         "params": {
           "text": "スタイルタグ付きテキスト",
@@ -2640,7 +2640,7 @@
       },
       "tr": {
         "summary": "Draws text with style tags",
-        "description": "Draws text while switching styles with <style:name> tags.\nPassing a single object for styles / appearances treats it as the \"default\" key.\n\nExample:\n// Draw with a single style\nlayer.drawStyledText(\n\"テキスト\",\n10, 10, 400, 300,\nRichText.HALIGN_LEFT, RichText.VALIGN_TOP,\nstyle, app\n);\n\n// Draw with multiple styles\nvar styles = %[ \"default\": normalStyle, \"bold\": boldStyle ];\nvar apps = %[ \"default\": normalApp, \"bold\": boldApp ];\nlayer.drawStyledText(\n\"通常<style:bold>太字</style>通常\",\n10, 10, 400, 300,\nRichText.HALIGN_LEFT, RichText.VALIGN_TOP,\nstyles, apps\n);",
+        "description": "Draws text while switching styles with `<style:name>` tags.\nPassing a single object for styles / appearances treats it as the \"default\" key.\n\nExample:\n\n```tjs\n// Draw with a single style\nlayer.drawStyledText(\n\"テキスト\",\n10, 10, 400, 300,\nRichText.HALIGN_LEFT, RichText.VALIGN_TOP,\nstyle, app\n);\n\n// Draw with multiple styles\nvar styles = %[ \"default\": normalStyle, \"bold\": boldStyle ];\nvar apps = %[ \"default\": normalApp, \"bold\": boldApp ];\nlayer.drawStyledText(\n\"通常<style:bold>太字</style>通常\",\n10, 10, 400, 300,\nRichText.HALIGN_LEFT, RichText.VALIGN_TOP,\nstyles, apps\n);\n```",
         "returns": "Array of the actual drawn area [x, y, width, height]",
         "params": {
           "text": "Text with style tags",
@@ -2992,21 +2992,25 @@
       }
     },
     "layerExDraw:Layer.smoothingMode": {
-      "hash": "797b38bfba51",
+      "hash": "49532278ef21",
       "ja": {
-        "summary": "描画のアンチエイリアス指定(SmoothingMode) @description デフォルト SmoothingModeAntiAlias"
+        "summary": "描画のアンチエイリアス指定(SmoothingMode)",
+        "description": "デフォルト SmoothingModeAntiAlias"
       },
       "tr": {
-        "summary": "Antialiasing setting for drawing (SmoothingMode) @description Default: SmoothingModeAntiAlias"
+        "summary": "Antialiasing setting for drawing (SmoothingMode)",
+        "description": "Default: SmoothingModeAntiAlias"
       }
     },
     "layerExDraw:Layer.textRenderingHint": {
-      "hash": "10b055fbd4c0",
+      "hash": "2aee1505f985",
       "ja": {
-        "summary": "テキスト描画のレンダリング指定(TextRenderingHint) @description デフォルト TextRenderingHintAntiAlias"
+        "summary": "テキスト描画のレンダリング指定(TextRenderingHint)",
+        "description": "デフォルト TextRenderingHintAntiAlias"
       },
       "tr": {
-        "summary": "Rendering setting for text drawing (TextRenderingHint) @description Default: TextRenderingHintAntiAlias"
+        "summary": "Rendering setting for text drawing (TextRenderingHint)",
+        "description": "Default: TextRenderingHintAntiAlias"
       }
     },
     "layerExDraw:Layer.setTransform": {
@@ -3099,9 +3103,9 @@
       }
     },
     "layerExDraw:Layer.drawPie": {
-      "hash": "962fd82f2edb",
+      "hash": "7d1ad9e48734",
       "ja": {
-        "summary": "円錐の描画",
+        "summary": "扇形 (パイ) の描画",
         "returns": "更新域情報(RectF)",
         "params": {
           "app": "アピアランス GdiPlus.Appearance で描画スタイルを指定します",
@@ -3114,7 +3118,7 @@
         }
       },
       "tr": {
-        "summary": "Draws a pie",
+        "summary": "Draws a pie (sector)",
         "returns": "Updated area information (RectF)",
         "params": {
           "app": "Appearance: specifies the drawing style with a GdiPlus.Appearance",
@@ -3983,28 +3987,24 @@
       }
     },
     "layerExSave:Layer.getCropRect": {
-      "hash": "28e001f4ac90",
+      "hash": "610494dedb76",
       "ja": {
-        "summary": "レイヤイメージをクロップ（上下左右の余白透明部分を切り取る）したときの",
-        "description": "サイズを取得します。",
+        "summary": "レイヤイメージをクロップ（上下左右の余白透明部分を切り取る）したときのサイズを取得します。",
         "returns": "%[ x, y, w, h] 形式の辞書，またはvoid（全部透明のとき）"
       },
       "tr": {
-        "summary": "When the layer image is cropped (trimming the transparent margins on the top, bottom, left, and right),",
-        "description": "gets the resulting size.",
+        "summary": "Gets the size the layer image would have if cropped (trimming the transparent margins on the top, bottom, left, and right).",
         "returns": "Dictionary of the form %[ x, y, w, h], or void (when everything is transparent)"
       }
     },
     "layerExSave:Layer.getCropRectZero": {
-      "hash": "03fc75c31d93",
+      "hash": "8fa5fa771b95",
       "ja": {
-        "summary": "レイヤイメージをクロップ（上下左右の完全透明部分(0x00000000)を切り取る）したときの",
-        "description": "サイズを取得します。",
+        "summary": "レイヤイメージをクロップ（上下左右の完全透明部分(0x00000000)を切り取る）したときのサイズを取得します。",
         "returns": "%[ x, y, w, h] 形式の辞書，またはvoid（全部透明のとき）"
       },
       "tr": {
-        "summary": "When the layer image is cropped (trimming the fully transparent (0x00000000) parts on the top, bottom, left, and right),",
-        "description": "gets the resulting size.",
+        "summary": "Gets the size the layer image would have if cropped (trimming the fully transparent (0x00000000) parts on the top, bottom, left, and right).",
         "returns": "Dictionary of the form %[ x, y, w, h], or void (when everything is transparent)"
       }
     },
@@ -4090,18 +4090,18 @@
       }
     },
     "layerExSave:Layer.clearAlpha": {
-      "hash": "ec9636ea8884",
+      "hash": "390d804b62fd",
       "ja": {
-        "summary": "αが指定以下の部分を指定色で塗りつぶすする",
+        "summary": "αが指定以下の部分を指定色で塗りつぶす",
         "params": {
-          "threthold": "αの下限",
+          "threshold": "αの閾値。αがこの値以下のピクセルを塗りつぶす",
           "fillColor": "塗りつぶし色(0x00RRGGBB)"
         }
       },
       "tr": {
         "summary": "Fills the parts whose alpha is at or below the given value with the specified color",
         "params": {
-          "threthold": "Alpha lower bound",
+          "threshold": "Alpha threshold. Pixels whose alpha is at or below this value are filled",
           "fillColor": "Fill color (0x00RRGGBB)"
         }
       }
@@ -4262,9 +4262,9 @@
       }
     },
     "layerExVector:Layer.drawPie": {
-      "hash": "1796f79b066b",
+      "hash": "9beca236f966",
       "ja": {
-        "summary": "円錐の描画",
+        "summary": "扇形 (パイ) の描画",
         "returns": "更新領域情報(RectF)",
         "params": {
           "app": "アピアランス GdiPlus.Appearance で描画スタイルを指定します",
@@ -4277,7 +4277,7 @@
         }
       },
       "tr": {
-        "summary": "Draws a pie",
+        "summary": "Draws a pie (sector)",
         "returns": "Updated area information (RectF)",
         "params": {
           "app": "Appearance: specifies the drawing style with a GdiPlus.Appearance",

@@ -38,7 +38,7 @@
         "returns": "Port number."
       }
     },
-    "httpserv:SimpleHTTPServer.start@2": {
+    "httpserv:SimpleHTTPServer.stop": {
       "hash": "50347396cd1f",
       "ja": {
         "summary": "サービス停止"

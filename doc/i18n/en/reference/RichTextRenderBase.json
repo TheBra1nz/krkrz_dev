@@ -265,54 +265,81 @@
       }
     },
     "krkr_richtext:RichTextRenderBase.renderOver": {
-      "hash": "87928b7e794d",
+      "hash": "553ba645bb8c",
       "ja": {
-        "summary": "/ レンダリング結果が領域をはみ出ているかどうか"
+        "summary": "レンダリング結果が領域をはみ出ているかどうか"
       },
       "tr": {
         "summary": "Whether the rendering result overflows the area"
       }
     },
     "krkr_richtext:RichTextRenderBase.renderLines": {
-      "hash": "be1a0c1dd428",
+      "hash": "8916735fea4f",
       "ja": {
-        "summary": "/ レンダリング結果の行数"
+        "summary": "レンダリング結果の行数"
       },
       "tr": {
         "summary": "Number of lines in the rendering result"
       }
     },
     "krkr_richtext:RichTextRenderBase.renderCount": {
-      "hash": "244662bb78c6",
+      "hash": "e8ce2177c539",
       "ja": {
-        "summary": "/ レンダリング結果の文字数"
+        "summary": "レンダリング結果の文字数"
       },
       "tr": {
         "summary": "Number of characters in the rendering result"
       }
     },
     "krkr_richtext:RichTextRenderBase.renderDelay": {
-      "hash": "546faa9924d3",
+      "hash": "e19e9c77d4e2",
       "ja": {
-        "summary": "/ レンダリング結果の総表示時間"
+        "summary": "レンダリング結果の総表示時間"
       },
       "tr": {
         "summary": "Total display time of the rendering result"
       }
     },
     "krkr_richtext:RichTextRenderBase.renderLeft": {
-      "hash": "0ae3caff6a49",
+      "hash": "07123a63b7a4",
       "ja": {
-        "summary": "/ レンダリング結果領域情報"
+        "summary": "レンダリング結果領域の左端"
       },
       "tr": {
-        "summary": "Area information of the rendering result"
+        "summary": "Left edge of the rendering result area"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.renderTop": {
+      "hash": "9d1a4d395b81",
+      "ja": {
+        "summary": "レンダリング結果領域の上端"
+      },
+      "tr": {
+        "summary": "Top edge of the rendering result area"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.renderRight": {
+      "hash": "85960e76f1d8",
+      "ja": {
+        "summary": "レンダリング結果領域の右端"
+      },
+      "tr": {
+        "summary": "Right edge of the rendering result area"
+      }
+    },
+    "krkr_richtext:RichTextRenderBase.renderBottom": {
+      "hash": "a52c82550119",
+      "ja": {
+        "summary": "レンダリング結果領域の下端"
+      },
+      "tr": {
+        "summary": "Bottom edge of the rendering result area"
       }
     },
     "krkr_richtext:RichTextRenderBase.renderText": {
-      "hash": "2d13726e9b70",
+      "hash": "de5f158fb613",
       "ja": {
-        "summary": "/ レンダリング結果テキスト（エスケープ除去済み）"
+        "summary": "レンダリング結果テキスト（エスケープ除去済み）"
       },
       "tr": {
         "summary": "Text of the rendering result (escapes removed)"

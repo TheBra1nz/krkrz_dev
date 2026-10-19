@@ -4,6 +4,8 @@ Point light
 
 A light emitted from a single point in all directions.
 
+Shadows are set up in the same way as for DirectionalLight. However, setShadowOrthoBounds is for directional lights only and has no effect on point lights.
+
 ## Members
 
 ### Constructors
@@ -117,7 +119,7 @@ Method
 
 **Description**
 
---- Shadows (ShadowMap) --- Note: setShadowOrthoBounds is for directional lights only (it has no effect on point lights).
+Shadow map resolution (default 2048x2048)
 
 ---
 
@@ -131,6 +133,10 @@ Method
 | --- | --- | --- |
 | `bias` | `&nbsp;` |  |
 
+**Description**
+
+Shadow bias to reduce shadow acne (e.g. -0.0005)
+
 ---
 
 ### setShadowNormalBias
@@ -142,6 +148,10 @@ Method
 | Arguments | Default | Description |
 | --- | --- | --- |
 | `bias` | `&nbsp;` |  |
+
+**Description**
+
+Bias along the normal
 
 ---
 
@@ -155,6 +165,10 @@ Method
 | --- | --- | --- |
 | `radius` | `&nbsp;` |  |
 
+**Description**
+
+Soft shadow radius (PCF)
+
 ---
 
 ### setShadowNearFar
@@ -167,6 +181,10 @@ Method
 | --- | --- | --- |
 | `near` | `&nbsp;` |  |
 | `far` | `&nbsp;` |  |
+
+**Description**
+
+near/far of the shadow camera
 
 ---
 

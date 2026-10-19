@@ -16,7 +16,7 @@ See XML.tjs for a concrete DOM implementation example.
 - [currentByteIndex](#currentbyteindex)
 - [currentLineNumber](#currentlinenumber)
 - [currentColumnNumber](#currentcolumnnumber)
-- [currentButeCount](#currentbutecount)
+- [currentByteCount](#currentbytecount)
 
 ### Methods
 
@@ -71,11 +71,11 @@ Property \ Access: `r/w`
 
 **Description**
 
-Current line number
+Current column number
 
 ---
 
-### currentButeCount
+### currentByteCount
 
 Property \ Access: `r/w`
 

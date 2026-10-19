@@ -387,12 +387,11 @@ Property \ Access: `r/w`
 
 **Description**
 
-Icon display
+Icon when checked (0 for the default)
 
 Use the MenuItem.bi* constants, or pass a layer object.
 Note: this has no effect unless the item is a child of Window.menu and visible at the time the value is set.
 Also note that pull-down menus are not displayed unless extended events are registered with Window.registerExEvent().
-property bmpItem      { getter; setter }; //< icon at the text position (cannot be combined with the checked/unchecked icons?) Icon when checked (0 for the default)
 
 ---
 
@@ -403,6 +402,8 @@ Property \ Access: `r/w`
 **Description**
 
 Icon when unchecked (0 for the default)
+
+The values and notes are the same as for bmpChecked.
 
 ---
 
@@ -415,8 +416,8 @@ Method
 | Arguments | Default | Description |
 | --- | --- | --- |
 | `flags` | `&nbsp;` |  |
-| `x` | `cursorX` |  |
-| `y` | `cursorY` |  |
+| `x` | `cursorX` | Display position X (screen coordinates; the mouse cursor position if omitted). |
+| `y` | `cursorY` | Display position Y (screen coordinates; the mouse cursor position if omitted). |
 | `hwnd` | `this.root.window` | Owner window (the window the instance belongs to if omitted). |
 | `rect` | `&nbsp;` | Area the menu must not overlap (%[ x, y, w, h ]; no restriction if omitted). |
 | `menulist` | `this.children` | Array of menu entries (they need not be MenuItem instances; dictionaries are fine). |

@@ -515,14 +515,14 @@ Method
 
 **Return value**
 
-Guide information dictionary %[ last_applied_id,  // id last applied in Photoshop
-comps:[id,                // comp ID
+Comp information dictionary %[ last_applied_id,  // ID of the comp last applied in Photoshop
+comps:[ %[ id,                // comp ID
 record_visibility, // whether visibility is recorded
 record_position,   // whether position is recorded
 record_appearance, // whether appearance (layer effects) is recorded
 name,              // comp name
 comment,           // comment
-],... ]
+],... ] ]
 Returns void if there is no comp information.
 
 - If a record_xxx flag is not set, the state of the last applied comp (the comp last applied
@@ -591,9 +591,9 @@ channels: [ %[ source:, dest: ],... ]
 
 **Description**
 
-Gets the layer's blending ranges. source/dest are raw 32-bit values,
+Gets the layer's blending ranges.
 
-with the black and white ranges packed into the upper and lower 16 bits (see the PSD specification for details).
+source/dest are raw 32-bit values, with the black and white ranges packed into the upper and lower 16 bits (see the PSD specification for details).
 
 ---
 
@@ -742,8 +742,6 @@ data: // descriptor dictionary
 **Description**
 
 Gets the contents of a fill layer ('SoCo' solid color / 'GdFl' gradient / 'PtFl' pattern)
-
-Gets the fill contents.
 
 ---
 
@@ -1027,7 +1025,7 @@ true on success (false if the arguments are invalid).
 
 Moves the range [from, from+count) of the layer list to position to as a group
 
-(Low level. To move a whole folder, pass the return value of groupSpan.)
+A low-level operation. To move a whole folder, pass the return value of groupSpan.
 
 ---
 
@@ -1247,7 +1245,7 @@ Method
 
 General version of setLayerEffects for any additional layer information key
 
-(such as 'SoCo'/'GdFl'/'PtFl' of fill layers).
+Used for things such as 'SoCo'/'GdFl'/'PtFl' of fill layers.
 Throws an exception if the layer does not have the key.
 
 ---
@@ -1379,7 +1377,7 @@ true on success.
 
 **Description**
 
-Replaces a layer's mask pixels with the contents of a Layer object (the B component is used as gray)
+Replaces a layer's mask pixels with the contents of a Layer object (the B component is used as gray).
 
 Also sets the mask rectangle to (top,left,imageWidth,imageHeight).
 Creates a mask if there is none. 8-bit documents only.
@@ -1470,7 +1468,7 @@ Method
 
 **Description**
 
-Edits the style of run runIndex of a text layer (corresponding to getLayerInfo().text.runs)
+Edits the style of run runIndex of a text layer (corresponding to getLayerInfo().text.runs).
 
 Only the keys given in the style dictionary are overwritten.
 %[ font:      // font name; added to the document's font set if missing
@@ -1620,10 +1618,10 @@ Method
 
 **Description**
 
-Translates a text layer. Shifts tx/ty of the affine transform and the layer rectangle
+Translates a text layer.
 
-(and the mask rectangle, if any) by the same amount, so the raster stored in the PSD
-moves along with it. Throws an exception for non-text layers.
+Shifts tx/ty of the affine transform and the layer rectangle (and the mask rectangle, if any) by the same amount,
+so the raster stored in the PSD moves along with it. Throws an exception for non-text layers.
 
 ---
 
@@ -1680,9 +1678,9 @@ Method
 
 **Description**
 
-static method
+Clears the cache held for the storage
 
-Clears the cache held for the storage.
+A static method.
 
 ---
 
@@ -1848,9 +1846,9 @@ Method
 
 **Description**
 
-static method
-
 Converts a path into polylines.
+
+A static method.
 
 ---
 
@@ -1871,9 +1869,9 @@ Method
 
 **Description**
 
-static method
-
 Rasterizes the fill of a path (coverage as B=G=R=value, A=255).
+
+A static method.
 
 ---
 
@@ -1893,9 +1891,9 @@ Method
 
 **Description**
 
-static method
-
 Rasterizes the stroke of a path (coverage as B=G=R=value, A=255).
+
+A static method.
 
 ---
 
@@ -1911,9 +1909,9 @@ Method
 
 **Description**
 
-static method
-
 Number of threads used for parallel processing in rendering (getComposite / renderLayer / rasterization).
+
+A static method.
 Large images are split by rows across multiple threads (the result does not depend on the thread count).
 On CPUs with AVX2, compositing for the main blend modes uses a SIMD version that processes 8 pixels at a time.
 

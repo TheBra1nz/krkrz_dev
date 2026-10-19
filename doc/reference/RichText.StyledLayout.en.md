@@ -7,6 +7,8 @@ Separating layout from drawing makes redrawing the same text and
 character-by-character display animations efficient.
 
 Example:
+
+```tjs
 var sl = new RichText.StyledLayout();
 sl.layout(
 "<style:bold>太字</style>と通常テキスト",
@@ -16,6 +18,7 @@ RichText.HALIGN_LEFT, RichText.VALIGN_TOP,
 %[ "default": normalApp, "bold": boldApp ]
 );
 layer.drawStyledLayout(sl, 10, 10);
+```
 
 ## Members
 
@@ -171,7 +174,7 @@ Method
 
 Resolves timing information
 
-Resolves the timing information produced by layout() (the <start>, <delay>, <wait>, <sync>, and <keywait> tags)
+Resolves the timing information produced by layout() (the `<start>`, `<delay>`, `<wait>`, `<sync>`, and `<keywait>` tags)
 and computes the display start time of each character.
 
 Even if you do not call it explicitly, it is resolved automatically with default values (timeScale=1.0, widthTimeScale=false)
@@ -228,7 +231,7 @@ Each element is a dictionary %[pos, time].
 - pos: character position (charIndex)
 - time: elapsed time at that point (ms)
 
-Returns the positions of <keywait/> tags and the cumulative display time up to each.
+Returns the positions of `<keywait/>` tags and the cumulative display time up to each.
 
 ---
 

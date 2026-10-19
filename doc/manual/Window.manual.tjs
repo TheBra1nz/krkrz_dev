@@ -1363,7 +1363,7 @@ class Window {
 	/**
 	 * ビューポート余白の背景色
 	 *
-	 * ビューポートで生じた余白を塗る背景色を `0xRRGGBB` 形式の整数で表します(上位 8bit は alpha)。既定は黒。
+	 * ビューポートで生じた余白を塗る背景色を `0xAARRGGBB` 形式の整数で表します (上位 8bit が alpha。不透明にするには `0xff` を付けます)。既定は `0xff000000` (不透明の黒)。
 	 * 値を設定することもできます。壁紙([Window.setViewportWallpaper](Window.md#setviewportwallpaper))が設定されている場合は壁紙が優先されます。
 	 *
 	 * Windows ネイティブ ( WINVER ) ビルドと SDL3 / 汎用ビルドの双方で利用できます ( WINVER 対応は 2026-08-17 )。

@@ -298,7 +298,7 @@ function onAction(id, payload) {
 
 ## ミニマルな利用例
 
-[Dialog](../reference/ElementsDialog.md) を継承したクラスで [onAction](../reference/ElementsDialog.md#onaction) を実装し、JSON レイアウトを渡して表示します。
+[ElementsDialog](../reference/ElementsDialog.md) を継承したクラスで [onAction](../reference/ElementsDialog.md#onaction) を実装し、JSON レイアウトを渡して表示します。
 
 ```tjs
 class TestDialog extends ElementsDialog {
@@ -335,7 +335,7 @@ dlg.showJson(json);             // 非モーダル
 // var r = dlg.showModalJson(json);                       // ゲーム画面オーバーレイ
 ```
 
-ボタン・入力欄などの widget を JSON でどう記述するかの一覧は、[Dialog](../reference/ElementsDialog.md) クラスリファレンスを参照してください。
+ボタン・入力欄などの widget を JSON でどう記述するかの一覧は、[ElementsDialog](../reference/ElementsDialog.md) クラスリファレンスを参照してください。
 
 ## フォントの登録
 

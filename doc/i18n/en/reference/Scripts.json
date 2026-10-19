@@ -179,13 +179,13 @@
       }
     },
     "Scripts.getClassNames": {
-      "hash": "e293a88dae89",
+      "hash": "fbddfc3dc904",
       "ja": {
         "summary": "クラス名を取得",
         "description": "オブジェクトからクラス名を取得します。",
         "returns": "クラス名の配列",
         "params": {
-          "obect": "クラス名を取得するオブジェクト。"
+          "object": "クラス名を取得するオブジェクト。"
         }
       },
       "tr": {
@@ -193,7 +193,7 @@
         "description": "Gets the class names of an object.",
         "returns": "Array of class names",
         "params": {
-          "obect": "Object whose class names to get."
+          "object": "Object whose class names to get."
         }
       }
     },

@@ -1,5 +1,5 @@
 ---
-source_hash: a585971269df
+source_hash: c3ccacae9ea9
 ---
 
 # Classes
@@ -350,5 +350,5 @@ In subclass methods and properties, you can access superclass methods and proper
 
 
 
-Member variables cannot be overridden. Member variables are registered on a single object, so if the subclass and superclass have a member function with the same name,
+Member variables cannot be overridden. Member variables are registered on a single object, so if the subclass and superclass have a member variable with the same name,
 the subclass variable overwrites the superclass variable.

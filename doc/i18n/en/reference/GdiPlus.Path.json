@@ -54,9 +54,9 @@
       }
     },
     "layerExDraw:GdiPlus.Path.drawPie": {
-      "hash": "ef13ea9edd7e",
+      "hash": "2b4092ce7bac",
       "ja": {
-        "summary": "円錐の描画",
+        "summary": "扇形 (パイ) の描画",
         "params": {
           "x": "左上座標",
           "y": "左上座標",
@@ -67,7 +67,7 @@
         }
       },
       "tr": {
-        "summary": "Draws a pie",
+        "summary": "Draws a pie (sector)",
         "params": {
           "x": "Top-left coordinate",
           "y": "Top-left coordinate",
@@ -320,9 +320,9 @@
       }
     },
     "layerExVector:GdiPlus.Path.drawPie": {
-      "hash": "ef13ea9edd7e",
+      "hash": "2b4092ce7bac",
       "ja": {
-        "summary": "円錐の描画",
+        "summary": "扇形 (パイ) の描画",
         "params": {
           "x": "左上座標",
           "y": "左上座標",
@@ -333,7 +333,7 @@
         }
       },
       "tr": {
-        "summary": "Draws a pie",
+        "summary": "Draws a pie (sector)",
         "params": {
           "x": "Top-left coordinate",
           "y": "Top-left coordinate",

@@ -1,5 +1,5 @@
 ---
-source_hash: cff5ea53dc83
+source_hash: e04dbe809717
 ---
 
 # File Formats
@@ -15,9 +15,9 @@ This page describes the file formats supported by Kirikiri Z.
 | Kind | Format | Extension | Description |
 | --- | --- | --- | --- |
 | Still image | Windows bitmap (Bitmap) | .bmp | Only uncompressed files are supported. |
-| Still image | JPEG | .jpg | The decoding precision can be specified.<br>The value is one of 'high', 'normal', or 'low'.<br>The default is 'normal'.<br>low: fixed-point (integer) ANN IDCT, no chroma upsampling interpolation.<br>normal: fixed-point (integer) ANN IDCT, with chroma upsampling interpolation.<br>high: floating-point AAN IDCT, with chroma upsampling interpolation.<br>For how to specify it, see [command-line option -jpegdec (JPEG decoding precision)](../guide/CommandLine.md).<br>* A fixed-point (integer) LLM IDCT with chroma upsampling interpolation would arguably be a better default. |
+| Still image | JPEG | .jpg | The decoding precision can be specified.<br>The value is one of 'high', 'normal', or 'low'.<br>The default is 'normal'.<br>low: fixed-point (integer) AAN IDCT, no chroma upsampling interpolation.<br>normal: fixed-point (integer) LLM IDCT, with chroma upsampling interpolation.<br>high: floating-point AAN IDCT, with chroma upsampling interpolation.<br>For how to specify it, see [command-line option -jpegdec (JPEG decoding precision)](../guide/CommandLine.md). |
 | Still image | Portable Network Graphic (PNG) | .png | Supports alpha channels and a transparent color. |
-| Still image | Entis Rasterized Image format (ERI) | .eri | A lossless compression format proposed by L.Entis.<br>Images with an alpha channel can also be read.<br>For details, see [ERI Developer's site](http://www.entis.jp/eridev/frame.html). |
+| Still image | Entis Rasterized Image format (ERI) | .eri | A lossless compression format proposed by L.Entis.<br>Images with an alpha channel can also be read. |
 | Still image | TLG5 | .tlg | Kirikiri's own format.<br>Notable for fast decoding (about 4x as fast as PNG).<br>Can be converted with the [image format converter](../guide/TPC.md). |
 | Still image | TLG6 | .tlg | Kirikiri's own format.<br>Compresses better than PNG or TLG5, but takes about twice as long as TLG5 to decode.<br>Even so, it is still about twice as fast as PNG.<br>Can be converted with the [image format converter](../guide/TPC.md). |
 | Still image | Others | .* | Can be extended with Susie plugins. |

@@ -1,5 +1,5 @@
 ---
-source_hash: 6216234843b2
+source_hash: 425db22db08e
 ---
 
 # tTJS
@@ -255,7 +255,7 @@ tjs_int lineofs = 0
 
 Evaluates an expression.
 
-See ExecScript for the arguments.
+See [ExecScript](#execscript) for the arguments.
 
 
 

@@ -1,5 +1,5 @@
 ---
-source_hash: e2d4d3766778
+source_hash: eb53fe88e869
 ---
 
 # Command-Line Options
@@ -80,9 +80,7 @@ For example, if the value of the -cdvol option is direct, specify -cdvol=direct.
 
 Apart from the "startup options", "debugging options", and "system compatibility options", most of these options are for fine-tuning to work around environment-specific problems.
 
-For solving environment-specific problems, see also
-
-.
+For solving environment-specific problems, see also [Environment-Dependent Problems](ComputerDependentProblems.md).
 
 > **Note:**
 > Releaser and -userconf can change these options by rewriting the Kirikiri executable or an external configuration file, but the defaults are usually fine. **We do not recommend distributing executables or configuration files with these options left at non-default values just because there was a problem in the creator's own environment** (of course, some options, such as -datapath, should be set according to how the product is distributed and used).

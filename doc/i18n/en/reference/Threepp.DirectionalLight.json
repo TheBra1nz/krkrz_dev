@@ -2,14 +2,14 @@
   "class": "Threepp.DirectionalLight",
   "entries": {
     "krkrthreepp:Threepp.DirectionalLight": {
-      "hash": "5dbc5efb671c",
+      "hash": "9486bfb8fcb5",
       "ja": {
         "summary": "平行光源（太陽光のような光）",
-        "description": "無限遠から平行に照射される光源です。影を落とすことができます。"
+        "description": "無限遠から平行に照射される光源です。影を落とすことができます。\n\n影を落とすには castShadow=true にし、renderer.setShadowMapEnabled(true) と、\n影を受ける側の receiveShadow=true が必要です。\n平行光源の影は正投影カメラで焼くので、シーンを覆う範囲を setShadowOrthoBounds で指定します。"
       },
       "tr": {
         "summary": "Directional light (like sunlight)",
-        "description": "A light whose rays are emitted in parallel from infinitely far away. It can cast shadows."
+        "description": "A light whose rays are emitted in parallel from infinitely far away. It can cast shadows.\n\nTo cast shadows, set castShadow=true, call renderer.setShadowMapEnabled(true),\nand set receiveShadow=true on the receiving objects.\nDirectional light shadows are rendered with an orthographic camera, so specify the area covering the scene with setShadowOrthoBounds."
       }
     },
     "krkrthreepp:Threepp.DirectionalLight.DirectionalLight": {
@@ -39,12 +39,12 @@
       }
     },
     "krkrthreepp:Threepp.DirectionalLight.setShadowMapSize": {
-      "hash": "8dbe3ee26aaa",
+      "hash": "b82110712d1d",
       "ja": {
-        "summary": "--- 影(ShadowMap) --- このライトで影を落とすには castShadow=true にし、 renderer.setShadowMapEnabled(true) と、影を受ける側の receiveShadow=true が必要。 平行光源の影は正投影カメラで焼くので、シーンを覆う範囲を setShadowOrthoBounds で指定する。"
+        "summary": "シャドウマップ解像度 (既定 2048x2048)"
       },
       "tr": {
-        "summary": "--- Shadows (ShadowMap) --- For this light to cast shadows, set castShadow=true, call renderer.setShadowMapEnabled(true), and set receiveShadow=true on the receiving objects. Directional light shadows are rendered with an orthographic camera, so specify the area covering the scene with setShadowOrthoBounds."
+        "summary": "Shadow map resolution (default 2048x2048)"
       }
     },
     "krkrthreepp:Threepp.DirectionalLight.setShadowBias": {
