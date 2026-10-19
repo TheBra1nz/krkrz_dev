@@ -1,5 +1,5 @@
 ---
-source_hash: 311a6320417d
+source_hash: 1c0fe51b6ee6
 ---
 
 # Command-Line Options
@@ -596,16 +596,16 @@ A mechanism that **adds gain (volume) in dB** when decoding compressed audio. It
   The requested context version is ES 3.2; if that cannot be created, it automatically retries with 3.1 → 3.0 → 2.0 (ANGLE's D3D11 backend supports only up to ES 3.0/3.1, so through EGL the context is established by this retry). The version actually obtained can be checked in the startup log line `Loaded GLES x.y`.
   
   OpenGL on the WINVER build always goes through EGL (ANGLE), so this option is meaningful only on SDL3 builds.
-- **-**dpiscaling** (follow the OS display scaling / SDL3 build only)**
+- **-**dpiscaling** (follow the OS display scaling)**
   Specifies whether to enlarge the window according to the OS display scaling ( Windows "Scale", macOS Retina, etc. ).
 
   The value is **'no' (default, actual pixels)** or **'yes' (follow the OS scaling)**.
 
   With 'no', window sizes ( [Window.innerWidth](../reference/Window.md#innerwidth) / innerHeight, setInnerSize, etc. ) are in actual screen pixels. On a 200% display a 1280x720 window looks half as large, but the picture is shown pixel for pixel ( Windows and macOS behave the same ).
 
-  With 'yes', window sizes are in virtual pixels (actual pixels divided by the OS scaling), and the picture is enlarged by the scaling factor ( at 200%, a 1280x720 window is actually 2560x1440 pixels and looks the same size as on a 100% display ). Mouse coordinates are converted to virtual pixels as well. The size is the same with every DrawDevice ( sdl / sdlogl / ogl ). Moving the window to a display with a different scaling changes the virtual pixel size and raises onResize.
+  With 'yes', window sizes are in virtual pixels (actual pixels divided by the OS scaling), and the picture is enlarged by the scaling factor ( at 200%, a 1280x720 window is actually 2560x1440 pixels and looks the same size as on a 100% display ). Mouse coordinates are converted to virtual pixels as well. The size is the same with every DrawDevice ( sdl / sdlogl / ogl on SDL3 builds, basic / ogl on the WINVER build ). Moving the window to a display with a different scaling changes the virtual pixel size and raises onResize.
 
-  It can also be set in `config.cf`. It has no effect on the WINVER build ( WINVER always uses actual pixels ).
+  It can also be set in `config.cf`. It works on both SDL3 builds and the WINVER build. The window position ( left / top ) stays in actual screen pixels even with 'yes'.
 - **-**gpudriver** (explicit SDL_GPU driver / `KRKRZ_CANVAS_GPU` builds only)**  
   Explicitly specifies the SDL_GPU driver name used by GPUDrawDevice ( e.g. `vulkan` ). If not specified, the choice is left to SDL3's automatic selection.
   
