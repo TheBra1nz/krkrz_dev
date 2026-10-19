@@ -64,3 +64,15 @@ vcpkg マニフェストの統合の仕組みなど開発者向けの詳細は�
 - 2026-10-20: 現状確認と方針決定まで
 - 2026-10-20: 1 を完了。公開サイトに [外枠リポジトリの共通設定](doc/topics/core/platform_config.md) (日英)。
   公開文書の用語の決まり (「案件」は書かない) に合わせ、プロジェクトフォルダ / タイトルと書いた
+- 2026-10-20: 2〜5 を完了 (全 8 本を共通構成 + ですます + README_en.md。push 前)。
+  - krkrz_android 1007→139 行 (docs/ に android-build / config / signing / customize を新設)、krkrz_web 440→188 行
+    (docs/ に web-build / config / hosting / save-data / loading / shell / video / tools)、krkrz_tools 234→133 行
+    (docs/ にツールごとのページ)。krkrz_ios は docs/ios-config.md を新設。krkrz_linux / krkrz_gdk / src/core は構成をそろえた
+  - krkrz_dev: 公開サイト・ブランチ・リポジトリの構成を追加。vcpkg マニフェストの仕組みは MergeVcpkgManifest.cmake の
+    先頭の説明へのリンクに、スキルのインストール手順は tools/skills/README.md へ
+  - 英語版の鮮度は `tools/docgen/check_readme_en.py` (全 8 本 訳済み)
+  - README 以外でも直したもの: 利用者向け docs・サンプル設定の「案件」、krkrz_web の CMakeLists.txt と src/core の
+    CMakeLists.txt のコメントにあった非公開リポジトリ名 / 機種名を一般的な書き方に
+  - 残り (README の外・未着手): 外枠の Makefile / スクリプト / CLAUDE.md のコメントの「案件」、krkrz_web の
+    既定リソースフォルダ名 `setup/nxresource` (コードの既定値)、各リポジトリの LICENSE ファイル
+    (android / ios / linux / web には無い。README ではリポジトリ自体のライセンスを書いていない)
