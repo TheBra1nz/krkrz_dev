@@ -53,7 +53,8 @@ Elements 以外の描画 (drawText / setInfo / メニュー / samples.tjs の ti
   - 保留: elements_gallery の定義ソース (pages.tjs。表示と eval を兼ねる)
   - 新規デモは表を使って書く
 - [x] 埋め込みデモへ言語を渡す (krkrz_web `?language=` → `-language=`、doc/demos.en.md の iframe に付与)
-  - [ ] krkrz_web を再ビルドして `doc/_assets/demo` を差し替える (英語化したデモと ?language= を反映)
+  - [x] krkrz_web を再ビルドして `doc/_assets/demo` を差し替え (2026-10-19。英語ページの埋め込みデモが英語で起動し、
+    読み込み表示などの外枠も ja / en で切り替わることを mkdocs serve で確認)
 
 ## C. 公開ドキュメントの英語版
 
