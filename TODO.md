@@ -41,15 +41,10 @@ krkrz_dev 全体の未対応課題をここに集約する。**詳細な SSOT �
 
 [Versioning.md](src/core/doc/Versioning.md) の「移行メモ」= サマリとタグメッセージの冒頭に置く一覧。 リリース枝へ反映するときに拾う。
 
-- **SDL 版 / CS 版: 文字の縦位置 (baseline) を GDI と同じ基準にした (不具合修正)** (src/core 8552c8e7 /
-  2182df8e)。FreeType 経路・glyphware 経路とも OS/2 の sTypoAscender を優先する (無い / 0 なら hhea)。
-  hhea の ascender の方が大きいフォント (源ノ角ゴシック・源柔ゴシック等) では、同じ座標指定で文字が
-  0.2〜0.28em ほど上へ動き、WINVER (GDI) と同じ位置になる。以前の位置に合わせて個別に座標を
-  補正していたタイトルは、補正を外せば WINVER と揃う (既存タイトルをさかのぼって直す対応はしない)。
-  drawShapedText 系と Elements は独自の行送りなので変わらない
-- **Canvas: Texture を渡した `drawTextureAtlas` / `draw9Patch` が上下逆に描かれていたのを修正 (不具合修正)**
-  (src/core 1bc98dd7 ほか、OpenGL 版)。Offscreen を渡した場合は変わらない。逆さまを前提に画像側を
-  上下反転して用意していた場合は元に戻す
+(なし)
+
+2.6.5 (2026-10-19) までの分は krkrz.git のサマリ `9ee5c6a8` と タグ `v2.6.5` の「■ 移行メモ」へ載せた
+(SDL 版 / CS 版の文字の縦位置を GDI と揃えた / Texture を渡した drawTextureAtlas・draw9Patch の上下逆)。
 
 2.6.4 (2026-10-19) までの分は krkrz.git のサマリ `5670dd10` と タグ `v2.6.4` の「■ 移行メモ」へ載せた
 (macOS / Wayland のサイズと座標の実ピクセル基準化 / macOS の外形にタイトルバー / Windows 以外のプラグインのシンボル非公開)。
