@@ -1,5 +1,5 @@
 ---
-source_hash: 1c0fe51b6ee6
+source_hash: e2d4d3766778
 ---
 
 # Command-Line Options
@@ -605,7 +605,7 @@ A mechanism that **adds gain (volume) in dB** when decoding compressed audio. It
 
   With 'yes', window sizes are in virtual pixels (actual pixels divided by the OS scaling), and the picture is enlarged by the scaling factor ( at 200%, a 1280x720 window is actually 2560x1440 pixels and looks the same size as on a 100% display ). Mouse coordinates are converted to virtual pixels as well. The size is the same with every DrawDevice ( sdl / sdlogl / ogl on SDL3 builds, basic / ogl on the WINVER build ). Moving the window to a display with a different scaling changes the virtual pixel size and raises onResize.
 
-  It can also be set in `config.cf`. It works on both SDL3 builds and the WINVER build. The window position ( left / top ) stays in actual screen pixels even with 'yes'.
+  It can also be set in `config.cf`. It works on both SDL3 builds and the WINVER build. The window position ( left / top ) and the screen size and position ( System.screenWidth / screenHeight, desktopLeft / Top / Width / Height, getMonitorInfo ) use the same unit, so centering a window based on the screen works as is ( all in actual pixels with 'no', all in virtual pixels with 'yes' ).
 - **-**gpudriver** (explicit SDL_GPU driver / `KRKRZ_CANVAS_GPU` builds only)**  
   Explicitly specifies the SDL_GPU driver name used by GPUDrawDevice ( e.g. `vulkan` ). If not specified, the choice is left to SDL3's automatic selection.
   

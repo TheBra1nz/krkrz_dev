@@ -601,7 +601,7 @@ tool.exe -replfile=D:/ch -datapath=D:/ch/sd -- -batch a.mmo
 
   'yes' では、ウィンドウの大きさを OS の拡大率で割った仮想的なピクセル数で扱い、画面へは拡大率ぶん拡大して表示します ( 拡大率 200% なら 1280x720 のウィンドウが実際には 2560x1440 ピクセルになり、見かけは拡大率 100% の画面と同じです )。マウス座標も仮想的なピクセル数に換算されます。どの DrawDevice ( SDL3 ビルドの sdl / sdlogl / ogl、WINVER ビルドの basic / ogl ) でも同じ大きさになります。拡大率の違うディスプレイへウィンドウを移すと、仮想的なピクセル数が変わって onResize が発生します。
 
-  `config.cf` でも指定できます。SDL3 ビルドと WINVER ビルドの両方で効きます。ウィンドウの位置 ( left / top ) は 'yes' でも実際の画面のピクセル数のままです。
+  `config.cf` でも指定できます。SDL3 ビルドと WINVER ビルドの両方で効きます。ウィンドウの位置 ( left / top ) と画面の大きさ・位置 ( System.screenWidth / screenHeight、desktopLeft / Top / Width / Height、getMonitorInfo ) も同じ単位になるので、画面基準で中央寄せする計算もそのまま合います ( 'no' ではすべて実際のピクセル数、'yes' ではすべて仮想的なピクセル数 )。
 - **-**gpudriver** (SDL_GPU ドライバの明示指定 / `KRKRZ_CANVAS_GPU` ビルド限定)**  
   GPUDrawDevice が使う SDL_GPU のドライバ名を明示します ( 例: `vulkan` )。指定しなかった場合は SDL3 の自動選択に任されます。
   
