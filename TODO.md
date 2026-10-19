@@ -41,19 +41,18 @@ krkrz_dev 全体の未対応課題をここに集約する。**詳細な SSOT �
 
 [Versioning.md](src/core/doc/Versioning.md) の「移行メモ」= サマリとタグメッセージの冒頭に置く一覧。 リリース枝へ反映するときに拾う。
 
-- **macOS: ウィンドウのサイズと座標が実ピクセル基準になった** (src/core 6993e5c1)。Retina では
-  `Window.width` / `innerWidth` / `setSize` などの値が従来 (論理ポイント) の 2 倍になる
-  (Windows と同じく「物理ピクセルの大きさを保つ」既定に揃えた)。従来の見え方 (OS の拡大率に
-  合わせた仮想解像度) にしたい場合は起動オプション `-dpiscaling=yes`
-- **Linux (Wayland) も同じ DPI ポリシーになった** (src/core 9d92ac0a)。拡大率 1.25 などの画面では
-  サイズが実ピクセルになる。X11 は従来どおり。`-dpiscaling=yes` も効く
-- **macOS: `Window.width` / `height` (外形) にタイトルバーが入るようになった** (src/core bf80e640)。
-  以前は inner と同じ値だった。外形の値で画面中央に寄せる計算をしている場合は位置が変わる
-- **Windows 以外の共有プラグインはシンボルを既定で公開しない** (tp_stub 35ef31a / src/core 4aac7ad5)。
-  公開されるのは `DLL_EXPORT` 付きの `V2Link` / `V2Unlink` だけ。ncbind / simplebinder の雛形は
-  そのまま動く。入口を自前で書いているプラグインは `DLL_EXPORT` が必要
-- macOS の .app でプラグインを `Contents/MacOS` (実行ファイルと同じ場所) から探すようになった
-  (以前は `Contents/Resources` を見ていて見つからなかった。不具合修正)
+- **SDL 版 / CS 版: 文字の縦位置 (baseline) を GDI と同じ基準にした (不具合修正)** (src/core 8552c8e7 /
+  2182df8e)。FreeType 経路・glyphware 経路とも OS/2 の sTypoAscender を優先する (無い / 0 なら hhea)。
+  hhea の ascender の方が大きいフォント (源ノ角ゴシック・源柔ゴシック等) では、同じ座標指定で文字が
+  0.2〜0.28em ほど上へ動き、WINVER (GDI) と同じ位置になる。以前の位置に合わせて個別に座標を
+  補正していたタイトルは、補正を外せば WINVER と揃う (既存タイトルをさかのぼって直す対応はしない)。
+  drawShapedText 系と Elements は独自の行送りなので変わらない
+- **Canvas: Texture を渡した `drawTextureAtlas` / `draw9Patch` が上下逆に描かれていたのを修正 (不具合修正)**
+  (src/core 1bc98dd7 ほか、OpenGL 版)。Offscreen を渡した場合は変わらない。逆さまを前提に画像側を
+  上下反転して用意していた場合は元に戻す
+
+2.6.4 (2026-10-19) までの分は krkrz.git のサマリ `5670dd10` と タグ `v2.6.4` の「■ 移行メモ」へ載せた
+(macOS / Wayland のサイズと座標の実ピクセル基準化 / macOS の外形にタイトルバー / Windows 以外のプラグインのシンボル非公開)。
 
 2.6.3 (2026-10-13) までの分は krkrz.git のサマリ `247a7592` と タグ `v2.6.3` の「■ 移行メモ」へ載せた
 (非 Windows の物理メモリ量 / macOS の Retina と縦横比 / aspectLock の幅基準 / user:// の 0 バイト)。
@@ -144,8 +143,8 @@ registerHotKey の WINVER 配線)。
 | ✅ | 動画のレイヤ再生 (vomLayer) の 4 件 | **2026-10-01 報告・同日修正** (movie-player `435ba0c` / src/core `f0f2a5b4`)。①webm 再生中に CPU 1 コアが張り付く = movie-player のコアスレッドが `yield` だけで回るビジーループ → 何も進まない回は次フレームの表示時刻まで待つ (Windows は高分解能待機タイマ + メッセージ到着イベント)。8fps 素材で 102% → 0〜2% ②layer モードの mp4 / mpg のループが 2 周目で止まる = 終端 (`stEnded`) からの `Rewind()` が再生へ戻していなかった ③ループで最終コマの表示時間がほぼ 0 = webm・mp4・mpg とも最終フレームの表示開始で終了していた → 1 フレーム分表示してから終了 ④コマ 0 の `onFrameUpdate` が来ない = `Play()` 直後の `ClearWndProcMessages()` が食べていた / 単発終了後にコマ 0 へ戻る = 停止・終了で古いフレームを再通知していた。ついでに webm ループの `perLoop` が 1 周 2 回出ていたのも修正。同日、残っていた mp4 のコマ番号 +2 (MF のタイムスタンプがエンコーダ遅延分から始まる → 先頭フレームを起点に) と、音声あり webm のループで 2 周目が止まる件 (音声の時計が sink の通算の再生済みサンプル数を足していた → 起点バッファからの差に。一時停止 → 再開でコマが飛ぶ件も同じ原因) も修正。SSOT = [MovieMFMigration.md](src/core/doc/MovieMFMigration.md) 「レイヤ再生 (vomLayer) の 4 件」 |
 | ✅ | SDL 版 `VideoOverlay` のループ / コマ番号 / 先頭コマ通知 | **2026-10-01 対応** (src/core `3d1cd510` / movie-player `71c2b52`)。`generic/visual/VideoOvlImpl.cpp` は `SetLoop` が空 (1 周で stop)、`onFrameUpdate` のコマ番号が常に 0、新しく開いた webm の先頭コマが通知されなかった (修正前から)。ループ = `CheckUpdate` で終端を検出したら `Seek(0)` + `Play()` + `perLoop` / `iTVPMoviePlayer::FrameRate()` を足してコマ番号・fps・総コマ数を実装 / generic ラッパの `Play()` が未配送なら先頭を出し直す / pl_mpeg も巻き戻しと最終コマを WINVER と同じに。movie-player はシークで同じ絵を通知し直さない (ループ時に偽の stop が出ていた)。→ [MovieMFMigration.md](src/core/doc/MovieMFMigration.md) |
 | ✅ | `VideoOverlay` の再生矩形 (`setPos` / `setSize` / `setBounds`) | **2026-10-12 に対応** (src/core `303aaaa6` / `5a92a7ec`)。調査で、SDL 版だけでなく WINVER の presenter 経路 (BasicDrawDevice が動画を描く既定の経路・HW 再生を含む) も矩形を無視して画面全体に描いていたと分かった。矩形はプライマリレイヤ座標で持ち、ゲーム画面の表示矩形へ写して描く。未指定の間は従来どおり画面全体、指定するとゲーム画面の上へ重ねる。初期値は WINVER と同じ 0,0,320,240。SDL 版 (SDLDrawDevice / SDLOGL / OGL)・WINVER (CPU / HW)・ブラウザ版 (`<video>` の位置) で確認。GPU 版 (GPUDrawDevice、Canvas の上へ重ねる場合を含む) も確認。SSOT = [MovieMFMigration.md](src/core/doc/MovieMFMigration.md) 「overlay 動画の表示位置・大きさ」 |
-| 中 | 文字の縦位置 (baseline) を GDI と揃える: glyphware 経路が未対応 + master へ未反映 | **2026-10-16 判明**。WINVER の GDI 経路は baseline に `otmAscent` (= OS/2 `sTypoAscender`) を使うが、FreeType 経路 (`tFreeTypeFace::GetAscent()`) は hhea の `ascender` を使っていた。源柔ゴシック (1101/881)・源ノ角ゴシック (1160/880) のように hhea の方が大きいフォントでは、同じ座標指定で SDL / CS 版の文字が GDI より 0.2〜0.28em 下に描かれる (Switch 実機・krkrz_ogl で実測、48px で 12px 前後)。FreeType 経路は **sTypoAscender 優先 (OS/2 が無い / 0 なら hhea)・四捨五入** に直した (src/core の別ブランチのコミット `343091f8`、`common/visual/FreeType.h`)。残り: **①master へ反映** (全 SDL / CS 案件の文字が上へ動くので、既存案件で座標補正を入れていないか確認してから) **②glyphware 経路 (`GlyphwareFontRasterizer::ApplyFont`) も揃える** — 今は `LineMetrics::ascenderUnits` (= hhea) から Ascent を出していて FreeType 経路と食い違う。glyphware の `Face::lineMetrics()` に OS/2 `sTypoAscender` (例: `typoAscenderUnits`) を足し、krkrz 側で同じ優先順位で使う。下線・取消線の位置も baseline 基準なので一緒に確認する |
-| 中 | `Canvas.drawTextureAtlas` が Texture を上下逆に描く (master へ未反映) | **2026-10-19 判明**。uv が Offscreen (FBO、ボトムアップ) 前提の `(th - top) / th` だけで、Texture (LoadTexture が上の行から詰めるトップダウン) を渡すと 切り出し位置が上下で鏡写しになり絵も上下逆になる (GPU モードの画像の一部表示レイヤで立ち絵が逆さまに出た)。渡されたのが Offscreen かどうかで v の向きを切り替える修正を src/core の別ブランチのコミット `e19471e0` に入れた (`common/visual/opengl/CanvasIntf.cpp`)。残り: **master へ反映**。同じ Offscreen 前提の式が `DrawNinePatch` 系 (`tx_top = 1.0f`) にもあるので、Texture を渡した場合の向きを合わせて確認する。スクリプト側 (mwtools の GPULayer) は rect 付きの単一画像をこの関数で描くので、未修正の本体と組み合わせると上下逆になる |
+| ✅ | 文字の縦位置 (baseline) を GDI と揃える | **2026-10-19 対応** (src/core 8552c8e7 / 2182df8e、glyphware 5cd6a5a)。WINVER の GDI 経路は baseline に `otmAscent` (= OS/2 `sTypoAscender`) を使うが、FreeType 経路 (`tFreeTypeFace::GetAscent()`) と glyphware 経路 (`GlyphwareFontRasterizer`) は hhea の `ascender` を使っていたため、源柔ゴシック (1101/881)・源ノ角ゴシック (1160/880) のように hhea の方が大きいフォントで SDL / CS 版の文字が GDI より 0.2〜0.28em 下に描かれていた。両経路とも **sTypoAscender 優先 (OS/2 が無い / 0 なら hhea)・四捨五入** に統一 (glyphware は `LineMetrics::typoAscenderUnits` を追加)。源ノ角ゴシック B の 16/24/32/48px で FreeType / glyphware の字面上端が一致 (0/0/1/1px、GDI は 1〜2px)。⚠ 全 SDL / CS 案件の文字が上へ動く (旧値に合わせた座標補正を入れている案件は外す)。drawShapedText 系 (GlyphwareText) と Elements は独自の行送りなので対象外 |
+| ✅ | `Canvas.drawTextureAtlas` が Texture を上下逆に描く | **2026-10-19 対応** (src/core 1bc98dd7)。uv が Offscreen (FBO、ボトムアップ) 前提の `(th - top) / th` だけで、Texture (トップダウン) を渡すと 切り出し位置が上下で鏡写しになり絵も上下逆になっていた (GPU モードの画像の一部表示レイヤで立ち絵が逆さまに出た)。渡されたのが Offscreen かどうかで v の向きを切り替える。同じ Offscreen 前提の式が残っていた `Canvas.draw9Patch` (OpenGL 版) も、実際に描いて上下逆を確認したうえで トップダウンの式に直した (GPU 版と同じ寄せ方。上半分赤・下半分青のテクスチャで drawTexture と同じ向きになることを確認) |
 | 中 | Layer / Bitmap / ImageFunction の統合 | ImageFunction の API 二重化と、プラグインが Bitmap を扱えない問題 (Layer 参照 26 ファイル) の再整理。**方針決定済 = P1 (tp_stub 共通アクセス口) → P2 (Bitmap へメソッド追加・ImageFunction は shim 化) → P3 (プラグイン対応) → P4 で共通基底 `ImageBuffer` の要否を判断**。B案はプロトタイプ実測済み (パッチ同梱)。着手は後日。SSOT = [ImageBufferUnification.md](src/core/doc/ImageBufferUnification.md) |
 | ✅ | GPU 版 Canvas の `endEffect` に opacity 引数が無い | **2026-10-15 に対応** (src/core `6a2ef2a4`)。OpenGL 版へ `endEffect(commands, opacity)` を足した (`e5e0d390`) のに続き、GPU 版 (`GpuCanvasIntf`) も合成用の組み込みシェーダ `clip_mask` に `a_opacity` を足して対応 (マスククリップの合成は 1.0 のまま)。組み込みのパック (SPIR-V / DXIL) は作り直し済み。GLCompositor で読み戻して OpenGL 版と同じ画素になることを Vulkan・D3D12 で確認。⚠ 機種専用形式 (PS5 等) のパックは機種側のビルドで作り直しが要る (実機は未確認)。SSOT = [CanvasGPU.md](src/core/doc/CanvasGPU.md) «今後の方向» 1 |
 | 中 | DrawDevice overlay 描画口の汎用開放 | `PostRenderCallback` の tp_stub 公開 + WINVER 対応 (小) / dialog renderer の painter リスト化 (大) |
