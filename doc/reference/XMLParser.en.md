@@ -27,7 +27,7 @@ See XML.tjs for a concrete DOM implementation example.
 
 ### errorCode
 
-Property \ Access: `r/w`
+Property \ Access: `r`
 
 **Description**
 
@@ -37,7 +37,7 @@ Error code (number)
 
 ### errorString
 
-Property \ Access: `r/w`
+Property \ Access: `r`
 
 **Description**
 
@@ -47,7 +47,7 @@ Error code (string)
 
 ### currentByteIndex
 
-Property \ Access: `r/w`
+Property \ Access: `r`
 
 **Description**
 
@@ -57,7 +57,7 @@ Current byte index
 
 ### currentLineNumber
 
-Property \ Access: `r/w`
+Property \ Access: `r`
 
 **Description**
 
@@ -67,7 +67,7 @@ Current line number
 
 ### currentColumnNumber
 
-Property \ Access: `r/w`
+Property \ Access: `r`
 
 **Description**
 
@@ -77,7 +77,7 @@ Current column number
 
 ### currentByteCount
 
-Property \ Access: `r/w`
+Property \ Access: `r`
 
 **Description**
 

@@ -492,8 +492,8 @@ Method
 
 **Description**
 
-static method
+Clears the cache held for the storage
 
-Clears the cache held for the storage.
+A static method.
 
 ---

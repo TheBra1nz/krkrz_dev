@@ -328,9 +328,9 @@ An array of strings describing problems. An empty array means no problems.
 
 **Description**
 
-static method
+Checks referential integrity
 
-Checks referential integrity. **Always run this before opening a file in CSP.**
+A static method. **Always run this before opening a file in CSP.**
 Checks mip level counts, cycles, orphan rows, storage types and references to deleted layers.
 
 ---

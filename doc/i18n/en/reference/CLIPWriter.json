@@ -238,18 +238,18 @@
       }
     },
     "clipfile:CLIPWriter.validate": {
-      "hash": "d7e1cdfd85a6",
+      "hash": "38294a11cad4",
       "ja": {
-        "summary": "static method",
-        "description": "参照整合性を検査する。**CSP で開く前に必ず通すこと。**\nミップ段数 / 閉路 / 孤児行 / 格納型 / 消えたレイヤへの参照を見ます。",
+        "summary": "参照整合性を検査する",
+        "description": "static メソッド。**CSP で開く前に必ず通すこと。**\nミップ段数 / 閉路 / 孤児行 / 格納型 / 消えたレイヤへの参照を見ます。",
         "returns": "問題点の文字列配列。空配列なら問題なし",
         "params": {
           "filename": "検査するファイル(ローカルパス)"
         }
       },
       "tr": {
-        "summary": "static method",
-        "description": "Checks referential integrity. **Always run this before opening a file in CSP.**\nChecks mip level counts, cycles, orphan rows, storage types and references to deleted layers.",
+        "summary": "Checks referential integrity",
+        "description": "A static method. **Always run this before opening a file in CSP.**\nChecks mip level counts, cycles, orphan rows, storage types and references to deleted layers.",
         "returns": "An array of strings describing problems. An empty array means no problems.",
         "params": {
           "filename": "File to check (local path)."

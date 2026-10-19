@@ -354,14 +354,14 @@
       }
     },
     "clipfile:CLIP.clearStorageCache": {
-      "hash": "17d2ddf452b3",
+      "hash": "cac904b2f6a9",
       "ja": {
-        "summary": "static method",
-        "description": "ストレージとして保持されてるキャッシュをクリアする"
+        "summary": "ストレージとして保持されてるキャッシュをクリアする",
+        "description": "static メソッド。"
       },
       "tr": {
-        "summary": "static method",
-        "description": "Clears the cache held for the storage."
+        "summary": "Clears the cache held for the storage",
+        "description": "A static method."
       }
     }
   }

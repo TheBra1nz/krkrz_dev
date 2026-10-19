@@ -101,12 +101,14 @@ specification の加算 / ソフトライトの式・JPEG の AAN/LLM・執筆�
 viewportBgColor の 0xAARRGGBB、tjs2 の各項目 (vmcodes の clt/cgt・asc/chr、switch の default 等))、
 plugin の manual.tjs 19 本 + doc/manual (summary / description の分断、`@param a, b` 書式、実装と違う名前、誤字)。
 krkrthreepp で二重に宣言されていた `Threepp.Loop_*` は末尾側を削除 (説明は先頭側へ移した)。
+XMLParser のプロパティ 6 つを実装どおり読み取り専用 (`{ getter; }`) に、clipfile の "static method" を
+PSD と同じく説明側へ移した。
+guide/BundledLicenses は生成器 (gen_licenses_c.py `--mode table --i18n doc/i18n`) が日本語版と英語版を
+同時に出すようにした (固定文言は生成器の TABLE_TEXT、manifest 由来の文言は doc/i18n/en/bundled_licenses.json)。
+再生成で英訳が要再訳にならない。
 Steam の DummySteam.tjs も実装の名前 (clearAchievement / cloudFileCount) に合わせた。
 
 残り (判断待ち / 対象外):
 - topics/core/repl: コード例のラベル文字列 (一般的な語へ変えるか)
-- guide/BundledLicenses は生成物 (gen_licenses_c.py) なので、再生成のたびに英訳が要再訳になる
-- expat: XMLParser の current* は C++ では読み取り専用だが、doc は読み書きの property のまま
-- clipfile: summary が "static method" だけの項目 (PSD と同じ形) が残っている
-- Steam の `isIsSubscribedApp` は実装の名前がこの綴り (doc は実装に合わせたまま)
+- Steam の `isIsSubscribedApp` は実装の名前がこの綴り。現状のまま (ユーザ判断)
 
