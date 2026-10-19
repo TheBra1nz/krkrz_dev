@@ -1,5 +1,5 @@
 ---
-source_hash: ac95c0e4c357
+source_hash: 1d467109bfc4
 ---
 
 # Dialogs
@@ -284,6 +284,8 @@ To move focus with the pad's D-pad, the screen JSON needs `"input": { "arrow_foc
     { "key": "escape", "action": "cancel" } ] }   // 組込名 = ダイアログ内で処理
 ```
 
+`"key"` also accepts the function keys `"f1"` to `"f12"`.
+
 Notifications arrive in [onAction](../reference/ElementsDialog.md#onaction), but **`id` is always `"<action>"`, and the name you assigned is in `payload`**.
 
 ```tjs
@@ -390,6 +392,6 @@ If you are unsure which layer to fix, read that first.
 - [ElementsDialog.registerFont](../reference/ElementsDialog.md#registerfont) / [registerFontDir](../reference/ElementsDialog.md#registerfontdir) / [defaultFontFamily](../reference/ElementsDialog.md#defaultfontfamily) — font registration
 - [ElementsDialog.setVar](../reference/ElementsDialog.md#setvar) / [getVar](../reference/ElementsDialog.md#getvar) / [listVars](../reference/ElementsDialog.md#listvars) / [onVar](../reference/ElementsDialog.md#onvar) / [watchVars](../reference/ElementsDialog.md#watchvars) — per-screen variable store
 - [ElementsDialog.getSharedVars](../reference/ElementsDialog.md#getsharedvars) / [setSharedVar](../reference/ElementsDialog.md#setsharedvar) / [clearSharedVars](../reference/ElementsDialog.md#clearsharedvars) — session-shared variables across screens (for save / load)
-- [ElementsDialog.registerImage](../reference/ElementsDialog.md#registerimage) / [unregisterImage](../reference/ElementsDialog.md#unregisterimage) / [clearImages](../reference/ElementsDialog.md#clearimages) — run-time images (`mem://`)
+- [ElementsDialog.registerImage](../reference/ElementsDialog.md#registerimage) / [registerLayerImage](../reference/ElementsDialog.md#registerlayerimage) / [unregisterImage](../reference/ElementsDialog.md#unregisterimage) / [clearImages](../reference/ElementsDialog.md#clearimages) — run-time images (`mem://`; registerLayerImage registers a layer's pixels as they are)
 - [ElementsDialog.setAtlasImage](../reference/ElementsDialog.md#setatlasimage) / [swappableAtlases](../reference/ElementsDialog.md#swappableatlases) — swappable atlases
 - [ElementsDialog.language](../reference/ElementsDialog.md#language) / [fontLanguages](../reference/ElementsDialog.md#fontlanguages) — i18n (display language and language-dependent font substitution)

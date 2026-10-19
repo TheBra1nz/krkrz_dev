@@ -127,6 +127,7 @@ text input are all supported).
 - [beginKeyCapture](#beginkeycapture)
 - [endKeyCapture](#endkeycapture)
 - [registerImage](#registerimage)
+- [registerLayerImage](#registerlayerimage)
 - [unregisterImage](#unregisterimage)
 - [clearImages](#clearimages)
 - [setSharedVar](#setsharedvar)
@@ -1273,6 +1274,37 @@ at runtime, such as save thumbnails, to Elements. If the displayed screen has an
 `mem://<name>`, it is re-decoded and updated immediately when re-registered
 ( no need to reopen the screen; panels are updated too ). Widgets built before registration
 stay empty, so register the first time before opening the screen.
+
+---
+
+### registerLayerImage
+
+Method
+
+**Arguments**
+
+| Arguments | Default | Description |
+| --- | --- | --- |
+| `name` | `&nbsp;` | Name in the store (referenced as `mem://<name>`). |
+| `layer` | `&nbsp;` | Layer to take the pixels from. Passing anything other than a Layer throws an exception. |
+| `left` | `0` | Left edge of the range to take (default 0). |
+| `top` | `0` | Top edge of the range to take (default 0). |
+| `width` | `&nbsp;` | Width of the range to take (default: up to the right edge of the image). The range is clipped to the image. |
+| `height` | `&nbsp;` | Height of the range to take (default: up to the bottom edge of the image). |
+
+**Return value**
+
+Whether the image was registered. False if there is no image or the range is empty.
+
+**Description**
+
+Registers a layer's pixels as a runtime image
+
+Registers the pixels of the layer's image (its main image) in the runtime image store under name, without encoding them or going through a file. This is meant for passing pictures drawn in TJS (such as text drawn with TextRender in the same typeface as the message window) each time a list scrolls. Referencing it (`"mem://<name>"`), having a displayed image update immediately when re-registered, and removing it with [unregisterImage](#unregisterimage) all work the same as with [registerImage](#registerimage). One name holds either an image file or layer pixels, not both; registering again replaces it, including its kind.
+
+How alpha is handled depends on the layer type. `ltAddAlpha` is taken as already premultiplied, `ltOpaque` ignores alpha and is treated as opaque, and any other type is treated as non-premultiplied alpha and is premultiplied when registered.
+
+**See also:** [ElementsDialog.registerImage](ElementsDialog.md#registerimage)
 
 ---
 

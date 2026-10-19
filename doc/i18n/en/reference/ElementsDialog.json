@@ -587,6 +587,35 @@
         }
       }
     },
+    "ElementsDialog.registerLayerImage": {
+      "hash": "d4002c84b140",
+      "ja": {
+        "summary": "Layer の画素を実行時画像として登録する",
+        "description": "layer の画像 ( メイン画像 ) の画素を、エンコードもファイルも介さずに name で実行時画像\nストアへ登録します。TJS で描いた絵 ( TextRender でメッセージ窓と同じ書体で描いた文字など )\nを、一覧の送りのたびに渡すような用途向けです。参照のしかた ( `\"mem://<name>\"` )、\n再登録で表示中の image がその場で差し替わること、[unregisterImage](#unregisterimage)\nで消せることは [registerImage](#registerimage) と同じです。1 つの name に入るのは\nファイルの画像か Layer の画素のどちらか一方で、登録し直すと種類ごと置き換わります。\n\nアルファの扱いはレイヤの種類で決まります。`ltAddAlpha` は乗算済みとしてそのまま、\n`ltOpaque` はアルファを無視して不透明、それ以外は乗算していないアルファとして登録時に\n乗算します。",
+        "returns": "登録できたかどうか。画像が無い / 範囲が空のときは偽。",
+        "params": {
+          "name": "ストア上の名前 ( `mem://<name>` で参照 )。",
+          "layer": "画素を取り出す Layer。Layer 以外を渡すと例外になります。",
+          "left": "取り出す範囲の左端 ( 省略時 0 )。",
+          "top": "取り出す範囲の上端 ( 省略時 0 )。",
+          "width": "取り出す範囲の幅 ( 省略時は画像の右端まで )。範囲は画像の内側に丸めます。",
+          "height": "取り出す範囲の高さ ( 省略時は画像の下端まで )。"
+        }
+      },
+      "tr": {
+        "summary": "Registers a layer's pixels as a runtime image",
+        "description": "Registers the pixels of the layer's image (its main image) in the runtime image store under name, without encoding them or going through a file. This is meant for passing pictures drawn in TJS (such as text drawn with TextRender in the same typeface as the message window) each time a list scrolls. Referencing it (`\"mem://<name>\"`), having a displayed image update immediately when re-registered, and removing it with [unregisterImage](#unregisterimage) all work the same as with [registerImage](#registerimage). One name holds either an image file or layer pixels, not both; registering again replaces it, including its kind.\n\nHow alpha is handled depends on the layer type. `ltAddAlpha` is taken as already premultiplied, `ltOpaque` ignores alpha and is treated as opaque, and any other type is treated as non-premultiplied alpha and is premultiplied when registered.",
+        "returns": "Whether the image was registered. False if there is no image or the range is empty.",
+        "params": {
+          "name": "Name in the store (referenced as `mem://<name>`).",
+          "layer": "Layer to take the pixels from. Passing anything other than a Layer throws an exception.",
+          "left": "Left edge of the range to take (default 0).",
+          "top": "Top edge of the range to take (default 0).",
+          "width": "Width of the range to take (default: up to the right edge of the image). The range is clipped to the image.",
+          "height": "Height of the range to take (default: up to the bottom edge of the image)."
+        }
+      }
+    },
     "ElementsDialog.unregisterImage": {
       "hash": "6a363313403c",
       "ja": {
