@@ -74,5 +74,6 @@ vcpkg マニフェストの統合の仕組みなど開発者向けの詳細は�
   - README 以外でも直したもの: 利用者向け docs・サンプル設定の「案件」、krkrz_web の CMakeLists.txt と src/core の
     CMakeLists.txt のコメントにあった非公開リポジトリ名 / 機種名を一般的な書き方に
   - 残り (README の外・未着手): 外枠の Makefile / スクリプト / CLAUDE.md のコメントの「案件」、krkrz_web の
-    既定リソースフォルダ名 `setup/nxresource` (コードの既定値)、各リポジトリの LICENSE ファイル
-    (android / ios / linux / web には無い。README ではリポジトリ自体のライセンスを書いていない)
+    既定リソースフォルダ名 `setup/nxresource` (コードの既定値)
+- 2026-10-20: 外枠リポジトリのライセンスを MIT に統一 (ユーザ決定)。android / ios / linux / web に LICENSE
+  (krkrz_gdk と同じ MIT、Copyright WAMSOFT) を追加し、README (日英) のライセンス節を gdk と同じ書き方に
