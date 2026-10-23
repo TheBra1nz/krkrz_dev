@@ -1,0 +1,86 @@
+diff --git a/src/common/MessageLooper.h b/src/common/MessageLooper.h
+--- a/src/common/MessageLooper.h
++++ b/src/common/MessageLooper.h
+@@ -40,6 +40,7 @@
+ 
+ protected:
+   bool mIsRunning;
++  bool mQuitRequested; // guarded by mMessageMutex
+   std::thread mWorker;
+ 
+   // メッセージキュー管理
+diff --git a/src/common/MessageLooper.cpp b/src/common/MessageLooper.cpp
+--- a/src/common/MessageLooper.cpp
++++ b/src/common/MessageLooper.cpp
+@@ -6,6 +6,7 @@
+ 
+ MessageLooper::MessageLooper()
+ : mIsRunning(false)
++, mQuitRequested(false)
+ {}
+ 
+ MessageLooper::~MessageLooper()
+@@ -20,6 +21,10 @@
+ void
+ MessageLooper::StartThread()
+ {
++  {
++    std::lock_guard<std::mutex> lk(mMessageMutex);
++    mQuitRequested = false;
++  }
+   // looperスレッド開始
+   mWorker    = std::thread([this] { MessageLoop(); });
+   mIsRunning = true;
+@@ -62,6 +67,15 @@
+ {
+   std::lock_guard<std::mutex> lk(mMessageMutex);
+ 
++  // Once quit is queued, a late handler must not erase it with a flush
++  // or enqueue more work. Otherwise QuitLoop() can wait forever in join().
++  if (mQuitRequested) {
++    return;
++  }
++  if (msg.quit) {
++    mQuitRequested = true;
++  }
++
+   if (flush) {
+     // std::queue には clear() がない
+     mMessageQueue = {};
+diff --git a/src/windows/MoviePlayer.cpp b/src/windows/MoviePlayer.cpp
+--- a/src/windows/MoviePlayer.cpp
++++ b/src/windows/MoviePlayer.cpp
+@@ -106,7 +106,8 @@
+ MoviePlayer::Done()
+ {
+   if (mPlayer != nullptr) {
+-    mPlayer->Stop();
++    // Destruction requests worker exit directly. A playback Stop()
++    // message can be discarded by a concurrently executing pause/flush.
+     delete mPlayer;
+     mPlayer = nullptr;
+   }
+diff --git a/src/windows/MoviePlayerCore.cpp b/src/windows/MoviePlayerCore.cpp
+--- a/src/windows/MoviePlayerCore.cpp
++++ b/src/windows/MoviePlayerCore.cpp
+@@ -75,11 +75,16 @@
+ void
+ MoviePlayerCore::Done()
+ {
++  // Join the control worker before changing frames or decoder queues.
++  // Do not depend on a playback STOP acknowledgement for destruction.
++  StopThread();
++
++  // The host owns the sink. Stop output before Flush() returns borrowed
++  // decoder buffers; the host remains responsible for deleting the sink.
++  if (mAudioSink) {
++    mAudioSink->Stop();
++  }
+   Flush();
+-  StopThread();
+-
+-  // mAudioSink は host 所有なので touch しない (ここでは Stop も含めない;
+-  // host 側が VideoOverlay close 時に責任を持つ)
+ 
+   if (mVideoDecoder) {
+     mVideoDecoder->Stop();
