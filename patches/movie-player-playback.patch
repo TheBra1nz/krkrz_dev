@@ -1,0 +1,113 @@
+diff --git a/src/windows/MoviePlayer.cpp b/src/windows/MoviePlayer.cpp
+index 190df16..2962810 100644
+--- a/src/windows/MoviePlayer.cpp
++++ b/src/windows/MoviePlayer.cpp
+@@ -106,7 +106,7 @@ void
+ MoviePlayer::Done()
+ {
+   if (mPlayer != nullptr) {
+-    mPlayer->Stop();
++    // The core destructor joins the worker directly.
+     delete mPlayer;
+     mPlayer = nullptr;
+   }
+diff --git a/src/windows/MoviePlayerCore.cpp b/src/windows/MoviePlayerCore.cpp
+index f38a609..6e252d3 100644
+--- a/src/windows/MoviePlayerCore.cpp
++++ b/src/windows/MoviePlayerCore.cpp
+@@ -80,11 +80,12 @@ MoviePlayerCore::InitDummyFrame()
+ void
+ MoviePlayerCore::Done()
+ {
+-  Flush();
++  // Join the control worker before returning any buffers to the decoders.
+   StopThread();
+-
+-  // mAudioSink は host 所有なので touch しない (ここでは Stop も含めない;
+-  // host 側が VideoOverlay close 時に責任を持つ)
++  if (mAudioSink && mAudioDecoder) {
++    mAudioSink->Stop();
++  }
++  Flush();
+ 
+   if (mVideoDecoder) {
+     mVideoDecoder->Stop();
+@@ -691,7 +692,7 @@ MoviePlayerCore::Decode()
+   if (isMovieDone) {
+     if (mIsLoop) {
+       LOGV("---- Loop ----\n");
+-      Post(MSG_SEEK, 0);
++      Post(MSG_REWIND, 0);
+       Post(MSG_DECODE);
+     } else {
+       Post(MSG_FINISH);
+@@ -766,15 +767,16 @@ MoviePlayerCore::HandleMessage(int32_t what, int64_t arg, void *data)
+     break;
+ 
+   case MSG_DECODE:
+-    Decode();
++    if (IsCurrentState(STATE_PLAY)) {
++      Decode();
++    }
+     break;
+ 
+   case MSG_PAUSE:
+     if (IsCurrentState(STATE_PLAY)) {
+-      // 発行済のメッセージを全フラッシュ
+-      // その後MSG_DECODEを発行しないので、そのままデコード処理はポーズする
+       SetState(STATE_PAUSE);
+-      Post(MSG_NOP, 0, nullptr, true);
++      // Drop scheduled playback work and keep later control commands.
++      RemoveMessages({MSG_DECODE, MSG_REWIND, MSG_FINISH});
+     }
+     break;
+ 
+@@ -810,6 +812,7 @@ MoviePlayerCore::HandleMessage(int32_t what, int64_t arg, void *data)
+     mIsLoop = (arg != 0);
+   } break;
+ 
++  case MSG_REWIND:
+   case MSG_SEEK: {
+     Flush();
+     mExtractor->SeekTo(arg);
+@@ -830,18 +833,14 @@ MoviePlayerCore::HandleMessage(int32_t what, int64_t arg, void *data)
+     // 再通知していたため、停止/終了後にレイヤが先頭コマへ戻っていた)
+     HoldLastVideoFrame();
+     SetState(STATE_STOP);
+-    Post(MSG_NOP, 0, nullptr, true); // flush msg
++    RemoveMessages({MSG_DECODE, MSG_REWIND, MSG_FINISH});
+     mEventFlag.Set(EVENT_FLAG_STOPPED);
+     break;
+ 
+   case MSG_FINISH:
+     HoldLastVideoFrame();
+     SetState(STATE_FINISH);
+-    Post(MSG_NOP, 0, nullptr, true); // flush msg
+-    mEventFlag.Set(EVENT_FLAG_STOPPED);
+-    break;
+-
+-  case MSG_NOP: // no operation
++    RemoveMessages({MSG_DECODE, MSG_REWIND, MSG_FINISH});
+     break;
+ 
+   default:
+diff --git a/src/windows/MoviePlayerCore.h b/src/windows/MoviePlayerCore.h
+index 29dcd08..b4c69ee 100644
+--- a/src/windows/MoviePlayerCore.h
++++ b/src/windows/MoviePlayerCore.h
+@@ -15,7 +15,6 @@ class MoviePlayerCore : public MessageLooper
+ public:
+   enum Message
+   {
+-    MSG_NOP,
+     MSG_PRELOAD,
+     MSG_START,
+     MSG_DECODE,
+@@ -23,6 +22,7 @@ public:
+     MSG_RESUME,
+     MSG_SET_LOOP,
+     MSG_SEEK,
++    MSG_REWIND,
+     MSG_STOP,
+     MSG_FINISH
+   };
