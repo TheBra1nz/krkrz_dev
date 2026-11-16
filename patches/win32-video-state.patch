@@ -1,0 +1,20 @@
+diff --git a/win32/visual/VideoOvlImpl.cpp b/win32/visual/VideoOvlImpl.cpp
+index b848e12..d07766c 100644
+--- a/win32/visual/VideoOvlImpl.cpp
++++ b/win32/visual/VideoOvlImpl.cpp
+@@ -1640,6 +1640,15 @@ void tTJSNI_VideoOverlay::ClearWndProcMessages()
+ 				VideoOverlay->FreeEventParams( evcode, p1, p2 );
+ 		}
+ 	}
++
++	// State notifications use WM_USER+18, outside the legacy graph-message
++	// range above. Discard them too, so a stopped/released player cannot
++	// deliver a stale status to the next movie using this event window.
++	// These messages carry status values, not graph events: do not call
++	// GetEvent() or FreeEventParams() for them.
++	while(PeekMessage(&msg, EventQueue.GetOwner(), WM_STATE_CHANGE, WM_STATE_CHANGE, PM_REMOVE))
++	{
++	}
+ }
+ //---------------------------------------------------------------------------
+ 
