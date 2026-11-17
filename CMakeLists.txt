@@ -203,7 +203,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/CommonExternals.cmake)
 # KRKRZ 本体
 option(KRKRZ_BUILD_TESTS "build SIMD parity tests" OFF)
 add_subdirectory(src/core ${CMAKE_CURRENT_BINARY_DIR}/core)
-include(cmake/VideoFixes.cmake)
+include(cmake/SubmoduleFixes.cmake)
 
 # 標準ツール (src/tools/krkrz_tools)。別ビルドで作り、install で tools/ へ (cmake/KrkrzTools.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/KrkrzTools.cmake)
