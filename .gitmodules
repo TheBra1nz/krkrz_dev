@@ -189,4 +189,4 @@
 	url = https://github.com/wamsoft/clipfile.git
 [submodule "src/tools/krkrz_tools"]
 	path = src/tools/krkrz_tools
-	url = https://github.com/wamsoft/krkrz_tools.git
+	url = https://github.com/TheBra1nz/krkrz_tools.git
