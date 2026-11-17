@@ -1,10 +1,10 @@
 # Compile patched copies of the affected sources from the pinned submodules.
-function(krkrz_patch_video_sources target patch_name)
+function(krkrz_patch_submodule_sources target patch_name)
     find_package(Git REQUIRED)
     get_target_property(source_dir ${target} SOURCE_DIR)
     get_target_property(sources ${target} SOURCES)
     set(patch_file "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../patches/${patch_name}.patch")
-    set(staging_dir "${CMAKE_CURRENT_BINARY_DIR}/video-fixes/${patch_name}")
+    set(staging_dir "${CMAKE_CURRENT_BINARY_DIR}/submodule-fixes/${patch_name}")
     set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${patch_file}")
 
     foreach(path IN LISTS ARGN)
@@ -40,14 +40,14 @@ function(krkrz_patch_video_sources target patch_name)
 endfunction()
 
 if(TARGET movieplayer)
-    krkrz_patch_video_sources(movieplayer movie-player-looper
+    krkrz_patch_submodule_sources(movieplayer movie-player-looper
         src/common/MessageLooper.cpp src/common/MessageLooper.h)
     target_include_directories(movieplayer BEFORE PRIVATE
-        "${CMAKE_CURRENT_BINARY_DIR}/video-fixes/movie-player-looper/src/common")
+        "${CMAKE_CURRENT_BINARY_DIR}/submodule-fixes/movie-player-looper/src/common")
 
     # The WebM backend lives under src/windows and also builds on desktop Unix.
     if(NOT ANDROID)
-        krkrz_patch_video_sources(movieplayer movie-player-playback
+        krkrz_patch_submodule_sources(movieplayer movie-player-playback
             src/windows/MoviePlayer.cpp src/windows/MoviePlayerCore.cpp
             src/windows/MoviePlayerCore.h)
     endif()
@@ -59,6 +59,12 @@ if(KRKRZ_VARIANT STREQUAL "WIN")
     else()
         set(krkrz_video_target krkrz)
     endif()
-    krkrz_patch_video_sources(${krkrz_video_target} win32-video-state
+    krkrz_patch_submodule_sources(${krkrz_video_target} win32-video-state
         win32/visual/VideoOvlImpl.cpp)
+endif()
+
+if(TARGET menu)
+    krkrz_patch_submodule_sources(menu win32-menu-shortcuts Main.cpp)
+    get_target_property(menu_source_dir menu SOURCE_DIR)
+    target_include_directories(menu BEFORE PRIVATE "${menu_source_dir}")
 endif()
