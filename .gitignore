@@ -8,3 +8,11 @@ site
 __pycache__
 .krkrz_history
 .deckstage/
+bin-release/
+bin-debug/
+build_debug.cmd
+build_release.cmd
+build_icon.cmd
+cmake_commands.txt
+rokan_MAINICON.ico
+tvpwin32.ico
